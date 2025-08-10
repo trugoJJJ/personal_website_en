@@ -13,23 +13,23 @@ All colors MUST be HSL.
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
-    /* Brand colors - Marketing gradient theme */
-    --primary: 263 70% 50%;  /* Deep purple */
+    /* Brand colors - Monochrome minimal */
+    --primary: 0 0% 10%;
     --primary-foreground: 0 0% 100%;
-    --primary-light: 263 70% 65%;
-    --primary-dark: 263 70% 35%;
+    --primary-light: 0 0% 20%;
+    --primary-dark: 0 0% 0%;
 
-    /* Secondary - Complementary blue */
-    --secondary: 217 91% 60%;
+    /* Secondary - same monochrome to avoid gradients */
+    --secondary: 0 0% 10%;
     --secondary-foreground: 0 0% 100%;
-    --secondary-light: 217 91% 75%;
-    --secondary-dark: 217 91% 45%;
+    --secondary-light: 0 0% 20%;
+    --secondary-dark: 0 0% 0%;
 
-    /* Accent - Pink/Rose */
-    --accent: 330 81% 60%;
+    /* Accent - same monochrome */
+    --accent: 0 0% 10%;
     --accent-foreground: 0 0% 100%;
-    --accent-light: 330 81% 75%;
-    --accent-dark: 330 81% 45%;
+    --accent-light: 0 0% 20%;
+    --accent-dark: 0 0% 0%;
 
     /* Neutral colors */
     --card: 0 0% 100%;
@@ -38,14 +38,14 @@ All colors MUST be HSL.
     --muted-foreground: 215.4 16.3% 46.9%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 263 70% 50%;
+    --ring: 0 0% 10%;
 
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
-    --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--accent)));
-    --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--primary)));
-    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 50%, hsl(var(--accent)) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(210 40% 98%) 100%);
+    /* Gradients - disabled (use solid backgrounds) */
+    --gradient-primary: linear-gradient(180deg, hsl(var(--primary)), hsl(var(--primary)));
+    --gradient-secondary: linear-gradient(180deg, hsl(var(--primary)), hsl(var(--primary)));
+    --gradient-accent: linear-gradient(180deg, hsl(var(--primary)), hsl(var(--primary)));
+    --gradient-hero: linear-gradient(180deg, hsl(var(--primary)), hsl(var(--primary)));
+    --gradient-card: linear-gradient(180deg, hsl(var(--card)), hsl(var(--card)));
 
     /* Shadows */
     --shadow-card: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
