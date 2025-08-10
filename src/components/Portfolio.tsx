@@ -1,48 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github } from "lucide-react";
 
-const portfolioProjects = [
-  {
-    id: 1,
-    title: "E-commerce Growth Campaign",
-    description: "Kampania marketingowa, która zwiększyła sprzedaż o 340% w 6 miesięcy",
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop",
-    tags: ["Google Ads", "Facebook Ads", "Email Marketing", "Analytics"],
-    metrics: "+340% sprzedaż",
-    link: "#",
-    github: "#"
-  },
-  {
-    id: 2,
-    title: "SaaS Landing Page Optimization",
-    description: "Redesign i optymalizacja strony głównej, która podwoiła konwersję",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
-    tags: ["A/B Testing", "UX/UI", "Analytics", "Webflow"],
-    metrics: "+127% konwersja",
-    link: "#",
-    github: "#"
-  },
-  {
-    id: 3,
-    title: "Content Marketing Automation",
-    description: "System automatyzacji content marketingu z wykorzystaniem AI",
-    image: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=600&h=400&fit=crop",
-    tags: ["AI Tools", "Automation", "Content Marketing", "Social Media"],
-    metrics: "70% oszczędność czasu",
-    link: "#",
-    github: "#"
-  },
-  {
-    id: 4,
-    title: "Multi-channel Attribution Model",
-    description: "Zaawansowany model atrybukcji do trackowania customer journey",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
-    tags: ["Analytics", "Python", "Data Science", "Attribution"],
-    metrics: "360° wgląd w dane",
-    link: "#",
-    github: "#"
-  }
-];
+import { Link } from "react-router-dom";
+import { portfolioProjects } from "@/data/portfolio";
 
 export const Portfolio = () => {
   return (
@@ -103,12 +63,16 @@ export const Portfolio = () => {
 
                 {/* Links */}
                 <div className="flex gap-3 pt-2">
-                  <Button variant="outline" size="sm" className="flex-1">
-                    <ExternalLink className="h-4 w-4 mr-2" />
-                    Zobacz projekt
+                  <Button asChild variant="outline" size="sm" className="flex-1">
+                    <Link to={`/portfolio/${project.id}`} aria-label={`Zobacz projekt: ${project.title}`}>
+                      <ExternalLink className="h-4 w-4 mr-2" />
+                      Zobacz projekt
+                    </Link>
                   </Button>
-                  <Button variant="outline" size="sm">
-                    <Github className="h-4 w-4" />
+                  <Button asChild variant="outline" size="sm" aria-label="Repozytorium projektu">
+                    <a href={project.github} target="_blank" rel="noopener noreferrer">
+                      <Github className="h-4 w-4" />
+                    </a>
                   </Button>
                 </div>
               </div>
@@ -118,8 +82,8 @@ export const Portfolio = () => {
 
         {/* View More Button */}
         <div className="text-center">
-          <Button size="lg" className="bg-gradient-primary hover:opacity-90 text-white font-semibold px-8 py-6">
-            Zobacz więcej projektów
+          <Button asChild size="lg" className="bg-gradient-primary hover:opacity-90 text-white font-semibold px-8 py-6">
+            <Link to="/portfolio" aria-label="Zobacz pełne portfolio">Zobacz więcej projektów</Link>
           </Button>
         </div>
       </div>

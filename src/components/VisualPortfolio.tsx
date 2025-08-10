@@ -137,8 +137,8 @@ export const VisualPortfolio = () => {
 
           {/* View More Button */}
           <div className="text-center animate-fade-in-up" style={{animationDelay: "1s"}}>
-            <Button size="lg" className="bg-gradient-primary hover:opacity-90 text-white font-semibold px-8 py-6">
-              Zobacz pełne portfolio
+            <Button asChild size="lg" className="bg-gradient-primary hover:opacity-90 text-white font-semibold px-8 py-6">
+              <a href="/portfolio" aria-label="Zobacz pełne portfolio">Zobacz pełne portfolio</a>
             </Button>
           </div>
 
