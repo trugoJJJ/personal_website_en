@@ -1,12 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github } from "lucide-react";
-
 import { Link } from "react-router-dom";
 import { portfolioProjects } from "@/data/portfolio";
-
 export const Portfolio = () => {
-  return (
-    <section className="py-20 bg-muted/30">
+  return <section className="py-20 bg-muted/30">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16 animate-fade-in-up">
           <h2 className="text-4xl lg:text-5xl font-bold text-gradient mb-6">
@@ -19,19 +16,12 @@ export const Portfolio = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          {portfolioProjects.map((project, index) => (
-            <div
-              key={project.id}
-              className="group hover-scale bg-gradient-card rounded-xl overflow-hidden shadow-card border border-border/50 hover:border-primary/20 transition-all duration-300 animate-fade-in-up"
-              style={{ animationDelay: `${index * 0.2}s` }}
-            >
+          {portfolioProjects.map((project, index) => <div key={project.id} className="group hover-scale bg-gradient-card rounded-xl overflow-hidden shadow-card border border-border/50 hover:border-primary/20 transition-all duration-300 animate-fade-in-up" style={{
+          animationDelay: `${index * 0.2}s`
+        }}>
               {/* Image */}
               <div className="aspect-video overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+                <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
               </div>
 
               {/* Content */}
@@ -51,14 +41,9 @@ export const Portfolio = () => {
 
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-xs bg-muted text-muted-foreground px-2 py-1 rounded-md"
-                    >
+                  {project.tags.map(tag => <span key={tag} className="text-xs bg-muted text-muted-foreground px-2 py-1 rounded-md">
                       {tag}
-                    </span>
-                  ))}
+                    </span>)}
                 </div>
 
                 {/* Links */}
@@ -76,17 +61,11 @@ export const Portfolio = () => {
                   </Button>
                 </div>
               </div>
-            </div>
-          ))}
+            </div>)}
         </div>
 
         {/* View More Button */}
-        <div className="text-center">
-          <Button asChild size="lg" className="bg-gradient-primary hover:opacity-90 text-white font-semibold px-8 py-6">
-            <Link to="/portfolio" aria-label="Zobacz pełne portfolio">Zobacz więcej projektów</Link>
-          </Button>
-        </div>
+        
       </div>
-    </section>
-  );
+    </section>;
 };
