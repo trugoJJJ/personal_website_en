@@ -1,3 +1,4 @@
+import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { Portfolio } from "@/components/Portfolio";
 import { About } from "@/components/About";
@@ -12,15 +13,39 @@ import { BigTypeCTA } from "@/components/BigTypeCTA";
 const Index = () => {
   return (
     <div className="min-h-screen">
-      <Hero />
-      <Portfolio />
-      <About />
-      <Experience />
-      <SkillsAndTech />
-      <Articles />
-      <VisualPortfolio />
+      <Header />
+
+      <section id="home" className="scroll-mt-24">
+        <Hero />
+      </section>
+
+      <section id="portfolio" className="scroll-mt-24">
+        <Portfolio />
+        <VisualPortfolio />
+      </section>
+
+      <section id="about" className="scroll-mt-24">
+        <About />
+      </section>
+
+      <section id="experience" className="scroll-mt-24">
+        <Experience />
+      </section>
+
+      <section id="skills" className="scroll-mt-24">
+        <SkillsAndTech />
+      </section>
+
+      <section id="articles" className="scroll-mt-24">
+        <Articles />
+      </section>
+
       <BigTypeCTA />
-      <CTA />
+
+      <section id="contact" className="scroll-mt-24">
+        <CTA />
+      </section>
+
       <Footer />
     </div>
   );
