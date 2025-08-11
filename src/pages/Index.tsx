@@ -8,6 +8,7 @@ import { Articles } from "@/components/Articles";
 import { VisualPortfolio } from "@/components/VisualPortfolio";
 import { CTA } from "@/components/CTA";
 import { Footer } from "@/components/Footer";
+import { BigTypeCTA } from "@/components/BigTypeCTA";
 
 const Index = () => {
   return (
@@ -20,6 +21,7 @@ const Index = () => {
       <Skills />
       <Articles />
       <VisualPortfolio />
+      <BigTypeCTA />
       <CTA />
       <Footer />
     </div>
