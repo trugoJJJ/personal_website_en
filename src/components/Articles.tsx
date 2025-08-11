@@ -1,9 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Calendar, Clock } from "lucide-react";
+
 import { Link } from "react-router-dom";
 import { articles } from "@/data/articles";
+
 export const Articles = () => {
-  return <section className="py-20 bg-muted/30">
+  return (
+    <section className="py-20 bg-muted/30">
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           
@@ -20,12 +23,19 @@ export const Articles = () => {
 
           {/* Articles Grid */}
           <div className="grid lg:grid-cols-3 gap-8 mb-12">
-            {articles.map((article, index) => <article key={article.id} className="group hover-scale bg-gradient-card rounded-xl overflow-hidden shadow-card border border-border/50 hover:border-primary/20 transition-all duration-300 animate-fade-in-up" style={{
-            animationDelay: `${index * 0.2}s`
-          }}>
+            {articles.map((article, index) => (
+              <article
+                key={article.id}
+                className="group hover-scale bg-gradient-card rounded-xl overflow-hidden shadow-card border border-border/50 hover:border-primary/20 transition-all duration-300 animate-fade-in-up"
+                style={{ animationDelay: `${index * 0.2}s` }}
+              >
                 {/* Image */}
                 <div className="aspect-[4/3] overflow-hidden relative">
-                  <img src={article.image} alt={article.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <img
+                    src={article.image}
+                    alt={article.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
                   <div className="absolute top-4 left-4">
                     <span className="bg-primary text-primary-foreground text-xs font-medium px-3 py-1 rounded-full">
                       {article.category}
@@ -54,33 +64,48 @@ export const Articles = () => {
                     {article.excerpt}
                   </p>
 
-                  <Button asChild variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-all">
+                  <Button 
+                    asChild
+                    variant="outline" 
+                    className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-all"
+                  >
                     <Link to={`/articles/${article.id}`} aria-label={`Czytaj więcej: ${article.title}`}>
                       <ExternalLink className="h-4 w-4 mr-2" />
                       Czytaj więcej
                     </Link>
                   </Button>
                 </div>
-              </article>)}
+              </article>
+            ))}
           </div>
 
           {/* View All Articles Button */}
-          <div className="text-center animate-fade-in-up" style={{
-          animationDelay: "0.8s"
-        }}>
+          <div className="text-center animate-fade-in-up" style={{animationDelay: "0.8s"}}>
             <Button asChild size="lg" className="bg-gradient-primary hover:opacity-90 text-white font-semibold px-8 py-6">
               <Link to="/articles" aria-label="Zobacz wszystkie artykuły">Zobacz wszystkie artykuły</Link>
             </Button>
           </div>
 
           {/* Newsletter CTA */}
-          <div className="mt-16 animate-fade-in-up" style={{
-          animationDelay: "1s"
-        }}>
-            
+          <div className="mt-16 animate-fade-in-up" style={{animationDelay: "1s"}}>
+            <div className="max-w-4xl mx-auto p-8 bg-gradient-accent rounded-2xl text-white shadow-hero text-center">
+              <h4 className="text-2xl font-semibold mb-4">Bądź na bieżąco</h4>
+              <p className="text-white/90 mb-6 leading-relaxed">
+                Subskrybuj newsletter i otrzymuj najnowsze artykuły o digital marketingu 
+                oraz ekskluzywne case studies bezpośrednio na swoją skrzynkę.
+              </p>
+              <Button 
+                size="lg" 
+                variant="secondary"
+                className="bg-white text-accent hover:bg-white/90 font-semibold px-8 py-6"
+              >
+                Zapisz się do newslettera
+              </Button>
+            </div>
           </div>
 
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
