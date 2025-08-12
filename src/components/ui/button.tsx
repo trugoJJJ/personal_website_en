@@ -19,18 +19,18 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
       },
-      size: {
-        default: "h-14 px-10 rounded-full text-lg md:text-xl",
-        sm: "h-12 rounded-full px-8 text-base",
-        lg: "h-16 rounded-full px-12 text-xl md:text-2xl",
-        xl: "h-20 rounded-full px-14 text-2xl md:text-3xl",
-        icon: "h-10 w-10 rounded-full",
+        size: {
+          default: "h-10 px-5 rounded-full text-base",
+          sm: "h-9 rounded-full px-4 text-sm",
+          lg: "h-12 rounded-full px-8 text-base md:text-lg",
+          xl: "h-14 rounded-full px-10 text-lg md:text-xl",
+          icon: "h-10 w-10 rounded-full",
+        },
       },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "xl",
-    },
+      defaultVariants: {
+        variant: "default",
+        size: "lg",
+      },
   }
 )
 

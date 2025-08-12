@@ -3,19 +3,17 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import LanguageSwitch from "@/components/LanguageSwitch";
-import { useI18n } from "@/contexts/i18n";
+
+const links = [
+  { href: "#portfolio", label: "Portfolio" },
+  { href: "#about", label: "O mnie" },
+  { href: "#experience", label: "Doświadczenie" },
+  { href: "#skills", label: "Umiejętności" },
+  { href: "#articles", label: "Artykuły" },
+];
 
 export const Header = () => {
   const [open, setOpen] = useState(false);
-  const { t } = useI18n();
-
-  const links = [
-    { href: "#portfolio", label: t("nav.portfolio") },
-    { href: "#about", label: t("nav.about") },
-    { href: "#experience", label: t("nav.experience") },
-    { href: "#skills", label: t("nav.skills") },
-    { href: "#articles", label: t("nav.articles") },
-  ];
 
   return (
     <header className="fixed top-0 inset-x-0 z-50 bg-background/70 backdrop-blur border-b border-border">
@@ -39,8 +37,8 @@ export const Header = () => {
         <div className="hidden md:flex items-center gap-3">
           <LanguageSwitch />
           <ThemeToggle />
-          <Button size="xl" asChild>
-            <a href="#contact">{t("nav.contact")}</a>
+          <Button size="lg" asChild>
+            <a href="#contact">Kontakt</a>
           </Button>
         </div>
 
@@ -58,7 +56,7 @@ export const Header = () => {
       {open && (
         <div className="fixed inset-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
           <div className="container mx-auto px-6 h-16 flex items-center justify-between border-b border-border">
-            <span className="font-semibold">{t("nav.menu")}</span>
+            <span className="font-semibold">Menu</span>
             <Button variant="outline" size="icon" aria-label="Zamknij menu" onClick={() => setOpen(false)}>
               <X className="h-5 w-5" />
             </Button>
@@ -81,7 +79,7 @@ export const Header = () => {
             </ul>
             <div className="mt-6 flex items-center gap-3">
               <Button asChild size="xl" className="w-full">
-                <a href="#contact">{t("nav.contact")}</a>
+                <a href="#contact">Kontakt</a>
               </Button>
             </div>
           </div>
