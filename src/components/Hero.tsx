@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import heroProject from "@/assets/hero-project.jpg";
 
 export const Hero = () => {
   return (
@@ -26,6 +27,15 @@ export const Hero = () => {
               <a href="#portfolio">Zobacz portfolio</a>
             </Button>
           </div>
+          <figure className="mt-12 overflow-hidden rounded-2xl border border-border bg-card shadow-hero">
+            <img
+              src={heroProject}
+              alt="Przykładowy projekt – layout strony docelowej"
+              loading="lazy"
+              className="w-full h-[380px] md:h-[460px] object-cover"
+            />
+            <figcaption className="sr-only">Przykładowy projekt</figcaption>
+          </figure>
         </div>
       </div>
     </section>

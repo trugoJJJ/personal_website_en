@@ -1,4 +1,5 @@
 import { Target, TrendingUp, Users, Award } from "lucide-react";
+import portrait from "@/assets/hero-portrait.jpg";
 
 const stats = [
   {
@@ -58,6 +59,9 @@ export const About = () => {
             
             {/* Content */}
             <div className="space-y-8 animate-fade-in-up">
+              <figure className="overflow-hidden rounded-xl border border-border bg-card shadow-sm">
+                <img src={portrait} alt="Portret – o mnie" loading="lazy" className="w-full h-64 object-cover md:h-80" />
+              </figure>
               <div className="space-y-6">
                 <h3 className="text-2xl font-semibold text-foreground">
                   Tworzymy razem sukces Twojego biznesu
