@@ -1,9 +1,7 @@
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import CombinedPortfolio from "@/components/CombinedPortfolio";
-import { About } from "@/components/About";
-import { Experience } from "@/components/Experience";
-import { SkillsAndTech } from "@/components/SkillsAndTech";
+import AboutMega from "@/components/AboutMega";
 import { Articles } from "@/components/Articles";
 import { CTA } from "@/components/CTA";
 import { Footer } from "@/components/Footer";
@@ -23,15 +21,7 @@ const Index = () => {
       </section>
 
       <section id="about" className="scroll-mt-24">
-        <About />
-      </section>
-
-      <section id="experience" className="scroll-mt-24">
-        <Experience />
-      </section>
-
-      <section id="skills" className="scroll-mt-24">
-        <SkillsAndTech />
+        <AboutMega />
       </section>
 
       <section id="articles" className="scroll-mt-24">

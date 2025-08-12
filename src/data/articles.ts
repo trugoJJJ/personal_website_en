@@ -43,5 +43,39 @@ export const articles: Article[] = [
     category: "Automation",
     link: "#",
     excerpt: "Marketing automation to nie tylko wysyłanie maili. To inteligentne nurturing leadów, segmentacja behawioralna i spersonalizowane doświadczenia w skali."
+  },
+  // Placeholdery dodatkowe
+  {
+    id: 4,
+    title: "Strategie wzrostu dla SaaS: taktyki na 2025",
+    description: "Przegląd działań wzrostowych dla firm SaaS",
+    image: "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=600&h=400&fit=crop",
+    readTime: "9 min",
+    publishDate: "20 luty 2024",
+    category: "Growth",
+    link: "#",
+    excerpt: "Taktyki wzrostu, które działają — pricing, onboarding, aktywacja i retencja."
+  },
+  {
+    id: 5,
+    title: "Design system w marketingu: spójność i tempo",
+    description: "Dlaczego design system przyspiesza marketing",
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&h=400&fit=crop",
+    readTime: "7 min",
+    publishDate: "3 marzec 2024",
+    category: "Design",
+    link: "#",
+    excerpt: "Spójność wizualna i reusable komponenty skracają time‑to‑market i poprawiają UX."
+  },
+  {
+    id: 6,
+    title: "Analityka produktowa: jak podejmować decyzje",
+    description: "KPI, eventy i dashboardy dla product marketingu",
+    image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&h=400&fit=crop",
+    readTime: "11 min",
+    publishDate: "18 marzec 2024",
+    category: "Analytics",
+    link: "#",
+    excerpt: "Mądre decyzje opierają się na danych. Jak projektować pomiary i analizować wyniki."
   }
 ];

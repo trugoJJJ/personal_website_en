@@ -66,7 +66,8 @@ export const Articles = () => {
 
                   <Button 
                     asChild
-                    variant="outline" 
+                    variant="outline"
+                    size="xl"
                     className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-all"
                   >
                     <Link to={`/articles/${article.id}`} aria-label={`Czytaj więcej: ${article.title}`}>
@@ -81,7 +82,7 @@ export const Articles = () => {
 
           {/* View All Articles Button */}
           <div className="text-center animate-fade-in-up" style={{animationDelay: "0.8s"}}>
-            <Button asChild size="lg" className="bg-gradient-primary hover:opacity-90 text-white font-semibold px-8 py-6">
+            <Button asChild size="xl" className="bg-gradient-primary hover:opacity-90 text-white font-semibold px-8 py-6">
               <Link to="/articles" aria-label="Zobacz wszystkie artykuły">Zobacz wszystkie artykuły</Link>
             </Button>
           </div>
