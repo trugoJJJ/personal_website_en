@@ -1,11 +1,10 @@
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
-import { Portfolio } from "@/components/Portfolio";
+import CombinedPortfolio from "@/components/CombinedPortfolio";
 import { About } from "@/components/About";
 import { Experience } from "@/components/Experience";
 import { SkillsAndTech } from "@/components/SkillsAndTech";
 import { Articles } from "@/components/Articles";
-import { VisualPortfolio } from "@/components/VisualPortfolio";
 import { CTA } from "@/components/CTA";
 import { Footer } from "@/components/Footer";
 import { BigTypeCTA } from "@/components/BigTypeCTA";
@@ -20,8 +19,7 @@ const Index = () => {
       </section>
 
       <section id="portfolio" className="scroll-mt-24">
-        <Portfolio />
-        <VisualPortfolio />
+        <CombinedPortfolio />
       </section>
 
       <section id="about" className="scroll-mt-24">

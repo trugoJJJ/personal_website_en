@@ -4,6 +4,7 @@ export type Project = {
   description: string;
   image: string;
   tags: string[];
+  categories: string[];
   metrics: string;
   link: string;
   github: string;
@@ -16,6 +17,7 @@ export const portfolioProjects: Project[] = [
     description: "Kampania marketingowa, która zwiększyła sprzedaż o 340% w 6 miesięcy",
     image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop",
     tags: ["Google Ads", "Facebook Ads", "Email Marketing", "Analytics"],
+    categories: ["Kampanie reklamowe"],
     metrics: "+340% sprzedaż",
     link: "#",
     github: "#"
@@ -26,6 +28,7 @@ export const portfolioProjects: Project[] = [
     description: "Redesign i optymalizacja strony głównej, która podwoiła konwersję",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
     tags: ["A/B Testing", "UX/UI", "Analytics", "Webflow"],
+    categories: ["Designe"],
     metrics: "+127% konwersja",
     link: "#",
     github: "#"
@@ -36,6 +39,7 @@ export const portfolioProjects: Project[] = [
     description: "System automatyzacji content marketingu z wykorzystaniem AI",
     image: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=600&h=400&fit=crop",
     tags: ["AI Tools", "Automation", "Content Marketing", "Social Media"],
+    categories: ["Animacje"],
     metrics: "70% oszczędność czasu",
     link: "#",
     github: "#"
@@ -46,6 +50,7 @@ export const portfolioProjects: Project[] = [
     description: "Zaawansowany model atrybukcji do trackowania customer journey",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
     tags: ["Analytics", "Python", "Data Science", "Attribution"],
+    categories: ["Zarządzanie zespołem"],
     metrics: "360° wgląd w dane",
     link: "#",
     github: "#"
