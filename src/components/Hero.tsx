@@ -4,27 +4,32 @@ import heroProjectPoster from "@/assets/hero-project.jpg";
 import heroProjectVideo from "@/assets/hero-project.mp4";
 
 export const Hero = () => {
-  const [scale, setScale] = useState(1);
-  const [isFixed, setIsFixed] = useState(false);
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const [t, setT] = useState(0);
+  const [box, setBox] = useState({ left: 0, top: 0, width: 0, height: 0, radius: 16 });
   const placeholderRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handle = () => {
       const el = placeholderRef.current;
       if (!el) return;
-      const rect = el.getBoundingClientRect();
-      const atTop = rect.top <= 0;
-      setIsFixed(atTop);
+      const r = el.getBoundingClientRect();
+      const vh = window.innerHeight || 1;
+      const ww = window.innerWidth || 1;
 
-      if (!atTop) {
-        const viewportH = window.innerHeight || 1;
-        const progress = Math.min(Math.max((viewportH - rect.top) / viewportH, 0), 1);
-        const s = 1 + progress * 0.12; // subtle growth before it sticks to the top
-        setScale(s);
-      } else {
-        setScale(1);
-      }
+      const progress = Math.min(Math.max((vh - r.top) / vh, 0), 1);
+
+      const cw = r.width;
+      const left0 = r.left;
+      const top0 = r.top;
+
+      const width = cw + (ww - cw) * progress;
+      const height = cw + (ww * 9 / 16 - cw) * progress;
+      const left = left0 * (1 - progress);
+      const top = Math.max(top0 * (1 - progress), 0);
+      const radius = Math.max(0, 16 * (1 - progress));
+
+      setT(progress);
+      setBox({ left, top, width, height, radius });
     };
 
     let rAF = 0;
@@ -78,34 +83,41 @@ export const Hero = () => {
           <div className="relative">
             {/* Placeholder to prevent layout shift */}
             <div ref={placeholderRef} className="aspect-square w-full" />
-            {/* Video wrapper: absolute until it reaches top, then fixed full-width 16:9 */}
+            {/* Video wrapper: fixed, smoothly morphs from square (right column) to full-width 16:9 */}
             <div
-              ref={wrapperRef}
-              className={`${isFixed ? "fixed top-0 left-0 w-screen z-30" : "absolute inset-0"} transition-all duration-500 ease-out will-change-transform`}
-              style={!isFixed ? { transform: `scale(${scale})`, transformOrigin: "center" } : undefined}
+              className="fixed z-30 pointer-events-none"
+              style={{
+                left: `${box.left}px`,
+                top: `${box.top}px`,
+                width: `${box.width}px`,
+                height: `${box.height}px`,
+              }}
             >
-              <figure className={`${isFixed ? "rounded-none" : "rounded-2xl"} overflow-hidden bg-card shadow-hero ring-2 ring-[hsl(0,0%,100%)]`}>
-                <div className={`${isFixed ? "w-screen aspect-[16/9]" : "w-full h-full"}`}>
-                  <video
-                    src={heroProjectVideo}
-                    poster={heroProjectPoster}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    preload="none"
-                    className={`${isFixed ? "w-full h-full object-cover" : "w-full h-full object-cover"}`}
-                    aria-label="Przykładowe wideo projektu — layout strony docelowej"
-                  />
-                </div>
-                {/* Left gradient overlay when the video doesn't reach the left edge */}
-                {!isFixed && (
-                  <div
-                    className="pointer-events-none absolute inset-y-0 left-0 w-1/3"
-                    style={{ background: "linear-gradient(to right, hsl(var(--background)), transparent)" }}
-                    aria-hidden
-                  />
-                )}
+              <figure
+                className="w-full h-full overflow-hidden bg-card shadow-hero ring-2 ring-[hsl(0,0%,100%)]"
+                style={{ borderRadius: box.radius }}
+              >
+                <video
+                  src={heroProjectVideo}
+                  poster={heroProjectPoster}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="none"
+                  className="w-full h-full object-cover"
+                  aria-label="Przykładowe wideo projektu — layout strony docelowej"
+                />
+                {/* Left gradient overlay - appears progressively */}
+                <div
+                  className="pointer-events-none absolute inset-y-0 left-0"
+                  style={{
+                    width: `${Math.max(0, Math.min(box.left, box.width * 0.4))}px`,
+                    opacity: t,
+                    background: "linear-gradient(to right, hsl(var(--background)), transparent)",
+                  }}
+                  aria-hidden
+                />
                 <figcaption className="sr-only">Przykładowe wideo projektu</figcaption>
               </figure>
             </div>
