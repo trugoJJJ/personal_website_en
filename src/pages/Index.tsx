@@ -1,7 +1,7 @@
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import CombinedPortfolio from "@/components/CombinedPortfolio";
-import AboutMega from "@/components/AboutMega";
+import AboutCombinedLegacy from "@/components/AboutCombinedLegacy";
 import { Articles } from "@/components/Articles";
 import { CTA } from "@/components/CTA";
 import { Footer } from "@/components/Footer";
@@ -21,7 +21,7 @@ const Index = () => {
       </section>
 
       <section id="about" className="scroll-mt-24">
-        <AboutMega />
+        <AboutCombinedLegacy />
       </section>
 
       <section id="articles" className="scroll-mt-24">
