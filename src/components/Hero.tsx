@@ -18,7 +18,7 @@ export const Hero = () => {
       <h1 className="sr-only">Marketing manager - Portfolio</h1>
 
       {/* Main hero content */}
-      <div className="flex-1 flex items-center justify-center px-6 pt-16 pb-16">
+      <div className="flex-1 flex items-center justify-center px-6 pt-4 pb-16">
         <div className="text-center space-y-8">
           <h2 className="text-6xl md:text-8xl lg:text-9xl font-bold text-foreground tracking-tight">
             Marketing
