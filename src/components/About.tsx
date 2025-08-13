@@ -64,11 +64,11 @@ export const About = () => {
               </figure>
               <div className="space-y-6">
                 <h3 className="text-2xl font-semibold text-foreground">
-                  Tworzymy razem sukces Twojego biznesu
+                  Tworzymy razem coś tam takiego jakiegoś jak to
                 </h3>
                 <div className="space-y-4 text-muted-foreground leading-relaxed">
                   <p>
-                    Jestem marketing managerem i freelancerem specjalizującym się w digital marketingu. 
+                    Jestem managerem i freelancerem specjalizującym się w digital marketingu. 
                     Moja pasja to łączenie kreatywności z danymi, aby tworzyć kampanie, które nie tylko 
                     wyglądają świetnie, ale przede wszystkim przynoszą mierzalne rezultaty.
                   </p>
