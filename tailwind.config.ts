@@ -88,8 +88,8 @@ export default {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			fontFamily: {
-				sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-				display: ['Space Grotesk', 'Inter', 'ui-sans-serif', 'sans-serif']
+				sans: ['Noto Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+				display: ['Noto Sans', 'ui-sans-serif', 'sans-serif']
 			},
 			keyframes: {
 				'accordion-down': {
