@@ -51,7 +51,7 @@ export const About = () => {
               Więcej o mnie
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Pasjonat digital marketingu z 5-letnim doświadczeniem w budowaniu skutecznych strategii marketingowych dla startupów i etablowanych firm
+              Pasjonat marketingu z 5-letnim doświadczeniem w budowaniu skutecznych strategii marketingowych dla startupów i etablowanych firm
             </p>
           </div>
 
