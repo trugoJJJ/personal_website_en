@@ -1,9 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Mail, Calendar, MessageCircle, ArrowRight } from "lucide-react";
-
 export const CTA = () => {
-  return (
-    <section className="py-20 bg-gradient-hero animate-gradient">
+  return <section className="py-20 bg-gradient-hero animate-gradient">
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto text-center">
           
@@ -20,27 +18,12 @@ export const CTA = () => {
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16 animate-fade-in-up" style={{animationDelay: "0.3s"}}>
-            <Button 
-              size="lg" 
-              className="bg-white text-primary hover:bg-white/90 font-semibold px-8 py-6 text-lg shadow-hero group"
-            >
-              <Calendar className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
-              Umów bezpłatną konsultację
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline"
-              className="border-white/30 bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-semibold px-8 py-6 text-lg"
-            >
-              <Mail className="mr-2 h-5 w-5" />
-              Napisz wiadomość
-            </Button>
-          </div>
+          
 
           {/* Contact Methods */}
-          <div className="grid md:grid-cols-3 gap-8 animate-fade-in-up" style={{animationDelay: "0.6s"}}>
+          <div className="grid md:grid-cols-3 gap-8 animate-fade-in-up" style={{
+          animationDelay: "0.6s"
+        }}>
             
             {/* Email */}
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300 hover-scale">
@@ -51,10 +34,7 @@ export const CTA = () => {
               <p className="text-white/80 text-sm mb-4">
                 Odpowiadam zwykle w ciągu 24h
               </p>
-              <a 
-                href="mailto:hello@marketingwizard.pl" 
-                className="text-white hover:text-white/80 font-medium text-sm"
-              >
+              <a href="mailto:hello@marketingwizard.pl" className="text-white hover:text-white/80 font-medium text-sm">
                 hello@marketingwizard.pl
               </a>
             </div>
@@ -68,10 +48,7 @@ export const CTA = () => {
               <p className="text-white/80 text-sm mb-4">
                 Połączmy się i porozmawiajmy
               </p>
-              <a 
-                href="#" 
-                className="text-white hover:text-white/80 font-medium text-sm"
-              >
+              <a href="#" className="text-white hover:text-white/80 font-medium text-sm">
                 /in/marketingwizard
               </a>
             </div>
@@ -85,23 +62,17 @@ export const CTA = () => {
               <p className="text-white/80 text-sm mb-4">
                 Wybierz dogodny termin
               </p>
-              <a 
-                href="#" 
-                className="text-white hover:text-white/80 font-medium text-sm"
-              >
+              <a href="#" className="text-white hover:text-white/80 font-medium text-sm">
                 Zarezerwuj spotkanie
               </a>
             </div>
           </div>
 
           {/* Final note */}
-          <div className="mt-16 animate-fade-in-up" style={{animationDelay: "0.9s"}}>
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
-              <p className="text-white/90 text-lg leading-relaxed">
-                💡 <strong>Współpraca ze mną to:</strong> transparentność, regularne reporty, 
-                focus na ROI i partnerskie podejście do Twojego biznesu.
-              </p>
-            </div>
+          <div className="mt-16 animate-fade-in-up" style={{
+          animationDelay: "0.9s"
+        }}>
+            
           </div>
 
         </div>
@@ -110,8 +81,9 @@ export const CTA = () => {
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 right-20 w-64 h-64 bg-white/5 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute bottom-20 left-20 w-80 h-80 bg-white/3 rounded-full blur-3xl animate-float" style={{animationDelay: "3s"}}></div>
+        <div className="absolute bottom-20 left-20 w-80 h-80 bg-white/3 rounded-full blur-3xl animate-float" style={{
+        animationDelay: "3s"
+      }}></div>
       </div>
-    </section>
-  );
+    </section>;
 };

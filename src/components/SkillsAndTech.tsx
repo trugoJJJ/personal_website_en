@@ -4,76 +4,75 @@ import { Badge } from "@/components/ui/badge";
 // Minimalist combined section: Skills, Competencies and Tech Stack
 // No colorful icons or gradients. Large type, generous spacing, neutral palette.
 
-const technicalSkills = [
-  { name: "Google Ads", level: 95, category: "PPC" },
-  { name: "Facebook Ads", level: 92, category: "Social Media" },
-  { name: "Google Analytics", level: 88, category: "Analytics" },
-  { name: "SEO/SEM", level: 85, category: "Search" },
-  { name: "Email Marketing", level: 90, category: "Automation" },
-  { name: "Marketing Automation", level: 87, category: "Automation" },
-  { name: "A/B Testing", level: 83, category: "Optimization" },
-  { name: "Data Analysis", level: 80, category: "Analytics" }
-];
-
-const softSkills = [
-  "Strategic Thinking",
-  "Project Management",
-  "Client Communication",
-  "Creative Problem Solving",
-  "Team Leadership",
-  "Budget Management",
-  "Cross-functional Collaboration",
-  "Agile Methodology"
-];
-
+const technicalSkills = [{
+  name: "Google Ads",
+  level: 95,
+  category: "PPC"
+}, {
+  name: "Facebook Ads",
+  level: 92,
+  category: "Social Media"
+}, {
+  name: "Google Analytics",
+  level: 88,
+  category: "Analytics"
+}, {
+  name: "SEO/SEM",
+  level: 85,
+  category: "Search"
+}, {
+  name: "Email Marketing",
+  level: 90,
+  category: "Automation"
+}, {
+  name: "Marketing Automation",
+  level: 87,
+  category: "Automation"
+}, {
+  name: "A/B Testing",
+  level: 83,
+  category: "Optimization"
+}, {
+  name: "Data Analysis",
+  level: 80,
+  category: "Analytics"
+}];
+const softSkills = ["Strategic Thinking", "Project Management", "Client Communication", "Creative Problem Solving", "Team Leadership", "Budget Management", "Cross-functional Collaboration", "Agile Methodology"];
 
 // Tech stack categories (simplified, no icons/colors)
-const techCategories = [
-  {
-    title: "AI Tools",
-    tools: ["ChatGPT", "Claude", "Midjourney", "Runway", "Copy.ai"],
-  },
-  {
-    title: "Grafika",
-    tools: ["Photoshop", "Illustrator", "Figma", "Canva", "After Effects"],
-  },
-  {
-    title: "Animacja",
-    tools: ["After Effects", "Lottie", "Rive", "Framer Motion", "GSAP"],
-  },
-  {
-    title: "Strony internetowe",
-    tools: ["React", "WordPress", "Webflow", "Framer", "Shopify"],
-  },
-  {
-    title: "Analityka",
-    tools: ["Google Analytics", "Hotjar", "Mixpanel", "Amplitude", "Data Studio"],
-  },
-  {
-    title: "SEO",
-    tools: ["Ahrefs", "SEMrush", "Google Search Console", "Screaming Frog", "Surfer SEO"],
-  },
-  {
-    title: "Zarządzanie projektami",
-    tools: ["Notion", "Asana", "Monday.com", "Trello", "Slack"],
-  },
-  {
-    title: "Email Marketing",
-    tools: ["Mailchimp", "ConvertKit", "ActiveCampaign", "Klaviyo", "Sendinblue"],
-  },
-  {
-    title: "Systemy reklam PPC",
-    tools: ["Google Ads", "Facebook Ads", "LinkedIn Ads", "TikTok Ads", "Pinterest Ads"],
-  },
-  {
-    title: "Programowanie",
-    tools: ["React", "TypeScript", "Node.js", "Python", "No-code tools"],
-  },
-];
-
+const techCategories = [{
+  title: "AI Tools",
+  tools: ["ChatGPT", "Claude", "Midjourney", "Runway", "Copy.ai"]
+}, {
+  title: "Grafika",
+  tools: ["Photoshop", "Illustrator", "Figma", "Canva", "After Effects"]
+}, {
+  title: "Animacja",
+  tools: ["After Effects", "Lottie", "Rive", "Framer Motion", "GSAP"]
+}, {
+  title: "Strony internetowe",
+  tools: ["React", "WordPress", "Webflow", "Framer", "Shopify"]
+}, {
+  title: "Analityka",
+  tools: ["Google Analytics", "Hotjar", "Mixpanel", "Amplitude", "Data Studio"]
+}, {
+  title: "SEO",
+  tools: ["Ahrefs", "SEMrush", "Google Search Console", "Screaming Frog", "Surfer SEO"]
+}, {
+  title: "Zarządzanie projektami",
+  tools: ["Notion", "Asana", "Monday.com", "Trello", "Slack"]
+}, {
+  title: "Email Marketing",
+  tools: ["Mailchimp", "ConvertKit", "ActiveCampaign", "Klaviyo", "Sendinblue"]
+}, {
+  title: "Systemy reklam PPC",
+  tools: ["Google Ads", "Facebook Ads", "LinkedIn Ads", "TikTok Ads", "Pinterest Ads"]
+}, {
+  title: "Programowanie",
+  tools: ["React", "TypeScript", "Node.js", "Python", "No-code tools"]
+}];
 export const SkillsAndTech = () => {
-  return (
-    <section className="py-24 bg-background">
+  return <section className="py-24 bg-background">
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
@@ -95,8 +94,7 @@ export const SkillsAndTech = () => {
                 Umiejętności techniczne
               </h3>
               <div className="space-y-6">
-                {technicalSkills.map((skill) => (
-                  <div key={skill.name} className="space-y-3">
+                {technicalSkills.map(skill => <div key={skill.name} className="space-y-3">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
                         <span className="font-medium text-base md:text-lg text-foreground">
@@ -109,8 +107,7 @@ export const SkillsAndTech = () => {
                       <span className="text-sm text-muted-foreground">{skill.level}%</span>
                     </div>
                     <Progress value={skill.level} className="h-2 bg-muted" />
-                  </div>
-                ))}
+                  </div>)}
               </div>
             </article>
 
@@ -121,14 +118,9 @@ export const SkillsAndTech = () => {
                   Soft skills
                 </h3>
                 <div className="flex flex-wrap gap-3">
-                  {softSkills.map((skill) => (
-                    <div
-                      key={skill}
-                      className="inline-flex items-center rounded-full border border-border bg-muted/40 px-4 py-2 text-sm md:text-base text-foreground/90"
-                    >
+                  {softSkills.map(skill => <div key={skill} className="inline-flex items-center rounded-full border border-border bg-muted/40 px-4 py-2 text-sm md:text-base text-foreground/90">
                       {skill}
-                    </div>
-                  ))}
+                    </div>)}
                 </div>
               </div>
 
@@ -141,40 +133,24 @@ export const SkillsAndTech = () => {
               Tech Stack
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-              {techCategories.map((cat) => (
-                <div key={cat.title} className="rounded-xl border border-border p-6">
+              {techCategories.map(cat => <div key={cat.title} className="rounded-xl border border-border p-6">
                   <h4 className="text-lg md:text-xl font-semibold text-foreground mb-4">
                     {cat.title}
                   </h4>
                   <div className="flex flex-wrap gap-3">
-                    {cat.tools.map((tool) => (
-                      <div
-                        key={tool}
-                        className="inline-flex items-center rounded-full border border-border bg-muted/40 px-4 py-2 text-sm md:text-base text-foreground/90"
-                      >
+                    {cat.tools.map(tool => <div key={tool} className="inline-flex items-center rounded-full border border-border bg-muted/40 px-4 py-2 text-sm md:text-base text-foreground/90">
                         {tool}
-                      </div>
-                    ))}
+                      </div>)}
                   </div>
-                </div>
-              ))}
+                </div>)}
             </div>
           </section>
 
           {/* Summary */}
           <div className="mt-20 text-center">
-            <div className="max-w-4xl mx-auto p-8 md:p-10 rounded-2xl border border-border bg-muted/30">
-              <h4 className="text-lg md:text-xl font-semibold mb-3 text-foreground">
-                Nieustanny rozwój
-              </h4>
-              <p className="text-muted-foreground leading-relaxed">
-                Marketing cyfrowy zmienia się błyskawicznie. Każdego tygodnia poświęcam czas
-                na naukę nowych narzędzi, trendów i strategii, aby dostarczać maksymalne efekty.
-              </p>
-            </div>
+            
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
