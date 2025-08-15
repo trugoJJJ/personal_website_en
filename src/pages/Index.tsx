@@ -28,10 +28,6 @@ const Index = () => {
         <Articles />
       </section>
 
-      <div className="py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24">
-        <BigTypeCTA />
-      </div>
-
       <section id="contact" className="scroll-mt-24 py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24">
         <CTA />
       </section>

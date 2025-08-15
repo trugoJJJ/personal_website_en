@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { DndContext, closestCenter, DragEndEvent, DragStartEvent, DragOverlay } from '@dnd-kit/core';
 import { arrayMove, SortableContext, useSortable, rectSortingStrategy } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { BigTypeCTA } from "@/components/BigTypeCTA";
+import { SimpleCTA } from "@/components/SimpleCTA";
 
 // --- Funkcja pomocnicza ---
 function shuffleArray<T>(array: T[]): T[] {
@@ -206,6 +208,19 @@ const CombinedPortfolio = () => {
             {activeItem ? <ProjectCard project={activeItem} isOverlay /> : null}
           </DragOverlay>
         </DndContext>
+
+        {/* --- DODANY BLOK --- */}
+      <div className="py-8 sm:py-0 md:py-0 lg:py-0 xl:py-0">
+        <SimpleCTA />
+      </div>
+        {/* --- KONIEC DODANEGO BLOKU --- */}
+
+        {/* --- DODANY BLOK --- */}
+        <div className="py-8 sm:py-0 md:py-0 lg:py-0 xl:py-0">
+        <BigTypeCTA />
+      </div>
+        {/* --- KONIEC DODANEGO BLOKU --- */}
+
       </div>
     </section>
   );
