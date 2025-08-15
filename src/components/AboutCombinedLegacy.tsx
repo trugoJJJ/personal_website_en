@@ -5,7 +5,7 @@ import { SkillsAndTech } from "@/components/SkillsAndTech";
 // Jeden długi blok łączący poprzednie sekcje bez zmiany ich wyglądu
 export const AboutCombinedLegacy = () => {
   return (
-    <section className="bg-background">
+    <section className="bg-background py-0">
       {/* Zachowujemy oryginalne komponenty (z ich spacingiem) w jednej sekcji */}
       <About />
       <Experience />

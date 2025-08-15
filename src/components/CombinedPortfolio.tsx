@@ -161,7 +161,7 @@ const CombinedPortfolio = () => {
   }
 
   return (
-    <section className="py-20 bg-background">
+    <section className="py-0 bg-background">
        {isSolved && <SuccessAnimationPlaceholder onReset={handleReset} />}
       <div className="container mx-auto px-6">
         <header className="mb-10 text-center">
