@@ -6,31 +6,33 @@ import { Articles } from "@/components/Articles";
 import { CTA } from "@/components/CTA";
 import { Footer } from "@/components/Footer";
 import { BigTypeCTA } from "@/components/BigTypeCTA";
- 
+
 const Index = () => {
   return (
     <div className="min-h-screen">
       <Header />
 
-      <section id="home" className="scroll-mt-24">
+      <section id="home" className="scroll-mt-24 py-8 sm:py-12 md:py-16 lg:py-36 xl:py-36">
         <Hero />
       </section>
 
-      <section id="portfolio" className="scroll-mt-24">
+      <section id="portfolio" className="scroll-mt-24 py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24">
         <CombinedPortfolio />
       </section>
 
-      <section id="about" className="scroll-mt-24">
+      <section id="about" className="scroll-mt-24 py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24">
         <AboutCombinedLegacy />
       </section>
 
-      <section id="articles" className="scroll-mt-24">
+      <section id="articles" className="scroll-mt-24 py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24">
         <Articles />
       </section>
 
-      <BigTypeCTA />
+      <div className="py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24">
+        <BigTypeCTA />
+      </div>
 
-      <section id="contact" className="scroll-mt-24">
+      <section id="contact" className="scroll-mt-24 py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24">
         <CTA />
       </section>
 

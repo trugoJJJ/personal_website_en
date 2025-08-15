@@ -16,10 +16,10 @@ export const Header = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 inset-x-0 z-50 bg-background/70 backdrop-blur border-b border-border">
+    <header className="fixed top-0 inset-x-0 z-50 bg-background/70 backdrop-blur border-b border-border py-0">
       <nav className="container mx-auto px-6 h-16 flex items-center justify-between">
         <a href="#home" className="font-semibold tracking-tight text-foreground">
-          Studio
+          Adam Gałęcki
         </a>
 
         {/* Desktop nav */}
@@ -54,7 +54,7 @@ export const Header = () => {
 
       {/* Mobile overlay menu with Rive placeholder */}
       {open && (
-        <div className="fixed inset-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
+        <div className="fixed inset-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 py-0">
           <div className="container mx-auto px-6 h-16 flex items-center justify-between border-b border-border">
             <span className="font-semibold">Menu</span>
             <Button variant="outline" size="icon" aria-label="Zamknij menu" onClick={() => setOpen(false)}>
