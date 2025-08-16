@@ -50,7 +50,7 @@ export const SimpleCTA = () => {
           .simple-cta-button { 
             width: 100%; 
             border-radius: 9999px; 
-            min-height: 120px; /* ✅ Niższy na desktopie */
+            min-height: 140px; /* ✅ Niższy na desktopie */
             /* padding: 0 2rem;  <- USUNIĘTE */
           } 
           .simple-cta-button:hover { 

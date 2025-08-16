@@ -210,13 +210,13 @@ const CombinedPortfolio = () => {
         </DndContext>
 
         {/* --- DODANY BLOK --- */}
-      <div className="py-8 sm:py-0 md:py-0 lg:py-0 xl:py-0">
+      <div className="py-16 sm:py-10 md:py-12 lg:py-16 xl:py-18">
         <SimpleCTA />
       </div>
         {/* --- KONIEC DODANEGO BLOKU --- */}
 
         {/* --- DODANY BLOK --- */}
-        <div className="py-8 sm:py-0 md:py-0 lg:py-0 xl:py-0">
+        <div className="py-0 sm:py-0 md:py-0 lg:py-0 xl:py-0">
         <BigTypeCTA />
       </div>
         {/* --- KONIEC DODANEGO BLOKU --- */}

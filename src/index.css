@@ -148,9 +148,7 @@ All colors MUST be HSL.
     @apply text-lg md:text-xl text-muted-foreground;
   }
 
-  section {
-    @apply py-20 md:py-28;
-  }
+
 }
 
 @layer components {

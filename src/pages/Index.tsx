@@ -5,7 +5,6 @@ import AboutCombinedLegacy from "@/components/AboutCombinedLegacy";
 import { Articles } from "@/components/Articles";
 import { CTA } from "@/components/CTA";
 import { Footer } from "@/components/Footer";
-import { BigTypeCTA } from "@/components/BigTypeCTA";
 
 const Index = () => {
   return (

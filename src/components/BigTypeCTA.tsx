@@ -58,7 +58,6 @@ const BrushControls = ({
   // Dynamiczne tworzenie palety kolorów z ich przeciwieństwami
   const BASE_COLORS = ["#FFFFFF", "#000000", "#ff3b30", "#34c759", "#007aff"];
   const oppositeColors = BASE_COLORS.map(getOppositeColor);
-  // ✅ POPRAWKA: Ujednolicenie wielkości liter przed usunięciem duplikatów
   const COLORS = [
     ...new Set([...BASE_COLORS, ...oppositeColors].map(c => c.toLowerCase()))
   ];
@@ -147,7 +146,6 @@ export const BigTypeCTA = () => {
   const mousePosition = useRef<{ x: number; y: number } | null>(null);
   const lastMousePosition = useRef<{ x: number; y: number } | null>(null);
   const frameCounter = useRef(0);
-  const drawingTimer = useRef<NodeJS.Timeout | null>(null);
   const nextDrawingColor = useRef<string | null>(null);
 
   const handleColorChange = (newColor: string) => {
@@ -161,25 +159,22 @@ export const BigTypeCTA = () => {
     if (linkRef.current) {
       const rect = linkRef.current.getBoundingClientRect();
       mousePosition.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
-
-      if (!drawingTimer.current && !hasUnlockedControls) {
-        drawingTimer.current = setTimeout(() => {
-          setHasUnlockedControls(true);
-        }, 1000);
-      }
     }
   };
 
   const handleMouseLeave = () => {
     mousePosition.current = null;
     lastMousePosition.current = null;
-    if (drawingTimer.current) {
-      clearTimeout(drawingTimer.current);
-      drawingTimer.current = null;
-    }
   };
-
+  
+  // ✅ ZMIANA: Panel pojawia się natychmiast po najechaniu
   const handleMouseEnter = () => {
+    // Odblokuj panel kontrolny od razu, bez opóźnienia
+    if (!hasUnlockedControls) {
+      setHasUnlockedControls(true);
+    }
+    
+    // Pozostała logika do zmiany tła po zamalowaniu
     const canvas = canvasRef.current;
     const context = canvas?.getContext("2d");
     if (nextDrawingColor.current && context) {
@@ -419,13 +414,14 @@ export const BigTypeCTA = () => {
                 animation-delay: 2.5s; 
             } 
         }
+        /* ✅ ZMIANA: Bardziej subtelne pulsowanie na mobile */
         @keyframes mobile-pulse { 
             0% { 
                 transform: translate(-50%, -50%) scale(1); 
-                opacity: 0.5; 
+                opacity: 0.4; /* Zmniejszona przezroczystość początkowa */
             } 
             100% { 
-                transform: translate(-50%, -50%) scale(2.5); 
+                transform: translate(-50%, -50%) scale(1.6); /* Zmniejszona skala końcowa */
                 opacity: 0; 
             } 
         }
