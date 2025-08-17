@@ -57,7 +57,7 @@ setScale(s);
     <section className="relative min-h-screen bg-background flex flex-col py-0">
       <h1 className="sr-only">Marketing manager - Portfolio</h1>
 
-      <div className="flex-1 flex items-center justify-center px-6 pt-4 pb-16">
+      <div className="flex-1 flex items-center justify-center px-6 pt-4 pb-0 md:pb-16">
         <div className="text-center space-y-8">
           <h2 className="text-6xl md:text-8xl lg:text-9xl font-semibold text-foreground tracking-tight">
             Marketing

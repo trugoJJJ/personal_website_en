@@ -7,6 +7,23 @@ import { CSS } from '@dnd-kit/utilities';
 import { BigTypeCTA } from "@/components/BigTypeCTA";
 import { SimpleCTA } from "@/components/SimpleCTA";
 
+// ✅ ZMIANA: Dodany hook do sprawdzania rozmiaru ekranu
+function useMediaQuery(query: string) {
+  const [matches, setMatches] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia(query);
+    if (media.matches !== matches) {
+      setMatches(media.matches);
+    }
+    const listener = () => setMatches(media.matches);
+    window.addEventListener('resize', listener);
+    return () => window.removeEventListener('resize', listener);
+  }, [matches, query]);
+
+  return matches;
+}
+
 // --- Funkcja pomocnicza ---
 function shuffleArray<T>(array: T[]): T[] {
   const newArray = [...array];
@@ -39,7 +56,7 @@ const portfolioProjects: Omit<Project, 'id'>[] = [
 
 const createSixProjects = (projects: Omit<Project, 'id'>[]): Project[] => {
   const sixProjects: Project[] = [];
-  const projectPool = [...projects, ...projects.slice(0, 2)]; // Zapewnia po 2x Animacja i Design
+  const projectPool = [...projects, ...projects.slice(0, 2)]; 
 
   for (let i = 0; i < projectPool.length; i++) {
     const projectTemplate = projectPool[i];
@@ -65,13 +82,13 @@ function SuccessAnimationPlaceholder({ onReset }: { onReset: () => void }) {
   );
 }
 
-function ProjectCard({ project, isOverlay = false, isHighlighted = false }: { project: Project, isOverlay?: boolean, isHighlighted?: boolean }) {
+// ✅ ZMIANA: Dodano prop `isDraggable` do warunkowego stylowania
+function ProjectCard({ project, isOverlay = false, isHighlighted = false, isDraggable = true }: { project: Project, isOverlay?: boolean, isHighlighted?: boolean, isDraggable?: boolean }) {
   const overlayStyles = isOverlay ? 'shadow-2xl' : '';
   const highlightedStyles = isHighlighted ? 'scale-105 z-10' : '';
 
   return (
-    <article className={`group flex flex-col h-full bg-card rounded-xl transition-transform duration-300 cursor-grab ${overlayStyles} ${highlightedStyles}`}>
-        {/* ... zawartość karty bez zmian ... */}
+    <article className={`group flex flex-col h-full bg-card rounded-xl transition-transform duration-300 ${isDraggable ? 'cursor-grab' : ''} ${overlayStyles} ${highlightedStyles}`}>
          <div className="overflow-hidden rounded-xl flex flex-col h-full">
         <figure className="aspect-video overflow-hidden">
           <img src={project.image} alt={project.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"/>
@@ -101,13 +118,14 @@ function ProjectCard({ project, isOverlay = false, isHighlighted = false }: { pr
   );
 }
 
-function SortableProjectItem({ project, isHighlighted }: { project: Project, isHighlighted: boolean }) {
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: project.id });
+// ✅ ZMIANA: Dodano prop `isDraggable` i przekazano go do `useSortable`
+function SortableProjectItem({ project, isHighlighted, isDraggable }: { project: Project, isHighlighted: boolean, isDraggable: boolean }) {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: project.id, disabled: !isDraggable });
   const style = { transform: CSS.Transform.toString(transform), transition };
   if (isDragging) return <div ref={setNodeRef} style={style} className="rounded-xl bg-muted/50 border-2 border-dashed border-muted-foreground/30 h-full" />;
   return (
     <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      <ProjectCard project={project} isHighlighted={isHighlighted} />
+      <ProjectCard project={project} isHighlighted={isHighlighted} isDraggable={isDraggable} />
     </div>
   );
 }
@@ -120,6 +138,9 @@ const CombinedPortfolio = () => {
   const [activeItem, setActiveItem] = useState<Project | null>(null);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
+
+  // ✅ ZMIANA: Sprawdzamy, czy ekran jest desktopowy (używamy breakpointu `sm` z Tailwind)
+  const isDesktop = useMediaQuery('(min-width: 640px)');
 
   useEffect(() => {
     const generatedItems = createSixProjects(portfolioProjects);
@@ -171,11 +192,16 @@ const CombinedPortfolio = () => {
             Interaktywne Portfolio
           </h2>
           <p className="mt-3 text-muted-foreground max-w-2xl mx-auto">
-            Przeciągnij projekty, aby ułożyć jedną z dwóch zwycięskich sekwencji.
+            {/* ✅ ZMIANA: Inny tekst na mobile */}
+            {isDesktop 
+              ? "Przeciągnij projekty, aby ułożyć jedną z dwóch zwycięskich sekwencji." 
+              : "Oto wybrane projekty. Przeglądaj je w dowolnej kolejności."
+            }
           </p>
         </header>
         
-        <div className="flex flex-wrap justify-center gap-4 mb-16">
+        {/* ✅ ZMIANA: Przyciski ukryte na mobile (`hidden`), widoczne od `sm` wzwyż (`sm:flex`) */}
+        <div className="hidden sm:flex flex-wrap justify-center gap-4 mb-16">
           {CATEGORIES.map((c) => (
             <Button
               key={c}
@@ -200,26 +226,23 @@ const CombinedPortfolio = () => {
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-16">
               {items.map((item) => {
                  const isHighlighted = (activeCategory && item.categories?.includes(activeCategory)) || (hoveredCategory && item.categories?.includes(hoveredCategory));
-                 return <SortableProjectItem key={item.id} project={item} isHighlighted={isHighlighted} />;
+                 // ✅ ZMIANA: Przekazujemy informację, czy przeciąganie jest aktywne
+                 return <SortableProjectItem key={item.id} project={item} isHighlighted={isHighlighted} isDraggable={isDesktop} />;
               })}
             </div>
           </SortableContext>
           <DragOverlay>
-            {activeItem ? <ProjectCard project={activeItem} isOverlay /> : null}
+            {activeItem ? <ProjectCard project={activeItem} isOverlay isDraggable={isDesktop} /> : null}
           </DragOverlay>
         </DndContext>
 
-        {/* --- DODANY BLOK --- */}
       <div className="py-16 sm:py-10 md:py-12 lg:py-16 xl:py-18">
         <SimpleCTA />
       </div>
-        {/* --- KONIEC DODANEGO BLOKU --- */}
 
-        {/* --- DODANY BLOK --- */}
         <div className="py-0 sm:py-0 md:py-0 lg:py-0 xl:py-0">
         <BigTypeCTA />
       </div>
-        {/* --- KONIEC DODANEGO BLOKU --- */}
 
       </div>
     </section>

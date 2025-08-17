@@ -1,4 +1,4 @@
-import { Target, TrendingUp, Users, Award } from "lucide-react";
+import { Target, TrendingUp, Users, Award, Linkedin, Music, PenTool } from "lucide-react";
 import portrait from "@/assets/hero-portrait.jpg";
 
 const stats = [
@@ -39,6 +39,24 @@ const skills = [
   "Social Media Marketing"
 ];
 
+const socialLinks = [
+    {
+        icon: Linkedin,
+        href: "#", // Wstaw tutaj swój link do LinkedIn
+        ariaLabel: "LinkedIn"
+    },
+    {
+        icon: Music, // Ikona zastępcza dla TikTok
+        href: "#", // Wstaw tutaj swój link do TikTok
+        ariaLabel: "TikTok"
+    },
+    {
+        icon: PenTool, // Ikona zastępcza dla Behance
+        href: "#", // Wstaw tutaj swój link do Behance
+        ariaLabel: "Behance"
+    }
+]
+
 export const About = () => {
   return (
     <section className="py-20 bg-background">
@@ -55,9 +73,9 @@ export const About = () => {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-16 items-start">
             
-            {/* Content */}
+            {/* Left Column: Content */}
             <div className="space-y-8 animate-fade-in-up">
               <figure className="overflow-hidden rounded-xl border border-border bg-card shadow-sm">
                 <img src={portrait} alt="Portret – o mnie" loading="lazy" className="w-full h-64 object-cover md:h-80" />
@@ -97,40 +115,54 @@ export const About = () => {
               </div>
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-2 gap-6 animate-fade-in-up" style={{animationDelay: "0.3s"}}>
-              {stats.map((stat, index) => (
-                <div
-                  key={stat.label}
-                  className="group hover-scale bg-gradient-card rounded-xl p-6 text-center shadow-card border border-border/50 hover:border-primary/20 transition-all duration-300"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                    <stat.icon className={`h-8 w-8 ${stat.color}`} />
+            {/* Right Column: Stats and Socials */}
+            <div className="space-y-8">
+              {/* Stats */}
+              <div className="grid grid-cols-2 gap-6 animate-fade-in-up" style={{animationDelay: "0.3s"}}>
+                {stats.map((stat, index) => (
+                  <div
+                    key={stat.label}
+                    className="group hover-scale bg-gradient-card rounded-xl p-6 text-center shadow-card border border-border/50 hover:border-primary/20 transition-all duration-300"
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                  >
+                    <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                      <stat.icon className={`h-8 w-8 ${stat.color}`} />
+                    </div>
+                    <div className="text-3xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                      {stat.value}
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      {stat.label}
+                    </div>
                   </div>
-                  <div className="text-3xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
-                    {stat.value}
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-          </div>
-
-          {/* Interactive quote */}
-          <div className="mt-20 text-center animate-fade-in-up" style={{animationDelay: "0.6s"}}>
-            <div className="max-w-4xl mx-auto p-8 bg-gradient-primary rounded-2xl text-white shadow-hero">
-              <blockquote className="text-xl lg:text-2xl font-medium italic leading-relaxed">
-                "Najlepsze kampanie marketingowe to te, które łączą kreatywność z danymi, 
-                emocje z logiką, i storytelling z precyzyjną segmentacją."
-              </blockquote>
-              <div className="mt-6 text-white/80">
-                — Moja filozofia marketingowa
+                ))}
               </div>
+
+              {/* Social links */}
+              <div className="animate-fade-in-up" style={{animationDelay: "0.6s"}}>
+                <div className="max-w-4xl mx-auto p-8 bg-foreground rounded-2xl text-background shadow-hero text-center">
+                    <h4 className="text-xl font-semibold mb-6">
+                        Znajdź mnie na:
+                    </h4>
+                    <div className="flex justify-center items-center gap-x-8">
+                        {socialLinks.map((link) => (
+                             <a 
+                                key={link.ariaLabel}
+                                href={link.href} 
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label={link.ariaLabel}
+                                className="text-muted-foreground hover:text-primary transition-colors duration-300"
+                            >
+                                <link.icon className="w-8 h-8" />
+                            </a>
+                        ))}
+                    </div>
+                </div>
+              </div>
+
             </div>
+
           </div>
 
         </div>

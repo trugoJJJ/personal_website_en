@@ -1,24 +1,18 @@
 import { Link } from "react-router-dom";
 import { useRef, MouseEvent, useEffect, useState } from "react";
 
-// --- Komponenty i funkcje pomocnicze ---
+// --- Komponenty i funkcje pomocnicze (bez zmian) ---
 
-// Fikcyjny hook i18n na potrzeby demonstracji
 const useI18n = () => ({
   t: (key: string) => {
     const translations: { [key: string]: string } = {
-      "portfolio.cta.more": "Zobacz więcej projektów",
-      "portfolio.cta.more.mobile": "Zobacz<br/>więcej",
+      "portfolio.cta.more": "Więcej projektów graficznych",
+      "portfolio.cta.more.mobile": "Projekty<br/>graficzne",
     };
     return translations[key] || key;
   },
 });
 
-/**
- * Oblicza kolor przeciwny (negatyw) do podanego koloru w formacie hex.
- * @param hex - Kolor w formacie #RRGGBB
- * @returns Kolor przeciwny w formacie #RRGGBB
- */
 const getOppositeColor = (hex: string): string => {
   if (hex.indexOf("#") === 0) {
     hex = hex.slice(1);
@@ -29,7 +23,6 @@ const getOppositeColor = (hex: string): string => {
 
 type BrushType = "brush" | "pen" | "spray" | "cursor";
 
-// Komponent panelu kontrolnego pędzla
 const BrushControls = ({
   onSizeChange,
   onColorChange,
@@ -55,7 +48,6 @@ const BrushControls = ({
     { id: "cursor", name: "Kursor" },
   ];
 
-  // Dynamiczne tworzenie palety kolorów z ich przeciwieństwami
   const BASE_COLORS = ["#FFFFFF", "#000000", "#ff3b30", "#34c759", "#007aff"];
   const oppositeColors = BASE_COLORS.map(getOppositeColor);
   const COLORS = [
@@ -65,7 +57,7 @@ const BrushControls = ({
 
   return (
     <div className={`brush-controls-panel ${isVisible ? "visible" : ""}`}>
-      {/* Kontrolki rodzaju pędzla */}
+      {/* Kontrolki (bez zmian) */}
       <div className="flex items-center bg-gray-800/50 rounded-full p-1">
         {BRUSH_TYPES.map((brush) => (
           <button
@@ -82,7 +74,6 @@ const BrushControls = ({
           </button>
         ))}
       </div>
-      {/* Kontrolki grubości pędzla */}
       <div className="flex items-center bg-gray-800/50 rounded-full p-1">
         {SIZES.map((size) => (
           <button
@@ -101,7 +92,6 @@ const BrushControls = ({
           </button>
         ))}
       </div>
-      {/* Kontrolki koloru pędzla */}
       <div className="flex items-center bg-gray-800/50 rounded-full p-1">
         {COLORS.map((color) => (
           <button
@@ -133,7 +123,6 @@ export const BigTypeCTA = () => {
   const { t } = useI18n();
   const linkRef = useRef<HTMLAnchorElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  // Stany do zarządzania pędzlem i panelem
   const [brushSize, setBrushSize] = useState(140);
   const [drawingColor, setDrawingColor] = useState("#FFFFFF");
   const [brushType, setBrushType] = useState<BrushType>("brush");
@@ -141,7 +130,6 @@ export const BigTypeCTA = () => {
   const [isButtonVisible, setIsButtonVisible] = useState(false);
   const [isPanelVisible, setIsPanelVisible] = useState(false);
 
-  // Refy do przechowywania stanu animacji
   const animationFrameId = useRef<number>();
   const mousePosition = useRef<{ x: number; y: number } | null>(null);
   const lastMousePosition = useRef<{ x: number; y: number } | null>(null);
@@ -167,14 +155,11 @@ export const BigTypeCTA = () => {
     lastMousePosition.current = null;
   };
   
-  // ✅ ZMIANA: Panel pojawia się natychmiast po najechaniu
   const handleMouseEnter = () => {
-    // Odblokuj panel kontrolny od razu, bez opóźnienia
     if (!hasUnlockedControls) {
       setHasUnlockedControls(true);
     }
     
-    // Pozostała logika do zmiany tła po zamalowaniu
     const canvas = canvasRef.current;
     const context = canvas?.getContext("2d");
     if (nextDrawingColor.current && context) {
@@ -186,7 +171,6 @@ export const BigTypeCTA = () => {
     }
   };
 
-  // Efekt do obserwowania widoczności przycisku
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
       setIsButtonVisible(entry.isIntersecting);
@@ -197,7 +181,6 @@ export const BigTypeCTA = () => {
     };
   }, []);
 
-  // Efekt do zarządzania animacją panelu
   useEffect(() => {
     if (hasUnlockedControls && isButtonVisible) {
       setTimeout(() => setIsPanelVisible(true), 50);
@@ -206,23 +189,27 @@ export const BigTypeCTA = () => {
     }
   }, [hasUnlockedControls, isButtonVisible]);
   
-  // Efekt do dynamicznej zmiany kursora
   useEffect(() => {
     if (!linkRef.current) return;
     if (brushType === 'cursor') {
       linkRef.current.style.cursor = 'pointer';
     } else {
-      linkRef.current.style.cursor = ''; // Wróć do stylu z CSS
+      linkRef.current.style.cursor = '';
     }
   }, [brushType]);
 
-  // Efekt do inicjalizacji i zmiany rozmiaru canvasu
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas?.getContext("2d");
 
     const setupCanvas = () => {
       if (canvas && context) {
+        const isDarkMode = document.documentElement.classList.contains('dark');
+        const canvasBackgroundColor = isDarkMode ? '#FFFFFF' : '#000000';
+        
+        context.fillStyle = canvasBackgroundColor;
+        context.fillRect(0, 0, canvas.width, canvas.height);
+
         const dpr = window.devicePixelRatio || 1;
         const rect = canvas.getBoundingClientRect();
         const tempCanvas = document.createElement("canvas");
@@ -236,16 +223,18 @@ export const BigTypeCTA = () => {
       }
     };
 
-    if (canvas && context) {
-      context.fillStyle = "#000000";
-      context.fillRect(0, 0, canvas.width, canvas.height);
-    }
     setupCanvas();
     window.addEventListener("resize", setupCanvas);
-    return () => window.removeEventListener("resize", setupCanvas);
+    
+    const observer = new MutationObserver(() => setupCanvas());
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
+    return () => {
+        window.removeEventListener("resize", setupCanvas);
+        observer.disconnect();
+    }
   }, []);
 
-  // Główny hook do rysowania
   useEffect(() => {
     const context = canvasRef.current?.getContext("2d", { willReadFrequently: true });
     let isRunning = true;
@@ -341,15 +330,17 @@ export const BigTypeCTA = () => {
   return (
     <>
       <style>{`
-        :root { --background-hsl: 0 0% 100%; --foreground-hsl: 222.2 84% 4.9%; }
-        .cta-button-wrapper { 
+        /* Usunięto zmienne :root i .dark - nie są już potrzebne do sterowania kolorem tekstu */
+        
+        .big-type-cta-section .cta-button-wrapper { 
           position: relative; 
           display: flex; 
           justify-content: center; 
           align-items: center; 
           width: 100%; 
         }
-        .cta-button {
+        
+        .big-type-cta-section .cta-button {
           position: relative;
           z-index: 1;
           display: block;
@@ -361,10 +352,22 @@ export const BigTypeCTA = () => {
           border: none;
           outline: none;
           box-shadow: none;
-          cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'><circle cx='24' cy='24' r='18' fill='rgba(0,0,0,0.2)' stroke='%23fff' stroke-width='2'/></svg>") 24 24, auto;
+          cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'><circle cx='24' cy='24' r='18' fill='rgba(0,0,0,0.2)' stroke='%23000' stroke-width='2'/></svg>") 24 24, auto;
         }
-        .cta-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
-        .cta-text { position: relative; z-index: 2; color: hsl(var(--background-hsl)); mix-blend-mode: difference; pointer-events: none; }
+
+        .dark .big-type-cta-section .cta-button {
+          cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'><circle cx='24' cy='24' r='18' fill='rgba(255,255,255,0.2)' stroke='%23fff' stroke-width='2'/></svg>") 24 24, auto;
+        }
+        
+        .big-type-cta-section .cta-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+        .big-type-cta-section .cta-text { 
+            position: relative; 
+            z-index: 2; 
+            /* ✅ ZMIANA: Kolor tekstu jest na stałe biały. */
+            color: #FFFFFF; 
+            mix-blend-mode: difference; 
+            pointer-events: none; 
+        }
       
         .brush-controls-panel {
           position: fixed;
@@ -389,13 +392,32 @@ export const BigTypeCTA = () => {
           opacity: 1;
         }
 
-        @media (hover: hover) and (min-width: 769px) { .cta-button { width: 100%; border-radius: 9999px; min-height: 220px; display: flex; align-items: center; justify-content: center; padding: 0 2rem; } .cta-button:hover { transform: scale(1.02); } }
+        @media (hover: hover) and (min-width: 769px) { 
+          .big-type-cta-section .cta-button { 
+            width: 100%; border-radius: 9999px; min-height: 220px; display: flex; align-items: center; justify-content: center; padding: 0 2rem; 
+          } 
+          .big-type-cta-section .cta-button:hover { 
+            transform: scale(1.02); 
+          } 
+        }
         
         @media (hover: none), (max-width: 768px) { 
-            .cta-button { width: 200px; height: 200px; border-radius: 50%; display: flex; justify-content: center; align-items: center; text-align: center; } 
-            .cta-text { font-size: 1.5rem; line-height: 1.2; } 
+            .big-type-cta-section .cta-button { 
+                width: 200px; 
+                height: 200px; 
+                border-radius: 0;
+                display: flex; 
+                justify-content: center; 
+                align-items: center; 
+                text-align: center; 
+            } 
+            .big-type-cta-section .cta-text { 
+                font-size: 1.5rem; 
+                line-height: 1.2; 
+            } 
             
-            .cta-button-wrapper::before, .cta-button-wrapper::after { 
+            .big-type-cta-section .cta-button-wrapper::before, 
+            .big-type-cta-section .cta-button-wrapper::after { 
                 content: ''; 
                 position: absolute; 
                 top: 50%; 
@@ -403,41 +425,50 @@ export const BigTypeCTA = () => {
                 transform: translate(-50%, -50%); 
                 width: 200px;
                 height: 200px;
-                border: 1px solid hsl(var(--foreground-hsl)); 
-                border-radius: 50%; 
+                /* Zmienna --foreground-hsl nie istnieje, więc dla pewności ustawiamy stały kolor */
+                border: 1px solid #000;
+                border-radius: 0;
                 animation: mobile-pulse 5s infinite cubic-bezier(0.25, 0.46, 0.45, 0.94); 
                 opacity: 0; 
                 pointer-events: none; 
                 z-index: 0;
+            }
+            /* Dodajemy regułę dla dark mode dla animacji pulsującej */
+            .dark .big-type-cta-section .cta-button-wrapper::before,
+            .dark .big-type-cta-section .cta-button-wrapper::after {
+                border-color: #FFF;
             } 
-            .cta-button-wrapper::after { 
+
+            .big-type-cta-section .cta-button-wrapper::after { 
                 animation-delay: 2.5s; 
             } 
         }
-        /* ✅ ZMIANA: Bardziej subtelne pulsowanie na mobile */
+
         @keyframes mobile-pulse { 
             0% { 
                 transform: translate(-50%, -50%) scale(1); 
-                opacity: 0.4; /* Zmniejszona przezroczystość początkowa */
+                opacity: 0.4;
             } 
             100% { 
-                transform: translate(-50%, -50%) scale(1.6); /* Zmniejszona skala końcowa */
+                transform: translate(-50%, -50%) scale(1.6);
                 opacity: 0; 
             } 
         }
       `}</style>
-
-      <section aria-labelledby="big-type-cta">
+      
+      <section aria-labelledby="big-type-cta" className="py-0 big-type-cta-section">
         <div className="container mx-auto">
           <div className="cta-button-wrapper">
             <Link
-              to="/portfolio"
+              to="https://www.behance.net/adamgacki1"
               className="cta-button"
               aria-label={t("portfolio.cta.more")}
               onMouseEnter={handleMouseEnter}
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
               ref={linkRef}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <canvas ref={canvasRef} className="cta-canvas" />
               <h2
