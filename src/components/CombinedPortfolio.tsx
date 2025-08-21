@@ -7,7 +7,7 @@ import { CSS } from '@dnd-kit/utilities';
 import { BigTypeCTA } from "@/components/BigTypeCTA";
 import { SimpleCTA } from "@/components/SimpleCTA";
 
-// ✅ ZMIANA: Dodany hook do sprawdzania rozmiaru ekranu
+// Hook do sprawdzania rozmiaru ekranu
 function useMediaQuery(query: string) {
   const [matches, setMatches] = useState(false);
 
@@ -82,7 +82,6 @@ function SuccessAnimationPlaceholder({ onReset }: { onReset: () => void }) {
   );
 }
 
-// ✅ ZMIANA: Dodano prop `isDraggable` do warunkowego stylowania
 function ProjectCard({ project, isOverlay = false, isHighlighted = false, isDraggable = true }: { project: Project, isOverlay?: boolean, isHighlighted?: boolean, isDraggable?: boolean }) {
   const overlayStyles = isOverlay ? 'shadow-2xl' : '';
   const highlightedStyles = isHighlighted ? 'scale-105 z-10' : '';
@@ -118,7 +117,6 @@ function ProjectCard({ project, isOverlay = false, isHighlighted = false, isDrag
   );
 }
 
-// ✅ ZMIANA: Dodano prop `isDraggable` i przekazano go do `useSortable`
 function SortableProjectItem({ project, isHighlighted, isDraggable }: { project: Project, isHighlighted: boolean, isDraggable: boolean }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: project.id, disabled: !isDraggable });
   const style = { transform: CSS.Transform.toString(transform), transition };
@@ -139,7 +137,6 @@ const CombinedPortfolio = () => {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
 
-  // ✅ ZMIANA: Sprawdzamy, czy ekran jest desktopowy (używamy breakpointu `sm` z Tailwind)
   const isDesktop = useMediaQuery('(min-width: 640px)');
 
   useEffect(() => {
@@ -150,15 +147,12 @@ const CombinedPortfolio = () => {
 
   const checkSolution = (currentOrder: Project[]) => {
     const sequenceTitles = currentOrder.map(item => item.title);
-
     const anim = 'Projekt Animacji Korporacyjnej';
     const design = 'Identyfikacja Wizualna dla Startupu';
     const opt = 'Landing Page Optimization';
     const kamp = 'Kampania w Mediach Społecznościowych';
-
     const winningSequence1 = [anim, anim, kamp, design, design, opt];
     const winningSequence2 = [design, design, opt, anim, anim, kamp];
-
     const isMatch = (arr1: string[], arr2: string[]) => JSON.stringify(arr1) === JSON.stringify(arr2);
 
     if (isMatch(sequenceTitles, winningSequence1) || isMatch(sequenceTitles, winningSequence2)) {
@@ -184,15 +178,14 @@ const CombinedPortfolio = () => {
   }
 
   return (
-    <section className="py-0 bg-background">
+    <section className="py-16 sm:py-20 bg-background">
        {isSolved && <SuccessAnimationPlaceholder onReset={handleReset} />}
-      <div className="container mx-auto px-6">
-        <header className="mb-10 text-center">
+      <div className="container mx-auto px-4 sm:px-6">
+        <header className="mb-12 text-center">
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
             Interaktywne Portfolio
           </h2>
-          <p className="mt-3 text-muted-foreground max-w-2xl mx-auto">
-            {/* ✅ ZMIANA: Inny tekst na mobile */}
+          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
             {isDesktop 
               ? "Przeciągnij projekty, aby ułożyć jedną z dwóch zwycięskich sekwencji." 
               : "Oto wybrane projekty. Przeglądaj je w dowolnej kolejności."
@@ -200,7 +193,6 @@ const CombinedPortfolio = () => {
           </p>
         </header>
         
-        {/* ✅ ZMIANA: Przyciski ukryte na mobile (`hidden`), widoczne od `sm` wzwyż (`sm:flex`) */}
         <div className="hidden sm:flex flex-wrap justify-center gap-4 mb-16">
           {CATEGORIES.map((c) => (
             <Button
@@ -223,10 +215,9 @@ const CombinedPortfolio = () => {
           onDragEnd={handleDragEnd}
         >
           <SortableContext items={items} strategy={rectSortingStrategy}>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-16">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-6">
               {items.map((item) => {
                  const isHighlighted = (activeCategory && item.categories?.includes(activeCategory)) || (hoveredCategory && item.categories?.includes(hoveredCategory));
-                 // ✅ ZMIANA: Przekazujemy informację, czy przeciąganie jest aktywne
                  return <SortableProjectItem key={item.id} project={item} isHighlighted={isHighlighted} isDraggable={isDesktop} />;
               })}
             </div>
@@ -236,13 +227,11 @@ const CombinedPortfolio = () => {
           </DragOverlay>
         </DndContext>
 
-      <div className="py-16 sm:py-10 md:py-12 lg:py-16 xl:py-18">
-        <SimpleCTA />
-      </div>
-
-        <div className="py-0 sm:py-0 md:py-0 lg:py-0 xl:py-0">
-        <BigTypeCTA />
-      </div>
+        {/* ✅ ZMIANA: Dodany kontener dla dwukolumnowego układu CTA */}
+        <div className="cta-grid-container py-24 sm:py-32">
+            <SimpleCTA />
+            <BigTypeCTA />
+        </div>
 
       </div>
     </section>

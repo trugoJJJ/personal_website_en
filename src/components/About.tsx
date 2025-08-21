@@ -1,4 +1,4 @@
-import { Target, TrendingUp, Users, Award, Linkedin, Music, PenTool } from "lucide-react";
+import { Target, TrendingUp, Users, Award } from "lucide-react";
 import portrait from "@/assets/hero-portrait.jpg";
 
 const stats = [
@@ -38,24 +38,6 @@ const skills = [
   "SEO/SEM",
   "Social Media Marketing"
 ];
-
-const socialLinks = [
-    {
-        icon: Linkedin,
-        href: "#", // Wstaw tutaj swój link do LinkedIn
-        ariaLabel: "LinkedIn"
-    },
-    {
-        icon: Music, // Ikona zastępcza dla TikTok
-        href: "#", // Wstaw tutaj swój link do TikTok
-        ariaLabel: "TikTok"
-    },
-    {
-        icon: PenTool, // Ikona zastępcza dla Behance
-        href: "#", // Wstaw tutaj swój link do Behance
-        ariaLabel: "Behance"
-    }
-]
 
 export const About = () => {
   return (
@@ -102,7 +84,7 @@ export const About = () => {
               <div>
                 <h4 className="text-lg font-semibold mb-4 text-foreground">Główne specjalizacje:</h4>
                 <div className="grid grid-cols-2 gap-3">
-                  {skills.map((skill, index) => (
+                  {skills.map((skill) => (
                     <div
                       key={skill}
                       className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
@@ -115,7 +97,7 @@ export const About = () => {
               </div>
             </div>
 
-            {/* Right Column: Stats and Socials */}
+            {/* Right Column: Stats and Contact */}
             <div className="space-y-8">
               {/* Stats */}
               <div className="grid grid-cols-2 gap-6 animate-fade-in-up" style={{animationDelay: "0.3s"}}>
@@ -138,26 +120,39 @@ export const About = () => {
                 ))}
               </div>
 
-              {/* Social links */}
+              {/* Contact links */}
               <div className="animate-fade-in-up" style={{animationDelay: "0.6s"}}>
-                <div className="max-w-4xl mx-auto p-8 bg-foreground rounded-2xl text-background shadow-hero text-center">
-                    <h4 className="text-xl font-semibold mb-6">
-                        Znajdź mnie na:
-                    </h4>
-                    <div className="flex justify-center items-center gap-x-8">
-                        {socialLinks.map((link) => (
-                             <a 
-                                key={link.ariaLabel}
-                                href={link.href} 
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label={link.ariaLabel}
-                                className="text-muted-foreground hover:text-primary transition-colors duration-300"
-                            >
-                                <link.icon className="w-8 h-8" />
-                            </a>
-                        ))}
-                    </div>
+                <div className="max-w-4xl mx-auto p-8 bg-foreground rounded-2xl text-background shadow-hero">
+                  <h4 className="text-xl font-semibold mb-6 text-left">
+                    Skontaktuj się ze mną
+                  </h4>
+                  <div className="space-y-4 text-left text-lg">
+                    <a
+                      href="https://linkedin.com/in/adamgalecki"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block font-mono text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      linkedin.com/in/adamgalecki
+                    </a>
+                    <a
+                      href="https://tiktok.com/@adamgalecki"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block font-mono text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      tiktok.com/@adamgalecki
+                    </a>
+                    <a
+                      href="mailto:agalecki.work@gmail.com"
+                      className="block font-mono text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      agalecki.work@gmail.com
+                    </a>
+                    <p className="font-mono text-muted-foreground">
+                      (+48) 666 ⛧ 663 8007
+                    </p>
+                  </div>
                 </div>
               </div>
 

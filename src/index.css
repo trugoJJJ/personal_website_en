@@ -274,3 +274,29 @@ All colors MUST be HSL.
     animation: fade-in-up 0.6s ease-out;
   }
 }
+
+.cta-grid-container {
+  /* Mobile: jeden pod drugim */
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+/* Desktop: obok siebie */
+@media (min-width: 768px) {
+  .cta-grid-container {
+    flex-direction: row;
+    gap: 2rem;
+    align-items: stretch;
+  }
+}
+
+/* Wrapper BigTypeCTA (pierwszy element) */
+.cta-grid-container > *:first-child {
+  flex: 3; /* Zajmie 3/5 dostępnego miejsca */
+}
+
+/* Wrapper SimpleCTA (drugi element) */
+.cta-grid-container > *:last-child {
+  flex: 2; /* Zajmie 2/5 dostępnego miejsca */
+}
