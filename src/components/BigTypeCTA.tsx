@@ -146,10 +146,6 @@ const handleTouchStart = (e: TouchEvent<HTMLAnchorElement>) => {
 
 const handleTouchMove = (e: TouchEvent<HTMLAnchorElement>) => { 
   isDraggingRef.current = true; 
-  // Oznacz że użytkownik rysował tylko jeśli aktywnie rysuje (nie w trybie cursor)
-  if (brushType !== 'cursor') {
-    hasDrawnRef.current = true;
-  }
   if (linkRef.current) { 
     const rect = linkRef.current.getBoundingClientRect(); 
     const touch = e.touches[0]; 
@@ -159,9 +155,7 @@ const handleTouchMove = (e: TouchEvent<HTMLAnchorElement>) => {
 
 const handleTouchEnd = () => { 
   handleMouseLeave(); 
-  if (!hasDrawnRef.current && linkRef.current) { 
-    linkRef.current.click(); 
-  } 
+  // Na mobile nie blokuj kliknięcia - touch już obsługuje navigation
 };
 
 const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
@@ -301,113 +295,173 @@ return (
 
 <style>{`
 
-/* --- Style bazowe (Mobile-First) --- */
+@layer components {
+  /* ✅ POPRAWKA: Używamy @layer components dla wyższej specyficzności */
+  
+  .big-type-cta-section {
+    width: 100%;
+    padding: 0;
+  }
 
-.big-type-cta-section .cta-button-wrapper {
+  .big-type-cta-section .cta-button-wrapper {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 1.5rem; 
+    width: 100%;
+  }
 
-display: flex; flex-direction: column; align-items: center; gap: 1.5rem; width: 100%;
+  .big-type-cta-section .cta-button {
+    position: relative !important; 
+    z-index: 1; 
+    display: flex !important; 
+    align-items: center; 
+    justify-content: center; 
+    width: 100% !important;
+    overflow: hidden !important; 
+    background-color: transparent; 
+    transition: transform 0.3s ease; 
+    -webkit-tap-highlight-color: transparent;
+    text-decoration: none !important; 
+    border: none !important; 
+    outline: none !important; 
+    box-shadow: none !important; 
+    touch-action: none;
+    min-height: 180px !important;
+    
+    /* ✅ PEŁNE ZAOKRĄGLENIE NA MAKSA! */
+    border-radius: 9999px !important; /* Full pigułka na wszystkich urządzeniach! */
+    -webkit-border-radius: 9999px !important;
+    -moz-border-radius: 9999px !important;
+    
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'><circle cx='24' cy='24' r='18' fill='rgba(0,0,0,0.2)' stroke='%23000' stroke-width='2'/></svg>") 24 24, auto;
+  }
 
-}
+  .dark .big-type-cta-section .cta-button {
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'><circle cx='24' cy='24' r='18' fill='rgba(255,255,255,0.2)' stroke='%23fff' stroke-width='2'/></svg>") 24 24, auto;
+  }
 
-.big-type-cta-section .cta-button {
+  .big-type-cta-section .cta-canvas { 
+    position: absolute !important; 
+    inset: 0; 
+    width: 100% !important; 
+    height: 100% !important; 
+    z-index: 1; 
+    pointer-events: none; 
+    border-radius: 9999px !important; /* PEŁNE ZAOKRĄGLENIE WSZĘDZIE! */
+    -webkit-border-radius: 9999px !important;
+    -moz-border-radius: 9999px !important;
+  }
 
-position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; width: 100%;
+  .big-type-cta-section .cta-text {
+    position: relative; 
+    z-index: 2; 
+    color: #FFFFFF; 
+    mix-blend-mode: difference; 
+    pointer-events: none;
+    font-size: 1.5rem; 
+    line-height: 1.2;
+  }
 
-overflow: hidden; background-color: transparent; transition: transform 0.3s ease; -webkit-tap-highlight-color: transparent;
+  .controls-container { 
+    width: 100%; 
+    display: grid; 
+    grid-template-rows: 0fr; 
+    transition: grid-template-rows 0.4s ease-in-out; 
+    pointer-events: none; 
+  }
 
-text-decoration: none; border: none; outline: none; box-shadow: none; touch-action: none;
+  .controls-container.visible { 
+    grid-template-rows: 1fr; 
+    pointer-events: auto; 
+  }
 
-min-height: 180px;
+  .brush-controls-panel {
+    overflow: hidden; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 0.5rem; 
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out; 
+    flex-direction: row; 
+    flex-wrap: wrap; 
+    width: 90%; 
+    max-width: 380px; 
+    margin: 0 auto;
+  }
 
-border-radius: 2rem; /* ✅ POPRAWKA: Dodano border-radius dla mobilnych */
+  .controls-container.visible .brush-controls-panel { 
+    opacity: 1; 
+  }
 
-cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'><circle cx='24' cy='24' r='18' fill='rgba(0,0,0,0.2)' stroke='%23000' stroke-width='2'/></svg>") 24 24, auto;
+  .brush-controls-panel > div {
+    background-color: rgba(0, 0, 0, 0.5); 
+    backdrop-filter: blur(10px); 
+    border-radius: 9999px; 
+    padding: 0.5rem;
+    display: flex; 
+    align-items: center; 
+    gap: 0.5rem; 
+    flex-wrap: wrap; 
+    justify-content: center;
+  }
 
-}
+  /* --- Style dla Tabletu i Desktopa --- */
+  @media (min-width: 768px) {
+    .big-type-cta-section .cta-button {
+      min-height: 220px; 
+      padding: 0 2rem;
+      border-radius: 9999px !important; /* ✅ Pełne zaokrąglenie dla desktop */
+      -webkit-border-radius: 9999px !important;
+      -moz-border-radius: 9999px !important;
+    }
+    
+    .big-type-cta-section .cta-canvas {
+      border-radius: 9999px !important;
+      -webkit-border-radius: 9999px !important;
+      -moz-border-radius: 9999px !important;
+    }
 
-.dark .big-type-cta-section .cta-button {
+    .big-type-cta-section .cta-text { 
+      font-size: 2.25rem; 
+    }
+  }
 
-cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'><circle cx='24' cy='24' r='18' fill='rgba(255,255,255,0.2)' stroke='%23fff' stroke-width='2'/></svg>") 24 24, auto;
+  @media (min-width: 1024px) {
+    .big-type-cta-section .cta-text { 
+      font-size: 3rem; 
+    }
+    .brush-controls-panel { 
+      flex-wrap: nowrap; 
+      width: auto; 
+      max-width: none; 
+    }
+  }
 
-}
+  @media (hover: hover) and (min-width: 768px) {
+    .big-type-cta-section .cta-button:hover { 
+      transform: scale(1.02); 
+    }
+  }
 
-.big-type-cta-section .cta-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+  /* ✅ Poprawiona logika zmiany tekstu */
+  .desktop-text { 
+    display: none; 
+  }
 
-.big-type-cta-section .cta-text {
+  .mobile-text { 
+    display: inline-block; 
+  }
 
-position: relative; z-index: 2; color: #FFFFFF; mix-blend-mode: difference; pointer-events: none;
-
-font-size: 1.5rem; line-height: 1.2;
-
-}
-
-.controls-container { width: 100%; display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.4s ease-in-out; pointer-events: none; }
-
-.controls-container.visible { grid-template-rows: 1fr; pointer-events: auto; }
-
-.brush-controls-panel {
-
-overflow: hidden; display: flex; align-items: center; justify-content: center; gap: 0.5rem; opacity: 0;
-
-transition: opacity 0.4s ease-in-out; flex-direction: row; flex-wrap: wrap; width: 90%; max-width: 380px; margin: 0 auto;
-
-}
-
-.controls-container.visible .brush-controls-panel { opacity: 1; }
-
-.brush-controls-panel > div {
-
-background-color: rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); border-radius: 9999px; padding: 0.5rem;
-
-display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; justify-content: center;
-
-}
-
-
-
-/* --- Style dla Tabletu i Desktopa --- */
-
-@media (min-width: 768px) {
-
-.big-type-cta-section .cta-button {
-
-min-height: 220px; padding: 0 2rem;
-
-border-radius: 9999px; /* ✅ POPRAWKA: Pełne zaokrąglenie dla desktop */
-
-}
-
-.big-type-cta-section .cta-text { font-size: 2.25rem; }
-
-}
-
-@media (min-width: 1024px) {
-
-.big-type-cta-section .cta-text { font-size: 3rem; }
-
-.brush-controls-panel { flex-wrap: nowrap; width: auto; max-width: none; }
-
-}
-
-
-@media (hover: hover) and (min-width: 768px) {
-
-.big-type-cta-section .cta-button:hover { transform: scale(1.02); }
-
-}
-
-/* ✅ Poprawiona logika zmiany tekstu */
-
-.desktop-text { display: none; }
-
-.mobile-text { display: inline-block; }
-
-@media (min-width: 768px) {
-
-.desktop-text { display: inline-block; }
-
-.mobile-text { display: none; }
-
+  @media (min-width: 768px) {
+    .desktop-text { 
+      display: inline-block; 
+    }
+    .mobile-text { 
+      display: none; 
+    }
+  }
 }
 
 `}</style>
@@ -425,7 +479,7 @@ className="cta-button"
 
 aria-label={t("portfolio.cta.more")}
 
-onClick={handleClick} // ✅ POPRAWKA: Zmienione na handleClick
+                onClick={handleClick} // Link działa normalnie - bez blokowania
 
 onMouseEnter={handleMouseEnter}
 
@@ -447,7 +501,11 @@ rel="noopener noreferrer"
 
 >
 
-<canvas ref={canvasRef} className="cta-canvas" />
+                <canvas 
+  ref={canvasRef} 
+  className="cta-canvas" 
+  style={{ borderRadius: '2rem' }} // ✅ POPRAWKA: Wymusz border-radius na canvas
+/>
 
 <h2 id="big-type-cta" className="cta-text text-center font-regular tracking-tighter">
 

@@ -93,8 +93,9 @@ export const Experience = () => {
 
           <div className="grid lg:grid-cols-3 gap-12">
             
-            {/* Education */}
+            {/* Education & Certifications */}
             <div className="animate-fade-in-up">
+              {/* Education */}
               <div className="flex items-center gap-3 mb-8">
                 <div className="p-3 bg-gradient-primary rounded-lg">
                   <GraduationCap className="h-6 w-6 text-white" />
@@ -102,11 +103,11 @@ export const Experience = () => {
                 <h3 className="text-2xl font-semibold text-foreground">Wykształcenie</h3>
               </div>
               
-              <div className="space-y-6">
+              <div className="space-y-6 mb-12">
                 {education.map((edu, index) => (
                   <div
                     key={index}
-                    className="bg-gradient-card p-6 rounded-lg shadow-card border border-border/50 hover:border-primary/20 transition-all duration-300 hover-scale"
+                    className="bg-gradient-card p-6 rounded-lg border border-border/50"
                   >
                     <h4 className="font-semibold text-foreground mb-2">{edu.degree}</h4>
                     <div className="text-primary font-medium mb-2">{edu.school}</div>
@@ -118,10 +119,38 @@ export const Experience = () => {
                   </div>
                 ))}
               </div>
+
+              {/* Certifications */}
+              <div className="flex items-center gap-3 mb-8">
+                <div className="p-3 bg-gradient-accent rounded-lg">
+                  <Award className="h-6 w-6 text-white" />
+                </div>
+                <h3 className="text-2xl font-semibold text-foreground">Certyfikaty</h3>
+              </div>
+              
+              <div className="space-y-4">
+                {certifications.map((cert, index) => (
+                  <div
+                    key={index}
+                    className="bg-gradient-card p-4 rounded-lg border border-border/50"
+                  >
+                    <h4 className="font-semibold text-foreground text-sm mb-1">{cert.name}</h4>
+                    <div className="text-accent font-medium text-sm mb-1">{cert.issuer}</div>
+                    <div className="text-xs text-muted-foreground">{cert.year}</div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Additional note */}
+              <div className="mt-8 p-4 bg-primary/10 rounded-lg border border-primary/20">
+                <p className="text-sm text-primary font-medium text-center">
+                  Ciągle poszerzam swoje kompetencje poprzez kursy i certyfikacje branżowe
+                </p>
+              </div>
             </div>
 
-            {/* Experience */}
-            <div className="animate-fade-in-up" style={{animationDelay: "0.2s"}}>
+            {/* Experience - Two columns */}
+            <div className="lg:col-span-2 animate-fade-in-up" style={{animationDelay: "0.2s"}}>
               <div className="flex items-center gap-3 mb-8">
                 <div className="p-3 bg-gradient-secondary rounded-lg">
                   <Briefcase className="h-6 w-6 text-white" />
@@ -129,11 +158,11 @@ export const Experience = () => {
                 <h3 className="text-2xl font-semibold text-foreground">Doświadczenie</h3>
               </div>
               
-              <div className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
                 {experience.map((exp, index) => (
                   <div
                     key={index}
-                    className="bg-gradient-card p-6 rounded-lg shadow-card border border-border/50 hover:border-primary/20 transition-all duration-300 hover-scale"
+                    className="bg-gradient-card p-6 rounded-lg border border-border/50"
                   >
                     <h4 className="font-semibold text-foreground mb-1">{exp.position}</h4>
                     <div className="text-secondary font-medium mb-2">{exp.company}</div>
@@ -152,36 +181,6 @@ export const Experience = () => {
                     </ul>
                   </div>
                 ))}
-              </div>
-            </div>
-
-            {/* Certifications */}
-            <div className="animate-fade-in-up" style={{animationDelay: "0.4s"}}>
-              <div className="flex items-center gap-3 mb-8">
-                <div className="p-3 bg-gradient-accent rounded-lg">
-                  <Award className="h-6 w-6 text-white" />
-                </div>
-                <h3 className="text-2xl font-semibold text-foreground">Certyfikaty</h3>
-              </div>
-              
-              <div className="space-y-4">
-                {certifications.map((cert, index) => (
-                  <div
-                    key={index}
-                    className="bg-gradient-card p-4 rounded-lg shadow-card border border-border/50 hover:border-primary/20 transition-all duration-300 hover-scale"
-                  >
-                    <h4 className="font-semibold text-foreground text-sm mb-1">{cert.name}</h4>
-                    <div className="text-accent font-medium text-sm mb-1">{cert.issuer}</div>
-                    <div className="text-xs text-muted-foreground">{cert.year}</div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Additional note */}
-              <div className="mt-8 p-4 bg-primary/10 rounded-lg border border-primary/20">
-                <p className="text-sm text-primary font-medium text-center">
-                  Ciągle poszerzam swoje kompetencje poprzez kursy i certyfikacje branżowe
-                </p>
               </div>
             </div>
 

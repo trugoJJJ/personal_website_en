@@ -51,50 +51,33 @@ export const About = () => {
               Więcej o mnie
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Pasjonat marketingu z 5-letnim doświadczeniem w budowaniu skutecznych strategii marketingowych dla startupów i etablowanych firm
-            </p>
+            Zajmuję się kompleksową obsługą komunikacji marketingowej nakierowanej na osiąganie zamierzonych celów biznesowych.
+</p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             
             {/* Left Column: Content */}
             <div className="space-y-8 animate-fade-in-up">
-              <figure className="overflow-hidden rounded-xl border border-border bg-card shadow-sm">
+              <figure className="overflow-hidden rounded-xl border border-border bg-card">
                 <img src={portrait} alt="Portret – o mnie" loading="lazy" className="w-full h-64 object-cover md:h-80" />
               </figure>
               <div className="space-y-6">
                 <h3 className="text-2xl font-semibold text-foreground">
-                  Tworzymy razem coś tam takiego jakiegoś jak to
+                5 lat doświadczenia w marketingu
                 </h3>
                 <div className="space-y-4 text-muted-foreground leading-relaxed">
                   <p>
-                    Jestem managerem i freelancerem specjalizującym się w digital marketingu. 
-                    Moja pasja to łączenie kreatywności z danymi, aby tworzyć kampanie, które nie tylko 
-                    wyglądają świetnie, ale przede wszystkim przynoszą mierzalne rezultaty.
+                  Od grafika, przez specjalistę ds. SEO po managera zespołu marketingowo-sprzedażowego. Realizowałem strategie marketingowe dla różnych branż i pracowałem nad projektami dla największych Polskich marek.
                   </p>
                   <p>
-                    W swojej pracy wykorzystuję najnowsze narzędzia AI, zaawansowaną analitykę oraz 
-                    automatyzację, aby maksymalizować ROI moich klientów. Wierzę, że każdy biznes 
-                    zasługuje na strategię marketingową szytą na miarę.
+                  Wykształcenie kierunkowe oraz doświadczenie zarówno kreatywne, techniczne jak i w zarządzaniu dają mi unikalną perspektywę. Dzięki temu dostarczam skuteczne i zoptymalizowane kosztowo rozwiązania dopasowane do każdego klienta.
                   </p>
                 </div>
               </div>
 
-              {/* Skills */}
-              <div>
-                <h4 className="text-lg font-semibold mb-4 text-foreground">Główne specjalizacje:</h4>
-                <div className="grid grid-cols-2 gap-3">
-                  {skills.map((skill) => (
-                    <div
-                      key={skill}
-                      className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      <div className="w-2 h-2 bg-primary rounded-full"></div>
-                      {skill}
-                    </div>
-                  ))}
-                </div>
-              </div>
+            
+              
             </div>
 
             {/* Right Column: Stats and Contact */}
@@ -104,13 +87,13 @@ export const About = () => {
                 {stats.map((stat, index) => (
                   <div
                     key={stat.label}
-                    className="group hover-scale bg-gradient-card rounded-xl p-6 text-center shadow-card border border-border/50 hover:border-primary/20 transition-all duration-300"
+                    className="bg-gradient-card rounded-xl p-6 text-center border border-border/50"
                     style={{ animationDelay: `${index * 0.1}s` }}
                   >
-                    <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                      <stat.icon className={`h-8 w-8 ${stat.color}`} />
+                    <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 mb-4`}>
+                      <stat.icon className={`h-8 w-8 ${stat.color}`} strokeWidth={1} />
                     </div>
-                    <div className="text-3xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                    <div className="text-3xl font-bold text-foreground mb-2">
                       {stat.value}
                     </div>
                     <div className="text-sm text-muted-foreground">

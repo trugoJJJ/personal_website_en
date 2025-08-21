@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 const useI18n = () => ({
   t: (key: string) => {
     const translations: { [key: string]: string } = {
-      "portfolio.cta.contact": "Portfolio",
-      "portfolio.cta.contact.mobile": "Portfolio",
+      "portfolio.cta.contact": "Pobierz CV",
+      "portfolio.cta.contact.mobile": "Pobierz CV",
     };
     return translations[key] || key;
   },
