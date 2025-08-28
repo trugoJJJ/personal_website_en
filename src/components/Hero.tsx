@@ -558,10 +558,16 @@ function ProjectCard({ project, isHighlighted = false, isDraggable = true }: { p
     <article className="group flex flex-col h-full"
              style={{ border: `3px solid ${P("black")}`, outline: isHighlighted ? `4px solid ${P("alloy")}` : "none" }}>
       <div className="overflow-hidden flex flex-col h-full">
-        <figure className="aspect-video overflow-hidden"
-                style={{ borderBottom: `3px solid ${P("black")}` }}>
-          <img src={project.image} alt={project.title} loading="lazy" className="h-full w-full object-cover" />
-        </figure>
+      <figure className="aspect-video overflow-hidden"
+        style={{ borderBottom: `3px solid ${P("black")}` }}>
+  <img
+    src={project.image}
+    alt={project.title}
+    loading="lazy"
+    className="h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.05]"
+  />
+</figure>
+
         <div className="p-5 flex-1 flex flex-col" style={{ background: isDark ? P("charcoal") : P("white") }}>
           <div className="flex items-start justify-between gap-3">
             <h3 className="text-lg font-extrabold" style={{ color: isDark ? P("white") : P("charcoal") }}>{project.title}</h3>
@@ -631,18 +637,38 @@ export const Hero = () => {
   const { isDark, P } = usePalette();
   const { t } = useI18n();
 
+  // Dodaj useMediaQuery, aby sprawdzić, czy urządzenie to desktop
+  const isDesktop = useMediaQuery('(min-width: 640px)'); // używamy tej zmiennej w poniższym kodzie
+
+
   // HERO scale
   const [scale, setScale] = useState(0.6);
   const boxRef = useRef<HTMLDivElement | null>(null);
 
-  // portfolio
-  const [items, setItems] = useState<Project[]>([]);
-  const [initialItems, setInitialItems] = useState<Project[]>([]);
-  const [isSolved, setIsSolved] = useState(false);
-  const [activeItem, setActiveItem] = useState<Project | null>(null);
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
-  const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
-  const isDesktop = useMediaQuery('(min-width: 640px)');
+// portfolio
+const [items, setItems] = useState<Project[]>([]);
+const [initialItems, setInitialItems] = useState<Project[]>([]);
+const [isSolved, setIsSolved] = useState(false);
+const [activeItem, setActiveItem] = useState<Project | null>(null);
+const [activeCategory, setActiveCategory] = useState<string | null>(null);
+const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
+const hoverClearTimeout = useRef<number | null>(null);
+
+const setHoverCategorySafely = (val: string | null) => {
+  if (hoverClearTimeout.current) {
+    window.clearTimeout(hoverClearTimeout.current);
+    hoverClearTimeout.current = null;
+  }
+  setHoveredCategory(val);
+};
+
+const scheduleHoverClear = (delay = 150) => {
+  if (hoverClearTimeout.current) window.clearTimeout(hoverClearTimeout.current);
+  hoverClearTimeout.current = window.setTimeout(() => {
+    setHoveredCategory(null);
+    hoverClearTimeout.current = null;
+  }, delay);
+};
 
   // PDF generator UI
   const [generating, setGenerating] = useState(false);
@@ -781,27 +807,30 @@ export const Hero = () => {
             const activeColor = P("white");
             return (
               <button
-                key={c}
-                onClick={() => setActiveCategory(isActive ? null : (c as string))}
-                onMouseEnter={() => setHoveredCategory(c as string)}
-                onMouseLeave={() => setHoveredCategory(null)}
-                className="px-5 py-2 font-extrabold transition-colors"
-                style={{
-                  border: `3px solid ${P("black")}`,
-                  background: isActive ? activeBg : baseBg,
-                  color: isActive ? activeColor : baseColor,
-                }}
-                onMouseOver={(e) => {
-                  (e.currentTarget as HTMLButtonElement).style.background = P("butter");
-                  (e.currentTarget as HTMLButtonElement).style.color = P("white");
-                }}
-                onMouseOut={(e) => {
-                  (e.currentTarget as HTMLButtonElement).style.background = isActive ? activeBg : baseBg;
-                  (e.currentTarget as HTMLButtonElement).style.color = isActive ? activeColor : baseColor;
-                }}
-              >
-                {c as string}
-              </button>
+  key={c}
+  onClick={() => setActiveCategory(isActive ? null : (c as string))}
+  onMouseEnter={() => setHoverCategorySafely(c as string)}
+  onMouseLeave={() => scheduleHoverClear(150)}
+  onFocus={() => setHoverCategorySafely(c as string)}   // dla klawiatury
+  onBlur={() => scheduleHoverClear(150)}                // dla klawiatury
+  className="px-5 py-2 font-extrabold transition-colors"
+  style={{
+    border: `3px solid ${P("black")}`,
+    background: isActive ? activeBg : baseBg,
+    color: isActive ? activeColor : baseColor,
+  }}
+  onMouseOver={(e) => {
+    (e.currentTarget as HTMLButtonElement).style.background = P("butter");
+    (e.currentTarget as HTMLButtonElement).style.color = P("white");
+  }}
+  onMouseOut={(e) => {
+    (e.currentTarget as HTMLButtonElement).style.background = isActive ? activeBg : baseBg;
+    (e.currentTarget as HTMLButtonElement).style.color = isActive ? activeColor : baseColor;
+  }}
+>
+  {c as string}
+</button>
+
             );
           })}
         </div>
@@ -839,11 +868,12 @@ export const Hero = () => {
 
         {/* —— CTA POD PORTFOLIO —— */}
         <div className="mt-16 grid lg:grid-cols-[1fr_auto] gap-10 items-start">
-          <div>
-            <BigTypeCTA />
-          </div>
+          
           <div className="justify-self-center lg:justify-self-start">
             <SimpleCTA onGenerateCV={handleGenerateCV} generating={generating} />
+          </div>
+          <div>
+            <BigTypeCTA />
           </div>
         </div>
       </div>
