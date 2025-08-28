@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, MouseEvent } from "react";
 import { Link } from "react-router-dom";
 import {
   DndContext, closestCenter, DragEndEvent, DragOverlay
@@ -31,13 +31,13 @@ const COLORS = {
   black: "#000000",
 };
 
-/* ================== PALETA – DARK (fiolety) ================== */
+/* ================== PALETA – DARK (fiolety/ciemne) ================== */
 const DARK_COLORS: typeof COLORS = {
-  amaranth: "#6B2D5B",   // akcent
-  ecru: "#241b2b",       // tło sekcji
-  butter: "#3A245A",     // akcent 2
-  alloy: "#4E2A7F",      // akcent 3
-  charcoal: "#0B0B10",   // główne tło
+  amaranth: "#6B2D5B",
+  ecru: "#241b2b",
+  butter: "#3A245A",
+  alloy: "#4E2A7F",
+  charcoal: "#0B0B10",
   white: "#FFFFFF",
   black: "#000000",
 };
@@ -88,7 +88,6 @@ type Project = {
 };
 const CATEGORIES = ["Projekty kreatywne", "Projekty sprzedażowe"] as const;
 
-/** obrazki portfolio = obrazki z artykułów (jeśli są) */
 const portfolioProjects: Omit<Project, 'id'>[] = [
   {
     title: 'Kompleksowa obsługa SEO dla producenta drzwi zewnętrznych',
@@ -176,7 +175,7 @@ const Header = () => {
           <LanguageSwitch />
           <ThemeToggle />
           <Button size="lg" asChild
-                  className="rounded-none font-extrabold transition-transform"
+                  className="rounded-none font-extrabold transition-transform hover:scale-[1.02]"
                   style={{
                     background: P("amaranth"),
                     color: P("white"),
@@ -357,7 +356,7 @@ const BigTypeCTA = () => {
   const lastMousePosition = useRef<{ x: number; y: number } | null>(null);
   const animationFrameId = useRef<number>();
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleMouseMove = (e: MouseEvent<HTMLAnchorElement>) => {
     isDraggingRef.current = true;
     if (linkRef.current) {
       const rect = linkRef.current.getBoundingClientRect();
@@ -369,25 +368,8 @@ const BigTypeCTA = () => {
     lastMousePosition.current = null;
     setTimeout(() => { isDraggingRef.current = false; }, 100);
   };
-  const handleTouchStart = (e: React.TouchEvent<HTMLAnchorElement>) => {
-    isDraggingRef.current = false;
-    if (linkRef.current) {
-      const rect = linkRef.current.getBoundingClientRect();
-      const touch = e.touches[0];
-      mousePosition.current = { x: touch.clientX - rect.left, y: touch.clientY - rect.top };
-    }
-  };
-  const handleTouchMove = (e: React.TouchEvent<HTMLAnchorElement>) => {
-    isDraggingRef.current = true;
-    if (linkRef.current) {
-      const rect = linkRef.current.getBoundingClientRect();
-      const touch = e.touches[0];
-      mousePosition.current = { x: touch.clientX - rect.left, y: touch.clientY - rect.top };
-    }
-  };
-  const handleTouchEnd = () => { handleMouseLeave(); };
 
-  // Setup canvas size + tło wg palety
+  // Setup canvas size + tło wg palety (reaguje na dark mode)
   useEffect(() => {
     const setup = () => {
       const canvas = canvasRef.current;
@@ -398,7 +380,7 @@ const BigTypeCTA = () => {
       canvas.width = rect.width * dpr;
       canvas.height = rect.height * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.fillStyle = P("amaranth");   // tło przycisku
+      ctx.fillStyle = P("amaranth");
       ctx.fillRect(0, 0, rect.width, rect.height);
     };
     setup();
@@ -408,7 +390,7 @@ const BigTypeCTA = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isDark]);
 
-  // Rysowanie KWADRATAMI (brush = kwadratowe piksele na linii, spray = losowe kwadraty)
+  // Rysowanie kwadratami
   useEffect(() => {
     const ctx = canvasRef.current?.getContext("2d", { willReadFrequently: true });
     let running = true;
@@ -435,7 +417,6 @@ const BigTypeCTA = () => {
 
     const loop = () => {
       if (!running) return;
-
       if (brushType !== "cursor" && ctx && mousePosition.current && linkRef.current) {
         if (!lastMousePosition.current) lastMousePosition.current = mousePosition.current;
 
@@ -450,7 +431,6 @@ const BigTypeCTA = () => {
         } else {
           drawBrushSquaresBetween(lastMousePosition.current, mousePosition.current, 5);
         }
-
         lastMousePosition.current = mousePosition.current;
       }
 
@@ -471,9 +451,6 @@ const BigTypeCTA = () => {
           ref={linkRef}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
           className="relative w-full md:w-[900px] min-h-[220px] select-none"
           style={{
             border: `3px solid ${P("black")}`,
@@ -503,7 +480,7 @@ const BigTypeCTA = () => {
 
         <div className="w-full flex justify-center">
           <BrushControls
-            isVisible={isPanelVisible}
+            isVisible={true}
             onSizeChange={setBrushSize}
             onColorChange={setDrawingColor}
             onBrushTypeChange={setBrushType}
@@ -523,8 +500,8 @@ type SimpleCTAProps = {
   generating?: boolean;
 };
 function SimpleCTA({ onGenerateCV, generating = false }: SimpleCTAProps) {
-  const { t } = useI18n();
   const { isDark, P } = usePalette();
+  const { t } = useI18n();
   return (
     <section aria-labelledby="simple-cta" className="py-8">
       <div className="w-full flex justify-center">
@@ -532,13 +509,7 @@ function SimpleCTA({ onGenerateCV, generating = false }: SimpleCTAProps) {
           type="button"
           onClick={onGenerateCV}
           disabled={generating}
-          className="
-            flex items-center justify-center
-            rounded-full
-            w-56 h-56
-            text-3xl md:text-3xl font-extrabold tracking-tighter
-            transition-colors duration-200
-          "
+          className="flex items-center justify-center rounded-full w-56 h-56 text-3xl md:text-3xl font-extrabold tracking-tighter transition-colors duration-200"
           style={{
             background: P("butter"),
             color: isDark ? P("white") : P("black"),
@@ -677,7 +648,7 @@ export const Hero = () => {
   const [generating, setGenerating] = useState(false);
   const [showCV, setShowCV] = useState(false);
 
-  // hero scaling (jak wcześniej)
+  // hero scaling
   useEffect(() => {
     let ticking = false;
     const update = () => {
@@ -740,7 +711,7 @@ export const Hero = () => {
   const SectionHeading = ({ children, id }: { children: any, id?: string }) => (
     <header id={id} className="mt-8 mb-24">
       <h2
-        className="text-left text-5xl md:text-7xl font-extrabold uppercase tracking-tight"
+        className="text-left text-[9vw] sm:text-5xl md:text-7xl font-extrabold uppercase tracking-tight leading-[0.95]"
         style={{ color: isDark ? P("white") : P("black") }}
       >
         {children}
@@ -753,12 +724,12 @@ export const Hero = () => {
     <section id="home" className="pt-28 pb-24" style={{ background: isDark ? P("charcoal") : P("white") }}>
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
-          <h1 className="text-7xl md:text-9xl font-extrabold uppercase tracking-tight"
-              style={{ color: isDark ? P("white") : P("black"), lineHeight: 1 }}>
+          <h1 className="text-[16vw] sm:text-7xl md:text-9xl font-extrabold uppercase tracking-tight"
+              style={{ color: isDark ? P("white") : P("black"), lineHeight: 1.05 }}>
             Marketing
           </h1>
-          <h1 className="text-7xl md:text-9xl font-extrabold uppercase tracking-tight"
-              style={{ color: isDark ? P("white") : P("black"), lineHeight: 1 }}>
+          <h1 className="text-[16vw] sm:text-7xl md:text-9xl font-extrabold uppercase tracking-tight"
+              style={{ color: isDark ? P("white") : P("black"), lineHeight: 1.15 }}>
             Manager
           </h1>
         </div>
@@ -800,31 +771,39 @@ export const Hero = () => {
       <div className="container mx-auto px-6 max-w-6xl">
         <SectionHeading>Portfolio</SectionHeading>
 
-        {/* Kategorie (wyrównane do prawej) */}
+        {/* Kategorie (wyrównane do prawej) — DARK MODE FIX */}
         <div className="flex justify-end mb-10 gap-3">
-          {CATEGORIES.map((c) => (
-            <button
-              key={c}
-              onClick={() => setActiveCategory(activeCategory === c ? null : c)}
-              onMouseEnter={() => setHoveredCategory(c as string)}
-              onMouseLeave={() => setHoveredCategory(null)}
-              className="px-5 py-2 font-extrabold transition-colors"
-              style={{
-                border: `3px solid ${P("black")}`,
-                background: activeCategory === c ? P("amaranth") : P("white"),
-                color: activeCategory === c ? P("white") : (isDark ? P("white") : P("black")),
-              }}
-              onMouseOver={(e) => {
-                (e.currentTarget as HTMLButtonElement).style.background = P("butter");
-              }}
-              onMouseOut={(e) => {
-                (e.currentTarget as HTMLButtonElement).style.background =
-                  activeCategory === c ? P("amaranth") : P("white");
-              }}
-            >
-              {c as string}
-            </button>
-          ))}
+          {CATEGORIES.map((c) => {
+            const isActive = activeCategory === c;
+            const baseBg = isDark ? P("charcoal") : P("white"); // w dark: ciemne tło, w light: białe
+            const baseColor = isDark ? P("white") : P("black");
+            const activeBg = P("amaranth");
+            const activeColor = P("white");
+            return (
+              <button
+                key={c}
+                onClick={() => setActiveCategory(isActive ? null : (c as string))}
+                onMouseEnter={() => setHoveredCategory(c as string)}
+                onMouseLeave={() => setHoveredCategory(null)}
+                className="px-5 py-2 font-extrabold transition-colors"
+                style={{
+                  border: `3px solid ${P("black")}`,
+                  background: isActive ? activeBg : baseBg,
+                  color: isActive ? activeColor : baseColor,
+                }}
+                onMouseOver={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.background = P("butter");
+                  (e.currentTarget as HTMLButtonElement).style.color = P("white");
+                }}
+                onMouseOut={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.background = isActive ? activeBg : baseBg;
+                  (e.currentTarget as HTMLButtonElement).style.color = isActive ? activeColor : baseColor;
+                }}
+              >
+                {c as string}
+              </button>
+            );
+          })}
         </div>
 
         <DndContext
@@ -871,14 +850,16 @@ export const Hero = () => {
     </section>
   );
 
-  /* ———— POZOSTAŁE SEKCJE ———— */
+  /* ———— POZOSTAŁE SEKCJE (O mnie / Doświadczenie / Umiejętności / Tech Stack / Artykuły / Kontakt) ———— */
   const AboutSection = () => (
     <section className="py-28" id="about"
              style={{ background: isDark ? P("charcoal") : P("white"), borderTop: `3px solid ${P("black")}` }}>
       <div className="container mx-auto px-6 max-w-6xl">
         <header className="mb-24 mt-8">
-          <h2 className="text-5xl md:text-7xl font-extrabold uppercase tracking-tight text-left"
-              style={{ color: isDark ? P("white") : P("black") }}>O mnie</h2>
+          <h2 className="text-left text-[9vw] sm:text-5xl md:text-7xl font-extrabold uppercase tracking-tight leading-[0.95]"
+              style={{ color: isDark ? P("white") : P("black") }}>
+            O mnie
+          </h2>
         </header>
 
         <div className="grid lg:grid-cols-2 gap-16 items-start">
@@ -907,7 +888,7 @@ export const Hero = () => {
                 { Icon: Users, value: "40%", label: "Wzrost zapytań ofertowych" },
                 { Icon: Award, value: "750", label: "Wypełnionych formularzy" },
               ].map((s) => (
-                <div key={s.label} className="p-6 text-left"
+                <div key={s.label} className="p-6 text-left transition-transform hover:scale-[1.01]"
                      style={{ border: `3px solid ${P("black")}`, background: P("ecru"), color: isDark ? P("white") : P("black") }}>
                   <s.Icon className="h-7 w-7 mb-3" />
                   <div className="text-3xl font-extrabold">{s.value}</div>
@@ -970,11 +951,11 @@ export const Hero = () => {
                           href={href}
                           target="_blank"
                           rel="noreferrer"
-                          className="w-full aspect-square flex items-center justify-center"
+                          className="w-full aspect-square flex items-center justify-center transition-colors"
                           style={{
                             border: `3px solid ${P("black")}`,
                             background: isDark ? P("charcoal") : P("white"),
-                            color: P("black"),
+                            color: isDark ? P("white") : P("black"),
                           }}
                           aria-label={label}
                         >
@@ -1157,9 +1138,14 @@ export const Hero = () => {
           <SectionHeading>Umiejętności</SectionHeading>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {technicalSkills.map((s) => (
-              <div key={s} className="px-5 py-4 text-lg font-bold"
-                   style={{ border: `2px solid ${P("black")}`, color: isDark ? P("white") : P("charcoal") }}>
+            {technicalSkills.map((s, i) => (
+              <div key={s}
+                   className="px-5 py-4 text-lg font-bold transition-transform hover:scale-[1.01]"
+                   style={{
+                     border: `2px solid ${P("black")}`,
+                     color: isDark ? P("white") : P("charcoal"),
+                     background: i % 3 === 0 ? (isDark ? "#121219" : "#fff") : (i % 3 === 1 ? (isDark ? "#1b1523" : "#f9f5ff") : (isDark ? "#171422" : "#fdfaf2"))
+                   }}>
                 {s}
               </div>
             ))}
@@ -1171,16 +1157,16 @@ export const Hero = () => {
 
   const TechStackSection = () => {
     const techStack = [
-      { category: "AI Tools", items: ["ChatGPT", "Claude", "Midjourney", "Runway", "Copy.ai"] },
-      { category: "Grafika", items: ["Photoshop", "Illustrator", "Figma", "Canva", "After Effects"] },
-      { category: "Animacja", items: ["After Effects", "Lottie", "Rive", "Framer Motion", "GSAP"] },
-      { category: "Strony internetowe", items: ["React", "WordPress", "Webflow", "Framer", "Shopify"] },
-      { category: "Analityka", items: ["Google Analytics", "Hotjar", "Mixpanel", "Amplitude", "Data Studio"] },
-      { category: "SEO", items: ["Ahrefs", "SEMRush", "Google Search Console", "Screaming Frog", "Surfer SEO"] },
-      { category: "Zarządzanie projektami", items: ["Notion", "Asana", "Monday.com", "Trello", "Slack"] },
-      { category: "Email Marketing", items: ["Mailchimp", "ConvertKit", "ActiveCampaign", "Klaviyo", "Sendinblue"] },
-      { category: "Systemy reklam PPC", items: ["Google Ads", "Facebook Ads", "LinkedIn Ads", "TikTok Ads", "Pinterest Ads"] },
-      { category: "Programowanie", items: ["React", "TypeScript", "Node.js", "Python", "No-code tools"] },
+      { category: "AI Tools", items: [{ name: "ChatGPT", url: "https://chat.openai.com" }, { name: "Claude", url: "https://claude.ai" }, { name: "Midjourney", url: "https://www.midjourney.com" }, { name: "Runway", url: "https://runwayml.com" }, { name: "Copy.ai", url: "https://www.copy.ai" }] },
+      { category: "Grafika", items: [{ name: "Photoshop", url: "https://adobe.com" }, { name: "Illustrator", url: "https://adobe.com" }, { name: "Figma", url: "https://figma.com" }, { name: "Canva", url: "https://canva.com" }, { name: "After Effects", url: "https://adobe.com" }] },
+      { category: "Animacja", items: [{ name: "After Effects", url: "https://adobe.com" }, { name: "Lottie", url: "https://lottiefiles.com" }, { name: "Rive", url: "https://rive.app" }, { name: "Framer Motion", url: "https://www.framer.com/motion/" }, { name: "GSAP", url: "https://greensock.com/gsap/" }] },
+      { category: "Strony internetowe", items: [{ name: "React", url: "https://react.dev" }, { name: "WordPress", url: "https://wordpress.org" }, { name: "Webflow", url: "https://webflow.com" }, { name: "Framer", url: "https://framer.com" }, { name: "Shopify", url: "https://shopify.com" }] },
+      { category: "Analityka", items: [{ name: "Google Analytics", url: "https://marketingplatform.google.com/about/analytics/" }, { name: "Hotjar", url: "https://hotjar.com" }, { name: "Mixpanel", url: "https://mixpanel.com" }, { name: "Amplitude", url: "https://amplitude.com" }, { name: "Data Studio", url: "https://lookerstudio.google.com/" }] },
+      { category: "SEO", items: [{ name: "Ahrefs", url: "https://ahrefs.com" }, { name: "SEMRush", url: "https://semrush.com" }, { name: "Google Search Console", url: "https://search.google.com/search-console" }, { name: "Screaming Frog", url: "https://www.screamingfrog.co.uk/seo-spider/" }, { name: "Surfer SEO", url: "https://surferseo.com" }] },
+      { category: "Zarządzanie projektami", items: [{ name: "Notion", url: "https://notion.so" }, { name: "Asana", url: "https://asana.com" }, { name: "Monday.com", url: "https://monday.com" }, { name: "Trello", url: "https://trello.com" }, { name: "Slack", url: "https://slack.com" }] },
+      { category: "Email Marketing", items: [{ name: "Mailchimp", url: "https://mailchimp.com" }, { name: "ConvertKit", url: "https://convertkit.com" }, { name: "ActiveCampaign", url: "https://activecampaign.com" }, { name: "Klaviyo", url: "https://klaviyo.com" }, { name: "Sendinblue", url: "https://www.brevo.com" }] },
+      { category: "Systemy reklam PPC", items: [{ name: "Google Ads", url: "https://ads.google.com" }, { name: "Facebook Ads", url: "https://facebook.com/business/ads" }, { name: "LinkedIn Ads", url: "https://business.linkedin.com/marketing-solutions/ads" }, { name: "TikTok Ads", url: "https://ads.tiktok.com" }, { name: "Pinterest Ads", url: "https://ads.pinterest.com" }] },
+      { category: "Programowanie", items: [{ name: "React", url: "https://react.dev" }, { name: "TypeScript", url: "https://www.typescriptlang.org" }, { name: "Node.js", url: "https://nodejs.org" }, { name: "Python", url: "https://www.python.org" }, { name: "No-code tools", url: "https://www.nocodelist.co/" }] },
     ];
 
     return (
@@ -1188,7 +1174,8 @@ export const Hero = () => {
                style={{ background: P("ecru"), borderTop: `3px solid ${P("black")}` }}>
         <div className="container mx-auto px-6 max-w-6xl">
           <header className="mb-24 mt-8">
-            <h2 className="text-5xl md:text-7xl font-extrabold uppercase tracking-tight" style={{ color: isDark ? P("white") : P("black") }}>
+            <h2 className="text-left text-[9vw] sm:text-5xl md:text-7xl font-extrabold uppercase tracking-tight leading-[0.95]"
+                style={{ color: isDark ? P("white") : P("black") }}>
               Tech Stack
             </h2>
           </header>
@@ -1200,11 +1187,23 @@ export const Hero = () => {
                 <h3 className="text-xl font-extrabold mb-4">{block.category}</h3>
                 <div className="flex flex-wrap gap-2">
                   {block.items.map((item) => (
-                    <span key={item}
-                          className="px-3 py-1 text-sm font-bold"
-                          style={{ border: `2px solid ${P("black")}`, background: P("ecru"), color: isDark ? P("white") : P("black") }}>
-                      {item}
-                    </span>
+                    <a key={item.name}
+                       href={item.url}
+                       target="_blank"
+                       rel="noreferrer"
+                       className="px-3 py-1 text-sm font-bold transition-colors"
+                       style={{ border: `2px solid ${P("black")}`, background: P("ecru"), color: isDark ? P("white") : P("black") }}
+                       onMouseOver={(e) => {
+                         (e.currentTarget as HTMLAnchorElement).style.background = P("amaranth");
+                         (e.currentTarget as HTMLAnchorElement).style.color = P("white");
+                       }}
+                       onMouseOut={(e) => {
+                         (e.currentTarget as HTMLAnchorElement).style.background = P("ecru");
+                         (e.currentTarget as HTMLAnchorElement).style.color = isDark ? P("white") : P("black");
+                       }}
+                    >
+                      {item.name}
+                    </a>
                   ))}
                 </div>
               </div>
@@ -1251,7 +1250,7 @@ export const Hero = () => {
                     (e.currentTarget as HTMLAnchorElement).style.color = P("white");
                   }}
                   onMouseOut={(e) => {
-                    (e.currentTarget as HTMLAnchorElement).style.background = P("white");
+                    (e.currentTarget as HTMLAnchorElement).style.background = isDark ? P("charcoal") : P("white");
                     (e.currentTarget as HTMLAnchorElement).style.color = P("black");
                   }}
                 >
@@ -1278,37 +1277,47 @@ export const Hero = () => {
       <div className="container mx-auto px-6 max-w-6xl">
         <SectionHeading>Umów się na rozmowę</SectionHeading>
         <div className="grid md:grid-cols-3 gap-8">
-          <div className="p-6" style={{ background: P("ecru"), border: `3px solid ${P("black")}`, color: isDark ? P("white") : P("black") }}>
-            <div className="w-14 h-14 flex items-center justify-center mb-4"
-                 style={{ border: `2px solid ${P("black")}` }}>
-              <Mail className="h-7 w-7" />
-            </div>
-            <h3 className="text-lg font-extrabold mb-2">Email</h3>
-            <p className="text-sm mb-4">Odpowiadam zwykle w ciągu 24h</p>
-            <a href="mailto:agalecki.work@gmail.com" className="font-extrabold underline">
-              agalecki.work@gmail.com
+          {[{
+            title: "Email",
+            text: "Odpowiadam zwykle w ciągu 24h",
+            href: "mailto:agalecki.work@gmail.com",
+            body: (
+              <a href="mailto:agalecki.work@gmail.com" className="font-extrabold underline">
+                agalecki.work@gmail.com
+              </a>
+            ),
+            Icon: Mail
+          }, {
+            title: "LinkedIn",
+            text: "Połączmy się i porozmawiajmy",
+            href: "https://linkedin.com/in/adamgalecki",
+            body: (
+              <a href="https://linkedin.com/in/adamgalecki" className="font-extrabold underline" target="_blank" rel="noreferrer">
+                linkedin.com/in/adamgalecki
+              </a>
+            ),
+            Icon: MessageCircle
+          }, {
+            title: "Calendly",
+            text: "Wybierz dogodny termin",
+            href: "#",
+            body: (
+              <a href="#" className="font-extrabold underline">Zarezerwuj spotkanie</a>
+            ),
+            Icon: CalendarIcon
+          }].map((b) => (
+            <a key={b.title} href={b.href}
+               className="block p-6 transition-transform hover:scale-[1.01]"
+               style={{ background: P("ecru"), border: `3px solid ${P("black")}`, color: isDark ? P("white") : P("black") }}>
+              <div className="w-14 h-14 flex items-center justify-center mb-4"
+                   style={{ border: `2px solid ${P("black")}` }}>
+                <b.Icon className="h-7 w-7" />
+              </div>
+              <h3 className="text-lg font-extrabold mb-2">{b.title}</h3>
+              <p className="text-sm mb-4">{b.text}</p>
+              {b.body}
             </a>
-          </div>
-          <div className="p-6" style={{ background: P("ecru"), border: `3px solid ${P("black")}`, color: isDark ? P("white") : P("black") }}>
-            <div className="w-14 h-14 flex items-center justify-center mb-4"
-                 style={{ border: `2px solid ${P("black")}` }}>
-              <MessageCircle className="h-7 w-7" />
-            </div>
-            <h3 className="text-lg font-extrabold mb-2">LinkedIn</h3>
-            <p className="text-sm mb-4">Połączmy się i porozmawiajmy</p>
-            <a href="https://linkedin.com/in/adamgalecki" className="font-extrabold underline" target="_blank" rel="noreferrer">
-              linkedin.com/in/adamgalecki
-            </a>
-          </div>
-          <div className="p-6" style={{ background: P("ecru"), border: `3px solid ${P("black")}`, color: isDark ? P("white") : P("black") }}>
-            <div className="w-14 h-14 flex items-center justify-center mb-4"
-                 style={{ border: `2px solid ${P("black")}` }}>
-              <CalendarIcon className="h-7 w-7" />
-            </div>
-            <h3 className="text-lg font-extrabold mb-2">Calendly</h3>
-            <p className="text-sm mb-4">Wybierz dogodny termin</p>
-            <a href="#" className="font-extrabold underline">Zarezerwuj spotkanie</a>
-          </div>
+          ))}
         </div>
       </div>
     </section>
@@ -1383,7 +1392,7 @@ export const Hero = () => {
     </footer>
   );
 
-  /* ———— GENERATOR CV (ukryty layout do PDF) ———— */
+  /* ———— GENERATOR CV ———— */
   const handleGenerateCV = async () => {
     try {
       setGenerating(true);
@@ -1399,7 +1408,7 @@ export const Hero = () => {
       if (!cvRoot) throw new Error('Brak cv-root');
 
       const pages = Array.from(cvRoot.querySelectorAll('.cv-page')) as HTMLElement[];
-      const doc = new jsPDF({ unit: "pt", format: "a4" }); // 595 x 842 pt
+      const doc = new jsPDF({ unit: "pt", format: "a4" });
 
       for (let i = 0; i < pages.length; i++) {
         const pageEl = pages[i];
@@ -1442,7 +1451,7 @@ export const Hero = () => {
       {/* Ukryty CV Layout (dopasowany do A4) */}
       {showCV && (
         <div id="cv-root" style={{ position: 'fixed', top: -99999, left: -99999, width: 0, height: 0, overflow: 'hidden' }}>
-          {/* Strona 1: Hero + O mnie + Kontakt + RODO */}
+          {/* Strona 1 */}
           <div className="cv-page"
                style={{
                  width: 794, height: 1123,
@@ -1488,7 +1497,7 @@ export const Hero = () => {
             </div>
           </div>
 
-          {/* Strona 2: Portfolio kafelki */}
+          {/* Strona 2 */}
           <div className="cv-page"
                style={{
                  width: 794, height: 1123,
@@ -1515,7 +1524,7 @@ export const Hero = () => {
             </div>
           </div>
 
-          {/* Strona 3: Skills / Experience */}
+          {/* Strona 3 */}
           <div className="cv-page"
                style={{
                  width: 794, height: 1123,
