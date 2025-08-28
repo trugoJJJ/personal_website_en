@@ -14,24 +14,6 @@ const Index = () => {
       <section id="home" className="scroll-mt-24 py-8 sm:py-12 md:py-16 lg:py-36 xl:py-36">
         <Hero />
       </section>
-
-      <section id="portfolio" className="scroll-mt-24 py-0 sm:py-0 md:py-0 lg:py-0 xl:py-0">
-        <CombinedPortfolio />
-      </section>
-
-      <section id="about" className="scroll-mt-24 py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24">
-        <AboutCombinedLegacy />
-      </section>
-
-      <section id="articles" className="scroll-mt-24 py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24">
-        <Articles />
-      </section>
-
-      <section id="contact" className="scroll-mt-24 py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24">
-        <CTA />
-      </section>
-
-      <Footer />
     </div>
   );
 };
