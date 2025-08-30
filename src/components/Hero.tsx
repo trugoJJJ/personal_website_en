@@ -42,7 +42,7 @@ const Header = () => {
     }
   }, [open]);
   return (
-    <header className="fixed top-0 inset-x-0 z-50" style={{ background: isDark ? P("charcoal") : P("white"), borderBottom: `3px solid ${P("black")}`, color: isDark ? P("white") : P("charcoal") }}>
+    <header className="fixed top-0 inset-x-0 z-50" style={{ background: isDark ? P("charcoal") : P("white"), borderBottom: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, color: isDark ? P("white") : P("charcoal") }}>
       {/* Full width nav without container so center is relative to viewport */}
       <nav className="w-full h-16 px-4 md:px-8 flex items-center relative">
         {/* Left brand */}
@@ -62,25 +62,25 @@ const Header = () => {
         <div className="hidden desk:flex items-center gap-2 ml-auto">
           <LanguageSwitch />
           <ThemeToggle />
-          <Button size="lg" asChild className="rounded-none font-extrabold transition-transform hover:scale-[1.02]" style={{ background: P("amaranth"), color: P("white"), border: `3px solid ${P("black")}` }}>
+          <Button size="lg" asChild className="rounded-none font-extrabold transition-transform hover:scale-[1.02]" style={{ background: P("amaranth"), color: P("white"), border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
             <a href="#contact">Kontakt</a>
           </Button>
         </div>
         {/* Mobile right side */}
         <div className="flex items-center gap-2 ml-auto desk:hidden">
           <ThemeToggle />
-          <Button variant="outline" size="icon" aria-label="Otwórz menu" onClick={() => setOpen(true)} className="rounded-none" style={{ border: `3px solid ${P("black")}`, color: isDark ? P("white") : P("charcoal") }}>
+          <Button variant="outline" size="icon" aria-label="Otwórz menu" onClick={() => setOpen(true)} className="rounded-none" style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, color: isDark ? P("white") : P("charcoal") }}>
             <Menu className="h-5 w-5" />
           </Button>
         </div>
       </nav>
       {open && (
         <div className="fixed inset-0 z-50" style={{ background: isDark ? P("charcoal") : P("ecru") }}>
-          <div className="w-full h-16 px-4 md:px-8 flex items-center justify-between" style={{ borderBottom: `3px solid ${P("black")}`, color: isDark ? P("white") : P("charcoal") }}>
+          <div className="w-full h-16 px-4 md:px-8 flex items-center justify-between" style={{ borderBottom: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, color: isDark ? P("white") : P("charcoal") }}>
             <span className="font-extrabold">Menu</span>
             <div className="flex items-center gap-2">
               <LanguageSwitch />
-              <Button variant="outline" size="icon" aria-label="Zamknij menu" onClick={() => setOpen(false)} className="rounded-none" style={{ border: `3px solid ${P("black")}`, color: isDark ? P("white") : P("charcoal") }}>
+              <Button variant="outline" size="icon" aria-label="Zamknij menu" onClick={() => setOpen(false)} className="rounded-none" style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, color: isDark ? P("white") : P("charcoal") }}>
                 <X className="h-5 w-5" />
               </Button>
             </div>
@@ -89,12 +89,12 @@ const Header = () => {
             <ul className="grid gap-4 text-lg" style={{ color: isDark ? P("white") : P("charcoal") }}>
               {links.map(l => (
                 <li key={l.href}>
-                  <a href={l.href} className="block py-3" style={{ borderBottom: `2px solid ${P("black")}` }} onClick={() => setOpen(false)}>{l.label}</a>
+                  <a href={l.href} className="block py-3" style={{ borderBottom: `${isDark ? '1px' : '2px'} solid ${isDark ? P("white") : P("black")}` }} onClick={() => setOpen(false)}>{l.label}</a>
                 </li>
               ))}
             </ul>
             <div className="mt-6">
-              <Button asChild size="xl" className="w-full rounded-none font-extrabold" style={{ background: P("amaranth"), color: P("white"), border: `3px solid ${P("black")}` }}>
+              <Button asChild size="xl" className="w-full rounded-none font-extrabold" style={{ background: P("amaranth"), color: P("white"), border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
                 <a href="#contact">Kontakt</a>
               </Button>
             </div>
@@ -224,7 +224,7 @@ const useI18n = () => ({
   t: (key: string) =>
     ({
       "portfolio.cta.more": "kliknij, aby zobaczyć portfolio graficzne",
-      "portfolio.cta.more.mobile": "Projekty<br/>graficzne",
+      "portfolio.cta.more.mobile": "Kliknij, aby zobaczyć<br/>portfolio graficzne",
       "portfolio.cta.contact": "Pobierz CV",
       "portfolio.cta.contact.mobile": "Pobierz CV",
     }[key] || key),
@@ -232,147 +232,92 @@ const useI18n = () => ({
 
 const BrushControls = ({
   onSizeChange, onColorChange, onBrushTypeChange,
-  currentColor, currentSize, currentBrushType, isVisible,
+  currentColorKey, currentSize, currentBrushType, isVisible,
 }: {
   onSizeChange: (size: number) => void;
-  onColorChange: (color: string) => void;
+  onColorChange: (colorKey: keyof typeof COLORS) => void;
   onBrushTypeChange: (type: BrushType) => void;
-  currentColor: string;
+  currentColorKey: keyof typeof COLORS;
   currentSize: number;
   currentBrushType: BrushType;
   isVisible: boolean;
 }) => {
   const { isDark, P } = usePalette();
-
-  const SIZES = [
-    { label: 'Mały', value: 50 },
-    { label: 'Duży', value: 500 },
-  ];
-
+  const SIZES = [ { label: 'Mały', value: 50 }, { label: 'Duży', value: 500 } ];
   const BRUSH_TYPES: { id: BrushType; name: string }[] = [
     { id: "brush", name: "Pędzel" },
     { id: "spray", name: "Spray" },
     { id: "cursor", name: "Kursor" },
   ];
-
-  const PALETTE = [
-    { display: P("black"), draw: P("black") },
-    { display: P("white"), draw: P("white") },
-    { display: P("amaranth"), draw: P("amaranth") },
-    { display: P("butter"), draw: P("butter") },
-    { display: P("alloy"), draw: P("alloy") },
-    { display: P("charcoal"), draw: P("charcoal") },
-  ];
-
-  // ✅ Single-select placeholder ring
-  const [markedColor, setMarkedColor] = useState<string | null>(null);
-
-  const toggleMarkedClick = (color: string) => {
-    // Klik lewym = zmień pędzel + ustaw placeholder tylko na tym kolorze (lub wyłącz jeśli kliknięto ten sam)
-    onColorChange(color);
-    setMarkedColor(prev => (prev === color ? null : color));
+  const PALETTE: (keyof typeof COLORS)[] = ["black","white","amaranth","butter","alloy","charcoal"];
+  // Persistent (do refresh) zaznaczenia – multi select; nie resetują się przy zmianie pędzla/koloru
+  const [markedColors, setMarkedColors] = useState<Set<keyof typeof COLORS>>(()=> new Set([currentColorKey]));
+  const handleLeftClick = (key: keyof typeof COLORS) => {
+    onColorChange(key);
+    setMarkedColors(prev => {
+      if (prev.has(key)) return new Set(prev); // zachowaj
+      const next = new Set(prev); next.add(key); return next;
+    });
   };
-
-  const toggleMarkedRightClick = (e: React.MouseEvent, color: string) => {
-    // PPM = tylko przełącz placeholder (bez zmiany koloru pędzla), nadal single-select
+  const handleRightClick = (e: React.MouseEvent, key: keyof typeof COLORS) => {
     e.preventDefault();
-    setMarkedColor(prev => (prev === color ? null : color));
+    // pozwalamy usunąć oznaczenie PPM – opcjonalne
+    setMarkedColors(prev => { const next = new Set(prev); if (next.has(key)) next.delete(key); else next.add(key); return next; });
   };
-
   return (
-    <div
-      className={`transition-all ${isVisible ? "opacity-100" : "opacity-0"} flex flex-wrap gap-3 items-center justify-center`}
-    >
+    <div className={`transition-all ${isVisible ? "opacity-100" : "opacity-0"} flex flex-wrap gap-3 items-center justify-center`}>
       {/* Tryby pędzla */}
-      <div
-        className="flex items-center p-1 gap-1"
-        style={{ border: `3px solid ${P("black")}`, background: isDark ? P("charcoal") : P("ecru") }}
-      >
-        {BRUSH_TYPES.map((b, i) => (
-          <button
-            key={b.id}
-            onClick={() => onBrushTypeChange(b.id)}
-            className="px-3 py-2 font-extrabold"
-            style={{
-              background: currentBrushType === b.id ? P("amaranth") : (isDark ? P("charcoal") : P("ecru")),
-              color: currentBrushType === b.id ? P("white") : (isDark ? P("white") : P("black")),
-              borderRight: i === BRUSH_TYPES.length - 1 ? 'none' : `3px solid ${P("black")}`,
-            }}
-          >
-            {b.name}
-          </button>
+      <div className="flex items-center p-1 gap-1" style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: isDark ? P("charcoal") : P("ecru") }}>
+        {BRUSH_TYPES.map((b,i)=>(
+          <button key={b.id} onClick={()=>onBrushTypeChange(b.id)} className="px-3 py-2 font-extrabold" style={{
+            background: currentBrushType===b.id?P("amaranth"): (isDark?P("charcoal"):P("ecru")),
+            color: currentBrushType===b.id?P("white"): (isDark?P("white"):P("black")),
+            borderRight: i===BRUSH_TYPES.length-1? 'none': `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`
+          }}>{b.name}</button>
         ))}
       </div>
-
-      {/* Rozmiary pędzla */}
-      <div
-        className="flex items-center p-1 gap-1"
-        style={{ border: `3px solid ${P("black")}`, background: isDark ? P("charcoal") : P("ecru") }}
-      >
-        {SIZES.map((s, i) => (
-          <button
-            key={s.value}
-            onClick={() => onSizeChange(s.value)}
-            className="px-4 py-2 font-extrabold"
-            style={{
-              background: currentSize === s.value ? P("amaranth") : (isDark ? P("charcoal") : P("ecru")),
-              color: currentSize === s.value ? P("white") : (isDark ? P("white") : P("black")),
-              borderRight: i === SIZES.length - 1 ? 'none' : `3px solid ${P("black")}`,
-            }}
-          >
-            {s.label}
-          </button>
+      {/* Rozmiary */}
+      <div className="flex items-center p-1 gap-1" style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: isDark ? P("charcoal") : P("ecru") }}>
+        {SIZES.map((s,i)=>(
+          <button key={s.value} onClick={()=>onSizeChange(s.value)} className="px-4 py-2 font-extrabold" style={{
+            background: currentSize===s.value?P("amaranth"): (isDark?P("charcoal"):P("ecru")),
+            color: currentSize===s.value?P("white"): (isDark?P("white"):P("black")),
+            borderRight: i===SIZES.length-1? 'none': `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`
+          }}>{s.label}</button>
         ))}
       </div>
-
-      {/* Paleta kolorów z pojedynczym placeholder ringiem */}
-      <div
-        className="flex items-center p-1 gap-1"
-        style={{ border: `3px solid ${P("black")}`, background: isDark ? P("charcoal") : P("ecru") }}
-      >
-        {PALETTE.map((c, i) => {
-          const isSelected = currentColor === c.draw;
-          const isMarked = markedColor === c.draw;
-
-          return (
-            <button
-              key={c.draw + i}
-              onClick={() => toggleMarkedClick(c.draw)}
-              onContextMenu={(e) => toggleMarkedRightClick(e, c.draw)}
-              className="relative w-10 h-10"
-              style={{
-                background: c.display,
-                borderRight: i === PALETTE.length - 1 ? 'none' : `3px solid ${P("black")}`,
-              }}
-              aria-label={`Kolor ${c.draw}${isMarked ? ' (oznakowany)' : ''}`}
-              title={
-                isMarked
-                  ? 'Kliknij, aby usunąć obrys'
-                  : 'Kliknij, aby dodać obrys'
-              }
-            >
-              {/* Ring aktualnie wybranego koloru (wyróżnienie wyboru pędzla) */}
-              {isSelected && (
-                <span
-                  className="pointer-events-none absolute inset-0"
-                  style={{ boxShadow: `inset 0 0 0 3px ${P("amaranth")}` }}
-                />
-              )}
-
-              {/* Single-select placeholder ring — tylko obrys, nie zasłania tła */}
-              {isMarked && (
-                <span
-                  className="pointer-events-none absolute inset-0"
-                  style={{
-                    boxShadow: `
-                      inset 0 0 0 2px ${P("white")},
-                      inset 0 0 0 4px ${P("black")}
-                    `,
-                  }}
-                />
-              )}
-            </button>
-          );
+      {/* Paleta z pustą ramką */}
+      <div className="flex items-center p-1 gap-1" style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: isDark ? P("charcoal") : P("ecru") }}>
+        {PALETTE.map((key,i)=>{
+          const isActive = currentColorKey===key;
+            const isMarked = markedColors.has(key);
+            return (
+              <button
+                key={key+i}
+                onClick={()=>handleLeftClick(key)}
+                onContextMenu={(e)=>handleRightClick(e,key)}
+                className="relative w-10 h-10"
+                style={{
+                  // zewnętrzne tło = tło panelu – tworzy wizualną ramkę
+                  background: isDark ? P("charcoal") : P("ecru"),
+                  padding: 0,
+                  borderRight: i===PALETTE.length-1? 'none': `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`,
+                }}
+                aria-label={`Kolor ${key}${isMarked? ' (oznaczony)':''}${isActive?' (aktywny)':''}`}
+                title={isMarked? 'PPM usuń oznaczenie':'PPM dodaj oznaczenie'}
+              >
+                {/* Wnętrze – właściwy kolor z odstępem (pusta ramka) */}
+                <span className="absolute inset-[4px]" style={{ background: P(key), boxShadow: `inset 0 0 0 ${isDark ? '1px' : '2px'} ${isDark ? P("white") : P("black")}` }} />
+                {/* Oznaczenie (persist) */}
+                {isMarked && (
+                  <span className="pointer-events-none absolute inset-0" style={{ boxShadow: `inset 0 0 0 2px ${P("white")}, inset 0 0 0 ${isDark ? '3px' : '4px'} ${isDark ? P("white") : P("black")}` }} />
+                )}
+                {/* Aktywny kolor – amarantowa ramka wewnętrzna */}
+                {isActive && (
+                  <span className="pointer-events-none absolute inset-0" style={{ boxShadow: `inset 0 0 0 3px ${P("amaranth")}` }} />
+                )}
+              </button>
+            );
         })}
       </div>
     </div>
@@ -388,10 +333,25 @@ const BigTypeCTA = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const [brushSize, setBrushSize] = useState(500);
-  const [drawingColor, setDrawingColor] = useState(P("black"));
+  const [drawingColorKey, setDrawingColorKey] = useState<keyof typeof COLORS>('black');
   const [brushType, setBrushType] = useState<BrushType>("brush");
 
+  const drawingColor = P(drawingColorKey);
+
   const isPanelVisible = true;
+
+  const LINK_URL = "https://www.behance.net/adamgacki1"; // przeniesione z href
+
+  // Globalne blokowanie scrolla podczas aktywnego rysowania (iOS Safari fallback)
+  useEffect(() => {
+    const handler = (e: TouchEvent) => {
+      if (isDraggingRef.current) {
+        e.preventDefault();
+      }
+    };
+    window.addEventListener('touchmove', handler, { passive: false });
+    return () => window.removeEventListener('touchmove', handler);
+  }, []);
 
   // ===== Drawing state (mouse + touch) =====
   const isDraggingRef = useRef(false); // active drawing (mouse move pressed OR long-press touch)
@@ -401,10 +361,9 @@ const BigTypeCTA = () => {
 
   // Touch specific
   const touchLongPressTimer = useRef<number | null>(null);
-  const TOUCH_LONG_PRESS_MS = 220; // lekko wydłużone dla pewniejszego tap vs draw
+  const TOUCH_LONG_PRESS_MS = 150; // skróć czas
   const touchStartedAt = useRef<number>(0);
   const touchBecameDrawing = useRef(false);
-  const initialTouchPos = useRef<{ x: number; y: number } | null>(null); // NEW: do obliczania przesunięcia
 
   const updatePositionFromClient = (clientX: number, clientY: number) => {
     if (!linkRef.current) return;
@@ -412,78 +371,49 @@ const BigTypeCTA = () => {
     mousePosition.current = { x: clientX - rect.left, y: clientY - rect.top };
   };
 
-  const handleMouseMove = (e: MouseEvent<HTMLAnchorElement>) => {
-    // mouse drawing always allowed when moving inside (like previous behavior)
-    isDraggingRef.current = true;
-    updatePositionFromClient(e.clientX, e.clientY);
-  };
-  const handleMouseLeave = () => {
-    mousePosition.current = null;
-    lastMousePosition.current = null;
-    setTimeout(() => { isDraggingRef.current = false; }, 100);
-  };
-
-  // ===== Touch handlers (long-press to draw) =====
+  // ===== Touch handlers (simplified) =====
   const onTouchStart = (e: React.TouchEvent<HTMLAnchorElement>) => {
     if (!e.touches.length) return;
     const t = e.touches[0];
     touchStartedAt.current = Date.now();
     touchBecameDrawing.current = false;
-    initialTouchPos.current = { x: t.clientX, y: t.clientY }; // zapamiętujemy start
-    // ustawiamy pozycję startową (nie rysujemy jeszcze)
+    
     updatePositionFromClient(t.clientX, t.clientY);
+    
+    // Start timer for drawing mode
     touchLongPressTimer.current = window.setTimeout(() => {
-      // aktywacja trybu rysowania po long press
       touchBecameDrawing.current = true;
       isDraggingRef.current = true;
-      if (linkRef.current) linkRef.current.style.touchAction = 'none'; // blokuj scroll w elemencie
     }, TOUCH_LONG_PRESS_MS);
   };
 
   const onTouchMove = (e: React.TouchEvent<HTMLAnchorElement>) => {
     if (!e.touches.length) return;
-    const t = e.touches[0];
+    
     if (touchBecameDrawing.current) {
-      // aktywne rysowanie
       e.preventDefault();
+      const t = e.touches[0];
       updatePositionFromClient(t.clientX, t.clientY);
-    } else if (initialTouchPos.current) {
-      // sprawdź czy użytkownik przesuwa palcem (scroll gesture) zanim aktywuje się long press
-      const dx = Math.abs(t.clientX - initialTouchPos.current.x);
-      const dy = Math.abs(t.clientY - initialTouchPos.current.y);
-      if (dx > 12 || dy > 12) {
-        // uznaj jako scroll – anuluj long press
-        if (touchLongPressTimer.current) {
-          clearTimeout(touchLongPressTimer.current);
-          touchLongPressTimer.current = null;
-        }
-      }
     }
   };
 
-  const endTouchDrawing = () => {
-    if (linkRef.current) linkRef.current.style.touchAction = '';
-    isDraggingRef.current = false;
-    mousePosition.current = null;
-    lastMousePosition.current = null;
-  };
-
   const onTouchEnd = (e: React.TouchEvent<HTMLAnchorElement>) => {
+    // Clear timer
     if (touchLongPressTimer.current) {
       clearTimeout(touchLongPressTimer.current);
       touchLongPressTimer.current = null;
     }
-    const duration = Date.now() - touchStartedAt.current;
+    
     if (touchBecameDrawing.current) {
-      // zakończyliśmy rysowanie – blokuj nawigację
+      // Was drawing - prevent navigation
       e.preventDefault();
-      endTouchDrawing();
-    } else if (duration >= TOUCH_LONG_PRESS_MS) {
-      // długi, ale nie wszedł w drawing (fallback) – zablokuj klik
-      e.preventDefault();
+      isDraggingRef.current = false;
+      mousePosition.current = null;
+      lastMousePosition.current = null;
     }
+    // else: let default behavior handle the link click
+    
     touchBecameDrawing.current = false;
-    initialTouchPos.current = null;
   };
 
   const onTouchCancel = () => {
@@ -491,8 +421,26 @@ const BigTypeCTA = () => {
       clearTimeout(touchLongPressTimer.current);
       touchLongPressTimer.current = null;
     }
-    if (touchBecameDrawing.current) endTouchDrawing();
     touchBecameDrawing.current = false;
+    isDraggingRef.current = false;
+  };
+
+  // ===== Mouse handlers for desktop =====
+  const handleMouseEnter = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (brushType === "cursor") return;
+    updatePositionFromClient(e.clientX, e.clientY);
+    isDraggingRef.current = true;
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (brushType === "cursor") return;
+    updatePositionFromClient(e.clientX, e.clientY);
+  };
+
+  const handleMouseLeave = () => {
+    isDraggingRef.current = false;
+    mousePosition.current = null;
+    lastMousePosition.current = null;
   };
 
   // ===== Canvas sizing & background (unchanged) =====
@@ -506,14 +454,24 @@ const BigTypeCTA = () => {
       canvas.width = rect.width * dpr;
       canvas.height = rect.height * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.fillStyle = P("amaranth");
+      
+      // Najpierw wypełnij całe tło kolorem ecru (pusta przestrzeń) - statyczne kolory
+      const ecruColor = isDark ? "#241b2b" : "#FAF6EE";
+      const mainColor = isDark ? "#6B2D5B" : "#C25A3A";
+      
+      ctx.fillStyle = ecruColor;
       ctx.fillRect(0, 0, rect.width, rect.height);
+      
+      // Następnie narysuj mniejszy prostokąt z głównym kolorem (6px margin)
+      const margin = 6;
+      ctx.fillStyle = mainColor;
+      ctx.fillRect(margin, margin, rect.width - margin * 2, rect.height - margin * 2);
     };
     setup();
     const ro = new ResizeObserver(setup);
     if (linkRef.current) ro.observe(linkRef.current);
     return () => { ro.disconnect(); };
-  }, [isDark, P]);
+  }, [isDark]); // Tylko isDark, bez P
 
   // ===== Drawing loop (supports new flags) =====
   useEffect(() => {
@@ -561,52 +519,80 @@ const BigTypeCTA = () => {
     return () => { running = false; if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current); };
   }, [drawingColor, brushSize, brushType]);
 
-  return (
-    <section className="py-16">
-      <div className="w-full flex flex-col items-center gap-6">
-        <a
-          href="https://www.behance.net/adamgacki1"
-          target="_blank"
-          rel="noopener noreferrer"
-          ref={linkRef}
-          onMouseMove={handleMouseMove}
-          onMouseLeave={handleMouseLeave}
-          onTouchStart={onTouchStart}
-          onTouchMove={onTouchMove}
-          onTouchEnd={onTouchEnd}
-          onTouchCancel={onTouchCancel}
-          className="relative w-full max-w-[1000px] min-h-[clamp(140px,30vw,220px)] select-none"
-          style={{
-            border: `3px solid ${P("black")}`,
-            cursor: brushType === "cursor" ? "pointer" : "crosshair",
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            overflow: 'hidden',
-            WebkitTapHighlightColor: 'transparent'
-          }}
-          aria-label={t("portfolio.cta.more")}
-        >
-          <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" style={{ pointerEvents: "none" }} />
-          <span
-            className="relative z-[1] font-extrabold tracking-tighter text-center px-4 leading-tight [word-break:break-word]"
-            style={{ color: P("white"), fontSize: 'clamp(1.8rem,7vw,3.2rem)' }}
-            dangerouslySetInnerHTML={{
-              __html:
-                typeof window !== 'undefined' && window.innerWidth > 768
-                  ? t("portfolio.cta.more")
-                  : t("portfolio.cta.more.mobile"),
-            }}
-          />
-        </a>
-
+        return (
+    <section className="py-8 md:py-16">
+      <div className="container mx-auto px-6 max-w-6xl">
         <div className="w-full flex justify-center">
+          <a
+            role="link"
+            ref={linkRef}
+            href={LINK_URL}
+            target="_blank"
+            rel="noopener,noreferrer"
+            onContextMenu={(e) => e.preventDefault()}
+            onMouseEnter={handleMouseEnter}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            onTouchStart={onTouchStart}
+            onTouchMove={onTouchMove}
+            onTouchEnd={onTouchEnd}
+            onTouchCancel={onTouchCancel}
+            className="relative w-full max-w-[1000px] min-h-[clamp(140px,30vw,220px)] select-none"
+            style={{
+              border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`,
+              cursor: brushType === "cursor" ? "pointer" : "crosshair",
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              overflow: 'hidden',
+              WebkitTapHighlightColor: 'transparent',
+              WebkitTouchCallout: 'none',
+              userSelect: 'none',
+              touchAction: isDraggingRef.current ? 'none' : 'manipulation',
+              boxShadow: `inset 0 0 0 6px ${P("ecru")}`, // Dodana pusta przestrzeń jak w edukacji
+            }}
+            aria-label={t("portfolio.cta.more")}
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if ((e.key === 'Enter' || e.key === ' ') && !isDraggingRef.current) {
+                e.preventDefault();
+                window.open(LINK_URL, '_blank', 'noopener,noreferrer');
+              }
+            }}
+          >
+            <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" style={{ pointerEvents: "none" }} />
+            <div className="relative z-[1] flex flex-col items-center justify-center text-center px-4">
+              <span
+                className="font-extrabold tracking-tighter leading-tight [word-break:break-word]"
+                style={{ 
+                  color: P("white"), 
+                  fontSize: 'clamp(1.5rem,5vw,2.5rem)' // Zmniejszona czcionka
+                }}
+                dangerouslySetInnerHTML={{
+                  __html:
+                    typeof window !== 'undefined' && window.innerWidth > 768
+                      ? t("portfolio.cta.more")
+                      : t("portfolio.cta.more.mobile"),
+                }}
+              />
+              {/* Podpis tylko na mobile */}
+              <span 
+                className="block md:hidden mt-2 text-xs font-bold opacity-75"
+                style={{ color: P("white") }}
+              >
+                (przytrzymaj aby rysować)
+              </span>
+            </div>
+          </a>
+        </div>
+
+        <div className="w-full flex justify-center mt-8 md:mt-16">
           <BrushControls
             isVisible={true}
             onSizeChange={setBrushSize}
-            onColorChange={setDrawingColor}
+            onColorChange={setDrawingColorKey}
             onBrushTypeChange={setBrushType}
-            currentColor={drawingColor}
+            currentColorKey={drawingColorKey}
             currentSize={brushSize}
             currentBrushType={brushType}
           />
@@ -625,13 +611,13 @@ function SuccessAnimationPlaceholder({ onReset }: { onReset: () => void }) {
     <div className="fixed inset-0 z-[100] flex items-center justify-center"
          style={{ background: `rgba(0,0,0,0.85)` }}>
       <div className="p-8 text-center"
-           style={{ background: P("ecru"), color: P("black"), border: `3px solid ${P("black")}` }}>
+           style={{ background: P("ecru"), color: P("black"), border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
         <h2 className="text-4xl md:text-5xl font-extrabold mb-6 uppercase tracking-tight">Gratulacje!</h2>
         <p className="mb-8">Sekwencja została ułożona poprawnie.</p>
         <button
           onClick={onReset}
           className="px-6 py-3 font-extrabold"
-          style={{ background: P("butter"), border: `3px solid ${P("black")}` }}
+          style={{ background: P("butter"), border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}
         >
           Ułóż od nowa
         </button>
@@ -643,10 +629,10 @@ function ProjectCard({ project, isHighlighted = false, isDraggable = true }: { p
   const { isDark, P } = usePalette();
   return (
     <article className="group flex flex-col h-full"
-             style={{ border: `3px solid ${P("black")}`, outline: isHighlighted ? `4px solid ${P("alloy")}` : "none" }}>
+             style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, outline: isHighlighted ? `4px solid ${P("alloy")}` : "none" }}>
       <div className="overflow-hidden flex flex-col h-full">
       <figure className="aspect-video overflow-hidden"
-        style={{ borderBottom: `3px solid ${P("black")}` }}>
+        style={{ borderBottom: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
   <img
     src={project.image}
     alt={project.title}
@@ -660,7 +646,7 @@ function ProjectCard({ project, isHighlighted = false, isDraggable = true }: { p
             <h3 className="text-lg font-extrabold" style={{ color: isDark ? P("white") : P("charcoal") }}>{project.title}</h3>
             {project.metrics && (
               <span className="text-xs font-extrabold px-2 py-1"
-                    style={{ background: P("ecru"), color: isDark ? P("white") : P("black"), border: `2px solid ${P("black")}` }}>
+                    style={{ background: P("ecru"), color: isDark ? P("white") : P("black"), border: `2px solid ${isDark ? P("white") : P("black")}` }}>
                 {project.metrics}
               </span>
             )}
@@ -670,7 +656,7 @@ function ProjectCard({ project, isHighlighted = false, isDraggable = true }: { p
             <div className="mt-5 flex flex-wrap gap-2">
               {project.tags.slice(0, 4).map((t) => (
                 <span key={t} className="text-xs px-2 py-1"
-                      style={{ border: `2px solid ${P("black")}`, color: isDark ? P("white") : P("black") }}>
+                      style={{ border: `${isDark ? '1px' : '2px'} solid ${isDark ? P("white") : P("black")}`, color: isDark ? P("white") : P("black") }}>
                   {t}
                 </span>
               ))}
@@ -680,7 +666,7 @@ function ProjectCard({ project, isHighlighted = false, isDraggable = true }: { p
             <button
               className="w-full font-extrabold transition-colors"
               style={{
-                border: `3px solid ${isDark ? P("white") : P("black")}`,
+                border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`,
                 padding: "10px 0",
                 background: isDark ? P("charcoal") : P("white"),
                 color: isDark ? P("white") : P("black")
@@ -713,7 +699,7 @@ function SortableProjectItem({ project, isHighlighted, isDraggable }: { project:
     return (
       <div
         ref={setNodeRef}
-        style={{ ...baseStyle, border: `3px dashed ${P("black")}`, background: P("ecru"), height: '100%' }}
+        style={{ ...baseStyle, border: `3px dashed ${isDark ? P("white") : P("black")}`, background: P("ecru"), height: '100%' }}
       />
     );
   }
@@ -827,7 +813,7 @@ const scheduleHoverClear = (delay = 150) => {
 
   /* ————— wspólne headingi i odstępy ————— */
   const SectionHeading = ({ children, id }: { children: any, id?: string }) => (
-    <header id={id} className="mt-8 mb-24">
+    <header id={id} className="mt-4 md:mt-8 mb-12 md:mb-24">
       <h2
         className="text-left text-[9vw] sm:text-5xl md:text-7xl font-extrabold uppercase tracking-tight leading-[0.95]"
         style={{ color: isDark ? P("white") : P("black") }}
@@ -839,7 +825,7 @@ const scheduleHoverClear = (delay = 150) => {
 
   /* ———— HERO ———— */
   const HeroSection = () => (
-    <section id="home" className="pt-44 pb-32" style={{ background: isDark ? P("charcoal") : P("white") }}>
+    <section id="home" className="pt-44 pb-24 md:pb-32" style={{ background: isDark ? P("charcoal") : P("white") }}>
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
           <h1 className="font-extrabold uppercase tracking-wider leading-[1.05] text-6xl sm:text-9xl mb-6" style={{ color: isDark ? P("white") : P("black") }}>Digital</h1>
@@ -853,12 +839,12 @@ const scheduleHoverClear = (delay = 150) => {
             style={{
               transform: `scale(${scale})`,
               transformOrigin: "center",
-              border: `3px solid ${P("black")}`,
+              border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`,
             }}
           >
             <div className="aspect-video flex items-center justify-center" style={{ background: P("ecru") }}>
               <div className="text-center space-y-3" style={{ color: isDark ? P("white") : P("charcoal") }}>
-                <div className="w-16 h-16 mx-auto flex items-center justify-center" style={{ border: `3px solid ${P("black")}` }}>
+                <div className="w-16 h-16 mx-auto flex items-center justify-center" style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
                   <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z" />
                   </svg>
@@ -875,8 +861,8 @@ const scheduleHoverClear = (delay = 150) => {
 
   /* ———— PORTFOLIO ———— */
   const PortfolioSection = () => (
-    <section className="py-36" id="portfolio"
-             style={{ background: P("ecru"), borderTop: `3px solid ${P("black")}` }}>
+    <section className="py-24 md:py-36" id="portfolio"
+             style={{ background: P("ecru"), borderTop: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
       {isSolved && <SuccessAnimationPlaceholder onReset={handleReset} />}
       <div className="container mx-auto px-6 max-w-6xl">
         <SectionHeading>Portfolio</SectionHeading>
@@ -900,7 +886,7 @@ const scheduleHoverClear = (delay = 150) => {
                 onBlur={() => scheduleHoverClear(150)}
                 className="px-5 py-2 font-extrabold transition-colors"
                 style={{
-                  border: `3px solid ${borderColor}`,
+                  border: `${isDark ? '1px' : '3px'} solid ${borderColor}`,
                   background: isActive ? activeBg : baseBg,
                   color: isActive ? activeColor : baseColor,
                 }}
@@ -943,7 +929,7 @@ const scheduleHoverClear = (delay = 150) => {
           </SortableContext>
           <DragOverlay>
             {activeItem ? (
-              <div style={{ border: `3px solid ${P("black")}`, background: isDark ? P("charcoal") : P("white") }}>
+              <div style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: isDark ? P("charcoal") : P("white") }}>
                 <ProjectCard project={activeItem} />
               </div>
             ) : null}
@@ -951,10 +937,8 @@ const scheduleHoverClear = (delay = 150) => {
         </DndContext>
 
         {/* —— CTA POD PORTFOLIO —— */}
-        <div className="mt-16 grid lg:grid-cols-[1fr_auto] gap-10 items-start">
-          <div>
-            <BigTypeCTA />
-          </div>
+        <div className="mt-8 md:mt-16">
+          <BigTypeCTA />
         </div>
       </div>
     </section>
@@ -962,10 +946,10 @@ const scheduleHoverClear = (delay = 150) => {
 
   /* ———— POZOSTAŁE SEKCJE (O mnie / Doświadczenie / Umiejętności / Tech Stack / Artykuły / Kontakt) ———— */
   const AboutSection = () => (
-    <section className="py-36" id="about"
-             style={{ background: isDark ? P("charcoal") : P("white"), borderTop: `3px solid ${P("black")}` }}>
+    <section className="py-24 md:py-36" id="about"
+             style={{ background: isDark ? P("charcoal") : P("white"), borderTop: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
       <div className="container mx-auto px-6 max-w-6xl">
-        <header className="mb-24 mt-8">
+        <header className="mb-12 md:mb-24 mt-4 md:mt-8">
           <h2 className="text-left text-[9vw] sm:text-5xl md:text-7xl font-extrabold uppercase tracking-tight leading-[0.95]"
               style={{ color: isDark ? P("white") : P("black") }}>
             O mnie
@@ -974,7 +958,7 @@ const scheduleHoverClear = (delay = 150) => {
 
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           <div className="space-y-8">
-            <figure className="overflow-hidden" style={{ border: `3px solid ${P("black")}` }}>
+            <figure className="overflow-hidden" style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
               <img src={portrait} alt="Portret – o mnie" loading="lazy" className="w-full h-64 object-cover md:h-80" />
             </figure>
             <div className="space-y-6" style={{ color: isDark ? P("white") : P("charcoal") }}>
@@ -999,7 +983,7 @@ const scheduleHoverClear = (delay = 150) => {
                 { Icon: Award, value: "750", label: "Wypełnionych formularzy" },
               ].map((s) => (
                 <div key={s.label} className="p-6 text-left"
-                     style={{ border: `3px solid ${P("black")}`, background: P("ecru"), color: isDark ? P("white") : P("black") }}>
+                     style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: P("ecru"), color: isDark ? P("white") : P("black") }}>
                   <s.Icon className="h-7 w-7 mb-3" />
                   <div className="text-3xl font-extrabold">{s.value}</div>
                   <div className="text-sm mt-1">{s.label}</div>
@@ -1009,7 +993,7 @@ const scheduleHoverClear = (delay = 150) => {
 
             {/* Kontakt (ikony + QR) */}
             <div className="p-10"
-                 style={{ background: P("butter"), color: isDark ? P("white") : P("black"), border: `3px solid ${P("black")}` }}>
+                 style={{ background: P("butter"), color: isDark ? P("white") : P("black"), border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
               {(() => {
                 const QR_DATA_URI =
                   'data:image/svg+xml;utf8,' +
@@ -1035,9 +1019,9 @@ const scheduleHoverClear = (delay = 150) => {
                 `);
 
                 return (
-                  <div className="grid grid-cols-5 gap-8 items-center">
-                    {/* Ikony po lewej (2 rzędy po 3) */}
-                    <div className="col-span-3 grid grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
+                    {/* Ikony - full width na mobile, 3 kolumny na desktop */}
+                    <div className="col-span-1 md:col-span-3 grid grid-cols-3 gap-4 md:gap-6">
                       {[
                         { Icon: Mail, href: "mailto:agalecki.work@gmail.com", label: "Mail" },
                         { Icon: Linkedin, href: "https://linkedin.com/in/adamgalecki", label: "LinkedIn" },
@@ -1067,7 +1051,7 @@ const scheduleHoverClear = (delay = 150) => {
                             aria-label={label}
                             className="group w-full aspect-square flex items-center justify-center transition-transform duration-300 ease-out focus-visible:outline-none"
                             style={{
-                              border: `3px solid ${P("black")}`,
+                              border: `3px solid ${isDark ? P("white") : P("black")}`,
                               background: baseBg,
                               color: baseColor,
                               position: 'relative',
@@ -1085,17 +1069,17 @@ const scheduleHoverClear = (delay = 150) => {
                               el.style.transform = 'translateY(0)';
                             }}
                           >
-                            <Icon className="h-6 w-6" />
+                            <Icon className="h-8 w-8 md:h-6 md:w-6" />
                           </a>
                         );
                       })}
                     </div>
 
-                    {/* QR po prawej */}
-                    <div className="col-span-2 justify-self-end text-center">
+                    {/* QR po prawej - ukryty na mobile */}
+                    <div className="hidden md:block col-span-2 justify-self-end text-center">
                       <div
                         className="w-32 h-32 sm:w-40 sm:h-40 flex items-center justify-center mx-auto"
-                        style={{ border: `3px solid ${P("black")}`, background: isDark ? P("charcoal") : P("white") }}
+                        style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: isDark ? P("charcoal") : P("white") }}
                       >
                         <img src={QR_DATA_URI} alt="QR" className="w-[85%] h-[85%] object-contain" />
                       </div>
@@ -1113,7 +1097,7 @@ const scheduleHoverClear = (delay = 150) => {
 
   const ExperienceSection = () => {
     const card: React.CSSProperties = {
-      border: `3px solid ${P("black")}`,
+      border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`,
       background: isDark ? P("charcoal") : P("white"),
       color: isDark ? P("white") : P("charcoal"),
     };
@@ -1168,17 +1152,17 @@ const scheduleHoverClear = (delay = 150) => {
 
     return (
       <section
-        className="py-36"
+        className="py-24 md:py-36"
         id="experience"
-        style={{ background: P("ecru"), borderTop: `3px solid ${P("black")}` }}
+        style={{ background: P("ecru"), borderTop: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}
       >
         <div className="container mx-auto px-6 max-w-6xl">
           <SectionHeading>Doświadczenie</SectionHeading>
 
-          {/* 2 kolumny: PRACA (szerzej) | EDU + CERTYFIKATY */}
-          <div className="grid gap-8" style={{ gridTemplateColumns: "2fr 1fr" }}>
+          {/* Responsywny layout: 2 kolumny na mobile, standardowy na desktop */}
+          <div className="grid gap-4 md:gap-8 grid-cols-2 lg:grid-cols-[2fr_1fr]">
             {/* LEWA: PRACA */}
-            <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-4 md:gap-8 col-span-2 lg:col-span-1">
               {jobs.map((job) => (
                 <a
                   key={job.role}
@@ -1186,20 +1170,21 @@ const scheduleHoverClear = (delay = 150) => {
                   target="_blank"
                   rel="noreferrer"
                   className="group focus-visible:outline-none transition-transform duration-200 hover:scale-[1.02] focus-visible:scale-[1.02]"
-                  style={{ ...card, padding: 28, textDecoration: 'none', position: 'relative' }}
+                  style={{ ...card, padding: window.innerWidth < 768 ? 16 : 28, textDecoration: 'none', position: 'relative' }}
                 >
-                  <div className="flex items-center gap-2 text-sm mb-2" style={{ opacity: 0.9 }}>
-                    <Briefcase className="h-4 w-4" /> {job.period}
+                  <div className="flex items-center gap-2 text-xs md:text-sm mb-1 md:mb2" style={{ opacity: 0.9 }}>
+                    <Briefcase className="h-3 w-3 md:h-4 md:w-4" /> {job.period}
                   </div>
-                  <h4 className="font-extrabold">{job.role}</h4>
-                  <div className="font-bold mb-2">{job.company}</div>
-                  <div className="text-sm" style={{ opacity: 0.85 }}>{job.desc}</div>
+                  <h4 className="font-extrabold text-sm md:text-base">{job.role}</h4>
+                  <div className="font-bold mb-1 md:mb-2 text-sm md:text-base">{job.company}</div>
+                  {/* Opis tylko na desktop */}
+                  <div className="hidden md:block text-sm" style={{ opacity: 0.85 }}>{job.desc}</div>
                 </a>
               ))}
             </div>
 
             {/* PRAWA: EDU na górze + CERTYFIKATY niżej */}
-            <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-4 md:gap-8 col-span-2 lg:col-span-1">
               {/* EDU */}
               <a
                 href="https://pollub.pl"
@@ -1207,8 +1192,8 @@ const scheduleHoverClear = (delay = 150) => {
                 rel="noreferrer"
                 style={{
                   ...card,
-                  padding: 32,
-                  minHeight: 220,
+                  padding: window.innerWidth < 768 ? 20 : 32,
+                  minHeight: window.innerWidth < 768 ? 160 : 220,
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "center",
@@ -1221,12 +1206,11 @@ const scheduleHoverClear = (delay = 150) => {
                 className="transition-transform duration-200 hover:scale-[1.02] focus-visible:outline-none"
                 aria-label="Marketing i Komunikacja Rynkowa – Politechnika Lubelska (otwórz w nowej karcie)"
               >
-                <div className="flex items-center gap-2 text-sm mb-2" style={{ opacity: 0.9 }}>
-                  <GraduationCap className="h-4 w-4" /> Edukacja
+                <div className="flex items-center gap-2 text-xs md:text-sm mb-1 md:mb-2" style={{ opacity: 0.9 }}>
+                  <GraduationCap className="h-3 w-3 md:h-4 md:w-4" /> Edukacja
                 </div>
-                <h4 className="font-extrabold mb-1">Marketing i Komunikacja Rynkowa</h4>
-                <div className="font-bold">Politechnika Lubelska</div>
-                <span className="mt-4 text-xs font-bold opacity-60">Otwórz stronę uczelni</span>
+                <h4 className="font-extrabold mb-1 text-sm md:text-base">Marketing i Komunikacja Rynkowa</h4>
+                <div className="font-bold text-sm md:text-base">Politechnika Lubelska</div>
               </a>
 
               {/* CERTYFIKATY */}
@@ -1242,9 +1226,9 @@ const scheduleHoverClear = (delay = 150) => {
                   className="group focus-visible:outline-none transition-transform duration-200 hover:scale-[1.02] focus-visible:scale-[1.02]"
                   style={{
                     ...card,
-                    padding: 28,
+                    padding: window.innerWidth < 768 ? 16 : 28,
                     background: isDark ? "#1c1624" : "#fdfdf6",
-                    border: `2px dashed ${P("charcoal")}`,
+                    border: `${isDark ? '1px' : '2px'} dashed ${isDark ? P("white") : P("charcoal")}`,
                     position: "relative",
                     textDecoration: 'none'
                   }}
@@ -1252,24 +1236,25 @@ const scheduleHoverClear = (delay = 150) => {
                   <div
                     style={{
                       position: "absolute",
-                      top: -10,
-                      right: 16,
+                      top: -8,
+                      right: 12,
                       background: P("alloy"),
                       color: P("white"),
-                      border: `2px solid ${P("black")}`,
-                      padding: "2px 10px",
+                      border: `${isDark ? '1px' : '2px'} solid ${isDark ? P("white") : P("black")}`,
+                      padding: window.innerWidth < 768 ? "1px 6px" : "2px 10px",
                       fontWeight: 800,
+                      fontSize: window.innerWidth < 768 ? 8 : 10,
                     }}
                   >
                     {c.year}
                   </div>
 
-                  <div className="flex items-center gap-2 text-sm mb-2" style={{ opacity: 0.9 }}>
-                    <Award className="h-4 w-4" /> Certyfikat
+                  <div className="flex items-center gap-2 text-xs md:text-sm mb-1 md:mb-2" style={{ opacity: 0.9 }}>
+                    <Award className="h-3 w-3 md:h-4 md:w-4" /> Certyfikat
                   </div>
-                  <h4 className="font-extrabold">{c.title}</h4>
-                  <div className="italic">{c.org}</div>
-                  <span className="block mt-3 text-xs font-bold opacity-60">Kliknij, aby zobaczyć szczegóły</span>
+                  <h4 className="font-extrabold text-sm md:text-base">{c.title}</h4>
+                  <div className="italic text-sm md:text-base">{c.org}</div>
+                  <span className="block mt-2 md:mt-3 text-xs font-bold opacity-60">Kliknij, aby zobaczyć portfolio graficzne</span>
                 </a>
               ))}
             </div>
@@ -1289,14 +1274,14 @@ const scheduleHoverClear = (delay = 150) => {
           >
             <div
               className="w-full max-w-md relative"
-              style={{ background: isDark ? P("charcoal") : P("white"), border: `3px solid ${P("black")}`, color: isDark ? P("white") : P("black") }}
+              style={{ background: isDark ? P("charcoal") : P("white"), border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, color: isDark ? P("white") : P("black") }}
               onClick={(e) => e.stopPropagation()}
             >
               <button
                 onClick={() => setSelectedCert(null)}
                 aria-label="Zamknij"
                 className="absolute top-2 right-2 px-2 py-1 font-extrabold"
-                style={{ border: `2px solid ${P("black")}` }}
+                style={{ border: `${isDark ? '1px' : '2px'} solid ${isDark ? P("white") : P("black")}` }}
               >
                 ×
               </button>
@@ -1306,7 +1291,7 @@ const scheduleHoverClear = (delay = 150) => {
                 </div>
                 <h3 className="text-xl font-extrabold leading-tight">{selectedCert.title}</h3>
                 {/* NOWE: obrazek certyfikatu (placeholder) */}
-                <figure className="overflow-hidden" style={{ border: `2px solid ${P("black")}`, background: isDark ? P("charcoal") : P("ecru") }}>
+                <figure className="overflow-hidden" style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: isDark ? P("charcoal") : P("ecru") }}>
                   <img
                     src={selectedCert.image || 'https://placehold.co/800x500?text=Certyfikat'}
                     alt={`Podgląd certyfikatu ${selectedCert.title}`}
@@ -1323,7 +1308,7 @@ const scheduleHoverClear = (delay = 150) => {
                     target="_blank"
                     rel="noreferrer"
                     className="px-4 py-2 font-extrabold transition-colors"
-                    style={{ border: `3px solid ${P("black")}`, background: P("ecru"), color: P("black") }}
+                    style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: P("ecru"), color: P("black") }}
                     onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = P("amaranth"); (e.currentTarget as HTMLAnchorElement).style.color = P("white"); }}
                     onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = P("ecru"); (e.currentTarget as HTMLAnchorElement).style.color = P("black"); }}
                   >
@@ -1332,7 +1317,7 @@ const scheduleHoverClear = (delay = 150) => {
                   <button
                     onClick={() => setSelectedCert(null)}
                     className="px-4 py-2 font-extrabold transition-colors"
-                    style={{ border: `3px solid ${P("black")}`, background: P("butter"), color: P("black") }}
+                    style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: P("butter"), color: P("black") }}
                     onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.background = P("amaranth"); (e.currentTarget as HTMLButtonElement).style.color = P("white"); }}
                     onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.background = P("butter"); (e.currentTarget as HTMLButtonElement).style.color = P("black"); }}
                   >
@@ -1363,9 +1348,9 @@ const scheduleHoverClear = (delay = 150) => {
 
     return (
       <section
-        className="py-36"
+        className="py-24 md:py-36"
         id="skills"
-        style={{ background: isDark ? P("charcoal") : P("white"), borderTop: `3px solid ${P("black")}` }}
+        style={{ background: isDark ? P("charcoal") : P("white"), borderTop: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}
       >
         <div className="container mx-auto px-6 max-w-6xl">
           <SectionHeading>Umiejętności</SectionHeading>
@@ -1383,12 +1368,12 @@ const scheduleHoverClear = (delay = 150) => {
                   color: isDark ? P("white") : P("charcoal"),
                   padding: "20px 24px",
                   fontSize: "1.05rem",
-                  border: `3px solid ${P("black")}`,
+                  border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`,
                   display: "flex",
                   alignItems: "flex-start",
                   justifyContent: "flex-start",
                   lineHeight: 1.15,
-                  boxShadow: `4px 4px 0 0 ${P("black")}`,
+                  boxShadow: `${isDark ? '1px 1px' : '4px 4px'} 0 0 ${isDark ? P("white") : P("black")}`,
                 }}
               >
                 {/* boczny pasek – identyczny jak w kafelku referencyjnym (kolor butter) */}
@@ -1401,7 +1386,7 @@ const scheduleHoverClear = (delay = 150) => {
                     height: "100%",
                     width: 10,
                     background: P("butter"),
-                    borderRight: `3px solid ${P("black")}`,
+                    borderRight: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`,
                     mixBlendMode: isDark ? "normal" : "multiply",
                   }}
                 />
@@ -1414,7 +1399,7 @@ const scheduleHoverClear = (delay = 150) => {
                     right: 10,
                     background: P("alloy"),
                     color: P("white"),
-                    border: `2px solid ${P("black")}`,
+                    border: `${isDark ? '1px' : '2px'} solid ${isDark ? P("white") : P("black")}`,
                     fontSize: 10,
                     padding: "2px 6px",
                     letterSpacing: 0.5,
@@ -1447,10 +1432,10 @@ const scheduleHoverClear = (delay = 150) => {
     ];
 
     return (
-      <section className="py-36" id="techstack"
-               style={{ background: P("ecru"), borderTop: `3px solid ${P("black")}` }}>
+      <section className="py-24 md:py-36" id="techstack"
+               style={{ background: P("ecru"), borderTop: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
         <div className="container mx-auto px-6 max-w-6xl">
-          <header className="mb-24 mt-8">
+          <header className="mb-12 md:mb-24 mt-4 md:mt-8">
             <h2 className="text-left text-[9vw] sm:text-5xl md:text-7xl font-extrabold uppercase tracking-tight leading-[0.95]"
                 style={{ color: isDark ? P("white") : P("black") }}>
               Tech Stack
@@ -1460,7 +1445,7 @@ const scheduleHoverClear = (delay = 150) => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {techStack.map((block) => (
               <div key={block.category} className="p-6"
-                   style={{ background: isDark ? P("charcoal") : P("white"), border: `3px solid ${P("black")}`, color: isDark ? P("white") : P("charcoal") }}>
+                   style={{ background: isDark ? P("charcoal") : P("white"), border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, color: isDark ? P("white") : P("charcoal") }}>
                 <h3 className="text-xl font-extrabold mb-4">{block.category}</h3>
                 <div className="flex flex-wrap gap-2">
                   {block.items.map((item) => (
@@ -1469,7 +1454,7 @@ const scheduleHoverClear = (delay = 150) => {
                        target="_blank"
                        rel="noreferrer"
                        className="px-3 py-1 text-sm font-bold transition-colors"
-                       style={{ border: `2px solid ${P("black")}`, background: P("ecru"), color: isDark ? P("white") : P("black") }}
+                       style={{ border: `${isDark ? '1px' : '2px'} solid ${isDark ? P("white") : P("black")}`, background: P("ecru"), color: isDark ? P("white") : P("black") }}
                        onMouseOver={(e) => {
                          (e.currentTarget as HTMLAnchorElement).style.background = P("amaranth");
                          (e.currentTarget as HTMLAnchorElement).style.color = P("white");
@@ -1492,8 +1477,8 @@ const scheduleHoverClear = (delay = 150) => {
   };
 
   const ArticlesSection = () => (
-    <section className="py-36" id="articles"
-             style={{ background: isDark ? P("charcoal") : P("white"), borderTop: `3px solid ${P("black")}` }}>
+    <section className="py-24 md:py-36" id="articles"
+             style={{ background: isDark ? P("charcoal") : P("white"), borderTop: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
       <div className="container mx-auto px-6 max-w-6xl">
         <SectionHeading>Artykuły</SectionHeading>
 
@@ -1502,10 +1487,10 @@ const scheduleHoverClear = (delay = 150) => {
             <article
               key={article.id}
               className="group"
-              style={{ border: `3px solid ${P("black")}`, background: isDark ? P("charcoal") : P("white"), color: isDark ? P("white") : P("charcoal") }}
+              style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: isDark ? P("charcoal") : P("white"), color: isDark ? P("white") : P("charcoal") }}
             >
               <div className="aspect-[4/3] overflow-hidden relative"
-                   style={{ borderBottom: `3px solid ${P("black")}` }}>
+                   style={{ borderBottom: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
                 <img
                   src={article.image}
                   alt={article.title}
@@ -1513,7 +1498,7 @@ const scheduleHoverClear = (delay = 150) => {
                 />
                 <div className="absolute top-3 left-3">
                   <span className="text-xs font-extrabold px-2 py-1"
-                        style={{ background: P("alloy"), color: P("white"), border: `2px solid ${P("black")}` }}>
+                        style={{ background: P("alloy"), color: P("white"), border: `${isDark ? '1px' : '2px'} solid ${isDark ? P("white") : P("black")}` }}>
                     {article.category}
                   </span>
                 </div>
@@ -1529,7 +1514,7 @@ const scheduleHoverClear = (delay = 150) => {
                   to={`/articles/${article.id}`}
                   className="w-full inline-flex items-center justify-center gap-2 font-extrabold px-4 py-3 transition-colors"
                   style={{
-                    border: `3px solid ${isDark ? P("white") : P("black")}`,
+                    border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`,
                     background: isDark ? P("charcoal") : P("white"),
                     color: isDark ? P("white") : P("black")
                   }}
@@ -1584,8 +1569,8 @@ const scheduleHoverClear = (delay = 150) => {
     ];
 
     return (
-      <section className="py-36" id="contact"
-               style={{ background: isDark ? P("charcoal") : P("white"), borderTop: `3px solid ${P("black")}` }}>
+      <section className="py-24 md:py-36" id="contact"
+               style={{ background: isDark ? P("charcoal") : P("white"), borderTop: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
         <div className="container mx-auto px-6 max-w-6xl">
           <SectionHeading>Kontakt</SectionHeading>
           <div className="grid md:grid-cols-3 gap-8">
@@ -1598,11 +1583,11 @@ const scheduleHoverClear = (delay = 150) => {
                   {...(t.external ? { target: '_blank', rel: 'noreferrer' } : {})}
                   className="relative p-8 block focus-visible:outline-none transition-transform duration-200 hover:scale-[1.02]"
                   style={{
-                    border: `3px solid ${P("black")}`,
+                    border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`,
                     background: baseBg,
                     color: isDark ? P("white") : P("charcoal"),
                     textDecoration: 'none',
-                    boxShadow: `4px 4px 0 0 ${P("black")}`,
+                    boxShadow: `${isDark ? '1px 1px' : '4px 4px'} 0 0 ${isDark ? P("white") : P("black")}`,
                   }}
                   onMouseEnter={(e) => {
                     (e.currentTarget as HTMLElement).style.background = P("butter");
@@ -1623,7 +1608,7 @@ const scheduleHoverClear = (delay = 150) => {
                       width: 10,
                       height: '100%',
                       background: P("butter"),
-                      borderRight: `3px solid ${P("black")}`,
+                      borderRight: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`,
                     }}
                   />
                   {/* Numer */}
@@ -1635,7 +1620,7 @@ const scheduleHoverClear = (delay = 150) => {
                       right: 10,
                       background: P("alloy"),
                       color: P("white"),
-                      border: `2px solid ${P("black")}`,
+                      border: `${isDark ? '1px' : '2px'} solid ${isDark ? P("white") : P("black")}`,
                       fontSize: 10,
                       padding: '2px 6px',
                       letterSpacing: 0.5,
@@ -1646,7 +1631,7 @@ const scheduleHoverClear = (delay = 150) => {
                   </span>
                   <div className="relative">
                     <div className="w-14 h-14 flex items-center justify-center mb-4"
-                         style={{ border: `2px solid ${P("black")}`, background: isDark ? P("charcoal") : P("ecru") }}>
+                         style={{ border: `${isDark ? '1px' : '2px'} solid ${isDark ? P("white") : P("black")}`, background: isDark ? P("charcoal") : P("ecru") }}>
                       <t.Icon className="h-7 w-7" />
                     </div>
                     <h3 className="text-lg font-extrabold mb-2">{t.title}</h3>
@@ -1662,94 +1647,103 @@ const scheduleHoverClear = (delay = 150) => {
     );
   };
 
-  /* ———— STOPKA ———— */
-  const FooterSection = () => {
-    const textColor = isDark ? '#b5b5b5' : '#686a6c';
-    const borderColor = isDark ? P('white') : P('black');
-    const iconHover = isDark ? 'hover:bg-white hover:text-black' : 'hover:bg-black hover:text-white';
-    const btnHover = iconHover; // reuse
-    return (
-      <footer
-        style={{
-          background: isDark ? P('charcoal') : P('white'),
-          borderTop: `3px solid ${P('black')}`,
-          color: textColor,
-        }}
-      >
-        <div className="container mx-auto px-2 py-10">
-          <div className="py-6 grid gap-6 md:grid-cols-4 items-start">
-            {/* Kolumna 1 */}
-            <div className="flex flex-col items-center text-center">
-              <h3 className="text-xl font-extrabold mb-6" style={{ color: textColor }}>Adam Gałęcki – Firma Gałęcka</h3>
-              <div className="flex flex-wrap justify-center gap-4">
-                {[
-                  { href: 'mailto:agalecki.work@gmail.com', label: 'Mail', Icon: Mail },
-                  { href: 'https://linkedin.com/in/adamgalecki', label: 'LinkedIn', Icon: Linkedin, ext: true },
-                  { href: 'https://github.com', label: 'GitHub', Icon: Github, ext: true },
-                  { href: '#', label: 'Messenger', Icon: MessageCircle },
-                  { href: '#', label: 'Instagram', Icon: Heart },
-                  { href: 'https://tiktok.com/@twojprofil', label: 'TikTok', ext: true, Icon: (props: any) => (
-                    <svg viewBox="0 0 64 64" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="square" strokeLinejoin="miter" {...props}>
-                      <path d="M36 8v28" />
-                      <path d="M36 36c0 6-6 10-12 10s-12-4-12-10 6-10 12-10c3 0 6 1 8 3" />
-                      <path d="M36 14c3 6 10 10 16 10" />
-                    </svg>
-                  ) },
-                ].map(({ href, label, Icon, ext }, i) => (
-                  <a
-                    key={i}
-                    href={href}
-                    {...(ext ? { target: '_blank', rel: 'noreferrer' } : {})}
-                    className={`w-10 h-10 flex items-center justify-center transition ${iconHover}`}
-                    style={{ border: `1px solid ${borderColor}`, color: textColor }}
-                    aria-label={label}
-                  >
-                    <Icon className="h-5 w-5" />
-                  </a>
-                ))}
+ 
+        // ...existing code...
+      /* ———— STOPKA ———— */
+      const FooterSection = () => {
+        const textColor = isDark ? '#b5b5b5' : '#686a6c';
+        const borderColor = isDark ? P('white') : P('black');
+        const iconHover = isDark ? 'hover:bg-white hover:text-black' : 'hover:bg-black hover:text-white';
+        const btnHover = iconHover; // reuse
+        return (
+          <footer
+            style={{
+              background: isDark ? P('charcoal') : P('white'),
+              borderTop: `3px solid ${borderColor}`,
+              color: textColor,
+            }}
+          >
+            <div className="container mx-auto px-6 py-10 max-w-9xl">
+              <div className="py-6 grid gap-6 md:gap-6 md:grid-cols-4 md:items-center items-start">
+                {/* Kolumna 1 - Firma Gałęcka */}
+                <div className="flex flex-col items-center text-center md:relative md:pr-8 mb-6 md:mb-0">
+                  <h3 className="text-base font-extrabold mb-4" style={{ color: textColor }}>Adam Gałęcki – Firma Gałęcka</h3>
+                  <div className="flex flex-wrap justify-center gap-3">
+                    {[
+                      { href: 'mailto:agalecki.work@gmail.com', label: 'Mail', Icon: Mail },
+                      { href: 'https://linkedin.com/in/adamgalecki', label: 'LinkedIn', Icon: Linkedin, ext: true },
+                      { href: 'https://github.com', label: 'GitHub', Icon: Github, ext: true },
+                      { href: '#', label: 'Messenger', Icon: MessageCircle },
+                      { href: '#', label: 'Instagram', Icon: Heart },
+                      { href: 'https://tiktok.com/@twojprofil', label: 'TikTok', ext: true, Icon: (props: any) => (
+                        <svg viewBox="0 0 64 64" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="square" strokeLinejoin="miter" {...props}>
+                          <path d="M36 8v28" />
+                          <path d="M36 36c0 6-6 10-12 10s-12-4-12-10 6-10 12-10c3 0 6 1 8 3" />
+                          <path d="M36 14c3 6 10 10 16 10" />
+                        </svg>
+                      ) },
+                    ].map(({ href, label, Icon, ext }, i) => (
+                      <a
+                        key={i}
+                        href={href}
+                        {...(ext ? { target: '_blank', rel: 'noreferrer' } : {})}
+                        className={`w-8 h-8 flex items-center justify-center transition ${iconHover}`}
+                        style={{ border: `1px solid ${borderColor}`, color: textColor }}
+                        aria-label={label}
+                      >
+                        <Icon className="h-4 w-4" />
+                      </a>
+                    ))}
+                  </div>
+                  {/* Pionowy separator po prawej stronie tylko na desktop */}
+                  <div 
+                    className="hidden md:block absolute right-0 top-0 bottom-0 w-px"
+                    style={{ background: borderColor }}
+                  />
+                </div>
+                
+                {/* Kolumna 2 - NIP */}
+                <div className="flex flex-col items-center text-center font-bold text-sm leading-relaxed mb-4 md:mb-0">
+                  <div className="inline-flex items-center gap-3">
+                    <span style={{ color: textColor }}>NIP: 9462752489</span>
+                    <button
+                      onClick={() => navigator.clipboard.writeText('9462752489')}
+                      className={`px-2 py-0.5 text-[10px] font-extrabold tracking-wide transition ${btnHover}`}
+                      style={{ border: `1px solid ${borderColor}`, color: textColor }}
+                      aria-label="Kopiuj NIP"
+                    >Kopiuj</button>
+                  </div>
+                </div>
+                
+                {/* Kolumna 3 - REGON */}
+                <div className="flex flex-col items-center text-center font-bold text-sm leading-relaxed mb-4 md:mb-0">
+                  <div className="inline-flex items-center gap-3">
+                    <span style={{ color: textColor }}>REGON: 541404566</span>
+                    <button
+                      onClick={() => navigator.clipboard.writeText('541404566')}
+                      className={`px-2 py-0.5 text-[10px] font-extrabold tracking-wide transition ${btnHover}`}
+                      style={{ border: `1px solid ${borderColor}`, color: textColor }}
+                      aria-label="Kopiuj REGON"
+                    >Kopiuj</button>
+                  </div>
+                </div>
+                
+                {/* Kolumna 4 - Lokalizacja */}
+                <div className="flex flex-col items-center text-center font-bold text-sm leading-relaxed">
+                  <div className="flex items-center gap-2" style={{ color: textColor }}>
+                    <MapPin className="h-4 w-4" />
+                    <span>Lublin, Polska</span>
+                  </div>
+                </div>
+              </div>
+              <div className="pt-8 md:pt-0 pb-0 text-center text-[11px] font-semibold tracking-wide" style={{ opacity: 0.45, color: textColor }}>
+                © Firma Gałęcka 2025
               </div>
             </div>
-            {/* Kolumna 2 */}
-            <div className="flex flex-col items-center text-center font-bold text-sm leading-relaxed">
-              <div className="inline-flex items-center gap-3">
-                <span style={{ color: textColor }}>NIP: 9462752489</span>
-                <button
-                  onClick={() => navigator.clipboard.writeText('9462752489')}
-                  className={`px-2 py-0.5 text-[10px] font-extrabold tracking-wide transition ${btnHover}`}
-                  style={{ border: `1px solid ${borderColor}`, color: textColor }}
-                  aria-label="Kopiuj NIP"
-                >Kopiuj</button>
-              </div>
-            </div>
-            {/* Kolumna 3 */}
-            <div className="flex flex-col items-center text-center font-bold text-sm leading-relaxed">
-              <div className="inline-flex items-center gap-3">
-                <span style={{ color: textColor }}>REGON: 541404566</span>
-                <button
-                  onClick={() => navigator.clipboard.writeText('541404566')}
-                  className={`px-2 py-0.5 text-[10px] font-extrabold tracking-wide transition ${btnHover}`}
-                  style={{ border: `1px solid ${borderColor}`, color: textColor }}
-                  aria-label="Kopiuj REGON"
-                >Kopiuj</button>
-              </div>
-            </div>
-            {/* Kolumna 4 */}
-            <div className="flex flex-col items-center text-center font-bold text-sm leading-relaxed">
-              <div className="flex items-center gap-2" style={{ color: textColor }}>
-                <MapPin className="h-4 w-4" />
-                <span>Lublin, Polska</span>
-              </div>
-            </div>
-          </div>
-          <div className="pt-0 pb-0 text-left text-[11px] font-semibold tracking-wide" style={{ opacity: 0.45, color: textColor }}>
-            © Firma Gałęcka 2025
-          </div>
-        </div>
-      </footer>
-    );
-  };
-
-
+          </footer>
+        );
+      };
+    // ...existing code...
 
   /* ———— RENDER ———— */
   return (
@@ -1760,128 +1754,8 @@ const scheduleHoverClear = (delay = 150) => {
         <div className="fixed inset-0 z-[9999] flex items-center justify-center"
              style={{ background: `rgba(255,255,255,0.85)` }}>
           <div className="px-8 py-6 font-extrabold text-2xl"
-               style={{ border: `3px solid ${P("black")}`, background: P("ecru"), color: isDark ? P("white") : P("black") }}>
+               style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: P("ecru"), color: isDark ? P("white") : P("black") }}>
             Tworzę dokument…
-          </div>
-        </div>
-      )}
-
-      {/* Ukryty CV Layout (dopasowany do A4) */}
-      {showCV && (
-        <div id="cv-root" style={{ position: 'fixed', top: -99999, left: -99999, width: 0, height: 0, overflow: 'hidden' }}>
-          {/* Strona 1 */}
-          <div className="cv-page"
-               style={{
-                 width: 794, height: 1123,
-                 boxSizing: 'border-box',
-                 padding: 36,
-                 background: "#FFFFFF",
-                 color: "#000000",
-                 border: `3px solid #000`,
-                 display: 'flex',
-                 flexDirection: 'column',
-                 gap: 24
-               }}>
-            {/* Nagłówek + opis */}
-            <div>
-              <div style={{ fontWeight: 800, fontSize: 42, lineHeight: 1 }}>
-                Marketing<br />Manager
-              </div>
-              <div style={{ marginTop: 12, fontSize: 14, color: "#333", lineHeight: 1.4 }}>
-                Zajmuję się kompleksową obsługą komunikacji marketingowej nakierowanej na cele biznesowe.
-              </div>
-            </div>
-
-            {/* O mnie + Kontakt */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
-              <div>
-                <div style={{ fontWeight: 800, marginBottom: 8 }}>O mnie</div>
-                <div style={{ fontSize: 12, color: "#333", lineHeight: 1.55 }}>
-                  Przez ostatnie 5 lat rozwijałem się w marketingu – od grafika, przez SEO, po managera zespołu. Realizowałem
-                  długoterminowe strategie SEO, zarządzałem zespołem i wspierałem projekty IT dla największych marek w Polsce.
-                </div>
-              </div>
-              <div>
-                <div style={{ fontWeight: 800, marginBottom: 8 }}>Kontakt</div>
-                <div style={{ fontSize: 12, color: "#333", lineHeight: 1.6 }}>
-                  e-mail: agalecki.work@gmail.com<br />
-                  LinkedIn: linkedin.com/in/adamgalecki
-                </div>
-              </div>
-            </div>
-
-            {/* Klauzula RODO */}
-            <div style={{ marginTop: 'auto', fontSize: 10, color: "#333", borderTop: `2px solid #000`, paddingTop: 8, lineHeight: 1.4 }}>
-              Wyrażam zgodę na przetwarzanie moich danych osobowych dla potrzeb niezbędnych do realizacji procesu rekrutacji zgodnie z ustawą z dnia 10 maja 2018 r. o ochronie danych osobowych (Dz. U. z 2018 r., poz. 1000) oraz zgodnie z Rozporządzeniem Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r. (RODO).
-            </div>
-          </div>
-
-          {/* Strona 2 */}
-          <div className="cv-page"
-               style={{
-                 width: 794, height: 1123,
-                 boxSizing: 'border-box',
-                 padding: 24,
-                 background: "#FFFFFF",
-                 color: "#000000",
-                 border: `3px solid #000`,
-                 display: 'flex',
-                 flexDirection: 'column',
-                 gap: 16
-               }}>
-            <div style={{ fontWeight: 800, fontSize: 20, marginBottom: 8 }}>Portfolio (wybrane)</div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-              {portfolioProjects.slice(0, 4).map((p, i) => (
-                <div key={p.title + i} style={{ border: `2px solid #000`, padding: 8 }}>
-                  <div style={{ width: '100%', aspectRatio: '4 / 3', background: '#eee', borderBottom: `2px solid #000`, overflow: 'hidden' }}>
-                    <img src={p.image} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  </div>
-                  <div style={{ fontWeight: 800, marginTop: 6, fontSize: 12 }}>{p.title}</div>
-                  <div style={{ fontSize: 10, color: "#333" }}>{p.description}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Strona 3 */}
-          <div className="cv-page"
-               style={{
-                 width: 794, height: 1123,
-                 boxSizing: 'border-box',
-                 padding: 24,
-                 background: "#FFFFFF",
-                 color: "#000000",
-                 border: `3px solid #000`,
-                 display: 'flex',
-                 flexDirection: 'column',
-                 gap: 16
-               }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-              <div>
-                <div style={{ fontWeight: 800, fontSize: 18, marginBottom: 8 }}>Umiejętności / Tech Stack</div>
-                <ul style={{ paddingLeft: 14, fontSize: 11, color: "#333", lineHeight: 1.5 }}>
-                  {[
-                    "Zarządzanie zespołem", "Analityka marketingu", "SEO",
-                    "Media Społecznościowe", "Płatne Kampanie Reklamowe",
-                    "Projektowanie Lejków", "No-Code", "Email Marketing",
-                    "Automatyzacja", "Tworzenie stron", "Animacja 2D/3D",
-                    "Grafika 2D/3D"
-                  ].map((s) => <li key={s}>{s}</li>)}
-                </ul>
-              </div>
-              <div>
-                <div style={{ fontWeight: 800, fontSize: 18, marginBottom: 8 }}>Doświadczenie</div>
-                <ul style={{ paddingLeft: 14, fontSize: 11, color: "#333", lineHeight: 1.5 }}>
-                  {[
-                    "Dogtronic — Digital Marketing Specialist (2021–2025)",
-                    "Instytut Rozwoju Szkolnictwa Wyższego — Specjalista ds. marketingu (2023–2024)",
-                    "Kryptobot — SEO Specialist (2021–2022)",
-                    "Akanza — Stażysta w dziale marketingu (2021)",
-                    "EmArt Studio — Grafik (2021)",
-                  ].map((s) => <li key={s}>{s}</li>)}
-                </ul>
-              </div>
-            </div>
           </div>
         </div>
       )}
