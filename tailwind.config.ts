@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import defaultTheme from 'tailwindcss/defaultTheme';
 
 export default {
 	darkMode: ["class"],
@@ -10,6 +11,10 @@ export default {
 	],
 	prefix: "",
 	theme: {
+		screens: {
+			...defaultTheme.screens,
+			desk: '1360px', // custom breakpoint for desktop nav ( >1360 )
+		},
 		container: {
 			center: true,
 			padding: '2rem',

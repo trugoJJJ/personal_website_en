@@ -11,15 +11,99 @@ import {
   Target, TrendingUp, Users, Award,
   GraduationCap, Briefcase, Calendar as CalendarIcon,
   Mail, MessageCircle, ExternalLink, Clock,
-  Heart, Linkedin, Github, Menu, X, MapPin
+  Heart, Linkedin, Github, MapPin,
+  Menu, X // added icons
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import ThemeToggle from "@/components/ThemeToggle";
-import LanguageSwitch from "@/components/LanguageSwitch";
 import SeasonalBackground from "@/components/SeasonalBackground";
 import portrait from "@/assets/hero-portrait.jpg";
 import { articles } from "@/data/articles";
+import { LanguageSwitch } from "@/components/LanguageSwitch"; // added
+import ThemeToggle from "@/components/ThemeToggle"; // added
+
+/* ================== HEADER ================== */
+const links = [
+  { href: "#portfolio", label: "Portfolio" },
+  { href: "#about", label: "O mnie" },
+  { href: "#experience", label: "Doświadczenie" },
+  { href: "#skills", label: "Umiejętności" },
+  { href: "#articles", label: "Artykuły" },
+];
+
+const Header = () => {
+  const { isDark, P } = usePalette();
+  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    if (open) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => { document.body.style.overflow = originalOverflow; };
+    }
+  }, [open]);
+  return (
+    <header className="fixed top-0 inset-x-0 z-50" style={{ background: isDark ? P("charcoal") : P("white"), borderBottom: `3px solid ${P("black")}`, color: isDark ? P("white") : P("charcoal") }}>
+      {/* Full width nav without container so center is relative to viewport */}
+      <nav className="w-full h-16 px-4 md:px-8 flex items-center relative">
+        {/* Left brand */}
+        <a href="#home" className="font-extrabold tracking-tight leading-none" style={{ color: isDark ? P("white") : P("charcoal") }}>Adam&nbsp;Gałęcki</a>
+        {/* Center desktop nav absolutely centered to page */}
+        <ul
+          className="hidden desk:flex items-center gap-8 text-sm absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+          style={{ color: isDark ? P("white") : P("charcoal") }}
+        >
+          {links.map(l => (
+            <li key={l.href}>
+              <a href={l.href} className="font-bold hover:underline">{l.label}</a>
+            </li>
+          ))}
+        </ul>
+        {/* Right actions desktop */}
+        <div className="hidden desk:flex items-center gap-2 ml-auto">
+          <LanguageSwitch />
+          <ThemeToggle />
+          <Button size="lg" asChild className="rounded-none font-extrabold transition-transform hover:scale-[1.02]" style={{ background: P("amaranth"), color: P("white"), border: `3px solid ${P("black")}` }}>
+            <a href="#contact">Kontakt</a>
+          </Button>
+        </div>
+        {/* Mobile right side */}
+        <div className="flex items-center gap-2 ml-auto desk:hidden">
+          <ThemeToggle />
+          <Button variant="outline" size="icon" aria-label="Otwórz menu" onClick={() => setOpen(true)} className="rounded-none" style={{ border: `3px solid ${P("black")}`, color: isDark ? P("white") : P("charcoal") }}>
+            <Menu className="h-5 w-5" />
+          </Button>
+        </div>
+      </nav>
+      {open && (
+        <div className="fixed inset-0 z-50" style={{ background: isDark ? P("charcoal") : P("ecru") }}>
+          <div className="w-full h-16 px-4 md:px-8 flex items-center justify-between" style={{ borderBottom: `3px solid ${P("black")}`, color: isDark ? P("white") : P("charcoal") }}>
+            <span className="font-extrabold">Menu</span>
+            <div className="flex items-center gap-2">
+              <LanguageSwitch />
+              <Button variant="outline" size="icon" aria-label="Zamknij menu" onClick={() => setOpen(false)} className="rounded-none" style={{ border: `3px solid ${P("black")}`, color: isDark ? P("white") : P("charcoal") }}>
+                <X className="h-5 w-5" />
+              </Button>
+            </div>
+          </div>
+          <div className="mt-6 px-6 desk:hidden">
+            <ul className="grid gap-4 text-lg" style={{ color: isDark ? P("white") : P("charcoal") }}>
+              {links.map(l => (
+                <li key={l.href}>
+                  <a href={l.href} className="block py-3" style={{ borderBottom: `2px solid ${P("black")}` }} onClick={() => setOpen(false)}>{l.label}</a>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-6">
+              <Button asChild size="xl" className="w-full rounded-none font-extrabold" style={{ background: P("amaranth"), color: P("white"), border: `3px solid ${P("black")}` }}>
+                <a href="#contact">Kontakt</a>
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+};
 
 /* ================== PALETA – LIGHT ================== */
 const COLORS = {
@@ -132,140 +216,6 @@ const createSixProjects = (projects: Omit<Project, 'id'>[]): Project[] => {
     sixProjects.push({ ...projectTemplate, id: `${projectTemplate.title}-${i}` });
   }
   return sixProjects;
-};
-
-/* ================== HEADER ================== */
-const links = [
-  { href: "#portfolio", label: "Portfolio" },
-  { href: "#about", label: "O mnie" },
-  { href: "#experience", label: "Doświadczenie" },
-  { href: "#skills", label: "Umiejętności" },
-  { href: "#articles", label: "Artykuły" },
-];
-
-const Header = () => {
-  const { isDark, P } = usePalette();
-  const [open, setOpen] = useState(false);
-  // Disable body scroll when mobile menu is open
-  useEffect(() => {
-    if (open) {
-      const originalOverflow = document.body.style.overflow;
-      document.body.style.overflow = 'hidden';
-      return () => { document.body.style.overflow = originalOverflow; };
-    }
-  }, [open]);
-  return (
-    <header
-      className="fixed top-0 inset-x-0 z-50"
-      style={{
-        background: isDark ? P("charcoal") : P("white"),
-        borderBottom: `3px solid ${P("black")}`,
-        color: isDark ? P("white") : P("charcoal"),
-      }}
-    >
-      <nav className="container mx-auto px-6 h-16 grid grid-cols-[1fr_auto_1fr] items-center">
-  {/* lewa strona */}
-  <a
-    href="#home"
-    className="font-extrabold tracking-tight justify-self-start"
-    style={{ color: isDark ? P("white") : P("charcoal") }}
-  >
-    Adam&nbsp;Gałęcki
-  </a>
-
-  {/* środek — NA STAŁE WYŚRODKOWANE */}
-  <ul
-    className="hidden md:flex items-center gap-8 text-sm justify-self-center"
-    style={{ color: isDark ? P("white") : P("charcoal") }}
-  >
-    {links.map((l) => (
-      <li key={l.href}>
-        <a href={l.href} className="font-bold hover:underline">
-          {l.label}
-        </a>
-      </li>
-    ))}
-  </ul>
-
-  {/* prawa strona desktop */}
-  <div className="hidden md:flex items-center gap-2 justify-self-end">
-    <LanguageSwitch />
-    <ThemeToggle />
-    <Button
-      size="lg"
-      asChild
-      className="rounded-none font-extrabold transition-transform hover:scale-[1.02]"
-      style={{ background: P("amaranth"), color: P("white"), border: `3px solid ${P("black")}` }}
-    >
-      <a href="#contact">Kontakt</a>
-    </Button>
-  </div>
-
-  {/* prawa strona mobile */}
-  <div className="md:hidden flex items-center gap-2 justify-self-end">
-    {/* LanguageSwitch przeniesiony do menu overlay */}
-    <ThemeToggle />
-    <Button
-      variant="outline"
-      size="icon"
-      aria-label="Otwórz menu"
-      onClick={() => setOpen(true)}
-      className="rounded-none"
-      style={{ border: `3px solid ${P("black")}`, color: isDark ? P("white") : P("charcoal") }}
-    >
-      <Menu className="h-5 w-5" />
-    </Button>
-  </div>
-</nav>
-
-
-      {open && (
-        <div className="fixed inset-0 z-50"
-             style={{ background: isDark ? P("charcoal") : P("ecru") }}>
-          <div className="container mx-auto px-6 h-16 flex items-center justify-between"
-               style={{ borderBottom: `3px solid ${P("black")}`, color: isDark ? P("white") : P("charcoal") }}>
-            <span className="font-extrabold">Menu</span>
-            <Button variant="outline" size="icon" aria-label="Zamknij menu"
-                    onClick={() => setOpen(false)}
-                    className="rounded-none"
-                    style={{ border: `3px solid ${P("black")}`, color: isDark ? P("white") : P("charcoal") }}>
-              <X className="h-5 w-5" />
-            </Button>
-          </div>
-
-          <div className="mt-6 px-6">
-            {/* Language switch inside open mobile menu */}
-            <div className="mb-4">
-              <LanguageSwitch />
-            </div>
-            <ul className="grid gap-4 text-lg" style={{ color: isDark ? P("white") : P("charcoal") }}>
-              {links.map((l) => (
-                <li key={l.href}>
-                  <a href={l.href}
-                     className="block py-3"
-                     style={{ borderBottom: `2px solid ${P("black")}` }}
-                     onClick={() => setOpen(false)}>
-                    {l.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-6">
-              <Button asChild size="xl"
-                      className="w-full rounded-none font-extrabold"
-                      style={{
-                        background: P("amaranth"),
-                        color: P("white"),
-                        border: `3px solid ${P("black")}`,
-                      }}>
-                <a href="#contact">Kontakt</a>
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
-    </header>
-  );
 };
 
 /* ================== BIG TYPE CTA – MALOWANIE KWADRATAMI ================== */
@@ -443,17 +393,29 @@ const BigTypeCTA = () => {
 
   const isPanelVisible = true;
 
-  const isDraggingRef = useRef(false);
+  // ===== Drawing state (mouse + touch) =====
+  const isDraggingRef = useRef(false); // active drawing (mouse move pressed OR long-press touch)
   const mousePosition = useRef<{ x: number; y: number } | null>(null);
   const lastMousePosition = useRef<{ x: number; y: number } | null>(null);
   const animationFrameId = useRef<number>();
 
+  // Touch specific
+  const touchLongPressTimer = useRef<number | null>(null);
+  const TOUCH_LONG_PRESS_MS = 220; // lekko wydłużone dla pewniejszego tap vs draw
+  const touchStartedAt = useRef<number>(0);
+  const touchBecameDrawing = useRef(false);
+  const initialTouchPos = useRef<{ x: number; y: number } | null>(null); // NEW: do obliczania przesunięcia
+
+  const updatePositionFromClient = (clientX: number, clientY: number) => {
+    if (!linkRef.current) return;
+    const rect = linkRef.current.getBoundingClientRect();
+    mousePosition.current = { x: clientX - rect.left, y: clientY - rect.top };
+  };
+
   const handleMouseMove = (e: MouseEvent<HTMLAnchorElement>) => {
+    // mouse drawing always allowed when moving inside (like previous behavior)
     isDraggingRef.current = true;
-    if (linkRef.current) {
-      const rect = linkRef.current.getBoundingClientRect();
-      mousePosition.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
-    }
+    updatePositionFromClient(e.clientX, e.clientY);
   };
   const handleMouseLeave = () => {
     mousePosition.current = null;
@@ -461,7 +423,79 @@ const BigTypeCTA = () => {
     setTimeout(() => { isDraggingRef.current = false; }, 100);
   };
 
-  // Setup canvas size + tło wg palety (reaguje na dark mode)
+  // ===== Touch handlers (long-press to draw) =====
+  const onTouchStart = (e: React.TouchEvent<HTMLAnchorElement>) => {
+    if (!e.touches.length) return;
+    const t = e.touches[0];
+    touchStartedAt.current = Date.now();
+    touchBecameDrawing.current = false;
+    initialTouchPos.current = { x: t.clientX, y: t.clientY }; // zapamiętujemy start
+    // ustawiamy pozycję startową (nie rysujemy jeszcze)
+    updatePositionFromClient(t.clientX, t.clientY);
+    touchLongPressTimer.current = window.setTimeout(() => {
+      // aktywacja trybu rysowania po long press
+      touchBecameDrawing.current = true;
+      isDraggingRef.current = true;
+      if (linkRef.current) linkRef.current.style.touchAction = 'none'; // blokuj scroll w elemencie
+    }, TOUCH_LONG_PRESS_MS);
+  };
+
+  const onTouchMove = (e: React.TouchEvent<HTMLAnchorElement>) => {
+    if (!e.touches.length) return;
+    const t = e.touches[0];
+    if (touchBecameDrawing.current) {
+      // aktywne rysowanie
+      e.preventDefault();
+      updatePositionFromClient(t.clientX, t.clientY);
+    } else if (initialTouchPos.current) {
+      // sprawdź czy użytkownik przesuwa palcem (scroll gesture) zanim aktywuje się long press
+      const dx = Math.abs(t.clientX - initialTouchPos.current.x);
+      const dy = Math.abs(t.clientY - initialTouchPos.current.y);
+      if (dx > 12 || dy > 12) {
+        // uznaj jako scroll – anuluj long press
+        if (touchLongPressTimer.current) {
+          clearTimeout(touchLongPressTimer.current);
+          touchLongPressTimer.current = null;
+        }
+      }
+    }
+  };
+
+  const endTouchDrawing = () => {
+    if (linkRef.current) linkRef.current.style.touchAction = '';
+    isDraggingRef.current = false;
+    mousePosition.current = null;
+    lastMousePosition.current = null;
+  };
+
+  const onTouchEnd = (e: React.TouchEvent<HTMLAnchorElement>) => {
+    if (touchLongPressTimer.current) {
+      clearTimeout(touchLongPressTimer.current);
+      touchLongPressTimer.current = null;
+    }
+    const duration = Date.now() - touchStartedAt.current;
+    if (touchBecameDrawing.current) {
+      // zakończyliśmy rysowanie – blokuj nawigację
+      e.preventDefault();
+      endTouchDrawing();
+    } else if (duration >= TOUCH_LONG_PRESS_MS) {
+      // długi, ale nie wszedł w drawing (fallback) – zablokuj klik
+      e.preventDefault();
+    }
+    touchBecameDrawing.current = false;
+    initialTouchPos.current = null;
+  };
+
+  const onTouchCancel = () => {
+    if (touchLongPressTimer.current) {
+      clearTimeout(touchLongPressTimer.current);
+      touchLongPressTimer.current = null;
+    }
+    if (touchBecameDrawing.current) endTouchDrawing();
+    touchBecameDrawing.current = false;
+  };
+
+  // ===== Canvas sizing & background (unchanged) =====
   useEffect(() => {
     const setup = () => {
       const canvas = canvasRef.current;
@@ -479,10 +513,9 @@ const BigTypeCTA = () => {
     const ro = new ResizeObserver(setup);
     if (linkRef.current) ro.observe(linkRef.current);
     return () => { ro.disconnect(); };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isDark]);
+  }, [isDark, P]);
 
-  // Rysowanie kwadratami
+  // ===== Drawing loop (supports new flags) =====
   useEffect(() => {
     const ctx = canvasRef.current?.getContext("2d", { willReadFrequently: true });
     let running = true;
@@ -493,7 +526,6 @@ const BigTypeCTA = () => {
       ctx.fillStyle = drawingColor;
       ctx.fillRect(Math.round(x - half), Math.round(y - half), Math.max(1, Math.round(size)), Math.max(1, Math.round(size)));
     };
-
     const drawBrushSquaresBetween = (from: {x: number; y: number}, to: {x: number; y: number}, step = 6) => {
       const dx = to.x - from.x;
       const dy = to.y - from.y;
@@ -506,12 +538,10 @@ const BigTypeCTA = () => {
         drawSquare(x, y, Math.max(4, Math.floor(brushSize / 6)));
       }
     };
-
     const loop = () => {
       if (!running) return;
-      if (brushType !== "cursor" && ctx && mousePosition.current && linkRef.current) {
+      if (brushType !== "cursor" && ctx && mousePosition.current && isDraggingRef.current) {
         if (!lastMousePosition.current) lastMousePosition.current = mousePosition.current;
-
         if (brushType === "spray") {
           for (let i = 0; i < 30; i++) {
             const angle = Math.random() * Math.PI * 2;
@@ -525,10 +555,8 @@ const BigTypeCTA = () => {
         }
         lastMousePosition.current = mousePosition.current;
       }
-
       animationFrameId.current = requestAnimationFrame(loop);
     };
-
     loop();
     return () => { running = false; if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current); };
   }, [drawingColor, brushSize, brushType]);
@@ -543,27 +571,29 @@ const BigTypeCTA = () => {
           ref={linkRef}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
-          className="relative w-full md:w-[900px] min-h-[160px] select-none"
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+          onTouchCancel={onTouchCancel}
+          className="relative w-full max-w-[1000px] min-h-[clamp(140px,30vw,220px)] select-none"
           style={{
             border: `3px solid ${P("black")}`,
             cursor: brushType === "cursor" ? "pointer" : "crosshair",
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            overflow: 'hidden',
+            WebkitTapHighlightColor: 'transparent'
           }}
           aria-label={t("portfolio.cta.more")}
         >
-          <canvas
-            ref={canvasRef}
-            className="absolute inset-0 w-full h-full"
-            style={{ pointerEvents: "none" }}
-          />
+          <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" style={{ pointerEvents: "none" }} />
           <span
-            className="relative z-[1] text-3xl md:text-3xl font-extrabold tracking-tighter text-center"
-            style={{ color: P("white") }}
+            className="relative z-[1] font-extrabold tracking-tighter text-center px-4 leading-tight [word-break:break-word]"
+            style={{ color: P("white"), fontSize: 'clamp(1.8rem,7vw,3.2rem)' }}
             dangerouslySetInnerHTML={{
               __html:
-                window.innerWidth > 768
+                typeof window !== 'undefined' && window.innerWidth > 768
                   ? t("portfolio.cta.more")
                   : t("portfolio.cta.more.mobile"),
             }}
@@ -812,21 +842,10 @@ const scheduleHoverClear = (delay = 150) => {
     <section id="home" className="pt-44 pb-32" style={{ background: isDark ? P("charcoal") : P("white") }}>
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
-          <h1 className="text-[20vw] sm:text-4xl md:text-9xl font-extrabold uppercase tracking-tight"
-              style={{ color: isDark ? P("white") : P("black"), lineHeight: 1.05 }}>
-            Digital
-          </h1>
-          <h1 className="text-[16vw] sm:text-3xl md:text-6xl font-extrabold uppercase tracking-tight"
-              style={{ color: isDark ? P("white") : P("black"), lineHeight: 1.05 }}>
-            Marketing
-          </h1>
-          <h1 className="text-[16vw] sm:text-2xl md:text-4xl font-extrabold uppercase tracking-tight"
-              style={{ color: isDark ? P("white") : P("black"), lineHeight: 1.15 }}>
-            Manager
-          </h1>
+          <h1 className="font-extrabold uppercase tracking-wider leading-[1.05] text-6xl sm:text-9xl mb-6" style={{ color: isDark ? P("white") : P("black") }}>Digital</h1>
+          <h1 className="font-extrabold uppercase tracking-wider leading-[1.05] text-4xl sm:text-6xl mb-6" style={{ color: isDark ? P("white") : P("black") }}>Marketing</h1>
+          <h1 className="font-extrabold uppercase tracking-wider leading-[1.15] text-4xl sm:text-5xl" style={{ color: isDark ? P("white") : P("black") }}>Manager</h1>
         </div>
-
-        {/* Video placeholder ze skalowaniem */}
         <div className="relative mx-auto w-full max-w-[1600px]">
           <div
             ref={boxRef}
@@ -839,8 +858,7 @@ const scheduleHoverClear = (delay = 150) => {
           >
             <div className="aspect-video flex items-center justify-center" style={{ background: P("ecru") }}>
               <div className="text-center space-y-3" style={{ color: isDark ? P("white") : P("charcoal") }}>
-                <div className="w-16 h-16 mx-auto flex items-center justify-center"
-                     style={{ border: `3px solid ${P("black")}` }}>
+                <div className="w-16 h-16 mx-auto flex items-center justify-center" style={{ border: `3px solid ${P("black")}` }}>
                   <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z" />
                   </svg>
@@ -864,7 +882,7 @@ const scheduleHoverClear = (delay = 150) => {
         <SectionHeading>Portfolio</SectionHeading>
 
         {/* Kategorie (wyrównane do prawej) — DARK MODE FIX */}
-        <div className="flex justify-end mb-10 gap-3">
+        <div className="hidden sm:flex justify-end mb-10 gap-3">
           {CATEGORIES.map((c) => {
             const isActive = activeCategory === c;
             const baseBg = isDark ? P("charcoal") : P("white");
@@ -1659,8 +1677,8 @@ const scheduleHoverClear = (delay = 150) => {
         }}
       >
         <div className="container mx-auto px-2 py-10">
-          <div className="py-6 grid gap-6 md:grid-cols-4 items-center justify-items-center">
-            {/* Kolumna 1: nazwa + ikony */}
+          <div className="py-6 grid gap-6 md:grid-cols-4 items-start">
+            {/* Kolumna 1 */}
             <div className="flex flex-col items-center text-center">
               <h3 className="text-xl font-extrabold mb-6" style={{ color: textColor }}>Adam Gałęcki – Firma Gałęcka</h3>
               <div className="flex flex-wrap justify-center gap-4">
@@ -1691,7 +1709,7 @@ const scheduleHoverClear = (delay = 150) => {
                 ))}
               </div>
             </div>
-            {/* Kolumna 2: NIP */}
+            {/* Kolumna 2 */}
             <div className="flex flex-col items-center text-center font-bold text-sm leading-relaxed">
               <div className="inline-flex items-center gap-3">
                 <span style={{ color: textColor }}>NIP: 9462752489</span>
@@ -1703,7 +1721,7 @@ const scheduleHoverClear = (delay = 150) => {
                 >Kopiuj</button>
               </div>
             </div>
-            {/* Kolumna 3: REGON */}
+            {/* Kolumna 3 */}
             <div className="flex flex-col items-center text-center font-bold text-sm leading-relaxed">
               <div className="inline-flex items-center gap-3">
                 <span style={{ color: textColor }}>REGON: 541404566</span>
@@ -1715,7 +1733,7 @@ const scheduleHoverClear = (delay = 150) => {
                 >Kopiuj</button>
               </div>
             </div>
-            {/* Kolumna 4: Lokalizacja */}
+            {/* Kolumna 4 */}
             <div className="flex flex-col items-center text-center font-bold text-sm leading-relaxed">
               <div className="flex items-center gap-2" style={{ color: textColor }}>
                 <MapPin className="h-4 w-4" />
