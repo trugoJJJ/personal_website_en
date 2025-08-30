@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Geist+Mono:wght@100..900&family=Lexend:wght@100..900&family=Pixelify+Sans:wght@400..700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -9,42 +11,43 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Base colors */
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* LIGHT PALETTE – Autumn: Burnt Sienna / Olive / Goldenrod / Dusty Beige */
+    --background: 40 56% 96%;       /* #FAF6EE */
+    --foreground: 26 36% 14%;       /* #2E2217 */
 
-    /* Brand colors - Monochrome minimal */
-    --primary: 0 0% 10%;
-    --primary-foreground: 0 0% 100%;
-    --primary-light: 0 0% 20%;
-    --primary-dark: 0 0% 0%;
+    --card: 40 56% 96%;
+    --card-foreground: 26 36% 14%;
 
-    /* Secondary - same monochrome to avoid gradients */
-    --secondary: 0 0% 10%;
-    --secondary-foreground: 0 0% 100%;
-    --secondary-light: 0 0% 20%;
-    --secondary-dark: 0 0% 0%;
+    --popover: 40 56% 96%;
+    --popover-foreground: 26 36% 14%;
 
-    /* Accent - same monochrome */
-    --accent: 0 0% 10%;
-    --accent-foreground: 0 0% 100%;
-    --accent-light: 0 0% 20%;
-    --accent-dark: 0 0% 0%;
+    --primary: 14 54% 49%;          /* Burnt Sienna #C25A3A */
+    --primary-foreground: 40 56% 96%;
+    --primary-light: 14 54% 57%;
+    --primary-dark: 14 54% 35%;
 
-    /* Neutral colors */
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 0 0% 10%;
+    --secondary: 43 38% 33%;        /* Olive Brown #736134 */
+    --secondary-foreground: 40 56% 96%;
+    --secondary-light: 43 38% 40%;
+    --secondary-dark: 43 38% 22%;
 
-    /* Gradients - disabled (use solid backgrounds) */
-    --gradient-primary: linear-gradient(180deg, hsl(var(--primary)), hsl(var(--primary)));
-    --gradient-secondary: linear-gradient(180deg, hsl(var(--primary)), hsl(var(--primary)));
-    --gradient-accent: linear-gradient(180deg, hsl(var(--primary)), hsl(var(--primary)));
-    --gradient-hero: linear-gradient(180deg, hsl(var(--primary)), hsl(var(--primary)));
+    --accent: 40 67% 54%;           /* Goldenrod #D8A23A */
+    --accent-foreground: 26 36% 14%;
+    --accent-light: 40 67% 63%;
+    --accent-dark: 40 67% 40%;
+
+    --muted: 34 27% 77%;            /* Dusty Beige #D4C6B4 */
+    --muted-foreground: 34 27% 30%;
+
+    --border: 34 27% 65%;
+    --input: 34 27% 65%;
+    --ring: 14 54% 49%;
+
+    /* FIX gradients: map to their own color scales instead of all using --primary */
+    --gradient-primary: linear-gradient(180deg, hsl(var(--primary-light)), hsl(var(--primary-dark)));
+    --gradient-secondary: linear-gradient(180deg, hsl(var(--secondary-light)), hsl(var(--secondary-dark)));
+    --gradient-accent: linear-gradient(180deg, hsl(var(--accent-light)), hsl(var(--accent-dark)));
+    --gradient-hero: linear-gradient(180deg, hsl(var(--primary-light)), hsl(var(--primary-dark)));
     --gradient-card: linear-gradient(180deg, hsl(var(--card)), hsl(var(--card)));
 
     /* Shadows */
@@ -52,10 +55,6 @@ All colors MUST be HSL.
     --shadow-card-hover: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
     --shadow-hero: 0 25px 50px -12px rgb(0 0 0 / 0.25);
     --shadow-glow: 0 0 40px hsl(var(--primary) / 0.3);
-
-    /* Popover */
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
 
     /* Destructive */
     --destructive: 0 84.2% 60.2%;
@@ -110,22 +109,31 @@ All colors MUST be HSL.
     --ring: 212.7 26.8% 83.9%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-primary: 217.2 91.2% 59.8%;
+    --sidebar-primary-foreground: 222.2 47.4% 11.2%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 217.2 32.6% 17.5%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: hsl(var(--border));
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased text-base md:text-lg;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'Figtree','Lexend',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Helvetica Neue',Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 1rem; /* base */
+    line-height: 1.5;
+  }
+  @media (min-width: 768px) {
+    body { font-size: 1.125rem; }
   }
 
   html {
@@ -133,22 +141,44 @@ All colors MUST be HSL.
   }
 
   h1 {
-    @apply font-display font-bold tracking-tight leading-[1.05] text-5xl md:text-7xl;
+    font-family: 'Lexend','Figtree',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Helvetica Neue',Arial,sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    font-size: 3rem; /* 5xl */
+    line-height: 1.05;
+  }
+  @media (min-width: 768px) {
+    h1 { font-size: 4.5rem; /* 7xl */ }
   }
 
   h2 {
-    @apply font-display font-semibold tracking-tight leading-tight text-4xl md:text-5xl;
+    font-family: 'Lexend','Figtree',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Helvetica Neue',Arial,sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    font-size: 2.25rem; /* 4xl */
+    line-height: 1.25; /* leading-tight */
+  }
+  @media (min-width: 768px) {
+    h2 { font-size: 3rem; /* 5xl */ }
   }
 
   h3 {
-    @apply font-display font-semibold leading-snug text-2xl md:text-3xl;
+    font-family: 'Lexend','Figtree',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto','Helvetica Neue',Arial,sans-serif;
+    font-weight: 600;
+    font-size: 1.5rem; /* 2xl */
+    line-height: 1.375; /* leading-snug */
+  }
+  @media (min-width: 768px) {
+    h3 { font-size: 1.875rem; /* 3xl */ }
   }
 
   p.lead {
-    @apply text-lg md:text-xl text-muted-foreground;
+    font-size: 1.125rem; line-height: 1.75rem;
+    color: hsl(var(--muted-foreground));
   }
-
-
+  @media (min-width: 768px) {
+    p.lead { font-size: 1.25rem; }
+  }
 }
 
 @layer components {
@@ -228,6 +258,44 @@ All colors MUST be HSL.
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+
+  /* === Seasonal Spring Background (day / night) === */
+  .spring-bg { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 5; }
+  .spring-petal { position: absolute; top: -10%; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; opacity: .55; animation: petal-fall linear infinite; transform: rotate(0deg); mix-blend-mode: multiply; }
+  .dark .spring-petal { opacity: .35; mix-blend-mode: screen; }
+  .spring-cloud { position: absolute; width: 360px; height: 140px; background: radial-gradient(circle at 30% 40%, hsl(0 0% 100%) 0%, hsl(0 0% 100%) 60%, hsl(0 0% 100% / 0) 70%); filter: blur(12px) saturate(80%); animation: cloud-drift linear infinite; }
+  .spring-firefly { position: absolute; border-radius: 50%; background: radial-gradient(circle at 30% 30%, hsl(45 100% 83%), hsl(43 100% 67%) 55%, hsl(40 100% 50% / 0.05) 70%); box-shadow: 0 0 6px 2px hsl(36 100% 74% / 0.5), 0 0 18px 6px hsl(33 100% 68% / 0.25); animation: firefly-float linear infinite, firefly-glow ease-in-out infinite; }
+  .spring-moon { position: absolute; top: 6%; right: 8%; width: 140px; height: 140px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, hsl(35 100% 89%) 0%, hsl(36 85% 82%) 45%, hsl(35 73% 66%) 75%, hsl(33 65% 57%) 100%); box-shadow: 0 0 18px 6px hsl(31 100% 83% / 0.35), 0 0 60px 18px hsl(30 100% 74% / 0.15); animation: moon-glow 12s ease-in-out infinite; }
+  .spring-star { position:absolute; background: radial-gradient(circle at 35% 35%, hsl(0 0% 100%) 0%, hsl(0 0% 100%) 55%, hsl(0 0% 100% / 0) 70%); border-radius:50%; opacity:.6; animation: star-twinkle ease-in-out infinite; }
+  .spring-sun { position:absolute; top:6%; left:7%; width:160px; height:160px; border-radius:50%; background: radial-gradient(circle at 35% 35%, hsl(50 100% 91%) 0%, hsl(45 100% 79%) 45%, hsl(41 100% 64%) 75%, hsl(36 93% 57%) 100%); box-shadow:0 0 35px 10px hsl(36 100% 74% / .35),0 0 90px 30px hsl(33 100% 68% / .25); animation: sun-glow 14s ease-in-out infinite; }
+
+  /* Canonical leaf */
+  .spring-leaf {
+    position:absolute; top:-8%;
+    border-radius:40% 60% 55% 45% / 55% 45% 60% 40%;
+    pointer-events:auto; z-index:9; will-change:transform, opacity;
+    /* Simplified color custom properties for broader parser support */
+    --leaf-color-center: 40 67% 54%;
+    --leaf-color-edge: 40 67% 40%;
+    background: radial-gradient(circle at 30% 30%,
+      hsl(var(--leaf-color-center)) 0%,
+      hsl(var(--leaf-color-edge)) 70%,
+      hsl(var(--leaf-color-edge) / 0) 80%
+    );
+    box-shadow: 0 2px 4px 0 hsl(0 0% 0% / 0.15), inset 0 1px 2px hsl(0 0% 100% / 0.35);
+    animation: leaf-fall var(--fallDur,14s) linear forwards;
+    animation-fill-mode:forwards;
+    filter: drop-shadow(0 2px 2px hsl(0 0% 0% / 0.15));
+  }
+  .dark .spring-leaf { opacity:.85; }
+  .spring-leaf::after { content:""; position:absolute; top:40%; left:50%; width:2px; height:55%; background:linear-gradient(to bottom, hsl(27 47% 23% / .8), hsl(27 40% 15% / .2)); transform:translateX(-50%) rotate(var(--stemRot,6deg)); border-radius:2px; }
+  /* Departure / interaction variants */
+  .spring-leaf.departing { animation:none !important; transition:transform 1.4s cubic-bezier(.22,.61,.36,1), opacity 1.4s ease; transform:translate3d(var(--offX,0), var(--offY,-40vh),0) rotate(var(--rotEnd,720deg)) scale(1.05); opacity:0; }
+  .spring-leaf.drift-off { animation: leaf-fly-away 1.4s cubic-bezier(.22,.61,.36,1) forwards !important; filter: drop-shadow(0 4px 6px hsl(0 0% 0% / 0.25)); }
+  .spring-leaf.drift-off.leaving { opacity:0; }
+  /* Utilities */
+  .spring-leaf.no-shadow, .spring-leaf.no-shadow::after, .spring-leaf.no-shadow.departing, .spring-leaf.no-shadow.drift-off { box-shadow:none !important; filter:none !important; }
+  .spring-leaf.no-tail::after { content:none !important; }
 }
 
 @layer utilities {
@@ -270,9 +338,162 @@ All colors MUST be HSL.
     }
   }
 
+  @keyframes petal-fall {
+    0% {
+      transform: translate3d(0,0,0) rotate(0deg);
+      opacity: 0;
+    }
+    5% {
+      opacity: 1;
+    }
+    95% {
+      opacity: 1;
+    }
+    100% {
+      transform: translate3d(calc(30px - 60px * var(--drift, 0.5)), 115vh, 720deg) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes cloud-drift {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(25vw);
+    }
+  }
+
+  @keyframes firefly-float {
+    0% {
+      transform: translate3d(0,0,0) scale(1);
+    }
+    50% {
+      transform: translate3d(30px,-40px,0) scale(1.3);
+    }
+    100% {
+      transform: translate3d(-10px,10px,0) scale(1);
+    }
+  }
+
+  @keyframes firefly-glow {
+    0%, 100% {
+      filter: brightness(1) saturate(1);
+      opacity: .85;
+    }
+    50% {
+      filter: brightness(1.6) saturate(1.4);
+      opacity: 1;
+    }
+  }
+
+  @keyframes moon-glow {
+    0%, 100% {
+      box-shadow: 0 0 18px 6px hsl(31 100% 83% / 0.35), 0 0 60px 18px hsl(30 100% 74% / 0.15);
+    }
+    50% {
+      box-shadow: 0 0 26px 10px hsl(31 100% 83% / 0.55), 0 0 80px 26px hsl(30 100% 74% / 0.25);
+    }
+  }
+
+  @keyframes leaf-fly-away {
+    0% {
+      transform: translate3d(var(--offX,0), var(--offY,-40vh), 0) rotate(var(--rotStart,0deg)) scale(1);
+      opacity: 1;
+    }
+    60% {
+      opacity: 1;
+    }
+    100% {
+      transform: translate3d(calc(var(--offX,0) + 10vw), calc(var(--offY,-40vh) - 60vh), 0) rotate(var(--rotEnd,720deg)) scale(1.05);
+      opacity: 0;
+    }
+  }
+
+  @keyframes leaf-fall {
+    0% {
+      transform: translate3d(0,0,0) rotate(var(--rotStart));
+      opacity: 0;
+    }
+    5% {
+      opacity: .9;
+    }
+    60% {
+      opacity: .9;
+    }
+    100% {
+      transform: translate3d(var(--sway),110vh,0) rotate(var(--rotEnd));
+      opacity: 0;
+    }
+  }
+
+  @keyframes leaf-wind {
+    0% {
+      transform: translate3d(0,0,0) rotate(var(--rotStart));
+      opacity: 0;
+    }
+    5% {
+      opacity: 1;
+    }
+    25% {
+      transform: translate3d(var(--x1),20vh,0) rotate(calc(var(--rotStart) + 90deg));
+    }
+    45% {
+      transform: translate3d(var(--x2),40vh,0) rotate(calc(var(--rotStart) + 180deg));
+    }
+    70% {
+      transform: translate3d(var(--x3),70vh,0) rotate(calc(var(--rotStart) + 450deg));
+    }
+    100% {
+      transform: translate3d(var(--x4),110vh,0) rotate(var(--rotEnd));
+      opacity: 0;
+    }
+  }
+
+  @keyframes leaf-fall-wide {
+    0% { transform: translate3d(var(--xStart, 0vw), -8vh, 0) rotate(var(--rotStart,0deg)); opacity:1; }
+    20% { transform: translate3d(var(--x1, 10vw), 20vh, 0) rotate(calc(var(--rotStart,0deg) + 140deg)); opacity:1; }
+    40% { transform: translate3d(var(--x2, -15vw), 42vh, 0) rotate(calc(var(--rotStart,0deg) + 290deg)); opacity:1; }
+    60% { transform: translate3d(var(--x3, 25vw), 64vh, 0) rotate(calc(var(--rotStart,0deg) + 430deg)); opacity:1; }
+    80% { transform: translate3d(var(--x4, -30vw), 86vh, 0) rotate(calc(var(--rotStart,0deg) + 570deg)); opacity:1; }
+    100% { transform: translate3d(var(--xEnd, 0vw), 112vh, 0) rotate(var(--rotEnd,720deg)); opacity:1; }
+  }
+
+  @keyframes star-twinkle {
+    0%, 100% {
+      opacity: .15;
+      transform: scale(1);
+    }
+    50% {
+      opacity: .9;
+      transform: scale(1.35);
+    }
+  }
+
+  @keyframes sun-glow {
+    0%, 100% {
+      box-shadow: 0 0 35px 10px hsl(36 100% 74% / .35), 0 0 90px 30px hsl(33 100% 68% / .25);
+    }
+    50% {
+      box-shadow: 0 0 50px 16px hsl(36 100% 74% / 0.55), 0 0 120px 40px hsl(33 100% 68% / 0.35);
+    }
+  }
+
+  @keyframes leaf-float {
+    0%,100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-6px) rotate(2deg); }
+    50% { transform: translateY(2px) rotate(-2deg); }
+    75% { transform: translateY(-4px) rotate(1deg); }
+  }
+
   .animate-fade-in-up {
     animation: fade-in-up 0.6s ease-out;
   }
+}
+
+/* Added reduced-motion safety */
+@media (prefers-reduced-motion: reduce) {
+  .animate-gradient, .animate-float, .animate-pulse-glow, .spring-leaf, .spring-petal, .spring-cloud, .spring-firefly, .spring-moon, .spring-sun { animation: none !important; transition: none !important; }
 }
 
 .cta-grid-container {

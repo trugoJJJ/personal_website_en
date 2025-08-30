@@ -2,17 +2,22 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { useI18n, Locale } from "@/contexts/i18n";
 
+// Jesienna paleta spójna z Hero
 const LIGHT = {
   black: "#000000",
   white: "#FFFFFF",
-  amaranth: "#A4243B",
-  ecru: "#D8C99B",
+  amaranth: "#C25A3A", // Burnt Sienna
+  ecru: "#FAF6EE",     // Cream
+  butter: "#D8A23A",
+  charcoal: "#2E2217",
 };
 const DARK = {
   black: "#000000",
   white: "#FFFFFF",
-  amaranth: "#6B2D5B",
-  ecru: "#241b2b",
+  amaranth: "#6B2D5B", // dopasowany do dark mode (#6B2D5B)
+  ecru: "#2E2217", // ciemne tło
+  butter: "#D8A23A",
+  charcoal: "#2E2217",
 };
 
 function useIsDark() {
@@ -29,21 +34,29 @@ function useIsDark() {
 export const LanguageSwitch = () => {
   const { locale, setLocale } = useI18n();
   const isDark = useIsDark();
-  const COLORS = isDark ? DARK : LIGHT;
+  const PALETTE = isDark ? DARK : LIGHT;
 
   const setPL = () => setLocale("pl" as Locale);
   const setEN = () => setLocale("en" as Locale);
 
   const baseBtn = "rounded-none font-extrabold select-none transition-colors";
-  const baseStyle: React.CSSProperties = {
-    border: `3px solid ${COLORS.black}`,
-    background: COLORS.white,
-    color: COLORS.black,
+  const baseStyle: React.CSSProperties = isDark ? {
+    border: `3px solid ${PALETTE.black}`,
+    background: PALETTE.white, // niewybrany biały
+    color: PALETTE.black,
+  } : {
+    border: `3px solid ${PALETTE.black}`,
+    background: PALETTE.ecru,
+    color: PALETTE.black,
   };
-  const activeStyle: React.CSSProperties = {
-    border: `3px solid ${COLORS.black}`,
-    background: COLORS.amaranth,
-    color: COLORS.white,
+  const activeStyle: React.CSSProperties = isDark ? {
+    border: `3px solid ${PALETTE.black}`,
+    background: PALETTE.amaranth,
+    color: PALETTE.white,
+  } : {
+    border: `3px solid ${PALETTE.black}`,
+    background: PALETTE.amaranth,
+    color: PALETTE.white,
   };
 
   return (
@@ -58,14 +71,16 @@ export const LanguageSwitch = () => {
         style={locale === "pl" ? activeStyle : baseStyle}
         onMouseEnter={(e) => {
           if (locale !== "pl") {
-            (e.currentTarget as HTMLButtonElement).style.background = COLORS.black;
-            (e.currentTarget as HTMLButtonElement).style.color = COLORS.white;
+            (e.currentTarget as HTMLButtonElement).style.background = PALETTE.amaranth;
+            (e.currentTarget as HTMLButtonElement).style.color = PALETTE.white;
+            (e.currentTarget as HTMLButtonElement).style.border = `3px solid ${PALETTE.black}`;
           }
         }}
         onMouseLeave={(e) => {
           if (locale !== "pl") {
-            (e.currentTarget as HTMLButtonElement).style.background = COLORS.white;
-            (e.currentTarget as HTMLButtonElement).style.color = COLORS.black;
+            (e.currentTarget as HTMLButtonElement).style.background = baseStyle.background as string;
+            (e.currentTarget as HTMLButtonElement).style.color = baseStyle.color as string;
+            (e.currentTarget as HTMLButtonElement).style.border = baseStyle.border as string;
           }
         }}
       >
@@ -82,14 +97,16 @@ export const LanguageSwitch = () => {
         style={locale === "en" ? activeStyle : baseStyle}
         onMouseEnter={(e) => {
           if (locale !== "en") {
-            (e.currentTarget as HTMLButtonElement).style.background = COLORS.black;
-            (e.currentTarget as HTMLButtonElement).style.color = COLORS.white;
+            (e.currentTarget as HTMLButtonElement).style.background = PALETTE.amaranth;
+            (e.currentTarget as HTMLButtonElement).style.color = PALETTE.white;
+            (e.currentTarget as HTMLButtonElement).style.border = `3px solid ${PALETTE.black}`;
           }
         }}
         onMouseLeave={(e) => {
           if (locale !== "en") {
-            (e.currentTarget as HTMLButtonElement).style.background = COLORS.white;
-            (e.currentTarget as HTMLButtonElement).style.color = COLORS.black;
+            (e.currentTarget as HTMLButtonElement).style.background = baseStyle.background as string;
+            (e.currentTarget as HTMLButtonElement).style.color = baseStyle.color as string;
+            (e.currentTarget as HTMLButtonElement).style.border = baseStyle.border as string;
           }
         }}
       >

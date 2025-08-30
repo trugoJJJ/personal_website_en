@@ -17,16 +17,17 @@ import {
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/ThemeToggle";
 import LanguageSwitch from "@/components/LanguageSwitch";
+import SeasonalBackground from "@/components/SeasonalBackground";
 import portrait from "@/assets/hero-portrait.jpg";
 import { articles } from "@/data/articles";
 
 /* ================== PALETA – LIGHT ================== */
 const COLORS = {
-  amaranth: "#A4243B",
-  ecru: "#D8C99B",
-  butter: "#D8973C",
-  alloy: "#BD632F",
-  charcoal: "#273E47",
+  amaranth: "#C25A3A",  // Burnt Sienna – główny akcent (primary)
+  ecru: "#FAF6EE",      // Cream background
+  butter: "#D8A23A",    // Goldenrod – akcent / highlight
+  alloy: "#736134",     // Olive Brown – secondary / średni kontrast
+  charcoal: "#2E2217",  // Dark Brown – ciemne elementy / tekst
   white: "#FFFFFF",
   black: "#000000",
 };
@@ -145,6 +146,14 @@ const links = [
 const Header = () => {
   const { isDark, P } = usePalette();
   const [open, setOpen] = useState(false);
+  // Disable body scroll when mobile menu is open
+  useEffect(() => {
+    if (open) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => { document.body.style.overflow = originalOverflow; };
+    }
+  }, [open]);
   return (
     <header
       className="fixed top-0 inset-x-0 z-50"
@@ -154,48 +163,61 @@ const Header = () => {
         color: isDark ? P("white") : P("charcoal"),
       }}
     >
-      <nav className="container mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="#home" className="font-extrabold tracking-tight"
-           style={{ color: isDark ? P("white") : P("charcoal") }}>
-          Adam&nbsp;Gałęcki
+      <nav className="container mx-auto px-6 h-16 grid grid-cols-[1fr_auto_1fr] items-center">
+  {/* lewa strona */}
+  <a
+    href="#home"
+    className="font-extrabold tracking-tight justify-self-start"
+    style={{ color: isDark ? P("white") : P("charcoal") }}
+  >
+    Adam&nbsp;Gałęcki
+  </a>
+
+  {/* środek — NA STAŁE WYŚRODKOWANE */}
+  <ul
+    className="hidden md:flex items-center gap-8 text-sm justify-self-center"
+    style={{ color: isDark ? P("white") : P("charcoal") }}
+  >
+    {links.map((l) => (
+      <li key={l.href}>
+        <a href={l.href} className="font-bold hover:underline">
+          {l.label}
         </a>
+      </li>
+    ))}
+  </ul>
 
-        <ul className="hidden md:flex items-center gap-8 text-sm"
-            style={{ color: isDark ? P("white") : P("charcoal") }}>
-          {links.map((l) => (
-            <li key={l.href}>
-              <a href={l.href} className="font-bold hover:underline">
-                {l.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+  {/* prawa strona desktop */}
+  <div className="hidden md:flex items-center gap-2 justify-self-end">
+    <LanguageSwitch />
+    <ThemeToggle />
+    <Button
+      size="lg"
+      asChild
+      className="rounded-none font-extrabold transition-transform hover:scale-[1.02]"
+      style={{ background: P("amaranth"), color: P("white"), border: `3px solid ${P("black")}` }}
+    >
+      <a href="#contact">Kontakt</a>
+    </Button>
+  </div>
 
-        <div className="hidden md:flex items-center gap-2">
-          <LanguageSwitch />
-          <ThemeToggle />
-          <Button size="lg" asChild
-                  className="rounded-none font-extrabold transition-transform hover:scale-[1.02]"
-                  style={{
-                    background: P("amaranth"),
-                    color: P("white"),
-                    border: `3px solid ${P("black")}`,
-                  }}>
-            <a href="#contact">Kontakt</a>
-          </Button>
-        </div>
+  {/* prawa strona mobile */}
+  <div className="md:hidden flex items-center gap-2 justify-self-end">
+    {/* LanguageSwitch przeniesiony do menu overlay */}
+    <ThemeToggle />
+    <Button
+      variant="outline"
+      size="icon"
+      aria-label="Otwórz menu"
+      onClick={() => setOpen(true)}
+      className="rounded-none"
+      style={{ border: `3px solid ${P("black")}`, color: isDark ? P("white") : P("charcoal") }}
+    >
+      <Menu className="h-5 w-5" />
+    </Button>
+  </div>
+</nav>
 
-        <div className="md:hidden flex items-center gap-2">
-          <LanguageSwitch />
-          <ThemeToggle />
-          <Button variant="outline" size="icon" aria-label="Otwórz menu"
-                  onClick={() => setOpen(true)}
-                  className="rounded-none"
-                  style={{ border: `3px solid ${P("black")}`, color: isDark ? P("white") : P("charcoal") }}>
-            <Menu className="h-5 w-5" />
-          </Button>
-        </div>
-      </nav>
 
       {open && (
         <div className="fixed inset-0 z-50"
@@ -212,6 +234,10 @@ const Header = () => {
           </div>
 
           <div className="mt-6 px-6">
+            {/* Language switch inside open mobile menu */}
+            <div className="mb-4">
+              <LanguageSwitch />
+            </div>
             <ul className="grid gap-4 text-lg" style={{ color: isDark ? P("white") : P("charcoal") }}>
               {links.map((l) => (
                 <li key={l.href}>
@@ -247,7 +273,7 @@ type BrushType = "brush" | "spray" | "cursor";
 const useI18n = () => ({
   t: (key: string) =>
     ({
-      "portfolio.cta.more": "Projekty graficzne",
+      "portfolio.cta.more": "kliknij, aby zobaczyć portfolio graficzne",
       "portfolio.cta.more.mobile": "Projekty<br/>graficzne",
       "portfolio.cta.contact": "Pobierz CV",
       "portfolio.cta.contact.mobile": "Pobierz CV",
@@ -267,15 +293,18 @@ const BrushControls = ({
   isVisible: boolean;
 }) => {
   const { isDark, P } = usePalette();
+
   const SIZES = [
     { label: 'Mały', value: 50 },
     { label: 'Duży', value: 500 },
   ];
+
   const BRUSH_TYPES: { id: BrushType; name: string }[] = [
     { id: "brush", name: "Pędzel" },
     { id: "spray", name: "Spray" },
     { id: "cursor", name: "Kursor" },
   ];
+
   const PALETTE = [
     { display: P("black"), draw: P("black") },
     { display: P("white"), draw: P("white") },
@@ -285,9 +314,30 @@ const BrushControls = ({
     { display: P("charcoal"), draw: P("charcoal") },
   ];
 
+  // ✅ Single-select placeholder ring
+  const [markedColor, setMarkedColor] = useState<string | null>(null);
+
+  const toggleMarkedClick = (color: string) => {
+    // Klik lewym = zmień pędzel + ustaw placeholder tylko na tym kolorze (lub wyłącz jeśli kliknięto ten sam)
+    onColorChange(color);
+    setMarkedColor(prev => (prev === color ? null : color));
+  };
+
+  const toggleMarkedRightClick = (e: React.MouseEvent, color: string) => {
+    // PPM = tylko przełącz placeholder (bez zmiany koloru pędzla), nadal single-select
+    e.preventDefault();
+    setMarkedColor(prev => (prev === color ? null : color));
+  };
+
   return (
-    <div className={`transition-all ${isVisible ? "opacity-100" : "opacity-0"} flex flex-wrap gap-3 items-center justify-center`}>
-      <div className="flex items-center p-1 gap-1" style={{ border: `3px solid ${P("black")}`, background: isDark ? P("charcoal") : P("ecru") }}>
+    <div
+      className={`transition-all ${isVisible ? "opacity-100" : "opacity-0"} flex flex-wrap gap-3 items-center justify-center`}
+    >
+      {/* Tryby pędzla */}
+      <div
+        className="flex items-center p-1 gap-1"
+        style={{ border: `3px solid ${P("black")}`, background: isDark ? P("charcoal") : P("ecru") }}
+      >
         {BRUSH_TYPES.map((b, i) => (
           <button
             key={b.id}
@@ -304,7 +354,11 @@ const BrushControls = ({
         ))}
       </div>
 
-      <div className="flex items-center p-1 gap-1" style={{ border: `3px solid ${P("black")}`, background: isDark ? P("charcoal") : P("ecru") }}>
+      {/* Rozmiary pędzla */}
+      <div
+        className="flex items-center p-1 gap-1"
+        style={{ border: `3px solid ${P("black")}`, background: isDark ? P("charcoal") : P("ecru") }}
+      >
         {SIZES.map((s, i) => (
           <button
             key={s.value}
@@ -321,23 +375,61 @@ const BrushControls = ({
         ))}
       </div>
 
-      <div className="flex items-center p-1 gap-1" style={{ border: `3px solid ${P("black")}`, background: isDark ? P("charcoal") : P("ecru") }}>
-        {PALETTE.map((c, i) => (
-          <button
-            key={c.draw + i}
-            onClick={() => onColorChange(c.draw)}
-            className="w-10 h-10"
-            style={{
-              background: c.display,
-              borderRight: i === PALETTE.length - 1 ? 'none' : `3px solid ${P("black")}`,
-            }}
-            aria-label={`Kolor ${c.draw}`}
-          />
-        ))}
+      {/* Paleta kolorów z pojedynczym placeholder ringiem */}
+      <div
+        className="flex items-center p-1 gap-1"
+        style={{ border: `3px solid ${P("black")}`, background: isDark ? P("charcoal") : P("ecru") }}
+      >
+        {PALETTE.map((c, i) => {
+          const isSelected = currentColor === c.draw;
+          const isMarked = markedColor === c.draw;
+
+          return (
+            <button
+              key={c.draw + i}
+              onClick={() => toggleMarkedClick(c.draw)}
+              onContextMenu={(e) => toggleMarkedRightClick(e, c.draw)}
+              className="relative w-10 h-10"
+              style={{
+                background: c.display,
+                borderRight: i === PALETTE.length - 1 ? 'none' : `3px solid ${P("black")}`,
+              }}
+              aria-label={`Kolor ${c.draw}${isMarked ? ' (oznakowany)' : ''}`}
+              title={
+                isMarked
+                  ? 'Kliknij, aby usunąć obrys'
+                  : 'Kliknij, aby dodać obrys'
+              }
+            >
+              {/* Ring aktualnie wybranego koloru (wyróżnienie wyboru pędzla) */}
+              {isSelected && (
+                <span
+                  className="pointer-events-none absolute inset-0"
+                  style={{ boxShadow: `inset 0 0 0 3px ${P("amaranth")}` }}
+                />
+              )}
+
+              {/* Single-select placeholder ring — tylko obrys, nie zasłania tła */}
+              {isMarked && (
+                <span
+                  className="pointer-events-none absolute inset-0"
+                  style={{
+                    boxShadow: `
+                      inset 0 0 0 2px ${P("white")},
+                      inset 0 0 0 4px ${P("black")}
+                    `,
+                  }}
+                />
+              )}
+            </button>
+          );
+        })}
       </div>
     </div>
   );
 };
+
+
 
 const BigTypeCTA = () => {
   const { t } = useI18n();
@@ -442,7 +534,7 @@ const BigTypeCTA = () => {
   }, [drawingColor, brushSize, brushType]);
 
   return (
-    <section className="py-8">
+    <section className="py-16">
       <div className="w-full flex flex-col items-center gap-6">
         <a
           href="https://www.behance.net/adamgacki1"
@@ -451,7 +543,7 @@ const BigTypeCTA = () => {
           ref={linkRef}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
-          className="relative w-full md:w-[900px] min-h-[220px] select-none"
+          className="relative w-full md:w-[900px] min-h-[160px] select-none"
           style={{
             border: `3px solid ${P("black")}`,
             cursor: brushType === "cursor" ? "pointer" : "crosshair",
@@ -494,42 +586,7 @@ const BigTypeCTA = () => {
   );
 };
 
-/* ================== SIMPLE CTA – KOŁO + hover + generator CV ================== */
-type SimpleCTAProps = {
-  onGenerateCV: () => void | Promise<void>;
-  generating?: boolean;
-};
-function SimpleCTA({ onGenerateCV, generating = false }: SimpleCTAProps) {
-  const { isDark, P } = usePalette();
-  const { t } = useI18n();
-  return (
-    <section aria-labelledby="simple-cta" className="py-8">
-      <div className="w-full flex justify-center">
-        <button
-          type="button"
-          onClick={onGenerateCV}
-          disabled={generating}
-          className="flex items-center justify-center rounded-full w-56 h-56 text-3xl md:text-3xl font-extrabold tracking-tighter transition-colors duration-200"
-          style={{
-            background: P("butter"),
-            color: isDark ? P("white") : P("black"),
-            border: `3px solid ${P("black")}`,
-          }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.background = P("amaranth");
-            (e.currentTarget as HTMLElement).style.color = P("white");
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.background = P("butter");
-            (e.currentTarget as HTMLElement).style.color = isDark ? P("white") : P("black");
-          }}
-        >
-          {generating ? "Tworzę dokument..." : t("portfolio.cta.contact")}
-        </button>
-      </div>
-    </section>
-  );
-}
+
 
 /* ================== MINI UI DND ================== */
 function SuccessAnimationPlaceholder({ onReset }: { onReset: () => void }) {
@@ -592,9 +649,14 @@ function ProjectCard({ project, isHighlighted = false, isDraggable = true }: { p
           <div className="mt-auto pt-6">
             <button
               className="w-full font-extrabold transition-colors"
-              style={{ border: `3px solid ${P("black")}`, padding: "10px 0", background: isDark ? P("charcoal") : P("white"), color: isDark ? P("white") : P("black") }}
+              style={{
+                border: `3px solid ${isDark ? P("white") : P("black")}`,
+                padding: "10px 0",
+                background: isDark ? P("charcoal") : P("white"),
+                color: isDark ? P("white") : P("black")
+              }}
               onMouseOver={(e) => {
-                (e.currentTarget as HTMLButtonElement).style.background = P("black");
+                (e.currentTarget as HTMLButtonElement).style.background = P("amaranth");
                 (e.currentTarget as HTMLButtonElement).style.color = P("white");
               }}
               onMouseOut={(e) => {
@@ -747,14 +809,18 @@ const scheduleHoverClear = (delay = 150) => {
 
   /* ———— HERO ———— */
   const HeroSection = () => (
-    <section id="home" className="pt-28 pb-24" style={{ background: isDark ? P("charcoal") : P("white") }}>
+    <section id="home" className="pt-44 pb-32" style={{ background: isDark ? P("charcoal") : P("white") }}>
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
-          <h1 className="text-[16vw] sm:text-7xl md:text-9xl font-extrabold uppercase tracking-tight"
+          <h1 className="text-[20vw] sm:text-4xl md:text-9xl font-extrabold uppercase tracking-tight"
+              style={{ color: isDark ? P("white") : P("black"), lineHeight: 1.05 }}>
+            Digital
+          </h1>
+          <h1 className="text-[16vw] sm:text-3xl md:text-6xl font-extrabold uppercase tracking-tight"
               style={{ color: isDark ? P("white") : P("black"), lineHeight: 1.05 }}>
             Marketing
           </h1>
-          <h1 className="text-[16vw] sm:text-7xl md:text-9xl font-extrabold uppercase tracking-tight"
+          <h1 className="text-[16vw] sm:text-2xl md:text-4xl font-extrabold uppercase tracking-tight"
               style={{ color: isDark ? P("white") : P("black"), lineHeight: 1.15 }}>
             Manager
           </h1>
@@ -791,8 +857,8 @@ const scheduleHoverClear = (delay = 150) => {
 
   /* ———— PORTFOLIO ———— */
   const PortfolioSection = () => (
-    <section className="py-28" id="portfolio"
-             style={{ background: isDark ? P("charcoal") : P("white"), borderTop: `3px solid ${P("black")}` }}>
+    <section className="py-36" id="portfolio"
+             style={{ background: P("ecru"), borderTop: `3px solid ${P("black")}` }}>
       {isSolved && <SuccessAnimationPlaceholder onReset={handleReset} />}
       <div className="container mx-auto px-6 max-w-6xl">
         <SectionHeading>Portfolio</SectionHeading>
@@ -801,36 +867,36 @@ const scheduleHoverClear = (delay = 150) => {
         <div className="flex justify-end mb-10 gap-3">
           {CATEGORIES.map((c) => {
             const isActive = activeCategory === c;
-            const baseBg = isDark ? P("charcoal") : P("white"); // w dark: ciemne tło, w light: białe
+            const baseBg = isDark ? P("charcoal") : P("white");
             const baseColor = isDark ? P("white") : P("black");
             const activeBg = P("amaranth");
             const activeColor = P("white");
+            const borderColor = isDark ? P("white") : P("black");
             return (
               <button
-  key={c}
-  onClick={() => setActiveCategory(isActive ? null : (c as string))}
-  onMouseEnter={() => setHoverCategorySafely(c as string)}
-  onMouseLeave={() => scheduleHoverClear(150)}
-  onFocus={() => setHoverCategorySafely(c as string)}   // dla klawiatury
-  onBlur={() => scheduleHoverClear(150)}                // dla klawiatury
-  className="px-5 py-2 font-extrabold transition-colors"
-  style={{
-    border: `3px solid ${P("black")}`,
-    background: isActive ? activeBg : baseBg,
-    color: isActive ? activeColor : baseColor,
-  }}
-  onMouseOver={(e) => {
-    (e.currentTarget as HTMLButtonElement).style.background = P("butter");
-    (e.currentTarget as HTMLButtonElement).style.color = P("white");
-  }}
-  onMouseOut={(e) => {
-    (e.currentTarget as HTMLButtonElement).style.background = isActive ? activeBg : baseBg;
-    (e.currentTarget as HTMLButtonElement).style.color = isActive ? activeColor : baseColor;
-  }}
->
-  {c as string}
-</button>
-
+                key={c}
+                onClick={() => setActiveCategory(isActive ? null : (c as string))}
+                onMouseEnter={() => setHoverCategorySafely(c as string)}
+                onMouseLeave={() => scheduleHoverClear(150)}
+                onFocus={() => setHoverCategorySafely(c as string)}
+                onBlur={() => scheduleHoverClear(150)}
+                className="px-5 py-2 font-extrabold transition-colors"
+                style={{
+                  border: `3px solid ${borderColor}`,
+                  background: isActive ? activeBg : baseBg,
+                  color: isActive ? activeColor : baseColor,
+                }}
+                onMouseOver={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.background = P("amaranth");
+                  (e.currentTarget as HTMLButtonElement).style.color = P("white");
+                }}
+                onMouseOut={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.background = isActive ? activeBg : baseBg;
+                  (e.currentTarget as HTMLButtonElement).style.color = isActive ? activeColor : baseColor;
+                }}
+              >
+                {c as string}
+              </button>
             );
           })}
         </div>
@@ -868,10 +934,6 @@ const scheduleHoverClear = (delay = 150) => {
 
         {/* —— CTA POD PORTFOLIO —— */}
         <div className="mt-16 grid lg:grid-cols-[1fr_auto] gap-10 items-start">
-          
-          <div className="justify-self-center lg:justify-self-start">
-            <SimpleCTA onGenerateCV={handleGenerateCV} generating={generating} />
-          </div>
           <div>
             <BigTypeCTA />
           </div>
@@ -882,7 +944,7 @@ const scheduleHoverClear = (delay = 150) => {
 
   /* ———— POZOSTAŁE SEKCJE (O mnie / Doświadczenie / Umiejętności / Tech Stack / Artykuły / Kontakt) ———— */
   const AboutSection = () => (
-    <section className="py-28" id="about"
+    <section className="py-36" id="about"
              style={{ background: isDark ? P("charcoal") : P("white"), borderTop: `3px solid ${P("black")}` }}>
       <div className="container mx-auto px-6 max-w-6xl">
         <header className="mb-24 mt-8">
@@ -898,7 +960,7 @@ const scheduleHoverClear = (delay = 150) => {
               <img src={portrait} alt="Portret – o mnie" loading="lazy" className="w-full h-64 object-cover md:h-80" />
             </figure>
             <div className="space-y-6" style={{ color: isDark ? P("white") : P("charcoal") }}>
-              <h3 className="text-2xl md:text-3xl font-extrabold uppercase text-center md:text-left">Cześć, nazywam się Adam</h3>
+              <h3 className="text-2xl md:text-3xl font-extrabold text-center md:text-left">Cześć, nazywam się Adam</h3>
               <p className="text-lg">
                 Zajmuję się kompleksową obsługą komunikacji marketingowej nakierowanej na osiąganie zamierzonych celów biznesowych.
               </p>
@@ -918,7 +980,7 @@ const scheduleHoverClear = (delay = 150) => {
                 { Icon: Users, value: "40%", label: "Wzrost zapytań ofertowych" },
                 { Icon: Award, value: "750", label: "Wypełnionych formularzy" },
               ].map((s) => (
-                <div key={s.label} className="p-6 text-left transition-transform hover:scale-[1.01]"
+                <div key={s.label} className="p-6 text-left"
                      style={{ border: `3px solid ${P("black")}`, background: P("ecru"), color: isDark ? P("white") : P("black") }}>
                   <s.Icon className="h-7 w-7 mb-3" />
                   <div className="text-3xl font-extrabold">{s.value}</div>
@@ -975,23 +1037,40 @@ const scheduleHoverClear = (delay = 150) => {
                           href: "https://tiktok.com/@twojprofil",
                           label: "TikTok",
                         },
-                      ].map(({ Icon, href, label }, i) => (
-                        <a
-                          key={i}
-                          href={href}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="w-full aspect-square flex items-center justify-center transition-colors"
-                          style={{
-                            border: `3px solid ${P("black")}`,
-                            background: isDark ? P("charcoal") : P("white"),
-                            color: isDark ? P("white") : P("black"),
-                          }}
-                          aria-label={label}
-                        >
-                          <Icon className="w-6 h-6" />
-                        </a>
-                      ))}
+                      ].map(({ Icon, href, label }, i) => {
+                        const baseBg = isDark ? P("charcoal") : P("white");
+                        const baseColor = isDark ? P("white") : P("black");
+                        return (
+                          <a
+                            key={i}
+                            href={href}
+                            target="_blank"
+                            rel="noreferrer"
+                            aria-label={label}
+                            className="group w-full aspect-square flex items-center justify-center transition-transform duration-300 ease-out focus-visible:outline-none"
+                            style={{
+                              border: `3px solid ${P("black")}`,
+                              background: baseBg,
+                              color: baseColor,
+                              position: 'relative',
+                            }}
+                            onMouseEnter={(e) => {
+                              const el = e.currentTarget;
+                              el.style.background = P("amaranth");
+                              el.style.color = P("white");
+                              el.style.transform = 'translateY(-4px)';
+                            }}
+                            onMouseLeave={(e) => {
+                              const el = e.currentTarget;
+                              el.style.background = baseBg;
+                              el.style.color = baseColor;
+                              el.style.transform = 'translateY(0)';
+                            }}
+                          >
+                            <Icon className="h-6 w-6" />
+                          </a>
+                        );
+                      })}
                     </div>
 
                     {/* QR po prawej */}
@@ -1002,7 +1081,6 @@ const scheduleHoverClear = (delay = 150) => {
                       >
                         <img src={QR_DATA_URI} alt="QR" className="w-[85%] h-[85%] object-contain" />
                       </div>
-                      <div className="mt-3 font-extrabold">Zeskanuj kod QR</div>
                     </div>
                   </div>
                 );
@@ -1028,43 +1106,51 @@ const scheduleHoverClear = (delay = 150) => {
         company: "Dogtronic",
         period: "2021 – 2025",
         desc: "Prowadzenie kampanii digital, SEO oraz zarządzanie zespołem marketingowym",
+        url: "https://example.com/case-study/dogtronic"
       },
       {
         role: "Specjalista ds. marketingu",
         company: "Instytut Rozwoju Szkolnictwa Wyższego",
         period: "2023 – 2024",
         desc: "Koordynacja działań promocyjnych i rozwój komunikacji wizerunkowej",
+        url: "https://example.com/case-study/irsw"
       },
       {
         role: "SEO Specialist",
         company: "Kryptobot",
         period: "2021 – 2022",
         desc: "Audyt i optymalizacja serwisów pod SEO, link building i analityka",
+        url: "https://example.com/case-study/kryptobot"
       },
       {
         role: "Stażysta w dziale marketingu",
         company: "Akanza",
         period: "2021",
         desc: "Wsparcie zespołu w tworzeniu treści i kampanii reklamowych",
+        url: "https://example.com/case-study/akanza"
       },
       {
         role: "Grafik",
         company: "EmArt Studio",
         period: "2021",
         desc: "Projektowanie materiałów graficznych online i offline dla klientów",
+        url: "https://example.com/case-study/emart"
       },
     ];
 
     const certs = [
-      { year: "2023", title: "Google Ads Certified", org: "Google" },
-      { year: "2023", title: "Facebook Blueprint Certified", org: "Meta" },
-      { year: "2023", title: "Google Analytics 4 Certified", org: "Google" },
-      { year: "2022", title: "HubSpot Inbound Marketing", org: "HubSpot" },
+      { year: "2023", title: "Google Ads Certified", org: "Google", url: "https://example.com/cert/google-ads", image: "https://placehold.co/800x500?text=Google+Ads" },
+      { year: "2023", title: "Facebook Blueprint Certified", org: "Meta", url: "https://example.com/cert/meta-blueprint", image: "https://placehold.co/800x500?text=Meta+Blueprint" },
+      { year: "2023", title: "Google Analytics 4 Certified", org: "Google", url: "https://example.com/cert/ga4", image: "https://placehold.co/800x500?text=GA4" },
+      { year: "2022", title: "HubSpot Inbound Marketing", org: "HubSpot", url: "https://example.com/cert/hubspot-inbound", image: "https://placehold.co/800x500?text=HubSpot+Inbound" },
     ];
+
+    // NEW: lokalny stan popupu dla certyfikatów
+    const [selectedCert, setSelectedCert] = useState<typeof certs[number] | null>(null);
 
     return (
       <section
-        className="py-28"
+        className="py-36"
         id="experience"
         style={{ background: P("ecru"), borderTop: `3px solid ${P("black")}` }}
       >
@@ -1076,23 +1162,31 @@ const scheduleHoverClear = (delay = 150) => {
             {/* LEWA: PRACA */}
             <div className="flex flex-col gap-8">
               {jobs.map((job) => (
-                <div key={job.role} style={{ ...card, padding: 28 }}>
+                <a
+                  key={job.role}
+                  href={job.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group focus-visible:outline-none transition-transform duration-200 hover:scale-[1.02] focus-visible:scale-[1.02]"
+                  style={{ ...card, padding: 28, textDecoration: 'none', position: 'relative' }}
+                >
                   <div className="flex items-center gap-2 text-sm mb-2" style={{ opacity: 0.9 }}>
                     <Briefcase className="h-4 w-4" /> {job.period}
                   </div>
                   <h4 className="font-extrabold">{job.role}</h4>
-                  <div className="font-bold">{job.company}</div>
-                  <div className="text-sm mt-3" style={{ opacity: 0.85 }}>
-                    {job.desc}
-                  </div>
-                </div>
+                  <div className="font-bold mb-2">{job.company}</div>
+                  <div className="text-sm" style={{ opacity: 0.85 }}>{job.desc}</div>
+                </a>
               ))}
             </div>
 
             {/* PRAWA: EDU na górze + CERTYFIKATY niżej */}
             <div className="flex flex-col gap-8">
               {/* EDU */}
-              <div
+              <a
+                href="https://pollub.pl"
+                target="_blank"
+                rel="noreferrer"
                 style={{
                   ...card,
                   padding: 32,
@@ -1102,28 +1196,41 @@ const scheduleHoverClear = (delay = 150) => {
                   justifyContent: "center",
                   background: isDark ? P("charcoal") : P("white"),
                   boxShadow: `inset 0 0 0 6px ${P("ecru")}`,
+                  textDecoration: 'none',
+                  color: isDark ? P("white") : P("charcoal"),
+                  cursor: 'pointer',
                 }}
+                className="transition-transform duration-200 hover:scale-[1.02] focus-visible:outline-none"
+                aria-label="Marketing i Komunikacja Rynkowa – Politechnika Lubelska (otwórz w nowej karcie)"
               >
                 <div className="flex items-center gap-2 text-sm mb-2" style={{ opacity: 0.9 }}>
                   <GraduationCap className="h-4 w-4" /> Edukacja
                 </div>
                 <h4 className="font-extrabold mb-1">Marketing i Komunikacja Rynkowa</h4>
                 <div className="font-bold">Politechnika Lubelska</div>
-              </div>
+                <span className="mt-4 text-xs font-bold opacity-60">Otwórz stronę uczelni</span>
+              </a>
 
               {/* CERTYFIKATY */}
               {certs.map((c) => (
-                <div
+                <a
                   key={c.title}
+                  href={c.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={(e) => { e.preventDefault(); setSelectedCert(c); }}
+                  aria-haspopup="dialog"
+                  aria-controls="cert-modal"
+                  className="group focus-visible:outline-none transition-transform duration-200 hover:scale-[1.02] focus-visible:scale-[1.02]"
                   style={{
                     ...card,
                     padding: 28,
                     background: isDark ? "#1c1624" : "#fdfdf6",
                     border: `2px dashed ${P("charcoal")}`,
                     position: "relative",
+                    textDecoration: 'none'
                   }}
                 >
-                  {/* prostokątna kapsułka z rokiem */}
                   <div
                     style={{
                       position: "absolute",
@@ -1144,11 +1251,80 @@ const scheduleHoverClear = (delay = 150) => {
                   </div>
                   <h4 className="font-extrabold">{c.title}</h4>
                   <div className="italic">{c.org}</div>
-                </div>
+                  <span className="block mt-3 text-xs font-bold opacity-60">Kliknij, aby zobaczyć szczegóły</span>
+                </a>
               ))}
             </div>
           </div>
         </div>
+
+        {/* MODAL POPUP CERT */}
+        {selectedCert && (
+          <div
+            id="cert-modal"
+            className="fixed inset-0 z-[300] flex items-center justify-center p-4"
+            role="dialog"
+            aria-modal="true"
+            aria-label={`Certyfikat ${selectedCert.title}`}
+            style={{ background: 'rgba(0,0,0,0.6)' }}
+            onClick={() => setSelectedCert(null)}
+          >
+            <div
+              className="w-full max-w-md relative"
+              style={{ background: isDark ? P("charcoal") : P("white"), border: `3px solid ${P("black")}`, color: isDark ? P("white") : P("black") }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setSelectedCert(null)}
+                aria-label="Zamknij"
+                className="absolute top-2 right-2 px-2 py-1 font-extrabold"
+                style={{ border: `2px solid ${P("black")}` }}
+              >
+                ×
+              </button>
+              <div className="p-6 space-y-4">
+                <div className="flex items-center gap-2 text-sm" style={{ opacity: 0.9 }}>
+                  <Award className="h-4 w-4" /> Certyfikat
+                </div>
+                <h3 className="text-xl font-extrabold leading-tight">{selectedCert.title}</h3>
+                {/* NOWE: obrazek certyfikatu (placeholder) */}
+                <figure className="overflow-hidden" style={{ border: `2px solid ${P("black")}`, background: isDark ? P("charcoal") : P("ecru") }}>
+                  <img
+                    src={selectedCert.image || 'https://placehold.co/800x500?text=Certyfikat'}
+                    alt={`Podgląd certyfikatu ${selectedCert.title}`}
+                    className="w-full h-auto object-contain"
+                    style={{ maxHeight: 380 }}
+                    loading="lazy"
+                  />
+                </figure>
+                <div className="font-bold">Organizacja: {selectedCert.org}</div>
+                <div className="text-sm">Rok: {selectedCert.year}</div>
+                <div className="flex gap-3 pt-2">
+                  <a
+                    href={selectedCert.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-4 py-2 font-extrabold transition-colors"
+                    style={{ border: `3px solid ${P("black")}`, background: P("ecru"), color: P("black") }}
+                    onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = P("amaranth"); (e.currentTarget as HTMLAnchorElement).style.color = P("white"); }}
+                    onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = P("ecru"); (e.currentTarget as HTMLAnchorElement).style.color = P("black"); }}
+                  >
+                    Dowiedz się więcej
+                  </a>
+                  <button
+                    onClick={() => setSelectedCert(null)}
+                    className="px-4 py-2 font-extrabold transition-colors"
+                    style={{ border: `3px solid ${P("black")}`, background: P("butter"), color: P("black") }}
+                    onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.background = P("amaranth"); (e.currentTarget as HTMLButtonElement).style.color = P("white"); }}
+                    onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.background = P("butter"); (e.currentTarget as HTMLButtonElement).style.color = P("black"); }}
+                  >
+                    Zamknij
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </section>
     );
   };
@@ -1161,22 +1337,75 @@ const scheduleHoverClear = (delay = 150) => {
       "Automatyzacja", "Tworzenie stron", "Animacja 3D", "Animacja 2D",
       "Grafika 3D", "Grafika 2D", "+ trochę więcej…"
     ];
+
+    // Styl kafelka jak dla: "Analityka marketingu" (index 1 w poprzedniej wersji)
+    const baseBackground = isDark
+      ? `linear-gradient(145deg, #14131b 0%, #1d1626 60%, #241b2b 100%)`
+      : `linear-gradient(145deg, #ffffff 0%, #faf7ef 55%, #f1ead8 100%)`;
+
     return (
-      <section className="py-28" id="skills"
-               style={{ background: isDark ? P("charcoal") : P("white"), borderTop: `3px solid ${P("black")}` }}>
+      <section
+        className="py-36"
+        id="skills"
+        style={{ background: isDark ? P("charcoal") : P("white"), borderTop: `3px solid ${P("black")}` }}
+      >
         <div className="container mx-auto px-6 max-w-6xl">
           <SectionHeading>Umiejętności</SectionHeading>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {technicalSkills.map((s, i) => (
-              <div key={s}
-                   className="px-5 py-4 text-lg font-bold transition-transform hover:scale-[1.01]"
-                   style={{
-                     border: `2px solid ${P("black")}`,
-                     color: isDark ? P("white") : P("charcoal"),
-                     background: i % 3 === 0 ? (isDark ? "#121219" : "#fff") : (i % 3 === 1 ? (isDark ? "#1b1523" : "#f9f5ff") : (isDark ? "#171422" : "#fdfaf2"))
-                   }}>
-                {s}
+          <div
+            className="grid gap-5"
+            style={{ gridTemplateColumns: "repeat(auto-fill,minmax(220px,1fr))" }}
+          >
+            {technicalSkills.map((skill, i) => (
+              <div
+                key={skill}
+                className="relative font-extrabold tracking-tight select-none"
+                style={{
+                  background: baseBackground,
+                  color: isDark ? P("white") : P("charcoal"),
+                  padding: "20px 24px",
+                  fontSize: "1.05rem",
+                  border: `3px solid ${P("black")}`,
+                  display: "flex",
+                  alignItems: "flex-start",
+                  justifyContent: "flex-start",
+                  lineHeight: 1.15,
+                  boxShadow: `4px 4px 0 0 ${P("black")}`,
+                }}
+              >
+                {/* boczny pasek – identyczny jak w kafelku referencyjnym (kolor butter) */}
+                <span
+                  aria-hidden="true"
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    height: "100%",
+                    width: 10,
+                    background: P("butter"),
+                    borderRight: `3px solid ${P("black")}`,
+                    mixBlendMode: isDark ? "normal" : "multiply",
+                  }}
+                />
+                {/* numer (zostawiamy – spójny element stylu) */}
+                <span
+                  aria-hidden="true"
+                  style={{
+                    position: "absolute",
+                    top: -12,
+                    right: 10,
+                    background: P("alloy"),
+                    color: P("white"),
+                    border: `2px solid ${P("black")}`,
+                    fontSize: 10,
+                    padding: "2px 6px",
+                    letterSpacing: 0.5,
+                    fontWeight: 800,
+                  }}
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span style={{ paddingLeft: 16 }}>{skill}</span>
               </div>
             ))}
           </div>
@@ -1200,7 +1429,7 @@ const scheduleHoverClear = (delay = 150) => {
     ];
 
     return (
-      <section className="py-28" id="techstack"
+      <section className="py-36" id="techstack"
                style={{ background: P("ecru"), borderTop: `3px solid ${P("black")}` }}>
         <div className="container mx-auto px-6 max-w-6xl">
           <header className="mb-24 mt-8">
@@ -1245,18 +1474,25 @@ const scheduleHoverClear = (delay = 150) => {
   };
 
   const ArticlesSection = () => (
-    <section className="py-28" id="articles"
+    <section className="py-36" id="articles"
              style={{ background: isDark ? P("charcoal") : P("white"), borderTop: `3px solid ${P("black")}` }}>
       <div className="container mx-auto px-6 max-w-6xl">
         <SectionHeading>Artykuły</SectionHeading>
 
         <div className="grid lg:grid-cols-3 gap-8 mb-12">
           {articles.map((article) => (
-            <article key={article.id} className="group"
-                     style={{ border: `3px solid ${P("black")}`, background: isDark ? P("charcoal") : P("white"), color: isDark ? P("white") : P("charcoal") }}>
+            <article
+              key={article.id}
+              className="group"
+              style={{ border: `3px solid ${P("black")}`, background: isDark ? P("charcoal") : P("white"), color: isDark ? P("white") : P("charcoal") }}
+            >
               <div className="aspect-[4/3] overflow-hidden relative"
                    style={{ borderBottom: `3px solid ${P("black")}` }}>
-                <img src={article.image} alt={article.title} className="w-full h-full object-cover" />
+                <img
+                  src={article.image}
+                  alt={article.title}
+                  className="w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.05]"
+                />
                 <div className="absolute top-3 left-3">
                   <span className="text-xs font-extrabold px-2 py-1"
                         style={{ background: P("alloy"), color: P("white"), border: `2px solid ${P("black")}` }}>
@@ -1274,14 +1510,18 @@ const scheduleHoverClear = (delay = 150) => {
                 <Link
                   to={`/articles/${article.id}`}
                   className="w-full inline-flex items-center justify-center gap-2 font-extrabold px-4 py-3 transition-colors"
-                  style={{ border: `3px solid ${P("black")}`, background: isDark ? P("charcoal") : P("white"), color: P("black") }}
+                  style={{
+                    border: `3px solid ${isDark ? P("white") : P("black")}`,
+                    background: isDark ? P("charcoal") : P("white"),
+                    color: isDark ? P("white") : P("black")
+                  }}
                   onMouseOver={(e) => {
-                    (e.currentTarget as HTMLAnchorElement).style.background = P("black");
+                    (e.currentTarget as HTMLAnchorElement).style.background = P("amaranth");
                     (e.currentTarget as HTMLAnchorElement).style.color = P("white");
                   }}
                   onMouseOut={(e) => {
                     (e.currentTarget as HTMLAnchorElement).style.background = isDark ? P("charcoal") : P("white");
-                    (e.currentTarget as HTMLAnchorElement).style.color = P("black");
+                    (e.currentTarget as HTMLAnchorElement).style.color = isDark ? P("white") : P("black");
                   }}
                 >
                   <ExternalLink className="h-4 w-4" />
@@ -1292,181 +1532,211 @@ const scheduleHoverClear = (delay = 150) => {
           ))}
         </div>
 
-        <div className="p-8"
-             style={{ border: `3px solid ${P("black")}`, background: P("ecru"), color: isDark ? P("white") : P("black") }}>
-          <h3 className="text-2xl font-extrabold mb-2">Zrób sobie krótką przerwę</h3>
-          <p>Odpowiedzi na pytania natury ważnej</p>
-        </div>
+        
       </div>
     </section>
   );
 
-  const CTASection = () => (
-    <section className="py-28" id="contact"
-             style={{ background: isDark ? P("charcoal") : P("white"), borderTop: `3px solid ${P("black")}` }}>
-      <div className="container mx-auto px-6 max-w-6xl">
-        <SectionHeading>Umów się na rozmowę</SectionHeading>
-        <div className="grid md:grid-cols-3 gap-8">
-          {[{
-            title: "Email",
-            text: "Odpowiadam zwykle w ciągu 24h",
-            href: "mailto:agalecki.work@gmail.com",
-            body: (
-              <a href="mailto:agalecki.work@gmail.com" className="font-extrabold underline">
-                agalecki.work@gmail.com
-              </a>
-            ),
-            Icon: Mail
-          }, {
-            title: "LinkedIn",
-            text: "Połączmy się i porozmawiajmy",
-            href: "https://linkedin.com/in/adamgalecki",
-            body: (
-              <a href="https://linkedin.com/in/adamgalecki" className="font-extrabold underline" target="_blank" rel="noreferrer">
-                linkedin.com/in/adamgalecki
-              </a>
-            ),
-            Icon: MessageCircle
-          }, {
-            title: "Calendly",
-            text: "Wybierz dogodny termin",
-            href: "#",
-            body: (
-              <a href="#" className="font-extrabold underline">Zarezerwuj spotkanie</a>
-            ),
-            Icon: CalendarIcon
-          }].map((b) => (
-            <a key={b.title} href={b.href}
-               className="block p-6 transition-transform hover:scale-[1.01]"
-               style={{ background: P("ecru"), border: `3px solid ${P("black")}`, color: isDark ? P("white") : P("black") }}>
-              <div className="w-14 h-14 flex items-center justify-center mb-4"
-                   style={{ border: `2px solid ${P("black")}` }}>
-                <b.Icon className="h-7 w-7" />
-              </div>
-              <h3 className="text-lg font-extrabold mb-2">{b.title}</h3>
-              <p className="text-sm mb-4">{b.text}</p>
-              {b.body}
-            </a>
-          ))}
+  const CTASection = () => {
+    // Kafelki jak w Umiejętnościach: solid tło + boczny pasek
+    // Usunięto zagnieżdżone <a> w body (powodowało <a> w <a>) – teraz tylko tekst/span
+    const tiles = [
+      {
+        title: "Email",
+        text: "Odpowiadam zwykle w ciągu 24h",
+        href: "mailto:agalecki.work@gmail.com",
+        display: "agalecki.work@gmail.com",
+        Icon: Mail,
+      },
+      {
+        title: "LinkedIn",
+        text: "Połączmy się i porozmawiajmy",
+        href: "https://linkedin.com/in/adamgalecki",
+        display: "linkedin.com/in/adamgalecki",
+        Icon: MessageCircle, // unchanged original Icon reference
+        external: true,
+      },
+      {
+        title: "Calendly",
+        text: "Wybierz dogodny termin",
+        href: "#",
+        display: "Zarezerwuj spotkanie",
+        Icon: CalendarIcon,
+      },
+    ];
+
+    return (
+      <section className="py-36" id="contact"
+               style={{ background: isDark ? P("charcoal") : P("white"), borderTop: `3px solid ${P("black")}` }}>
+        <div className="container mx-auto px-6 max-w-6xl">
+          <SectionHeading>Kontakt</SectionHeading>
+          <div className="grid md:grid-cols-3 gap-8">
+            {tiles.map((t, i) => {
+              const baseBg = isDark ? P("charcoal") : P("white");
+              return (
+                <a
+                  key={i}
+                  href={t.href}
+                  {...(t.external ? { target: '_blank', rel: 'noreferrer' } : {})}
+                  className="relative p-8 block focus-visible:outline-none transition-transform duration-200 hover:scale-[1.02]"
+                  style={{
+                    border: `3px solid ${P("black")}`,
+                    background: baseBg,
+                    color: isDark ? P("white") : P("charcoal"),
+                    textDecoration: 'none',
+                    boxShadow: `4px 4px 0 0 ${P("black")}`,
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLElement).style.background = P("butter");
+                    (e.currentTarget as HTMLElement).style.transform = 'translateY(-4px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLElement).style.background = baseBg;
+                    (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
+                  }}
+                >
+                  {/* Boczny pasek */}
+                  <span
+                    aria-hidden="true"
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: 10,
+                      height: '100%',
+                      background: P("butter"),
+                      borderRight: `3px solid ${P("black")}`,
+                    }}
+                  />
+                  {/* Numer */}
+                  <span
+                    aria-hidden="true"
+                    style={{
+                      position: 'absolute',
+                      top: -12,
+                      right: 10,
+                      background: P("alloy"),
+                      color: P("white"),
+                      border: `2px solid ${P("black")}`,
+                      fontSize: 10,
+                      padding: '2px 6px',
+                      letterSpacing: 0.5,
+                      fontWeight: 800,
+                    }}
+                  >
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <div className="relative">
+                    <div className="w-14 h-14 flex items-center justify-center mb-4"
+                         style={{ border: `2px solid ${P("black")}`, background: isDark ? P("charcoal") : P("ecru") }}>
+                      <t.Icon className="h-7 w-7" />
+                    </div>
+                    <h3 className="text-lg font-extrabold mb-2">{t.title}</h3>
+                    <p className="text-sm mb-4" style={{ opacity: 0.85 }}>{t.text}</p>
+                    <span className="font-extrabold underline break-all">{t.display}</span>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
         </div>
-      </div>
-    </section>
-  );
+      </section>
+    );
+  };
 
   /* ———— STOPKA ———— */
-  const FooterSection = () => (
-    <footer
-      style={{
-        background: P("ecru"),
-        borderTop: `3px solid ${P("black")}`,
-        color: isDark ? P("white") : P("charcoal"),
-      }}
-    >
-      <div className="container mx-auto px-6">
-        <div className="py-8 flex flex-col md:flex-row items-center justify-between gap-6">
-          {/* Lewa kolumna */}
-          <div className="text-center md:text-left">
-            <h3 className="text-xl font-extrabold mb-3" style={{ color: isDark ? P("white") : P("charcoal") }}>Adam Gałęcki</h3>
-            <div className="flex justify-center md:justify-start gap-3 mb-3">
-              <a
-                href="mailto:agalecki.work@gmail.com"
-                className="w-10 h-10 flex items-center justify-center hover:bg-black hover:text-white transition"
-                style={{ border: `2px solid ${P("black")}` }}
-              >
-                <Mail className="h-5 w-5" />
-              </a>
-              <a
-                href="https://linkedin.com/in/adamgalecki"
-                target="_blank"
-                rel="noreferrer"
-                className="w-10 h-10 flex items-center justify-center hover:bg-black hover:text-white transition"
-                style={{ border: `2px solid ${P("black")}` }}
-              >
-                <Linkedin className="h-5 w-5" />
-              </a>
-              <a
-                href="https://tiktok.com/@twojprofil"
-                target="_blank"
-                rel="noreferrer"
-                className="w-10 h-10 flex items-center justify-center hover:bg-black hover:text-white transition"
-                style={{ border: `2px solid ${P("black")}` }}
-              >
-                <svg
-                  viewBox="0 0 64 64"
-                  width="20"
-                  height="20"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="5"
-                  strokeLinecap="square"
-                  strokeLinejoin="miter"
-                >
-                  <path d="M36 8v28" />
-                  <path d="M36 36c0 6-6 10-12 10s-12-4-12-10 6-10 12-10c3 0 6 1 8 3" />
-                  <path d="M36 14c3 6 10 10 16 10" />
-                </svg>
-              </a>
+  const FooterSection = () => {
+    const textColor = isDark ? '#b5b5b5' : '#686a6c';
+    const borderColor = isDark ? P('white') : P('black');
+    const iconHover = isDark ? 'hover:bg-white hover:text-black' : 'hover:bg-black hover:text-white';
+    const btnHover = iconHover; // reuse
+    return (
+      <footer
+        style={{
+          background: isDark ? P('charcoal') : P('white'),
+          borderTop: `3px solid ${P('black')}`,
+          color: textColor,
+        }}
+      >
+        <div className="container mx-auto px-2 py-10">
+          <div className="py-6 grid gap-6 md:grid-cols-4 items-center justify-items-center">
+            {/* Kolumna 1: nazwa + ikony */}
+            <div className="flex flex-col items-center text-center">
+              <h3 className="text-xl font-extrabold mb-6" style={{ color: textColor }}>Adam Gałęcki – Firma Gałęcka</h3>
+              <div className="flex flex-wrap justify-center gap-4">
+                {[
+                  { href: 'mailto:agalecki.work@gmail.com', label: 'Mail', Icon: Mail },
+                  { href: 'https://linkedin.com/in/adamgalecki', label: 'LinkedIn', Icon: Linkedin, ext: true },
+                  { href: 'https://github.com', label: 'GitHub', Icon: Github, ext: true },
+                  { href: '#', label: 'Messenger', Icon: MessageCircle },
+                  { href: '#', label: 'Instagram', Icon: Heart },
+                  { href: 'https://tiktok.com/@twojprofil', label: 'TikTok', ext: true, Icon: (props: any) => (
+                    <svg viewBox="0 0 64 64" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="square" strokeLinejoin="miter" {...props}>
+                      <path d="M36 8v28" />
+                      <path d="M36 36c0 6-6 10-12 10s-12-4-12-10 6-10 12-10c3 0 6 1 8 3" />
+                      <path d="M36 14c3 6 10 10 16 10" />
+                    </svg>
+                  ) },
+                ].map(({ href, label, Icon, ext }, i) => (
+                  <a
+                    key={i}
+                    href={href}
+                    {...(ext ? { target: '_blank', rel: 'noreferrer' } : {})}
+                    className={`w-10 h-10 flex items-center justify-center transition ${iconHover}`}
+                    style={{ border: `1px solid ${borderColor}`, color: textColor }}
+                    aria-label={label}
+                  >
+                    <Icon className="h-5 w-5" />
+                  </a>
+                ))}
+              </div>
             </div>
-            <div className="flex items-center justify-center md:justify-start gap-2 text-sm font-bold">
-              <MapPin className="h-4 w-4" />
-              Lublin, Polska
+            {/* Kolumna 2: NIP */}
+            <div className="flex flex-col items-center text-center font-bold text-sm leading-relaxed">
+              <div className="inline-flex items-center gap-3">
+                <span style={{ color: textColor }}>NIP: 9462752489</span>
+                <button
+                  onClick={() => navigator.clipboard.writeText('9462752489')}
+                  className={`px-2 py-0.5 text-[10px] font-extrabold tracking-wide transition ${btnHover}`}
+                  style={{ border: `1px solid ${borderColor}`, color: textColor }}
+                  aria-label="Kopiuj NIP"
+                >Kopiuj</button>
+              </div>
+            </div>
+            {/* Kolumna 3: REGON */}
+            <div className="flex flex-col items-center text-center font-bold text-sm leading-relaxed">
+              <div className="inline-flex items-center gap-3">
+                <span style={{ color: textColor }}>REGON: 541404566</span>
+                <button
+                  onClick={() => navigator.clipboard.writeText('541404566')}
+                  className={`px-2 py-0.5 text-[10px] font-extrabold tracking-wide transition ${btnHover}`}
+                  style={{ border: `1px solid ${borderColor}`, color: textColor }}
+                  aria-label="Kopiuj REGON"
+                >Kopiuj</button>
+              </div>
+            </div>
+            {/* Kolumna 4: Lokalizacja */}
+            <div className="flex flex-col items-center text-center font-bold text-sm leading-relaxed">
+              <div className="flex items-center gap-2" style={{ color: textColor }}>
+                <MapPin className="h-4 w-4" />
+                <span>Lublin, Polska</span>
+              </div>
             </div>
           </div>
-
-          {/* Prawa kolumna */}
-          <div className="text-center md:text-right font-bold text-sm">
+          <div className="pt-0 pb-0 text-left text-[11px] font-semibold tracking-wide" style={{ opacity: 0.45, color: textColor }}>
             © Firma Gałęcka 2025
           </div>
         </div>
-      </div>
-    </footer>
-  );
-
-  /* ———— GENERATOR CV ———— */
-  const handleGenerateCV = async () => {
-    try {
-      setGenerating(true);
-      setShowCV(true);
-      await new Promise((r) => setTimeout(r, 50));
-
-      const [{ default: html2canvas }, { jsPDF }] = await Promise.all([
-        import('html2canvas'),
-        import('jspdf'),
-      ]);
-
-      const cvRoot = document.getElementById('cv-root');
-      if (!cvRoot) throw new Error('Brak cv-root');
-
-      const pages = Array.from(cvRoot.querySelectorAll('.cv-page')) as HTMLElement[];
-      const doc = new jsPDF({ unit: "pt", format: "a4" });
-
-      for (let i = 0; i < pages.length; i++) {
-        const pageEl = pages[i];
-        const canvas = await html2canvas(pageEl, {
-          backgroundColor: "#FFFFFF",
-          scale: 2,
-          useCORS: true,
-        });
-        const imgData = canvas.toDataURL("image/png");
-        const pageWidth = doc.internal.pageSize.getWidth();
-        const pageHeight = doc.internal.pageSize.getHeight();
-        doc.addImage(imgData, 'PNG', 0, 0, pageWidth, pageHeight);
-        if (i < pages.length - 1) doc.addPage();
-      }
-
-      doc.save("Adam_Galecki_CV.pdf");
-    } catch (err) {
-      console.error(err);
-      alert("Nie udało się wygenerować PDF. Upewnij się, że zainstalowano html2canvas i jspdf.");
-    } finally {
-      setGenerating(false);
-      setShowCV(false);
-    }
+      </footer>
+    );
   };
+
+
 
   /* ———— RENDER ———— */
   return (
     <div className="relative" style={{ background: isDark ? P("charcoal") : P("white"), color: isDark ? P("white") : P("charcoal") }}>
+      <SeasonalBackground />
       {/* Overlay „Tworzę dokument…” */}
       {generating && (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center"
@@ -1492,38 +1762,39 @@ const scheduleHoverClear = (delay = 150) => {
                  border: `3px solid #000`,
                  display: 'flex',
                  flexDirection: 'column',
-                 gap: 16
+                 gap: 24
                }}>
+            {/* Nagłówek + opis */}
             <div>
               <div style={{ fontWeight: 800, fontSize: 42, lineHeight: 1 }}>
-                Marketing<br/>Manager
+                Marketing<br />Manager
               </div>
-              <div style={{ marginTop: 8, fontSize: 14, color: "#333" }}>
+              <div style={{ marginTop: 12, fontSize: 14, color: "#333", lineHeight: 1.4 }}>
                 Zajmuję się kompleksową obsługą komunikacji marketingowej nakierowanej na cele biznesowe.
               </div>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+            {/* O mnie + Kontakt */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
               <div>
                 <div style={{ fontWeight: 800, marginBottom: 8 }}>O mnie</div>
-                <div style={{ fontSize: 12, color: "#333", lineHeight: 1.5 }}>
-                  Przez ostatnie 5 lat rozwijałem się w marketingu – od grafika, przez SEO, po managera zespołu.
-                  Realizowałem długoterminowe strategie SEO, zarządzałem zespołem i wspierałem projekty IT dla największych marek w Polsce.
+                <div style={{ fontSize: 12, color: "#333", lineHeight: 1.55 }}>
+                  Przez ostatnie 5 lat rozwijałem się w marketingu – od grafika, przez SEO, po managera zespołu. Realizowałem
+                  długoterminowe strategie SEO, zarządzałem zespołem i wspierałem projekty IT dla największych marek w Polsce.
                 </div>
               </div>
               <div>
                 <div style={{ fontWeight: 800, marginBottom: 8 }}>Kontakt</div>
                 <div style={{ fontSize: 12, color: "#333", lineHeight: 1.6 }}>
-                  e-mail: agalecki.work@gmail.com<br/>
+                  e-mail: agalecki.work@gmail.com<br />
                   LinkedIn: linkedin.com/in/adamgalecki
                 </div>
               </div>
             </div>
 
-            <div style={{ marginTop: 'auto', fontSize: 10, color: "#333", borderTop: `2px solid #000`, paddingTop: 8 }}>
-              Wyrażam zgodę na przetwarzanie moich danych osobowych dla potrzeb niezbędnych do realizacji procesu rekrutacji
-              zgodnie z ustawą z dnia 10 maja 2018 r. o ochronie danych osobowych (Dz. U. z 2018 r., poz. 1000) oraz zgodnie
-              z Rozporządzeniem Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r. (RODO).
+            {/* Klauzula RODO */}
+            <div style={{ marginTop: 'auto', fontSize: 10, color: "#333", borderTop: `2px solid #000`, paddingTop: 8, lineHeight: 1.4 }}>
+              Wyrażam zgodę na przetwarzanie moich danych osobowych dla potrzeb niezbędnych do realizacji procesu rekrutacji zgodnie z ustawą z dnia 10 maja 2018 r. o ochronie danych osobowych (Dz. U. z 2018 r., poz. 1000) oraz zgodnie z Rozporządzeniem Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r. (RODO).
             </div>
           </div>
 

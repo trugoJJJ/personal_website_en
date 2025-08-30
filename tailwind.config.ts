@@ -88,8 +88,10 @@ export default {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			fontFamily: {
-				sans: ['Work Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-				display: ['Work Sans', 'ui-sans-serif', 'sans-serif']
+				sans: ['Figtree', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+				display: ['Lexend', 'Figtree', 'ui-sans-serif', 'sans-serif'],
+				mono: ['Geist Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
+				pixelify: ['"Pixelify Sans"', 'Figtree', 'sans-serif']
 			},
 			keyframes: {
 				'accordion-down': {
@@ -115,5 +117,9 @@ export default {
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [
+		require("tailwindcss-animate"),
+		require("@tailwindcss/forms"),
+		require("@tailwindcss/typography")
+	],
 } satisfies Config;
