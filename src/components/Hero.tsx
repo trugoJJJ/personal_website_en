@@ -44,9 +44,9 @@ const Header = () => {
   return (
     <header className="fixed top-0 inset-x-0 z-50" style={{ background: isDark ? P("charcoal") : P("white"), borderBottom: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, color: isDark ? P("white") : P("charcoal") }}>
       {/* Full width nav without container so center is relative to viewport */}
-      <nav className="w-full h-16 px-4 md:px-8 flex items-center relative">
+      <nav className="w-full h-16 flex items-center relative">
         {/* Left brand */}
-        <a href="#home" className="font-extrabold tracking-tight leading-none" style={{ color: isDark ? P("white") : P("charcoal") }}>Adam&nbsp;Gałęcki</a>
+        <a href="#home" className="font-extrabold tracking-tight leading-none ml-4 md:ml-8" style={{ color: isDark ? P("white") : P("charcoal") }}>Adam&nbsp;Gałęcki</a>
         {/* Center desktop nav absolutely centered to page */}
         <ul
           className="hidden desk:flex items-center gap-8 text-sm absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
@@ -59,7 +59,7 @@ const Header = () => {
           ))}
         </ul>
         {/* Right actions desktop */}
-        <div className="hidden desk:flex items-center gap-2 ml-auto">
+        <div className="hidden desk:flex items-center gap-2 ml-auto mr-4 md:mr-8">
           <LanguageSwitch />
           <ThemeToggle />
           <Button size="lg" asChild className="rounded-none font-extrabold transition-transform hover:scale-[1.02]" style={{ background: P("amaranth"), color: P("white"), border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
@@ -265,7 +265,7 @@ const BrushControls = ({
     setMarkedColors(prev => { const next = new Set(prev); if (next.has(key)) next.delete(key); else next.add(key); return next; });
   };
   return (
-    <div className={`transition-all ${isVisible ? "opacity-100" : "opacity-0"} flex flex-wrap gap-3 items-center justify-center`}>
+    <div className={`transition-all ${isVisible ? "opacity-100" : "opacity-0"} flex flex-wrap gap-3 items-center justify-center px-6`}>
       {/* Tryby pędzla */}
       <div className="flex items-center p-1 gap-1" style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: isDark ? P("charcoal") : P("ecru") }}>
         {BRUSH_TYPES.map((b,i)=>(
@@ -521,7 +521,7 @@ const BigTypeCTA = () => {
 
         return (
     <section className="py-8 md:py-16">
-      <div className="container mx-auto px-6 max-w-6xl">
+      <div className="w-full max-w-6xl mx-auto">
         <div className="w-full flex justify-center">
           <a
             role="link"
@@ -537,7 +537,7 @@ const BigTypeCTA = () => {
             onTouchMove={onTouchMove}
             onTouchEnd={onTouchEnd}
             onTouchCancel={onTouchCancel}
-            className="relative w-full max-w-[1000px] min-h-[clamp(140px,30vw,220px)] select-none"
+            className="relative w-full min-h-[clamp(140px,30vw,220px)] select-none"
             style={{
               border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`,
               cursor: brushType === "cursor" ? "pointer" : "crosshair",
@@ -586,7 +586,7 @@ const BigTypeCTA = () => {
           </a>
         </div>
 
-        <div className="w-full flex justify-center mt-8 md:mt-16">
+        <div className="w-full flex justify-center mt-8 md:mt-12 px-6">
           <BrushControls
             isVisible={true}
             onSizeChange={setBrushSize}
@@ -606,7 +606,7 @@ const BigTypeCTA = () => {
 
 /* ================== MINI UI DND ================== */
 function SuccessAnimationPlaceholder({ onReset }: { onReset: () => void }) {
-  const { P } = usePalette();
+  const { isDark, P } = usePalette();
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center"
          style={{ background: `rgba(0,0,0,0.85)` }}>
@@ -689,7 +689,7 @@ function ProjectCard({ project, isHighlighted = false, isDraggable = true }: { p
   );
 }
 function SortableProjectItem({ project, isHighlighted, isDraggable }: { project: Project, isHighlighted: boolean, isDraggable: boolean }) {
-  const { P } = usePalette();
+  const { isDark, P } = usePalette();
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
     useSortable({ id: project.id, disabled: !isDraggable });
 
@@ -826,7 +826,7 @@ const scheduleHoverClear = (delay = 150) => {
   /* ———— HERO ———— */
   const HeroSection = () => (
     <section id="home" className="pt-44 pb-24 md:pb-32" style={{ background: isDark ? P("charcoal") : P("white") }}>
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto">
         <div className="text-center mb-12">
           <h1 className="font-extrabold uppercase tracking-wider leading-[1.05] text-6xl sm:text-9xl mb-6" style={{ color: isDark ? P("white") : P("black") }}>Digital</h1>
           <h1 className="font-extrabold uppercase tracking-wider leading-[1.05] text-4xl sm:text-6xl mb-6" style={{ color: isDark ? P("white") : P("black") }}>Marketing</h1>
@@ -895,6 +895,11 @@ const scheduleHoverClear = (delay = 150) => {
                   (e.currentTarget as HTMLButtonElement).style.color = P("white");
                 }}
                 onMouseOut={(e) => {
+                  const isActive = activeCategory === c;
+                  const activeBg = P("amaranth");
+                  const activeColor = P("white");
+                  const baseBg = isDark ? P("charcoal") : P("white");
+                  const baseColor = isDark ? P("white") : P("black");
                   (e.currentTarget as HTMLButtonElement).style.background = isActive ? activeBg : baseBg;
                   (e.currentTarget as HTMLButtonElement).style.color = isActive ? activeColor : baseColor;
                 }}
@@ -937,7 +942,7 @@ const scheduleHoverClear = (delay = 150) => {
         </DndContext>
 
         {/* —— CTA POD PORTFOLIO —— */}
-        <div className="mt-8 md:mt-16">
+        <div className="mt-8 md:mt-12">
           <BigTypeCTA />
         </div>
       </div>
@@ -945,10 +950,12 @@ const scheduleHoverClear = (delay = 150) => {
   );
 
   /* ———— POZOSTAŁE SEKCJE (O mnie / Doświadczenie / Umiejętności / Tech Stack / Artykuły / Kontakt) ———— */
-  const AboutSection = () => (
+  const AboutSection = () => {
+    const { isDark, P } = usePalette();
+    return (
     <section className="py-24 md:py-36" id="about"
              style={{ background: isDark ? P("charcoal") : P("white"), borderTop: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
-      <div className="container mx-auto px-6 max-w-6xl">
+      <div className="container mx-auto max-w-6xl">
         <header className="mb-12 md:mb-24 mt-4 md:mt-8">
           <h2 className="text-left text-[9vw] sm:text-5xl md:text-7xl font-extrabold uppercase tracking-tight leading-[0.95]"
               style={{ color: isDark ? P("white") : P("black") }}>
@@ -1094,8 +1101,10 @@ const scheduleHoverClear = (delay = 150) => {
       </div>
     </section>
   );
+};
 
   const ExperienceSection = () => {
+    const { isDark, P } = usePalette();
     const card: React.CSSProperties = {
       border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`,
       background: isDark ? P("charcoal") : P("white"),
@@ -1156,7 +1165,7 @@ const scheduleHoverClear = (delay = 150) => {
         id="experience"
         style={{ background: P("ecru"), borderTop: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}
       >
-        <div className="container mx-auto px-6 max-w-6xl">
+        <div className="container mx-auto max-w-6xl">
           <SectionHeading>Doświadczenie</SectionHeading>
 
           {/* Responsywny layout: 2 kolumny na mobile, standardowy na desktop */}
@@ -1434,7 +1443,7 @@ const scheduleHoverClear = (delay = 150) => {
     return (
       <section className="py-24 md:py-36" id="techstack"
                style={{ background: P("ecru"), borderTop: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
-        <div className="container mx-auto px-6 max-w-6xl">
+        <div className="container mx-auto max-w-6xl">
           <header className="mb-12 md:mb-24 mt-4 md:mt-8">
             <h2 className="text-left text-[9vw] sm:text-5xl md:text-7xl font-extrabold uppercase tracking-tight leading-[0.95]"
                 style={{ color: isDark ? P("white") : P("black") }}>
@@ -1479,7 +1488,7 @@ const scheduleHoverClear = (delay = 150) => {
   const ArticlesSection = () => (
     <section className="py-24 md:py-36" id="articles"
              style={{ background: isDark ? P("charcoal") : P("white"), borderTop: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
-      <div className="container mx-auto px-6 max-w-6xl">
+      <div className="container mx-auto max-w-6xl">
         <SectionHeading>Artykuły</SectionHeading>
 
         <div className="grid lg:grid-cols-3 gap-8 mb-12">
@@ -1570,8 +1579,8 @@ const scheduleHoverClear = (delay = 150) => {
 
     return (
       <section className="py-24 md:py-36" id="contact"
-               style={{ background: isDark ? P("charcoal") : P("white"), borderTop: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
-        <div className="container mx-auto px-6 max-w-6xl">
+               style={{ background: P("ecru"), borderTop: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
+        <div className="container mx-auto max-w-6xl">
           <SectionHeading>Kontakt</SectionHeading>
           <div className="grid md:grid-cols-3 gap-8">
             {tiles.map((t, i) => {
@@ -1663,7 +1672,7 @@ const scheduleHoverClear = (delay = 150) => {
               color: textColor,
             }}
           >
-            <div className="container mx-auto px-6 py-10 max-w-9xl">
+            <div className="container mx-auto max-w-9xl">
               <div className="py-6 grid gap-6 md:gap-6 md:grid-cols-4 md:items-center items-start">
                 {/* Kolumna 1 - Firma Gałęcka */}
                 <div className="flex flex-col items-center text-center md:relative md:pr-8 mb-6 md:mb-0">
@@ -1736,7 +1745,7 @@ const scheduleHoverClear = (delay = 150) => {
                   </div>
                 </div>
               </div>
-              <div className="pt-8 md:pt-0 pb-0 text-center text-[11px] font-semibold tracking-wide" style={{ opacity: 0.45, color: textColor }}>
+              <div className="pt-12 md:pt-8 pb-8 text-center text-[11px] font-semibold tracking-wide" style={{ opacity: 0.45, color: textColor }}>
                 © Firma Gałęcka 2025
               </div>
             </div>
