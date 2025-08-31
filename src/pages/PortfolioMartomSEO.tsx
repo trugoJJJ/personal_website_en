@@ -1,10 +1,11 @@
+import { Header } from "@/components/home/Header";
 import { SEO } from "@/components/SEO";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { portfolioProjects } from "@/data/portfolio";
 import { ExternalLink, Github, Calendar, Building, User, TrendingUp, Target, Lightbulb, CheckCircle, ArrowRight } from "lucide-react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { usePalette, COLORS } from "@/components/home/hooks";
 import { FooterSection } from "@/components/home/FooterSection";
 import { useState, useEffect } from "react";
@@ -12,106 +13,22 @@ import { Menu, X } from "lucide-react";
 import LanguageSwitch from "@/components/LanguageSwitch";
 import ThemeToggle from "@/components/ThemeToggle";
 
-// Header component from Hero.tsx
-const links = [
-  { href: "#portfolio", label: "Portfolio" },
-  { href: "#about", label: "O mnie" },
-  { href: "#experience", label: "Doświadczenie" },
-  { href: "#skills", label: "Umiejętności" },
-  { href: "#articles", label: "Artykuły" },
-];
+<header />
 
-const Header = () => {
-  const { isDark, P } = usePalette();
-  const [open, setOpen] = useState(false);
-  useEffect(() => {
-    if (open) {
-      const originalOverflow = document.body.style.overflow;
-      document.body.style.overflow = 'hidden';
-      return () => { document.body.style.overflow = originalOverflow; };
-    }
-  }, [open]);
-  return (
-    <header className="fixed top-0 inset-x-0 z-50" style={{ background: isDark ? P("charcoal") : P("white"), borderBottom: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, color: isDark ? P("white") : P("charcoal") }}>
-      <nav className="w-full h-16 flex items-center relative">
-        <a href="#home" className="font-extrabold tracking-tight leading-none ml-4 md:ml-8" style={{ color: isDark ? P("white") : P("charcoal") }}>Adam&nbsp;Gałęcki</a>
-        <ul
-          className="hidden desk:flex items-center gap-8 text-sm absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-          style={{ color: isDark ? P("white") : P("charcoal") }}
-        >
-          {links.map(l => (
-            <li key={l.href}>
-              <a href={l.href} className="font-bold hover:underline">{l.label}</a>
-            </li>
-          ))}
-        </ul>
-        <div className="hidden desk:flex items-center gap-2 ml-auto mr-4 md:mr-8">
-          <LanguageSwitch />
-          <ThemeToggle />
-          <Button size="lg" asChild className="rounded-none font-extrabold transition-transform hover:scale-[1.02]" style={{ background: P("amaranth"), color: P("white"), border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
-            <a href="#contact">Kontakt</a>
-          </Button>
-        </div>
-        <div className="flex items-center gap-2 ml-auto desk:hidden">
-          <ThemeToggle />
-          <Button variant="outline" size="icon" aria-label="Otwórz menu" onClick={() => setOpen(true)} className="rounded-none" style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, color: isDark ? P("white") : P("charcoal") }}>
-            <Menu className="h-5 w-5" />
-          </Button>
-        </div>
-      </nav>
-      {open && (
-        <div className="fixed inset-0 z-50" style={{ background: isDark ? P("charcoal") : P("ecru") }}>
-          <div className="w-full h-16 px-4 md:px-8 flex items-center justify-between" style={{ borderBottom: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, color: isDark ? P("white") : P("charcoal") }}>
-            <span className="font-extrabold">Menu</span>
-            <div className="flex items-center gap-2">
-              <LanguageSwitch />
-              <Button variant="outline" size="icon" aria-label="Zamknij menu" onClick={() => setOpen(false)} className="rounded-none" style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, color: isDark ? P("white") : P("charcoal") }}>
-                <X className="h-5 w-5" />
-              </Button>
-            </div>
-          </div>
-          <div className="mt-6 px-6 desk:hidden">
-            <ul className="grid gap-4 text-lg" style={{ color: isDark ? P("white") : P("charcoal") }}>
-              {links.map(l => (
-                <li key={l.href}>
-                  <a href={l.href} className="block py-3" style={{ borderBottom: `${isDark ? '1px' : '2px'} solid ${isDark ? P("white") : P("black")}` }} onClick={() => setOpen(false)}>{l.label}</a>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-6">
-              <Button asChild size="xl" className="w-full rounded-none font-extrabold" style={{ background: P("amaranth"), color: P("white"), border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
-                <a href="#contact">Kontakt</a>
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
-    </header>
-  );
-};
-
-const PortfolioDetail = () => {
-  const { id } = useParams();
-  const project = portfolioProjects.find((p) => String(p.id) === id);
+const PortfolioMartomSEO = () => {
   const { isDark, P } = usePalette();
 
-  if (!project) {
-    return (
-      <div style={{ background: isDark ? P("charcoal") : P("white"), color: isDark ? P("white") : P("charcoal") }}>
-        <Header />
-        <main className="py-16">
-          <SEO title="Projekt nie znaleziony" noIndex />
-          <section className="container mx-auto px-6 text-center">
-            <h1 className="text-3xl font-bold mb-4">Projekt nie znaleziony</h1>
-            <Button asChild variant="outline">
-              <Link to="/portfolio">Wróć do portfolio</Link>
-            </Button>
-          </section>
-        </main>
-        <FooterSection />
-      </div>
-    );
-  }
+  // Hardcoded project data for SEO portfolio
+  const project = {
+    id: 1,
+    title: "Kompleksowa obsługa SEO dla producenta drzwi zewnętrznych",
+    description: "Długoterminowa strategia SEO dla czołowego polskiego producenta drzwi zewnętrznych, realizowana od 2022 roku",
+    tags: ["SEO", "Content Marketing", "Link Building", "Analytics", "Google Ads", "Technical SEO"],
+    metrics: "+39% wzrost wyświetleń",
+    image: "/placeholder.svg",
+    link: "#",
+    github: "#"
+  };
 
   // Helpery stylistyczne (spójne z Hero.tsx)
   const headingStyles: React.CSSProperties = {
@@ -606,4 +523,4 @@ const PortfolioDetail = () => {
   );
 };
 
-export default PortfolioDetail;
+export default PortfolioMartomSEO;

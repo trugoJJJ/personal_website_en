@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import {
   DndContext, closestCenter, DragEndEvent, DragOverlay
 } from '@dnd-kit/core';
@@ -75,6 +76,7 @@ type Project = {
   categories: string[];
   tags?: string[];
   metrics?: string;
+  externalLink?: string;
 };
 
 const CATEGORIES = ["Projekty kreatywne", "Projekty sprzedażowe"] as const;
@@ -111,7 +113,8 @@ const portfolioProjects: Omit<Project, 'id'>[] = [
     image: articles?.[0]?.image || 'https://placehold.co/800x500',
     categories: ['Projekty kreatywne'],
     tags: ['After Effects', '2D', 'Template'],
-    metrics: '50 tys. wyświetleń'
+    metrics: '50 tys. wyświetleń',
+    externalLink: 'https://www.behance.net/gallery/199466415/Animationforthe-software-dvelopment-company-portfolio'
   },
 ];
 
@@ -149,6 +152,22 @@ function SuccessAnimationPlaceholder({ onReset }: { onReset: () => void }) {
 
 function ProjectCard({ project, isHighlighted = false, isDraggable = true }: { project: Project, isHighlighted?: boolean, isDraggable?: boolean }) {
   const { isDark, P } = usePalette();
+  
+  // Map project titles to their specific routes
+  const getProjectLink = (title: string) => {
+    if (title.includes('SEO') || title.includes('Kompleksowa obsługa SEO')) {
+      return '/portfolio/seo';
+    }
+    if (title.includes('płatnych kampanii') || title.includes('Portfolio płatnych')) {
+      return '/portfolio/ppc';
+    }
+    if (title.includes('System śledzenia') || title.includes('śledzenia danych')) {
+      return '/portfolio/analytics';
+    }
+    // For other projects, use generic portfolio detail page
+    return 'https://www.behance.net/gallery/199466415/Animationforthe-software-dvelopment-company-portfolio';
+  };
+
   return (
     <article className="group flex flex-col h-full"
              style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, outline: isHighlighted ? `4px solid ${P("alloy")}` : "none" }}>
@@ -184,26 +203,41 @@ function ProjectCard({ project, isHighlighted = false, isDraggable = true }: { p
               ))}
             </div>
           ) : null}
+          {project.externalLink && (
+            <div className="mt-5">
+              <a
+                href={project.externalLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-bold underline"
+                style={{ color: isDark ? P("butter") : P("amaranth") }}
+              >
+                Zobacz na Behance
+              </a>
+            </div>
+          )}
           <div className="mt-auto pt-6">
-            <button
-              className="w-full font-extrabold transition-colors"
+            <Link
+              to={getProjectLink(project.title)}
+              className="block w-full font-extrabold transition-colors text-center"
               style={{
                 border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`,
                 padding: "10px 0",
                 background: isDark ? P("charcoal") : P("white"),
-                color: isDark ? P("white") : P("black")
+                color: isDark ? P("white") : P("black"),
+                textDecoration: "none"
               }}
               onMouseOver={(e) => {
-                (e.currentTarget as HTMLButtonElement).style.background = P("amaranth");
-                (e.currentTarget as HTMLButtonElement).style.color = P("white");
+                (e.currentTarget as HTMLAnchorElement).style.background = P("amaranth");
+                (e.currentTarget as HTMLAnchorElement).style.color = P("white");
               }}
               onMouseOut={(e) => {
-                (e.currentTarget as HTMLButtonElement).style.background = isDark ? P("charcoal") : P("white");
-                (e.currentTarget as HTMLButtonElement).style.color = isDark ? P("white") : P("black");
+                (e.currentTarget as HTMLAnchorElement).style.background = isDark ? P("charcoal") : P("white");
+                (e.currentTarget as HTMLAnchorElement).style.color = isDark ? P("white") : P("black");
               }}
             >
               Szczegóły
-            </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -214,9 +248,31 @@ function ProjectCard({ project, isHighlighted = false, isDraggable = true }: { p
 function SortableProjectItem({ project, isHighlighted, isDraggable }: { project: Project, isHighlighted: boolean, isDraggable: boolean }) {
   const { isDark, P } = usePalette();
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
-    useSortable({ id: project.id, disabled: !isDraggable });
+    useSortable({ 
+      id: project.id, 
+      disabled: !isDraggable,
+      // Disable drag on certain elements
+      activationConstraint: {
+        distance: 8, // Require 8px of movement before drag starts
+      }
+    });
 
   const baseStyle: React.CSSProperties = { transform: CSS.Transform.toString(transform), transition };
+
+  // Filter out drag listeners from buttons and links
+  const dragHandlers = isDraggable ? {
+    ...attributes,
+    ...listeners,
+    onPointerDown: (e: any) => {
+      // Don't start drag if clicking on a link or button
+      if (e.target.closest('a') || e.target.closest('button')) {
+        return;
+      }
+      if (listeners?.onPointerDown) {
+        listeners.onPointerDown(e);
+      }
+    }
+  } : {};
 
   if (isDragging) {
     return (
@@ -227,7 +283,7 @@ function SortableProjectItem({ project, isHighlighted, isDraggable }: { project:
     );
   }
   return (
-    <div ref={setNodeRef} style={baseStyle} {...attributes} {...listeners}>
+    <div ref={setNodeRef} style={baseStyle} {...dragHandlers}>
       <ProjectCard project={project} isHighlighted={isHighlighted} isDraggable={isDraggable} />
     </div>
   );
