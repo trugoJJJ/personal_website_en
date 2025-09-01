@@ -1,5 +1,6 @@
 "use client";
 
+// Fixed imports for Vercel deployment
 import ClientOnlyWrapper from '@/components/ClientOnlyWrapper';
 import { Header } from "@/components/home/Header";
 import { SEO } from "@/components/SEO";
