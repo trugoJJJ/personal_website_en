@@ -47,16 +47,16 @@ const LanguageSwitchContent = () => {
 
   const baseBtn = "rounded-none font-extrabold select-none transition-colors";
   const baseStyle: React.CSSProperties = isDark ? {
-    border: `3px solid ${PALETTE.black}`,
-    background: PALETTE.white, // niewybrany biały
-    color: PALETTE.black,
+    border: `1px solid ${PALETTE.white}`,
+    background: PALETTE.black, // niewybrany czarny
+    color: PALETTE.white,
   } : {
     border: `3px solid ${PALETTE.black}`,
     background: PALETTE.ecru,
     color: PALETTE.black,
   };
   const activeStyle: React.CSSProperties = isDark ? {
-    border: `3px solid ${PALETTE.black}`,
+    border: `1px solid ${PALETTE.white}`,
     background: PALETTE.amaranth,
     color: PALETTE.white,
   } : {
@@ -79,7 +79,7 @@ const LanguageSwitchContent = () => {
           if (locale !== "pl") {
             (e.currentTarget as HTMLButtonElement).style.background = PALETTE.amaranth;
             (e.currentTarget as HTMLButtonElement).style.color = PALETTE.white;
-            (e.currentTarget as HTMLButtonElement).style.border = `3px solid ${PALETTE.black}`;
+            (e.currentTarget as HTMLButtonElement).style.border = `${isDark ? '1px' : '3px'} solid ${isDark ? PALETTE.white : PALETTE.black}`;
           }
         }}
         onMouseLeave={(e) => {
@@ -105,7 +105,7 @@ const LanguageSwitchContent = () => {
           if (locale !== "en") {
             (e.currentTarget as HTMLButtonElement).style.background = PALETTE.amaranth;
             (e.currentTarget as HTMLButtonElement).style.color = PALETTE.white;
-            (e.currentTarget as HTMLButtonElement).style.border = `3px solid ${PALETTE.black}`;
+            (e.currentTarget as HTMLButtonElement).style.border = `${isDark ? '1px' : '3px'} solid ${isDark ? PALETTE.white : PALETTE.black}`;
           }
         }}
         onMouseLeave={(e) => {

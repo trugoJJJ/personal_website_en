@@ -17,7 +17,7 @@ const ThemeToggleContent = () => {
 
   const baseBtn = "rounded-none font-extrabold transition-colors";
   const baseStyle: React.CSSProperties = {
-    border: `3px solid ${COLORS.black}`,
+    border: `${isDark ? '1px' : '3px'} solid ${isDark ? COLORS.white : COLORS.black}`,
     background: isDark ? COLORS.black : COLORS.white,
     color: isDark ? COLORS.white : COLORS.black,
     width: 44,
@@ -50,10 +50,12 @@ const ThemeToggleContent = () => {
       onMouseEnter={(e) => {
         (e.currentTarget as HTMLButtonElement).style.background = COLORS.black;
         (e.currentTarget as HTMLButtonElement).style.color = COLORS.white;
+        (e.currentTarget as HTMLButtonElement).style.border = `1px solid ${COLORS.white}`;
       }}
       onMouseLeave={(e) => {
         (e.currentTarget as HTMLButtonElement).style.background = isDark ? COLORS.black : COLORS.white;
         (e.currentTarget as HTMLButtonElement).style.color = isDark ? COLORS.white : COLORS.black;
+        (e.currentTarget as HTMLButtonElement).style.border = `${isDark ? '1px' : '3px'} solid ${isDark ? COLORS.white : COLORS.black}`;
       }}
     >
       {isDark ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
