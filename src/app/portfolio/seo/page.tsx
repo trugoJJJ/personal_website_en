@@ -66,8 +66,8 @@ const PortfolioMartomSEO = () => {
           <SEO 
             title="Optymalizacja SEO dla producenta drzwi – Adam Gałęcki"
             description="Kompleksowa optymalizacja SEO dla producenta drzwi zewnętrznych. Analiza słów kluczowych, optymalizacja techniczna, content marketing i wzrost pozycji w Google."
-            canonical="https://monke.io/portfolio/seo"
-            ogImage="https://monke.io/og_cover.png"
+            canonical="https://galecki.website/portfolio/seo"
+            ogImage="/og_cover.png"
           />
 
           {/* Sekcja tytułowa */}
@@ -481,7 +481,7 @@ const PortfolioMartomSEO = () => {
           title="Optymalizacja SEO dla producenta drzwi – Adam Gałęcki"
           description="Kompleksowa optymalizacja SEO dla producenta drzwi zewnętrznych. Analiza słów kluczowych, optymalizacja techniczna, content marketing i wzrost pozycji w Google."
           canonical="https://monke.io/portfolio/seo"
-          ogImage="https://monke.io/og_cover.png"
+          ogImage="/og_cover.png"
         />
         <article className="container mx-auto px-6 max-w-5xl">
           <header className="mb-8">

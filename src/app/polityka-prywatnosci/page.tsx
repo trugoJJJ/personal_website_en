@@ -28,7 +28,7 @@ const PrivacyPolicyContent = () => {
           title="Polityka Prywatności – Adam Gałęcki"
           description="Polityka prywatności i cookies serwisu galecki.website. Informacje o przetwarzaniu danych osobowych i wykorzystaniu plików cookies."
           canonical="https://monke.io/polityka-prywatnosci"
-          ogImage="https://monke.io/og_cover.png"
+          ogImage="/og_cover.png"
         />
 
         {/* Sekcja tytułowa */}

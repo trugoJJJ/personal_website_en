@@ -25,12 +25,12 @@ export default function RootLayout({
         <meta property="og:site_name" content="Adam Gałęcki - Portfolio" />
         <meta property="og:title" content="Portfolio – Adam Gałęcki – Digital Marketing Manager" />
         <meta property="og:description" content="Zajmuję się kompleksową obsługą komunikacji marketingowej nakierowanej na osiąganie zamierzonych celów biznesowych w firmach B2B i B2C." />
-        <meta property="og:image" content="https://monke.io/og_cover.png" />
-        <meta property="og:url" content="https://monke.io" />
+        <meta property="og:image" content="/og_cover.png" />
+        <meta property="og:url" content="https://galecki.website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Portfolio – Adam Gałęcki – Digital Marketing Manager" />
         <meta name="twitter:description" content="Zajmuję się kompleksową obsługą komunikacji marketingowej nakierowanej na osiąganie zamierzonych celów biznesowych w firmach B2B i B2C." />
-        <meta name="twitter:image" content="https://monke.io/og_cover.png" />
+        <meta name="twitter:image" content="/og_cover.png" />
       </head>
       <body>
         <LoadingProvider>

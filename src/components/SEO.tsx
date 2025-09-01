@@ -64,10 +64,10 @@ const SEOContent = ({ title, description, canonical, noIndex, ogImage }: SEOProp
     } else {
       // Default OG image if none provided
       const ogImageMeta = ensureMeta("", "og:image");
-      ogImageMeta.content = "https://monke.io/og_cover.png";
+      ogImageMeta.content = "/og_cover.png";
       
       const twitterImageMeta = ensureMeta("", "twitter:image");
-      twitterImageMeta.content = "https://monke.io/og_cover.png";
+      twitterImageMeta.content = "/og_cover.png";
     }
 
     // Update canonical link

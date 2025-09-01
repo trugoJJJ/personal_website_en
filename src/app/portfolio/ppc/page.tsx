@@ -133,7 +133,7 @@ const PortfolioPPC = () => {
           title="Kampanie reklamowe Google Ads i Meta Ads – Adam Gałęcki"
           description="Kompleksowe kampanie reklamowe Google Ads i Meta Ads dla producenta drzwi. Optymalizacja konwersji, zarządzanie budżetem i wzrost sprzedaży."
           canonical="https://monke.io/portfolio/ppc"
-          ogImage="https://monke.io/og_cover.png"
+          ogImage="/og_cover.png"
         />
 
         {/* Sekcja tytułowa */}

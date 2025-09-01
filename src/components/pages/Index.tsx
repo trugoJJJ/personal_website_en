@@ -20,8 +20,8 @@ const Index = () => {
       <SEO 
         title="Portfolio – Adam Gałęcki – Digital Marketing Manager"
         description="Zajmuję się kompleksową obsługą komunikacji marketingowej nakierowanej na osiąganie zamierzonych celów biznesowych w firmach B2B i B2C."
-        canonical="https://monke.io"
-        ogImage="https://monke.io/og_cover.png"
+        canonical="https://galecki.website"
+        ogImage="/og_cover.png"
       />
       <Header />
       <HeroSection />

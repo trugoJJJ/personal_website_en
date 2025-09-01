@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Static export configuration
+  output: 'export',
+  trailingSlash: true,
   images: {
+    unoptimized: true,
     domains: ['images.unsplash.com'],
   },
   webpack: (config) => {

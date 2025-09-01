@@ -84,8 +84,8 @@ const PortfolioMartomAnalytics = () => {
           <SEO 
             title="Implementacja systemu śledzenia danych – Adam Gałęcki"
             description="Kompleksowa implementacja systemu śledzenia danych dla producenta drzwi. Google Analytics, Google Tag Manager, śledzenie konwersji i optymalizacja kampanii reklamowych."
-            canonical="https://monke.io/portfolio/analytics"
-            ogImage="https://monke.io/og_cover.png"
+            canonical="https://galecki.website/portfolio/analytics"
+            ogImage="/og_cover.png"
           />
 
           {/* Sekcja tytułowa */}
@@ -501,8 +501,8 @@ const PortfolioMartomAnalytics = () => {
         <SEO 
           title="Implementacja systemu śledzenia danych – Adam Gałęcki"
           description="Kompleksowa implementacja systemu śledzenia danych dla producenta drzwi. Google Analytics, Google Tag Manager, śledzenie konwersji i optymalizacja kampanii reklamowych."
-          canonical="https://monke.io/portfolio/analytics"
-          ogImage="https://monke.io/og_cover.png"
+          canonical="https://galecki.website/portfolio/analytics"
+          ogImage="/og_cover.png"
         />
         <article className="container mx-auto px-6 max-w-5xl">
           <header className="mb-8">

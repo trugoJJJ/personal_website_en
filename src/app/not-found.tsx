@@ -1,12 +1,10 @@
-"use client";
-
-import dynamic from 'next/dynamic';
-
-const NotFound = dynamic(() => import("@/components/pages/NotFound"), {
-  ssr: false,
-  loading: () => null
-});
+import { ClientOnlyWrapper } from "@/components/ClientOnlyWrapper";
+import NotFound from "@/components/pages/NotFound";
 
 export default function NotFoundPage() {
-  return <NotFound />;
+  return (
+    <ClientOnlyWrapper>
+      <NotFound />
+    </ClientOnlyWrapper>
+  );
 }

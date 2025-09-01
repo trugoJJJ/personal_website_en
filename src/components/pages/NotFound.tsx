@@ -1,6 +1,5 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ClientOnlyWrapper } from "@/components/ClientOnlyWrapper";
 import Link from "next/link";
@@ -49,15 +48,16 @@ function usePalette() {
 }
 
 const NotFoundContent = () => {
-  const location = usePathname();
   const { isDark, P } = usePalette();
 
   useEffect(() => {
-    console.error(
-      "404 Error: User attempted to access non-existent route:",
-      location
-    );
-  }, [location]);
+    if (typeof window !== 'undefined') {
+      console.error(
+        "404 Error: User attempted to access non-existent route:",
+        window.location.pathname
+      );
+    }
+  }, []);
 
   return (
     <div 
@@ -72,6 +72,7 @@ const NotFoundContent = () => {
         title="404 – Strona nie została znaleziona – Adam Gałęcki"
         description="Przepraszamy, ale strona której szukasz nie istnieje lub została przeniesiona."
         noIndex
+        ogImage="/og_cover.png"
       />
       
       {/* Main Content */}
@@ -113,7 +114,7 @@ const NotFoundContent = () => {
                 color: isDark ? P("white") : P("charcoal")
               }}
             >
-              {location}
+              {typeof window !== 'undefined' ? window.location.pathname : ''}
             </div>
           </div>
 

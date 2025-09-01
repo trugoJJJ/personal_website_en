@@ -31,7 +31,7 @@ async function deploy() {
     
     // Krok 4: Wgrywanie plików
     console.log('⬆️  Wgrywam pliki na serwer...');
-    await client.uploadFromDir('./dist', remotePath);
+    await client.uploadFromDir('./out', remotePath);
     
     client.close();
     

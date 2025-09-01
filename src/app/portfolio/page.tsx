@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { Header } from "@/components/home/Header";
 import { FooterSection } from "@/components/home/FooterSection";
 import { SEO } from "@/components/SEO";
@@ -15,12 +14,13 @@ import { ClientOnlyWrapper } from "@/components/ClientOnlyWrapper";
 const PortfolioPageContent = () => {
   const { isDark, P } = usePalette();
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
-  const router = useRouter();
 
   // Przekierowanie na stronę główną do sekcji portfolio
   useEffect(() => {
-    router.replace('/#portfolio');
-  }, [router]);
+    if (typeof window !== 'undefined') {
+      window.location.href = '/#portfolio';
+    }
+  }, []);
 
   // Automatyczne pobieranie wszystkich projektów
   const portfolioProjects = getAllProjects();
@@ -50,8 +50,8 @@ const PortfolioPageContent = () => {
         <SEO 
           title="Portfolio – Adam Gałęcki – Projekty Marketingowe"
           description="Zobacz moje projekty z zakresu SEO, kampanii reklamowych, designu i automatyzacji. Kompleksowe rozwiązania marketingowe dla firm B2B i B2C."
-          canonical="https://monke.io/portfolio"
-          ogImage="https://monke.io/og_cover.png"
+          canonical="https://galecki.website/portfolio"
+          ogImage="/og_cover.png"
         />
 
         {/* Sekcja tytułowa */}
