@@ -5,7 +5,21 @@ import { Header } from "@/components/home/Header";
 import { SEO } from "@/components/SEO";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Github, Calendar, Building, User, TrendingUp, Target, CheckCircle, ArrowRight, BarChart, Search, PhoneCall, Mail } from "lucide-react";
+import { 
+  ExternalLink, 
+  Github, 
+  Calendar, 
+  Building, 
+  User, 
+  TrendingUp, 
+  Target, 
+  CheckCircle, 
+  ArrowRight, 
+  BarChart, 
+  Search, 
+  PhoneCall, 
+  Mail 
+} from "lucide-react";
 import Link from "next/link";
 import { usePalette, COLORS } from "@/components/home/hooks";
 import { FooterSection } from "@/components/home/FooterSection";
