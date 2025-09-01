@@ -43,7 +43,7 @@ const PortfolioMartomSEO = () => {
   });
   const cardBase = (accent?: 'ecru' | 'white' | 'charcoal' | 'butter' | 'amaranth' | 'alloy'): React.CSSProperties => ({
     border: `${isDark ? '1px' : '3px'} solid ${isDark ? P('white') : P('black')}`,
-    background: accent ? P(accent) : (isDark ? P('charcoal') : P('white')),
+    background: accent === 'white' ? (isDark ? P('charcoal') : P('white')) : (accent ? P(accent) : (isDark ? P('charcoal') : P('white'))),
     color: isDark ? P('white') : P('charcoal'),
   });
   const subtleBlock = (): React.CSSProperties => ({
@@ -55,7 +55,7 @@ const PortfolioMartomSEO = () => {
     lineHeight: 1,
   };
   const pillStyle = (bg: keyof typeof COLORS) => ({
-    background: P(bg),
+    background: bg === 'white' ? (isDark ? P('charcoal') : P('white')) : P(bg),
     color: bg === 'amaranth' || bg === 'alloy' ? P('white') : (isDark ? P('white') : P('black')),
     border: `${isDark ? '1px' : '2px'} solid ${isDark ? P('white') : P('black')}`,
     fontWeight: 800,
@@ -105,7 +105,7 @@ const PortfolioMartomSEO = () => {
                   className="mb-8 px-12 py-10 text-left"
                   style={{
                     border: `${isDark ? '1px' : '3px'} solid ${isDark ? P('white') : P('black')}`,
-                    background: isDark ? P('charcoal') : P('ecru'),
+                    background: isDark ? P('ecru') : P('ecru'),
                     boxShadow: `inset 0 0 0 6px ${isDark ? P('charcoal') : P('white')}`,
                   }}
                 >
@@ -158,7 +158,7 @@ const PortfolioMartomSEO = () => {
                   className="mb-8 px-12 py-10 text-left"
                   style={{
                     border: `${isDark ? '1px' : '3px'} solid ${isDark ? P('white') : P('black')}`,
-                    background: isDark ? P('charcoal') : P('ecru'),
+                    background: isDark ? P('ecru') : P('ecru'),
                     boxShadow: `inset 0 0 0 6px ${isDark ? P('charcoal') : P('white')}`,
                   }}
                 >
