@@ -52,18 +52,7 @@ function usePalette() {
   return { isDark, P };
 }
 
-function useMediaQuery(query: string) {
-  const [matches, setMatches] = useState(false);
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const media = window.matchMedia(query);
-    if (media.matches !== matches) setMatches(media.matches);
-    const listener = () => setMatches(media.matches);
-    window.addEventListener('resize', listener);
-    return () => window.removeEventListener('resize', listener);
-  }, [matches, query]);
-  return matches;
-}
+
 
 function shuffleArray<T>(array: T[]): T[] {
   const newArray = [...array];
@@ -311,7 +300,6 @@ const SectionHeading = ({ children, id }: { children: any, id?: string }) => {
 /* ================== GŁÓWNY KOMPONENT SEKCJI PORTFOLIO ================== */
 const PortfolioSectionContent = () => {
   const { isDark, P } = usePalette();
-  const isDesktop = useMediaQuery('(min-width: 768px)');
   const [items, setItems] = useState<Project[]>(() => shuffleArray(createSixProjects(portfolioProjects)));
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
