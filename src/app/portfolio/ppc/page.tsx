@@ -1,13 +1,9 @@
 "use client";
 
-import dynamic from 'next/dynamic';
 import ClientOnlyWrapper from '@/components/ClientOnlyWrapper';
 import { SEO } from "@/components/SEO";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { portfolioProjects } from "@/data/portfolio";
-import { ExternalLink, Github, Calendar, Building, User, TrendingUp, Target, Lightbulb, CheckCircle, ArrowRight } from "lucide-react";
+import { TrendingUp, Target, Lightbulb, CheckCircle, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { usePalette, COLORS } from "@/components/home/hooks";
 import { FooterSection } from "@/components/home/FooterSection";

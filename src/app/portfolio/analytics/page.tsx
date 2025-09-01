@@ -1,21 +1,14 @@
 "use client";
 
-import dynamic from 'next/dynamic';
 import ClientOnlyWrapper from '@/components/ClientOnlyWrapper';
 import { Header } from "@/components/home/Header";
 import { SEO } from "@/components/SEO";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { portfolioProjects } from "@/data/portfolio";
-import { ExternalLink, Github, Calendar, Building, User, TrendingUp, Target, Lightbulb, CheckCircle, ArrowRight, BarChart, Search, PhoneCall, Mail } from "lucide-react";
+import { ExternalLink, Github, Calendar, Building, User, TrendingUp, Target, CheckCircle, ArrowRight, BarChart, Search, PhoneCall, Mail } from "lucide-react";
 import Link from "next/link";
 import { usePalette, COLORS } from "@/components/home/hooks";
 import { FooterSection } from "@/components/home/FooterSection";
-import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
-import LanguageSwitch from "@/components/LanguageSwitch";
-import ThemeToggle from "@/components/ThemeToggle";
 
 const PortfolioMartomAnalytics = () => {
   const { isDark, P } = usePalette();
