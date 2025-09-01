@@ -1,5 +1,7 @@
+"use client";
+
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import {
   DndContext, closestCenter, DragEndEvent, DragOverlay
 } from '@dnd-kit/core';
@@ -34,9 +36,12 @@ const DARK_COLORS: typeof COLORS = {
 /* ================== HOOKI/UTILS ================== */
 function usePalette() {
   const isDomDark = () => document.documentElement.classList.contains("dark");
-  const [isDark, setIsDark] = useState<boolean>(isDomDark());
+  const [isDark, setIsDark] = useState<boolean>(false); // Start with false for SSR
 
   useEffect(() => {
+    // Set initial value on client side
+    setIsDark(isDomDark());
+    
     const mo = new MutationObserver(() => setIsDark(isDomDark()));
     mo.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
     return () => mo.disconnect();
@@ -49,6 +54,7 @@ function usePalette() {
 function useMediaQuery(query: string) {
   const [matches, setMatches] = useState(false);
   useEffect(() => {
+    if (typeof window === 'undefined') return;
     const media = window.matchMedia(query);
     if (media.matches !== matches) setMatches(media.matches);
     const listener = () => setMatches(media.matches);
@@ -150,7 +156,7 @@ function SuccessAnimationPlaceholder({ onReset }: { onReset: () => void }) {
   );
 }
 
-function ProjectCard({ project, isHighlighted = false, isDraggable = true }: { project: Project, isHighlighted?: boolean, isDraggable?: boolean }) {
+function ProjectCard({ project, isHighlighted = false }: { project: Project, isHighlighted?: boolean }) {
   const { isDark, P } = usePalette();
   
   // Map project titles to their specific routes
@@ -218,7 +224,7 @@ function ProjectCard({ project, isHighlighted = false, isDraggable = true }: { p
           )}
           <div className="mt-auto pt-6">
             <Link
-              to={getProjectLink(project.title)}
+              href={getProjectLink(project.title)}
               className="block w-full font-extrabold transition-colors text-center"
               style={{
                 border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`,
@@ -252,9 +258,6 @@ function SortableProjectItem({ project, isHighlighted, isDraggable }: { project:
       id: project.id, 
       disabled: !isDraggable,
       // Disable drag on certain elements
-      activationConstraint: {
-        distance: 8, // Require 8px of movement before drag starts
-      }
     });
 
   const baseStyle: React.CSSProperties = { transform: CSS.Transform.toString(transform), transition };
@@ -284,7 +287,7 @@ function SortableProjectItem({ project, isHighlighted, isDraggable }: { project:
   }
   return (
     <div ref={setNodeRef} style={baseStyle} {...dragHandlers}>
-      <ProjectCard project={project} isHighlighted={isHighlighted} isDraggable={isDraggable} />
+      <ProjectCard project={project} isHighlighted={isHighlighted} />
     </div>
   );
 }

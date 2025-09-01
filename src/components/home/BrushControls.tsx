@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { usePalette, COLORS } from "./hooks";
 import { BrushType } from "./types";
@@ -27,6 +29,7 @@ export const BrushControls = ({
   
   // Persistent (do refresh) zaznaczenia – multi select; nie resetują się przy zmianie pędzla/koloru
   const [markedColors, setMarkedColors] = useState<Set<keyof typeof COLORS>>(()=> new Set([currentColorKey]));
+  const [hoveredButton, setHoveredButton] = useState<string | number | null>(null);
   
   const handleLeftClick = (key: keyof typeof COLORS) => {
     onColorChange(key);
@@ -52,22 +55,38 @@ export const BrushControls = ({
       {/* Tryby pędzla */}
       <div className="flex items-center p-1 gap-1" style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: isDark ? P("charcoal") : P("ecru") }}>
         {BRUSH_TYPES.map((b,i)=>(
-          <button key={b.id} onClick={()=>onBrushTypeChange(b.id)} className="px-3 py-2 font-extrabold" style={{
-            background: currentBrushType===b.id?P("amaranth"): (isDark?P("charcoal"):P("ecru")),
-            color: currentBrushType===b.id?P("white"): (isDark?P("white"):P("black")),
-            borderRight: i===BRUSH_TYPES.length-1? 'none': `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`
-          }}>{b.name}</button>
+          <button 
+            key={b.id} 
+            onClick={()=>onBrushTypeChange(b.id)} 
+            onMouseEnter={() => setHoveredButton(b.id)}
+            onMouseLeave={() => setHoveredButton(null)}
+            className="px-3 py-2 font-extrabold transition-transform duration-300 ease-out" 
+            style={{
+              background: currentBrushType===b.id?P("amaranth"): (isDark?P("charcoal"):P("ecru")),
+              color: currentBrushType===b.id?P("white"): (isDark?P("white"):P("black")),
+              borderRight: i===BRUSH_TYPES.length-1? 'none': `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`,
+              transform: hoveredButton === b.id ? 'scale(1.05)' : 'scale(1)',
+            }}
+          >{b.name}</button>
         ))}
       </div>
       
       {/* Rozmiary */}
       <div className="flex items-center p-1 gap-1" style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: isDark ? P("charcoal") : P("ecru") }}>
         {SIZES.map((s,i)=>(
-          <button key={s.value} onClick={()=>onSizeChange(s.value)} className="px-4 py-2 font-extrabold" style={{
-            background: currentSize===s.value?P("amaranth"): (isDark?P("charcoal"):P("ecru")),
-            color: currentSize===s.value?P("white"): (isDark?P("white"):P("black")),
-            borderRight: i===SIZES.length-1? 'none': `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`
-          }}>{s.label}</button>
+          <button 
+            key={s.value} 
+            onClick={()=>onSizeChange(s.value)} 
+            onMouseEnter={() => setHoveredButton(s.value)}
+            onMouseLeave={() => setHoveredButton(null)}
+            className="px-4 py-2 font-extrabold transition-transform duration-300 ease-out" 
+            style={{
+              background: currentSize===s.value?P("amaranth"): (isDark?P("charcoal"):P("ecru")),
+              color: currentSize===s.value?P("white"): (isDark?P("white"):P("black")),
+              borderRight: i===SIZES.length-1? 'none': `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`,
+              transform: hoveredButton === s.value ? 'scale(1.05)' : 'scale(1)',
+            }}
+          >{s.label}</button>
         ))}
       </div>
       
@@ -81,12 +100,15 @@ export const BrushControls = ({
               key={key+i}
               onClick={()=>handleLeftClick(key)}
               onContextMenu={(e)=>handleRightClick(e,key)}
-              className="relative w-10 h-10"
+              onMouseEnter={() => setHoveredButton(key)}
+              onMouseLeave={() => setHoveredButton(null)}
+              className="relative w-10 h-10 transition-transform duration-300 ease-out"
               style={{
                 // zewnętrzne tło = tło panelu – tworzy wizualną ramkę
                 background: isDark ? P("charcoal") : P("ecru"),
                 padding: 0,
                 borderRight: i===PALETTE.length-1? 'none': `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`,
+                transform: hoveredButton === key ? 'scale(1.05)' : 'scale(1)',
               }}
               aria-label={`Kolor ${key}${isMarked? ' (oznaczony)':''}${isActive?' (aktywny)':''}`}
               title={isMarked? 'PPM usuń oznaczenie':'PPM dodaj oznaczenie'}

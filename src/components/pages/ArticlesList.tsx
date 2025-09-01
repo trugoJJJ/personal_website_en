@@ -1,8 +1,10 @@
+"use client";
+
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { articles } from "@/data/articles";
 import { Calendar, Clock, ExternalLink } from "lucide-react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 const ArticlesList = () => {
   return (
@@ -28,7 +30,7 @@ const ArticlesList = () => {
                 <h2 className="text-xl font-semibold">{a.title}</h2>
                 <p className="text-sm text-muted-foreground">{a.excerpt}</p>
                 <Button asChild variant="outline" className="w-full">
-                  <Link to={`/articles/${a.id}`} aria-label={`Czytaj więcej: ${a.title}`}>
+                  <Link href={`/articles/${a.id}`} aria-label={`Czytaj więcej: ${a.title}`}>
                     <ExternalLink className="h-4 w-4 mr-2" /> Czytaj więcej
                   </Link>
                 </Button>

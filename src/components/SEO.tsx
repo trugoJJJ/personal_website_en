@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect } from "react";
 
 type SEOProps = {
@@ -9,41 +11,45 @@ type SEOProps = {
 
 export const SEO = ({ title, description, canonical, noIndex }: SEOProps) => {
   useEffect(() => {
+    // Update document title
     document.title = title;
 
+    // Ensure meta tags exist
     const ensureMeta = (name: string) => {
-      let el = document.querySelector(`meta[name="${name}"]`);
-      if (!el) {
-        el = document.createElement("meta");
-        el.setAttribute("name", name);
-        document.head.appendChild(el);
+      let meta = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement;
+      if (!meta) {
+        meta = document.createElement("meta");
+        meta.name = name;
+        document.head.appendChild(meta);
       }
-      return el as HTMLMetaElement;
+      return meta;
     };
 
+    // Update description
     if (description) {
-      const desc = ensureMeta("description");
-      desc.setAttribute("content", description);
+      const descMeta = ensureMeta("description");
+      descMeta.content = description;
     }
 
-    const ensureLinkRel = (rel: string) => {
-      let el = document.querySelector(`link[rel="${rel}"]`);
-      if (!el) {
-        el = document.createElement("link");
-        el.setAttribute("rel", rel);
-        document.head.appendChild(el);
-      }
-      return el as HTMLLinkElement;
-    };
-
+    // Update canonical link
     const canon = ensureLinkRel("canonical");
     canon.setAttribute("href", canonical || window.location.href);
 
     if (noIndex) {
-      const robots = ensureMeta("robots");
-      robots.setAttribute("content", "noindex, nofollow");
+      const robotsMeta = ensureMeta("robots");
+      robotsMeta.content = "noindex, nofollow";
     }
   }, [title, description, canonical, noIndex]);
+
+  const ensureLinkRel = (rel: string) => {
+    let link = document.querySelector(`link[rel="${rel}"]`) as HTMLLinkElement;
+    if (!link) {
+      link = document.createElement("link");
+      link.rel = rel;
+      document.head.appendChild(link);
+    }
+    return link;
+  };
 
   return null;
 };

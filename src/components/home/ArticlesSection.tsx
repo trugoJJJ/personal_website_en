@@ -1,5 +1,7 @@
+"use client";
+
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { CalendarIcon, Clock, ExternalLink } from "lucide-react";
 import { articles } from "@/data/articles";
 
@@ -28,9 +30,12 @@ const DARK_COLORS: typeof COLORS = {
 /* ================== HOOKI/UTILS ================== */
 function usePalette() {
   const isDomDark = () => document.documentElement.classList.contains("dark");
-  const [isDark, setIsDark] = useState<boolean>(isDomDark());
+  const [isDark, setIsDark] = useState<boolean>(false); // Start with false for SSR
 
   useEffect(() => {
+    // Set initial value on client side
+    setIsDark(isDomDark());
+    
     const mo = new MutationObserver(() => setIsDark(isDomDark()));
     mo.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
     return () => mo.disconnect();
@@ -93,7 +98,7 @@ const ArticlesSection = () => {
                 <h3 className="text-xl font-extrabold">{article.title}</h3>
                 <p className="text-sm">{article.excerpt}</p>
                 <Link
-                  to={`/articles/${article.id}`}
+                  href={`/articles/${article.id}`}
                   className="w-full inline-flex items-center justify-center gap-2 font-extrabold px-4 py-3 transition-colors"
                   style={{
                     border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`,

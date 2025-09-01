@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
@@ -7,10 +9,9 @@ import { Project } from "./types";
 interface ProjectCardProps {
   project: Project;
   isHighlighted?: boolean;
-  isDraggable?: boolean;
 }
 
-export function ProjectCard({ project, isHighlighted = false, isDraggable = true }: ProjectCardProps) {
+export function ProjectCard({ project, isHighlighted = false }: ProjectCardProps) {
   const { isDark, P } = usePalette();
   
   return (
@@ -98,7 +99,7 @@ export function SortableProjectItem({ project, isHighlighted, isDraggable }: Sor
   
   return (
     <div ref={setNodeRef} style={baseStyle} {...attributes} {...listeners}>
-      <ProjectCard project={project} isHighlighted={isHighlighted} isDraggable={isDraggable} />
+      <ProjectCard project={project} isHighlighted={isHighlighted} />
     </div>
   );
 }

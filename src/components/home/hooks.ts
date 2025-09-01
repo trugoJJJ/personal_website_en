@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 
 /* ================== PALETA – LIGHT ================== */
@@ -24,10 +26,17 @@ const DARK_COLORS: typeof COLORS = {
 
 /* ================== HOOKI/UTILS ================== */
 export function usePalette() {
-  const isDomDark = () => document.documentElement.classList.contains("dark");
-  const [isDark, setIsDark] = useState<boolean>(isDomDark());
+  const [isDark, setIsDark] = useState<boolean>(false); // Start with false for SSR
 
   useEffect(() => {
+    // Only run on client side
+    if (typeof window === 'undefined') return;
+    
+    const isDomDark = () => document.documentElement.classList.contains("dark");
+    
+    // Set initial value on client side
+    setIsDark(isDomDark());
+    
     const mo = new MutationObserver(() => setIsDark(isDomDark()));
     mo.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
     return () => mo.disconnect();
@@ -40,6 +49,9 @@ export function usePalette() {
 export function useMediaQuery(query: string) {
   const [matches, setMatches] = useState(false);
   useEffect(() => {
+    // Only run on client side
+    if (typeof window === 'undefined') return;
+    
     const media = window.matchMedia(query);
     if (media.matches !== matches) setMatches(media.matches);
     const listener = () => setMatches(media.matches);

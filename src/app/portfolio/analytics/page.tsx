@@ -1,3 +1,7 @@
+"use client";
+
+import dynamic from 'next/dynamic';
+import ClientOnlyWrapper from '@/components/ClientOnlyWrapper';
 import { Header } from "@/components/home/Header";
 import { SEO } from "@/components/SEO";
 import { Badge } from "@/components/ui/badge";
@@ -5,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { portfolioProjects } from "@/data/portfolio";
 import { ExternalLink, Github, Calendar, Building, User, TrendingUp, Target, Lightbulb, CheckCircle, ArrowRight, BarChart, Search, PhoneCall, Mail } from "lucide-react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { usePalette, COLORS } from "@/components/home/hooks";
 import { FooterSection } from "@/components/home/FooterSection";
 import { useState, useEffect } from "react";
@@ -37,7 +41,7 @@ const PortfolioMartomAnalytics = () => {
           <section className="container mx-auto px-6 text-center">
             <h1 className="text-3xl font-bold mb-4">Projekt nie znaleziony</h1>
             <Button asChild variant="outline">
-              <Link to="/portfolio">Wróć do portfolio</Link>
+              <Link href="/portfolio">Wróć do portfolio</Link>
             </Button>
           </section>
         </main>
@@ -91,11 +95,11 @@ const PortfolioMartomAnalytics = () => {
             <div className="container mx-auto max-w-6xl px-6">
               {/* Breadcrumbs */}
               <nav className="flex items-center gap-2 text-sm mb-8 pt-4" style={{ opacity: .7 }}>
-                <Link to="/" className="hover:opacity-100 transition-opacity">
+                <Link href="/" className="hover:opacity-100 transition-opacity">
                   Start
                 </Link>
                 <span>→</span>
-                <Link to="/portfolio" className="hover:opacity-100 transition-opacity">
+                <Link href="/portfolio" className="hover:opacity-100 transition-opacity">
                   Portfolio
                 </Link>
                 <span>→</span>
@@ -401,7 +405,7 @@ const PortfolioMartomAnalytics = () => {
                 {[{
                   num: '01',
                   t: 'Pełna kontrola nad danymi',
-                  d: 'System śledzenia został skonfigurowany na koncie należącym do klienta. Brak uzależnienia od zewnętrznych agencji – klient ma dostęp do wszystkich danych i może je w każdej chwili wykorzystać.'
+                  d: 'System śledzenia został skonfigurowany na koncie należącym do klienta. Brak uzależnienia od zewnętrznych dostawców – klient ma dostęp do wszystkich danych i może je w każdej chwili wykorzystać.'
                 },{
                   num: '02',
                   t: 'Skalowalna architektura',
@@ -532,7 +536,7 @@ const PortfolioMartomAnalytics = () => {
 
           <footer className="pt-6 border-t-3 border-border">
             <Button asChild variant="outline" className="border-3">
-              <Link to="/portfolio">Wróć do listy</Link>
+              <Link href="/portfolio">Wróć do listy</Link>
             </Button>
           </footer>
         </article>
@@ -542,4 +546,10 @@ const PortfolioMartomAnalytics = () => {
   );
 };
 
-export default PortfolioMartomAnalytics;
+export default function AnalyticsPortfolioPage() {
+  return (
+    <ClientOnlyWrapper>
+      <PortfolioMartomAnalytics />
+    </ClientOnlyWrapper>
+  );
+}

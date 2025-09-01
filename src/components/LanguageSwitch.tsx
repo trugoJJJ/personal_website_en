@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { useI18n, Locale } from "@/contexts/i18n";
@@ -22,8 +24,11 @@ const DARK = {
 
 function useIsDark() {
   const is = () => document.documentElement.classList.contains("dark");
-  const [dark, setDark] = React.useState(is());
+  const [dark, setDark] = React.useState(false); // Start with false for SSR
   React.useEffect(() => {
+    // Set initial value on client side
+    setDark(is());
+    
     const mo = new MutationObserver(() => setDark(is()));
     mo.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
     return () => mo.disconnect();

@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect, useRef } from "react";
 import { usePalette, useI18n, COLORS } from "./hooks";
 import { BrushType } from "./types";

@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { Briefcase, GraduationCap, Award } from "lucide-react";
 import { usePalette } from "./hooks";

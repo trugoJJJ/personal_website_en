@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { Target, TrendingUp, Users, Award } from "lucide-react";
 import { usePalette } from "./hooks";
@@ -26,7 +28,7 @@ export const AboutSection = () => {
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           <div className="space-y-8">
             <figure className="overflow-hidden" style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
-              <img src={portrait} alt="Portret – o mnie" loading="lazy" className="w-full h-64 object-cover md:h-80" />
+              <img src={portrait.src} alt="Portret – o mnie" loading="lazy" className="w-full h-64 object-cover md:h-80" />
             </figure>
             <div className="space-y-6" style={{ color: isDark ? P("white") : P("charcoal") }}>
               <h3 className="text-2xl md:text-3xl font-extrabold text-center md:text-left">Cześć, nazywam się Adam</h3>

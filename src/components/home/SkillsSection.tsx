@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 
 /* ================== PALETA – LIGHT ================== */
@@ -25,9 +27,12 @@ const DARK_COLORS: typeof COLORS = {
 /* ================== HOOKI/UTILS ================== */
 function usePalette() {
   const isDomDark = () => document.documentElement.classList.contains("dark");
-  const [isDark, setIsDark] = useState<boolean>(isDomDark());
+  const [isDark, setIsDark] = useState<boolean>(false); // Start with false for SSR
 
   useEffect(() => {
+    // Set initial value on client side
+    setIsDark(isDomDark());
+    
     const mo = new MutationObserver(() => setIsDark(isDomDark()));
     mo.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
     return () => mo.disconnect();
