@@ -14,11 +14,11 @@ import ThemeToggle from "@/components/ThemeToggle";
 
 // Header component from Hero.tsx
 const links = [
-  { href: "#portfolio", label: "Portfolio" },
-  { href: "#about", label: "O mnie" },
-  { href: "#experience", label: "Doświadczenie" },
-  { href: "#skills", label: "Umiejętności" },
-  { href: "#articles", label: "Artykuły" },
+  { href: "/#portfolio", label: "Portfolio" },
+  { href: "/#about", label: "O mnie" },
+  { href: "/#experience", label: "Doświadczenie" },
+  { href: "/#skills", label: "Umiejętności" },
+  { href: "/#articles", label: "Artykuły" },
 ];
 
 const Header = () => {
@@ -49,7 +49,7 @@ const Header = () => {
           <LanguageSwitch />
           <ThemeToggle />
           <Button size="lg" asChild className="rounded-none font-extrabold transition-transform hover:scale-[1.02]" style={{ background: P("amaranth"), color: P("white"), border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
-            <a href="#contact">Kontakt</a>
+            <a href="/#contact">Kontakt</a>
           </Button>
         </div>
         <div className="flex items-center gap-2 ml-auto desk:hidden">
@@ -80,7 +80,7 @@ const Header = () => {
             </ul>
             <div className="mt-6">
               <Button asChild size="xl" className="w-full rounded-none font-extrabold" style={{ background: P("amaranth"), color: P("white"), border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
-                <a href="#contact">Kontakt</a>
+                <a href="/#contact">Kontakt</a>
               </Button>
             </div>
           </div>

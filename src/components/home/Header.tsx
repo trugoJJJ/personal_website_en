@@ -7,18 +7,35 @@ import { LanguageSwitch } from "@/components/LanguageSwitch";
 import ThemeToggle from "@/components/ThemeToggle";
 import { usePalette } from "./hooks";
 import { ClientOnlyWrapper } from "../ClientOnlyWrapper";
+import { useRouter, usePathname } from "next/navigation";
 
 const links = [
-  { href: "#portfolio", label: "Portfolio" },
-  { href: "#about", label: "O mnie" },
-  { href: "#experience", label: "Doświadczenie" },
-  { href: "#skills", label: "Umiejętności" },
-  { href: "#articles", label: "Artykuły" },
+  { section: "portfolio", label: "Portfolio" },
+  { section: "about", label: "O mnie" },
+  { section: "experience", label: "Doświadczenie" },
+  { section: "skills", label: "Umiejętności" },
+  { section: "articles", label: "Artykuły" },
 ];
 
 const HeaderContent = () => {
   const { isDark, P } = usePalette();
   const [open, setOpen] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
+  
+  const handleNavigation = (section: string) => {
+    if (pathname === '/') {
+      // Na stronie głównej - scroll do sekcji
+      const element = document.getElementById(section);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // Na podstronie - przejdź na główną i scroll do sekcji
+      router.push(`/#${section}`);
+    }
+    setOpen(false);
+  };
   
   useEffect(() => {
     if (open) {
@@ -27,6 +44,22 @@ const HeaderContent = () => {
       return () => { document.body.style.overflow = originalOverflow; };
     }
   }, [open]);
+
+  // Handle hash navigation after page load
+  useEffect(() => {
+    if (pathname === '/' && typeof window !== 'undefined') {
+      const hash = window.location.hash;
+      if (hash) {
+        const section = hash.substring(1);
+        setTimeout(() => {
+          const element = document.getElementById(section);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      }
+    }
+  }, [pathname]);
 
   return (
     <header className="fixed top-0 inset-x-0 z-50" style={{ background: isDark ? P("charcoal") : P("white"), borderBottom: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, color: isDark ? P("white") : P("charcoal") }}>
@@ -41,8 +74,14 @@ const HeaderContent = () => {
           style={{ color: isDark ? P("white") : P("charcoal") }}
         >
           {links.map(l => (
-            <li key={l.href}>
-              <a href={l.href} className="font-bold hover:underline">{l.label}</a>
+            <li key={l.section}>
+              <button 
+                onClick={() => handleNavigation(l.section)}
+                className="font-bold hover:underline bg-transparent border-none p-0 cursor-pointer"
+                style={{ color: isDark ? P("white") : P("charcoal") }}
+              >
+                {l.label}
+              </button>
             </li>
           ))}
         </ul>
@@ -52,7 +91,7 @@ const HeaderContent = () => {
           <LanguageSwitch />
           <ThemeToggle />
           <Button size="lg" asChild className="rounded-none font-extrabold transition-transform hover:scale-[1.02]" style={{ background: P("amaranth"), color: P("white"), border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
-            <a href="#contact">Kontakt</a>
+            <a href="/#contact">Kontakt</a>
           </Button>
         </div>
         
@@ -79,14 +118,20 @@ const HeaderContent = () => {
           <div className="mt-6 px-6 desk:hidden">
             <ul className="grid gap-4 text-sm font-extrabold" style={{ color: isDark ? P("white") : P("charcoal") }}>
               {links.map(l => (
-                <li key={l.href}>
-                  <a href={l.href} className="block py-3" style={{ borderBottom: `${isDark ? '1px' : '2px'} solid ${isDark ? P("white") : P("black")}` }} onClick={() => setOpen(false)}>{l.label}</a>
+                <li key={l.section}>
+                  <button 
+                    onClick={() => handleNavigation(l.section)}
+                    className="block py-3 w-full text-left bg-transparent border-none cursor-pointer"
+                    style={{ borderBottom: `${isDark ? '1px' : '2px'} solid ${isDark ? P("white") : P("black")}` }}
+                  >
+                    {l.label}
+                  </button>
                 </li>
               ))}
             </ul>
             <div className="mt-6">
               <Button asChild size="xl" className="w-full rounded-none font-extrabold" style={{ background: P("amaranth"), color: P("white"), border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
-                <a href="#contact">Kontakt</a>
+                <a href="/#contact">Kontakt</a>
               </Button>
             </div>
           </div>
