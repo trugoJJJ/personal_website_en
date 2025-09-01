@@ -60,7 +60,21 @@ const HeroSectionContent = () => {
               border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`,
             }}
           >
-            <div className="aspect-video flex items-center justify-center" style={{ background: P("ecru") }}>
+            <video 
+              className="w-full object-cover"
+              autoPlay 
+              muted 
+              loop 
+              playsInline
+              preload="auto"
+              style={{ 
+                background: P("ecru"), 
+                width: '100%',
+                aspectRatio: '16/9',
+                display: 'block'
+              }}
+            >
+              <source src="/hero_video_small.mp4" type="video/mp4" />
               <div className="text-center space-y-3" style={{ color: isDark ? P("white") : P("charcoal") }}>
                 <div className="w-16 h-16 mx-auto flex items-center justify-center" style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
                   <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
@@ -70,7 +84,7 @@ const HeroSectionContent = () => {
                 <p>Video placeholder</p>
                 <p style={{ opacity: .7 }}>Scroll to see video grow</p>
               </div>
-            </div>
+            </video>
           </div>
         </div>
       </div>
@@ -90,7 +104,21 @@ export const HeroSection = () => {
           </div>
           <div className="relative mx-auto w-full max-w-[1600px]">
             <div className="overflow-hidden transition-transform duration-150 ease-out scale-60 border-3 border-black">
-              <div className="aspect-video flex items-center justify-center bg-[#FAF6EE]">
+              <video 
+                className="w-full object-cover"
+                autoPlay 
+                muted 
+                loop 
+                playsInline
+                controls
+                style={{ 
+                  background: "#FAF6EE", 
+                  width: '100%',
+                  aspectRatio: '16/9',
+                  display: 'block'
+                }}
+              >
+                <source src="./hero_video_small.mp4" type="video/mp4" />
                 <div className="text-center space-y-3 text-[#2E2217]">
                   <div className="w-16 h-16 mx-auto flex items-center justify-center border-3 border-black">
                     <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
@@ -100,7 +128,7 @@ export const HeroSection = () => {
                   <p>Video placeholder</p>
                   <p className="opacity-70">Scroll to see video grow</p>
                 </div>
-              </div>
+              </video>
             </div>
           </div>
         </div>
