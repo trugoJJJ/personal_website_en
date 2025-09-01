@@ -70,7 +70,12 @@ const PortfolioMartomSEO = () => {
       <div style={{ background: isDark ? P('charcoal') : P('white'), color: isDark ? P('white') : P('charcoal') }}>
         <Header />
         <main className="pt-28"> {/* offset pod fixed header */}
-          <SEO title={`${project.title} – Portfolio`} description={project.description} />
+          <SEO 
+            title="Optymalizacja SEO dla producenta drzwi – Adam Gałęcki"
+            description="Kompleksowa optymalizacja SEO dla producenta drzwi zewnętrznych. Analiza słów kluczowych, optymalizacja techniczna, content marketing i wzrost pozycji w Google."
+            canonical="https://monke.io/portfolio/seo"
+            ogImage="https://monke.io/og_cover.png"
+          />
 
           {/* Sekcja tytułowa */}
           <section style={sectionOuter(isDark ? P('charcoal') : P('white'), false)} className="pb-20">
@@ -479,7 +484,12 @@ const PortfolioMartomSEO = () => {
     <div style={{ background: isDark ? P("charcoal") : P("white"), color: isDark ? P("white") : P("charcoal") }}>
       <Header />
       <main className="py-16">
-        <SEO title={`${project.title} – Portfolio`} description={project.description} />
+        <SEO 
+          title="Optymalizacja SEO dla producenta drzwi – Adam Gałęcki"
+          description="Kompleksowa optymalizacja SEO dla producenta drzwi zewnętrznych. Analiza słów kluczowych, optymalizacja techniczna, content marketing i wzrost pozycji w Google."
+          canonical="https://monke.io/portfolio/seo"
+          ogImage="https://monke.io/og_cover.png"
+        />
         <article className="container mx-auto px-6 max-w-5xl">
           <header className="mb-8">
             <h1 className="text-4xl font-bold">{project.title}</h1>

@@ -3,6 +3,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { useI18n, Locale } from "@/contexts/i18n";
+import { ClientOnlyWrapper } from "./ClientOnlyWrapper";
 
 // Jesienna paleta spójna z Hero
 const LIGHT = {
@@ -36,7 +37,7 @@ function useIsDark() {
   return dark;
 }
 
-export const LanguageSwitch = () => {
+const LanguageSwitchContent = () => {
   const { locale, setLocale } = useI18n();
   const isDark = useIsDark();
   const PALETTE = isDark ? DARK : LIGHT;
@@ -118,6 +119,43 @@ export const LanguageSwitch = () => {
         EN
       </Button>
     </div>
+  );
+};
+
+export const LanguageSwitch = () => {
+  return (
+    <ClientOnlyWrapper fallback={
+      <div className="inline-flex items-center gap-2" aria-label="Przełącz język">
+        <div 
+          className="rounded-none font-extrabold select-none transition-colors"
+          style={{
+            border: `3px solid ${LIGHT.black}`,
+            background: LIGHT.amaranth,
+            color: LIGHT.white,
+            padding: '0.5rem 1rem',
+            fontSize: '0.875rem',
+            fontWeight: 800
+          }}
+        >
+          PL
+        </div>
+        <div 
+          className="rounded-none font-extrabold select-none transition-colors"
+          style={{
+            border: `3px solid ${LIGHT.black}`,
+            background: LIGHT.ecru,
+            color: LIGHT.black,
+            padding: '0.5rem 1rem',
+            fontSize: '0.875rem',
+            fontWeight: 800
+          }}
+        >
+          EN
+        </div>
+      </div>
+    }>
+      <LanguageSwitchContent />
+    </ClientOnlyWrapper>
   );
 };
 

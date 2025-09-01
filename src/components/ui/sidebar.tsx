@@ -18,6 +18,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { ClientOnlyWrapper } from "@/components/ClientOnlyWrapper"
 
 const SIDEBAR_COOKIE_NAME = "sidebar:state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
@@ -47,7 +48,7 @@ function useSidebar() {
   return context
 }
 
-const SidebarProvider = React.forwardRef<
+const SidebarProviderContent = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<"div"> & {
     defaultOpen?: boolean
@@ -154,6 +155,27 @@ const SidebarProvider = React.forwardRef<
     )
   }
 )
+SidebarProviderContent.displayName = "SidebarProviderContent"
+
+const SidebarProvider = React.forwardRef<
+  HTMLDivElement,
+  React.ComponentProps<"div"> & {
+    defaultOpen?: boolean
+    open?: boolean
+    onOpenChange?: (open: boolean) => void
+  }
+>((props, ref) => {
+  return (
+    <ClientOnlyWrapper fallback={
+      <div className="group/sidebar-wrapper flex min-h-svh w-full" ref={ref}>
+        {props.children}
+      </div>
+    }>
+      <SidebarProviderContent {...props} ref={ref} />
+    </ClientOnlyWrapper>
+  );
+});
+
 SidebarProvider.displayName = "SidebarProvider"
 
 const Sidebar = React.forwardRef<

@@ -4,13 +4,14 @@ import React from "react";
 import { useTheme } from "next-themes";
 import { Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ClientOnlyWrapper } from "./ClientOnlyWrapper";
 
 const COLORS = {
   black: "#000000",
   white: "#FFFFFF",
 };
 
-export const ThemeToggle = () => {
+const ThemeToggleContent = () => {
   const { theme, setTheme } = useTheme();
   const isDark = theme === "dark";
 
@@ -43,6 +44,31 @@ export const ThemeToggle = () => {
     >
       {isDark ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
     </Button>
+  );
+};
+
+export const ThemeToggle = () => {
+  return (
+    <ClientOnlyWrapper fallback={
+      <div 
+        className="rounded-none font-extrabold transition-colors"
+        style={{
+          border: `3px solid ${COLORS.black}`,
+          background: COLORS.white,
+          color: COLORS.black,
+          width: 44,
+          height: 44,
+          padding: 0,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}
+      >
+        <Sun className="h-4 w-4" />
+      </div>
+    }>
+      <ThemeToggleContent />
+    </ClientOnlyWrapper>
   );
 };
 

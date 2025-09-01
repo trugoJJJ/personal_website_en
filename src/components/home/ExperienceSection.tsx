@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Briefcase, GraduationCap, Award } from "lucide-react";
 import { usePalette } from "./hooks";
+import { ClientOnlyWrapper } from "@/components/ClientOnlyWrapper";
 
 const SectionHeading = ({ children, id }: { children: React.ReactNode, id?: string }) => {
   const { isDark, P } = usePalette();
@@ -18,7 +19,7 @@ const SectionHeading = ({ children, id }: { children: React.ReactNode, id?: stri
   );
 };
 
-const ExperienceSection = () => {
+const ExperienceSectionContent = () => {
   const { isDark, P } = usePalette();
   const [isMobile, setIsMobile] = useState(false);
 
@@ -105,7 +106,7 @@ const ExperienceSection = () => {
                 key={job.role}
                 href={job.url}
                 target="_blank"
-                rel="noreferrer"
+                rel="noreferrer nofollow"
                 className="group focus-visible:outline-none transition-transform duration-200 hover:scale-[1.02] focus-visible:scale-[1.02]"
                 style={{ 
                   ...card, 
@@ -130,7 +131,7 @@ const ExperienceSection = () => {
             <a
               href="https://pollub.pl"
               target="_blank"
-              rel="noreferrer"
+              rel="noreferrer nofollow"
               style={{
                 ...card,
                 padding: isMobile ? 20 : 32,
@@ -160,7 +161,7 @@ const ExperienceSection = () => {
                 key={c.title}
                 href={c.url}
                 target="_blank"
-                rel="noreferrer"
+                rel="noreferrer nofollow"
                 onClick={(e) => { e.preventDefault(); setSelectedCert(c); }}
                 aria-haspopup="dialog"
                 aria-controls="cert-modal"
@@ -246,7 +247,7 @@ const ExperienceSection = () => {
                 <a
                   href={selectedCert.url}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noreferrer nofollow"
                   className="px-4 py-2 font-extrabold transition-colors"
                   style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: P("ecru"), color: P("black") }}
                   onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = P("amaranth"); (e.currentTarget as HTMLAnchorElement).style.color = P("white"); }}
@@ -272,4 +273,64 @@ const ExperienceSection = () => {
   );
 };
 
-export { ExperienceSection };
+export const ExperienceSection = () => {
+  return (
+    <ClientOnlyWrapper fallback={
+      <section className="py-24 md:py-36 bg-[#FAF6EE] border-t-3 border-black" id="experience">
+        <div className="container mx-auto max-w-6xl">
+          <header className="mt-4 md:mt-8 mb-12 md:mb-24">
+            <h2 className="text-left text-[9vw] sm:text-5xl md:text-7xl font-extrabold uppercase tracking-tight leading-[0.95] text-black">
+              Doświadczenie
+            </h2>
+          </header>
+          <div className="grid gap-4 md:gap-8 grid-cols-2 lg:grid-cols-[2fr_1fr]">
+            <div className="space-y-4">
+              <h3 className="text-2xl font-extrabold mb-6 flex items-center gap-3">
+                <div className="w-6 h-6 border border-black bg-white"></div>
+                Doświadczenie zawodowe
+              </h3>
+              <div className="space-y-4">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <div key={i} className="p-6 border-3 border-black bg-white text-black">
+                    <div className="flex justify-between items-start mb-2">
+                      <h4 className="font-extrabold">Position {i}</h4>
+                      <span className="text-sm opacity-60">2021-2025</span>
+                    </div>
+                    <div className="font-bold mb-1">Company {i}</div>
+                    <p className="text-sm">Description of the role and responsibilities.</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="space-y-4">
+              <h3 className="text-2xl font-extrabold mb-6 flex items-center gap-3">
+                <div className="w-6 h-6 border border-black bg-white"></div>
+                Certyfikaty
+              </h3>
+              <div className="grid gap-4">
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i} className="p-4 border-3 border-black bg-white text-black relative">
+                    <div className="absolute top-[-8px] right-3 bg-[#736134] text-white border-2 border-black px-2 py-1 text-xs font-extrabold">
+                      2023
+                    </div>
+                    <div className="flex items-center gap-2 text-xs mb-1 opacity-90">
+                      <div className="w-3 h-3 border border-black bg-white"></div>
+                      Certyfikat
+                    </div>
+                    <h4 className="font-extrabold text-sm">Certyfikat {i}</h4>
+                    <div className="italic text-sm">Organizacja {i}</div>
+                    <span className="block mt-2 text-xs font-bold opacity-60">Kliknij, aby zobaczyć certyfikat</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    }>
+      <ExperienceSectionContent />
+    </ClientOnlyWrapper>
+  );
+};
+
+export { ExperienceSectionContent };

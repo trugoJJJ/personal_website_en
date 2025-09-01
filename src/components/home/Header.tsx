@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { LanguageSwitch } from "@/components/LanguageSwitch";
 import ThemeToggle from "@/components/ThemeToggle";
 import { usePalette } from "./hooks";
+import { ClientOnlyWrapper } from "../ClientOnlyWrapper";
 
 const links = [
   { href: "#portfolio", label: "Portfolio" },
@@ -15,7 +16,7 @@ const links = [
   { href: "#articles", label: "Artykuły" },
 ];
 
-export const Header = () => {
+const HeaderContent = () => {
   const { isDark, P } = usePalette();
   const [open, setOpen] = useState(false);
   
@@ -32,7 +33,7 @@ export const Header = () => {
       {/* Full width nav without container so center is relative to viewport */}
       <nav className="w-full h-16 flex items-center relative">
         {/* Left brand */}
-        <a href="#home" className="font-extrabold tracking-tight leading-none ml-4 md:ml-8" style={{ color: isDark ? P("white") : P("charcoal") }}>Adam&nbsp;Gałęcki</a>
+        <a href="/" className="font-extrabold tracking-tight leading-none ml-4 md:ml-8" style={{ color: isDark ? P("white") : P("charcoal") }}>Adam&nbsp;Gałęcki</a>
         
         {/* Center desktop nav absolutely centered to page */}
         <ul
@@ -92,5 +93,23 @@ export const Header = () => {
         </div>
       )}
     </header>
+  );
+};
+
+export const Header = () => {
+  return (
+    <ClientOnlyWrapper fallback={
+      <header className="fixed top-0 inset-x-0 z-50 bg-white border-b-3 border-black">
+        <nav className="w-full h-16 flex items-center relative">
+          <a href="/" className="font-extrabold tracking-tight leading-none ml-4 md:ml-8 text-charcoal">Adam&nbsp;Gałęcki</a>
+          <div className="flex items-center gap-2 ml-auto mr-4">
+            <div className="w-11 h-11 bg-white border-3 border-black rounded-none"></div>
+            <div className="w-11 h-11 bg-white border-3 border-black rounded-none"></div>
+          </div>
+        </nav>
+      </header>
+    }>
+      <HeaderContent />
+    </ClientOnlyWrapper>
   );
 };

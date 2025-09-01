@@ -38,7 +38,7 @@ const Header = () => {
   return (
     <header className="fixed top-0 inset-x-0 z-50" style={{ background: isDark ? P("charcoal") : P("white"), borderBottom: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, color: isDark ? P("white") : P("charcoal") }}>
       <nav className="w-full h-16 flex items-center relative">
-        <a href="#home" className="font-extrabold tracking-tight leading-none ml-4 md:ml-8" style={{ color: isDark ? P("white") : P("charcoal") }}>Adam&nbsp;Gałęcki</a>
+        <a href="/" className="font-extrabold tracking-tight leading-none ml-4 md:ml-8" style={{ color: isDark ? P("white") : P("charcoal") }}>Adam&nbsp;Gałęcki</a>
         <ul
           className="hidden desk:flex items-center gap-8 text-sm absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
           style={{ color: isDark ? P("white") : P("charcoal") }}
@@ -133,7 +133,12 @@ const PortfolioPPC = () => {
     <div style={{ background: isDark ? P('charcoal') : P('white'), color: isDark ? P('white') : P('charcoal') }}>
       <Header />
       <main className="pt-28">
-        <SEO title={`${project.title} – Portfolio`} description={project.description} />
+        <SEO 
+          title="Kampanie reklamowe Google Ads i Meta Ads – Adam Gałęcki"
+          description="Kompleksowe kampanie reklamowe Google Ads i Meta Ads dla producenta drzwi. Optymalizacja konwersji, zarządzanie budżetem i wzrost sprzedaży."
+          canonical="https://monke.io/portfolio/ppc"
+          ogImage="https://monke.io/og_cover.png"
+        />
 
         {/* Sekcja tytułowa */}
         <section style={sectionOuter(isDark ? P('charcoal') : P('white'), false)} className="pb-20">

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { CalendarIcon, Clock, ExternalLink } from "lucide-react";
 import { articles } from "@/data/articles";
+import { ClientOnlyWrapper } from "@/components/ClientOnlyWrapper";
 
 /* ================== PALETA – LIGHT ================== */
 const COLORS = {
@@ -60,7 +61,7 @@ const SectionHeading = ({ children, id }: { children: any, id?: string }) => {
   );
 };
 
-const ArticlesSection = () => {
+const ArticlesSectionContent = () => {
   const { isDark, P } = usePalette();
   
   return (
@@ -98,7 +99,9 @@ const ArticlesSection = () => {
                 <h3 className="text-xl font-extrabold">{article.title}</h3>
                 <p className="text-sm">{article.excerpt}</p>
                 <Link
-                  href={`/articles/${article.id}`}
+                  href={article.link}
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
                   className="w-full inline-flex items-center justify-center gap-2 font-extrabold px-4 py-3 transition-colors"
                   style={{
                     border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`,
@@ -126,4 +129,54 @@ const ArticlesSection = () => {
   );
 };
 
-export { ArticlesSection };
+export const ArticlesSection = () => {
+  return (
+    <ClientOnlyWrapper fallback={
+      <section className="py-24 md:py-36 bg-white border-t-3 border-black" id="articles">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <header className="mt-4 md:mt-8 mb-12 md:mb-24">
+            <h2 className="text-left text-[9vw] sm:text-5xl md:text-7xl font-extrabold uppercase tracking-tight leading-[0.95] text-black">
+              Artykuły
+            </h2>
+          </header>
+          <div className="grid lg:grid-cols-3 gap-8 mb-12">
+            {[1, 2, 3].map((i) => (
+              <article key={i} className="group border-3 border-black bg-white text-[#2E2217]">
+                <div className="aspect-[4/3] overflow-hidden relative border-b-3 border-black">
+                  <div className="w-full h-full bg-gray-200"></div>
+                  <div className="absolute top-3 left-3">
+                    <span className="text-xs font-extrabold px-2 py-1 bg-[#736134] text-white border-2 border-black">
+                      Kategoria {i}
+                    </span>
+                  </div>
+                </div>
+                <div className="p-6 space-y-4">
+                  <div className="flex items-center gap-4 text-sm">
+                    <div className="flex items-center gap-1">
+                      <div className="w-4 h-4 border border-black bg-white"></div>
+                      2024-01-{String(i).padStart(2, '0')}
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <div className="w-4 h-4 border border-black bg-white"></div>
+                      {i * 5} min
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-extrabold">Tytuł artykułu {i}</h3>
+                  <p className="text-sm">Krótki opis artykułu i jego zawartości...</p>
+                  <div className="w-full inline-flex items-center justify-center gap-2 font-extrabold px-4 py-3 border-3 border-black bg-white text-black">
+                    <div className="w-4 h-4 border border-black bg-white"></div>
+                    Czytaj więcej
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    }>
+      <ArticlesSectionContent />
+    </ClientOnlyWrapper>
+  );
+};
+
+export { ArticlesSectionContent };

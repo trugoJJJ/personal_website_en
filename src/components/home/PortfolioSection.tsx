@@ -10,6 +10,7 @@ import {
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { articles } from "@/data/articles";
+import ClientOnlyWrapper from "@/components/ClientOnlyWrapper";
 
 /* ================== PALETA – LIGHT ================== */
 const COLORS = {
@@ -308,39 +309,35 @@ const SectionHeading = ({ children, id }: { children: any, id?: string }) => {
 };
 
 /* ================== GŁÓWNY KOMPONENT SEKCJI PORTFOLIO ================== */
-export const PortfolioSection = () => {
+const PortfolioSectionContent = () => {
   const { isDark, P } = usePalette();
-  const isDesktop = useMediaQuery('(min-width: 640px)');
-
-  // portfolio state
-  const [items, setItems] = useState<Project[]>([]);
-  const [initialItems, setInitialItems] = useState<Project[]>([]);
-  const [isSolved, setIsSolved] = useState(false);
-  const [activeItem, setActiveItem] = useState<Project | null>(null);
+  const isDesktop = useMediaQuery('(min-width: 768px)');
+  const [items, setItems] = useState<Project[]>(() => shuffleArray(createSixProjects(portfolioProjects)));
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
-  const hoverClearTimeout = useRef<number | null>(null);
+  const [activeItem, setActiveItem] = useState<Project | null>(null);
+  const [isSolved, setIsSolved] = useState(false);
+  const hoverTimeoutRef = useRef<number | null>(null);
 
   const setHoverCategorySafely = (val: string | null) => {
-    if (hoverClearTimeout.current) {
-      window.clearTimeout(hoverClearTimeout.current);
-      hoverClearTimeout.current = null;
+    if (hoverTimeoutRef.current) {
+      window.clearTimeout(hoverTimeoutRef.current);
+      hoverTimeoutRef.current = null;
     }
     setHoveredCategory(val);
   };
 
   const scheduleHoverClear = (delay = 150) => {
-    if (hoverClearTimeout.current) window.clearTimeout(hoverClearTimeout.current);
-    hoverClearTimeout.current = window.setTimeout(() => {
+    if (hoverTimeoutRef.current) window.clearTimeout(hoverTimeoutRef.current);
+    hoverTimeoutRef.current = window.setTimeout(() => {
       setHoveredCategory(null);
-      hoverClearTimeout.current = null;
+      hoverTimeoutRef.current = null;
     }, delay);
   };
 
   // init portfolio
   useEffect(() => {
     const generatedItems = createSixProjects(portfolioProjects);
-    setInitialItems(generatedItems);
     setItems(shuffleArray([...generatedItems]));
   }, []);
 
@@ -357,7 +354,7 @@ export const PortfolioSection = () => {
     if (isMatch(sequenceTitles, winning1) || isMatch(sequenceTitles, winning2)) setIsSolved(true);
   };
 
-  const handleReset = () => { setIsSolved(false); setItems(shuffleArray(initialItems)); };
+  const handleReset = () => { setIsSolved(false); setItems(shuffleArray(createSixProjects(portfolioProjects))); };
 
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
@@ -453,6 +450,41 @@ export const PortfolioSection = () => {
         </DndContext>
       </div>
     </section>
+  );
+};
+
+export const PortfolioSection = () => {
+  return (
+    <ClientOnlyWrapper fallback={
+      <section className="pt-24 md:pt-36 bg-[#FAF6EE] border-t-3 border-black" id="portfolio">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <header className="mb-12 md:mb-24 mt-4 md:mt-8">
+            <h2 className="text-left text-[9vw] sm:text-5xl md:text-7xl font-extrabold uppercase tracking-tight leading-[0.95] text-black">
+              Portfolio
+            </h2>
+          </header>
+          <div className="hidden sm:flex justify-end mb-10 gap-3">
+            <button className="px-5 py-2 font-extrabold transition-colors border-3 border-black bg-white text-black">
+              Projekty kreatywne
+            </button>
+            <button className="px-5 py-2 font-extrabold transition-colors border-3 border-black bg-white text-black">
+              Projekty sprzedażowe
+            </button>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div key={i} className="border-3 border-black bg-white p-6">
+                <div className="w-full h-48 bg-gray-200 mb-4"></div>
+                <h3 className="text-xl font-bold mb-2">Project {i}</h3>
+                <p className="text-sm text-gray-600">Project description</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    }>
+      <PortfolioSectionContent />
+    </ClientOnlyWrapper>
   );
 };
 

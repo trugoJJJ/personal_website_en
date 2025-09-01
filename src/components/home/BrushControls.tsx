@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { usePalette, COLORS } from "./hooks";
 import { BrushType } from "./types";
+import { ClientOnlyWrapper } from "@/components/ClientOnlyWrapper";
 
 interface BrushControlsProps {
   onSizeChange: (size: number) => void;
@@ -14,7 +15,7 @@ interface BrushControlsProps {
   isVisible: boolean;
 }
 
-export const BrushControls = ({
+const BrushControlsContent = ({
   onSizeChange, onColorChange, onBrushTypeChange,
   currentColorKey, currentSize, currentBrushType, isVisible,
 }: BrushControlsProps) => {
@@ -128,5 +129,24 @@ export const BrushControls = ({
         })}
       </div>
     </div>
+  );
+};
+
+export const BrushControls = ({
+  onSizeChange, onColorChange, onBrushTypeChange,
+  currentColorKey, currentSize, currentBrushType, isVisible,
+}: BrushControlsProps) => {
+  return (
+    <ClientOnlyWrapper>
+      <BrushControlsContent
+        onSizeChange={onSizeChange}
+        onColorChange={onColorChange}
+        onBrushTypeChange={onBrushTypeChange}
+        currentColorKey={currentColorKey}
+        currentSize={currentSize}
+        currentBrushType={currentBrushType}
+        isVisible={isVisible}
+      />
+    </ClientOnlyWrapper>
   );
 };

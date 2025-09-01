@@ -2,8 +2,9 @@
 
 import { useState, useEffect, useRef } from "react";
 import { usePalette } from "./hooks";
+import { ClientOnlyWrapper } from "../ClientOnlyWrapper";
 
-export const HeroSection = () => {
+const HeroSectionContent = () => {
   const { isDark, P } = usePalette();
   const [scale, setScale] = useState(0.6);
   const boxRef = useRef<HTMLDivElement | null>(null);
@@ -74,5 +75,38 @@ export const HeroSection = () => {
         </div>
       </div>
     </section>
+  );
+};
+
+export const HeroSection = () => {
+  return (
+    <ClientOnlyWrapper fallback={
+      <section id="home" className="pt-44 pb-24 md:pb-32 bg-white">
+        <div className="container mx-auto">
+          <div className="text-center mb-12">
+            <h1 className="font-extrabold uppercase tracking-wider leading-[1.05] text-6xl sm:text-9xl mb-6 text-black">Digital</h1>
+            <h1 className="font-extrabold uppercase tracking-wider leading-[1.05] text-4xl sm:text-6xl mb-6 text-black">Marketing</h1>
+            <h1 className="font-extrabold uppercase tracking-wider leading-[1.15] text-4xl sm:text-5xl text-black">Manager</h1>
+          </div>
+          <div className="relative mx-auto w-full max-w-[1600px]">
+            <div className="overflow-hidden transition-transform duration-150 ease-out scale-60 border-3 border-black">
+              <div className="aspect-video flex items-center justify-center bg-[#FAF6EE]">
+                <div className="text-center space-y-3 text-[#2E2217]">
+                  <div className="w-16 h-16 mx-auto flex items-center justify-center border-3 border-black">
+                    <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </div>
+                  <p>Video placeholder</p>
+                  <p className="opacity-70">Scroll to see video grow</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    }>
+      <HeroSectionContent />
+    </ClientOnlyWrapper>
   );
 };

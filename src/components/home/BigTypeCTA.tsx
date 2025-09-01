@@ -4,8 +4,9 @@ import { useState, useEffect, useRef } from "react";
 import { usePalette, useI18n, COLORS } from "./hooks";
 import { BrushType } from "./types";
 import { BrushControls } from "./BrushControls";
+import { ClientOnlyWrapper } from "../ClientOnlyWrapper";
 
-export const BigTypeCTA = () => {
+const BigTypeCTAContent = () => {
   const { t } = useI18n();
   const { isDark, P } = usePalette();
   const linkRef = useRef<HTMLAnchorElement>(null);
@@ -273,5 +274,13 @@ export const BigTypeCTA = () => {
         </div>
       </div>
     </section>
+  );
+};
+
+export const BigTypeCTA = () => {
+  return (
+    <ClientOnlyWrapper>
+      <BigTypeCTAContent />
+    </ClientOnlyWrapper>
   );
 };

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { ClientOnlyWrapper } from "@/components/ClientOnlyWrapper";
 
 /* ================== PALETA – LIGHT ================== */
 const COLORS = {
@@ -57,7 +58,7 @@ const SectionHeading = ({ children, id }: { children: any, id?: string }) => {
   );
 };
 
-const SkillsSection = () => {
+const SkillsSectionContent = () => {
   const { isDark, P } = usePalette();
   
   const technicalSkills = [
@@ -144,4 +145,80 @@ const SkillsSection = () => {
   );
 };
 
-export { SkillsSection };
+export const SkillsSection = () => {
+  return (
+    <ClientOnlyWrapper fallback={
+      <section className="py-24 md:py-36 bg-white border-t-3 border-black" id="skills">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <header className="mt-4 md:mt-8 mb-12 md:mb-24">
+            <h2 className="text-left text-[9vw] sm:text-5xl md:text-7xl font-extrabold uppercase tracking-tight leading-[0.95] text-black">
+              Umiejętności
+            </h2>
+          </header>
+          <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fill,minmax(220px,1fr))" }}>
+            {[
+              "Zarządzanie zespołem", "Analityka marketingu", "SEO",
+              "Media Społecznościowe", "Płatne Kampanie Reklamowe",
+              "Projektowanie Lejków", "No-Code", "Email Marketing",
+              "Automatyzacja", "Tworzenie stron", "Animacja 3D", "Animacja 2D",
+              "Grafika 3D", "Grafika 2D", "+ trochę więcej…"
+            ].map((skill, i) => (
+              <div
+                key={skill}
+                className="relative font-extrabold tracking-tight select-none"
+                style={{
+                  background: "linear-gradient(145deg, #ffffff 0%, #faf7ef 55%, #f1ead8 100%)",
+                  color: "#2E2217",
+                  padding: "20px 24px",
+                  fontSize: "1.05rem",
+                  border: "3px solid #000000",
+                  display: "flex",
+                  alignItems: "flex-start",
+                  justifyContent: "flex-start",
+                  lineHeight: 1.15,
+                  boxShadow: "4px 4px 0 0 #000000",
+                }}
+              >
+                <span
+                  aria-hidden="true"
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    height: "100%",
+                    width: 10,
+                    background: "#D8A23A",
+                    borderRight: "3px solid #000000",
+                    mixBlendMode: "multiply",
+                  }}
+                />
+                <span
+                  aria-hidden="true"
+                  style={{
+                    position: "absolute",
+                    top: -12,
+                    right: 10,
+                    background: "#736134",
+                    color: "#FFFFFF",
+                    border: "2px solid #000000",
+                    fontSize: 10,
+                    padding: "2px 6px",
+                    letterSpacing: 0.5,
+                    fontWeight: 800,
+                  }}
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span style={{ paddingLeft: 16 }}>{skill}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    }>
+      <SkillsSectionContent />
+    </ClientOnlyWrapper>
+  );
+};
+
+export { SkillsSectionContent };

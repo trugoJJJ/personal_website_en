@@ -1,8 +1,9 @@
 "use client";
 
 import { usePalette } from "./hooks";
+import { ClientOnlyWrapper } from "@/components/ClientOnlyWrapper";
 
-const TechStackSection = () => {
+const TechStackSectionContent = () => {
   const { isDark, P } = usePalette(); // Dodaj destrukturyzację
   
   const techStack = [
@@ -80,4 +81,37 @@ const TechStackSection = () => {
   );
 };
 
-export { TechStackSection };
+export const TechStackSection = () => {
+  return (
+    <ClientOnlyWrapper fallback={
+      <section className="py-24 md:py-36 bg-[#FAF6EE] border-t-3 border-black" id="techstack">
+        <div className="container mx-auto max-w-6xl">
+          <header className="mb-12 md:mb-24 mt-4 md:mt-8">
+            <h2 className="text-left text-[9vw] sm:text-5xl md:text-7xl font-extrabold uppercase tracking-tight leading-[0.95] text-black">
+              Tech Stack
+            </h2>
+          </header>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              "AI Tools", "Grafika", "Animacja", "Strony internetowe", "Analityka", "SEO",
+              "Zarządzanie projektami", "Email Marketing", "Systemy reklam PPC", "Programowanie"
+            ].map((category) => (
+              <div key={category} className="p-6 border-3 border-black bg-white text-[#2E2217]">
+                <h3 className="text-xl font-extrabold mb-4">{category}</h3>
+                <div className="flex flex-wrap gap-2">
+                  {[1, 2, 3, 4, 5].map((i) => (
+                    <div key={i} className="px-3 py-1 text-sm font-bold border-2 border-black bg-[#FAF6EE] text-black">
+                      Tool {i}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    }>
+      <TechStackSectionContent />
+    </ClientOnlyWrapper>
+  );
+};

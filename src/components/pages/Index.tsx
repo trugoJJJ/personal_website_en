@@ -12,10 +12,17 @@ import { SkillsSection } from "@/components/home/SkillsSection";
 import { ArticlesSection } from "@/components/home/ArticlesSection"; 
 import { CTASection } from "@/components/home/CTASection";
 import { FooterSection } from "@/components/home/FooterSection";
+import { SEO } from "@/components/SEO";
 
 const Index = () => {
   return (
     <div className="min-h-screen">
+      <SEO 
+        title="Portfolio – Adam Gałęcki – Digital Marketing Manager"
+        description="Zajmuję się kompleksową obsługą komunikacji marketingowej nakierowanej na osiąganie zamierzonych celów biznesowych w firmach B2B i B2C."
+        canonical="https://monke.io"
+        ogImage="https://monke.io/og_cover.png"
+      />
       <Header />
       <HeroSection />
       <PortfolioSection />

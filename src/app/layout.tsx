@@ -1,4 +1,6 @@
 import { Providers } from "@/components/Providers";
+import { LoadingProvider } from "@/components/LoadingProvider";
+import ScrollToTop from "@/components/ScrollToTop";
 import "./globals.css";
 
 export default function RootLayout({
@@ -9,26 +11,34 @@ export default function RootLayout({
   return (
     <html lang="pl" suppressHydrationWarning>
       <head>
-        <title>Monke.io - Portfolio & Blog</title>
-        <meta name="description" content="Professional portfolio and blog showcasing web development, SEO, PPC, and analytics projects." />
-        <meta name="keywords" content="web development,SEO,PPC,analytics,portfolio,blog" />
-        <meta name="author" content="Adam Gacki" />
+        <link rel="icon" href="/ag_fav.svg?v=1" type="image/svg+xml" />
+        <link rel="shortcut icon" href="/ag_fav.svg?v=1" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/ag_fav.svg?v=1" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta httpEquiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <meta httpEquiv="Pragma" content="no-cache" />
+        <meta httpEquiv="Expires" content="0" />
         <meta name="robots" content="index, follow" />
-        <meta property="og:title" content="Monke.io - Portfolio & Blog" />
-        <meta property="og:description" content="Professional portfolio and blog showcasing web development, SEO, PPC, and analytics projects." />
-        <meta property="og:url" content="https://monke.io" />
-        <meta property="og:site_name" content="Monke.io" />
+        <meta name="author" content="Adam Gałęcki" />
         <meta property="og:locale" content="pl_PL" />
         <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Adam Gałęcki - Portfolio" />
+        <meta property="og:title" content="Portfolio – Adam Gałęcki – Digital Marketing Manager" />
+        <meta property="og:description" content="Zajmuję się kompleksową obsługą komunikacji marketingowej nakierowanej na osiąganie zamierzonych celów biznesowych w firmach B2B i B2C." />
+        <meta property="og:image" content="https://monke.io/og_cover.png" />
+        <meta property="og:url" content="https://monke.io" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Monke.io - Portfolio & Blog" />
-        <meta name="twitter:description" content="Professional portfolio and blog showcasing web development, SEO, PPC, and analytics projects." />
+        <meta name="twitter:title" content="Portfolio – Adam Gałęcki – Digital Marketing Manager" />
+        <meta name="twitter:description" content="Zajmuję się kompleksową obsługą komunikacji marketingowej nakierowanej na osiąganie zamierzonych celów biznesowych w firmach B2B i B2C." />
+        <meta name="twitter:image" content="https://monke.io/og_cover.png" />
       </head>
       <body>
-        <Providers>
-          {children}
-        </Providers>
+        <LoadingProvider>
+          <Providers>
+            {children}
+            <ScrollToTop />
+          </Providers>
+        </LoadingProvider>
       </body>
     </html>
   );
