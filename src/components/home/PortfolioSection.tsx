@@ -434,7 +434,7 @@ const PortfolioSectionContent = () => {
                     key={item.id}
                     project={item}
                     isHighlighted={!!isHighlighted}
-                    isDraggable={isDesktop}
+                    isDraggable={false} // TODO: Zmień na true żeby włączyć drag & drop
                   />
                 );
               })}

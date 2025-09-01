@@ -10,15 +10,25 @@ All colors MUST be HSL.
 */
 
 @layer base {
-  /* Fix text selection color in dark mode */
+  /* Text selection colors using theme colors */
   ::selection {
-    background-color: hsl(210 40% 98% / 0.3);
-    color: hsl(210 40% 98%);
+    background-color: #C25A3A;
+    color: #FAF6EE;
+  }
+  
+  ::-moz-selection {
+    background-color: #C25A3A;
+    color: #FAF6EE;
   }
   
   .dark ::selection {
-    background-color: hsl(210 40% 98% / 0.3);
-    color: hsl(210 40% 98%);
+    background-color: #4C1D95;
+    color: #000000;
+  }
+  
+  .dark ::-moz-selection {
+    background-color: #4C1D95;
+    color: #000000;
   }
 
   /* Strong text in dark mode */
