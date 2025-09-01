@@ -33,8 +33,8 @@ const LoaderContent = () => {
   const checkTheme = () => {
     if (typeof window === 'undefined') return false;
     
-    // Check localStorage first
-    const storedTheme = localStorage.getItem('theme');
+    // Check localStorage first (using the same key as ThemeProvider)
+    const storedTheme = localStorage.getItem('theme-preference');
     if (storedTheme === 'dark') return true;
     if (storedTheme === 'light') return false;
     
@@ -63,7 +63,7 @@ const LoaderContent = () => {
 
     // Listen for localStorage changes
     const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === 'theme') {
+      if (e.key === 'theme-preference') {
         setIsDark(checkTheme());
       }
     };

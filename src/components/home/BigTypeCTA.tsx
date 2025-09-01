@@ -196,7 +196,8 @@ const BigTypeCTAContent = () => {
   }, [drawingColor, brushSize, brushType]);
 
   return (
-    <section className="pt-8 md:pt-16 pb-24 md:pb-36">
+    <section className="pt-8 md:pt-16 pb-24 md:pb-36"
+             style={{ background: P("ecru") }}>
       <div className="w-full max-w-6xl mx-auto px-6">
         <div className="w-full flex justify-center">
           <a

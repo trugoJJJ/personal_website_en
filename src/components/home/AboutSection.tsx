@@ -31,7 +31,7 @@ export const AboutSection = () => {
               <img src={portrait.src} alt="Portret – o mnie" loading="lazy" className="w-full h-64 object-cover md:h-80" />
             </figure>
             <div className="space-y-6" style={{ color: isDark ? P("white") : P("charcoal") }}>
-              <h3 className="text-2xl md:text-3xl font-extrabold text-center md:text-left">Cześć, nazywam się Adam</h3>
+              <h3 className="text-2xl md:text-3xl font-extrabold text-left">Cześć, nazywam się Adam</h3>
               <p className="text-lg">
                 Zajmuję się kompleksową obsługą komunikacji marketingowej nakierowanej na osiąganie zamierzonych celów biznesowych.
               </p>
@@ -44,18 +44,17 @@ export const AboutSection = () => {
           </div>
 
           <div className="space-y-8">
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-2 gap-3 md:gap-6">
               {[
-                { Icon: Target, value: "+3 mln", label: "Wyświetleń linku do strony w Google" },
-                { Icon: TrendingUp, value: "125 tys.", label: "Wejść na stronę z wyników Google" },
-                { Icon: Users, value: "40%", label: "Wzrost zapytań ofertowych" },
-                { Icon: Award, value: "750", label: "Wypełnionych formularzy" },
+                { value: "+3 mln", label: "Wyświetleń linku do strony w Google" },
+                { value: "125 tys.", label: "Wejść na stronę z wyników Google" },
+                { value: "40%", label: "Wzrost zapytań ofertowych" },
+                { value: "750", label: "Wypełnionych formularzy" },
               ].map((s) => (
-                <div key={s.label} className="p-6 text-left"
+                <div key={s.label} className="p-4 md:p-6 text-left"
                      style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: P("ecru"), color: isDark ? P("white") : P("black") }}>
-                  <s.Icon className="h-7 w-7 mb-3" />
-                  <div className="text-3xl font-extrabold">{s.value}</div>
-                  <div className="text-sm mt-1">{s.label}</div>
+                  <div className="text-2xl md:text-3xl font-extrabold">{s.value}</div>
+                  <div className="text-xs md:text-sm mt-1">{s.label}</div>
                 </div>
               ))}
             </div>

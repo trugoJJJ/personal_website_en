@@ -11,9 +11,9 @@ export default function RootLayout({
   return (
     <html lang="pl" suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/ag_fav.svg?v=1" type="image/svg+xml" />
-        <link rel="shortcut icon" href="/ag_fav.svg?v=1" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/ag_fav.svg?v=1" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/favicon.svg" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta httpEquiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
         <meta httpEquiv="Pragma" content="no-cache" />

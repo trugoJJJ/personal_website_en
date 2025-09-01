@@ -25,12 +25,26 @@ const ThemeToggleContent = () => {
     padding: 0,
   };
 
+  const handleThemeToggle = () => {
+    // Add glitch animation to the entire page
+    const html = document.documentElement;
+    html.classList.add('theme-glitch');
+    
+    // Remove animation class after animation completes
+    setTimeout(() => {
+      html.classList.remove('theme-glitch');
+    }, 400);
+    
+    // Toggle theme
+    setTheme(isDark ? "light" : "dark");
+  };
+
   return (
     <Button
       variant="outline"
       size="icon"
       aria-label={isDark ? "Przełącz na jasny motyw" : "Przełącz na ciemny motyw"}
-      onClick={() => setTheme(isDark ? "light" : "dark")}
+      onClick={handleThemeToggle}
       className={baseBtn}
       style={baseStyle}
       onMouseEnter={(e) => {

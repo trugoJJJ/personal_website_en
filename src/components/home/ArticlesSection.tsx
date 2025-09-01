@@ -66,7 +66,7 @@ const ArticlesSectionContent = () => {
   
   return (
     <section className="py-24 md:py-36" id="articles"
-             style={{ background: isDark ? P("charcoal") : P("white"), borderTop: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
+             style={{ background: P("ecru"), borderTop: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
       <div className="container mx-auto px-6 max-w-6xl">
         <SectionHeading>Artykuły</SectionHeading>
 

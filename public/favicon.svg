@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <!-- Tło -->
+  <rect width="32" height="32" fill="#FAF6EE"/>
+  
+  <!-- Grupa z rotacją całkowitą -->
+  <g transform="rotate(45 16 16)">
+    <!-- Górny kwadrat (górny róg rombu) -->
+    <rect x="13" y="4" width="6" height="6" fill="#C25A3A" stroke="#000000" stroke-width="1" transform="rotate(45 16 7)"/>
+    
+    <!-- Prawy kwadrat (prawy róg rombu) -->
+    <rect x="22" y="13" width="6" height="6" fill="#C25A3A" stroke="#000000" stroke-width="1" transform="rotate(45 25 16)"/>
+    
+    <!-- Dolny kwadrat (dolny róg rombu) -->
+    <rect x="13" y="22" width="6" height="6" fill="#C25A3A" stroke="#000000" stroke-width="1" transform="rotate(45 16 25)"/>
+    
+    <!-- Lewy kwadrat (lewy róg rombu) -->
+    <rect x="4" y="13" width="6" height="6" fill="#C25A3A" stroke="#000000" stroke-width="1" transform="rotate(45 7 16)"/>
+  </g>
+</svg>

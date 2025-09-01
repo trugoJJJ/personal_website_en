@@ -6,7 +6,12 @@ import { ClientOnlyWrapper } from "./ClientOnlyWrapper";
 
 const ThemeProviderContent = ({ children }: { children: React.ReactNode }) => {
   return (
-    <NextThemeProvider attribute="class" defaultTheme="system" enableSystem>
+    <NextThemeProvider 
+      attribute="class" 
+      defaultTheme="light" 
+      enableSystem={false}
+      storageKey="theme-preference"
+    >
       {children}
     </NextThemeProvider>
   );
