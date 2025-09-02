@@ -1,11 +1,12 @@
 const { execSync } = require('child_process');
 const ftp = require('basic-ftp');
+require('dotenv').config({ path: '.env.local' });
 
-// 🔧 ZMIEŃ TE DANE NA SWOJE!
+// 🔧 DANE FTP SĄ TERAZ W PLIKU .env.local (NIE COMMITUJ TEGO PLIKU!)
 const ftpConfig = {
-  host: 's23.cyber-folks.pl',        
-  user: 'admingalecki@galecki.website',                // Twój login FTP z panelu
-  password: 'Befs250ml***',     // Twoje hasło (to samo co do panelu)
+  host: process.env.FTP_HOST,        
+  user: process.env.FTP_USER,                
+  password: process.env.FTP_PASSWORD,     
   secure: false
 };
 
