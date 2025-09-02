@@ -76,101 +76,104 @@ const NotFoundContent = () => {
       />
       
       {/* Main Content */}
-      <main className="flex-1 flex items-center justify-center">
-        <div className="text-center max-w-md mx-auto px-6">
-          {/* 404 Number */}
-          <div className="mb-8">
-            <h1 
-              className="text-[20vw] sm:text-8xl md:text-9xl font-extrabold leading-none tracking-tight"
-              style={{ color: isDark ? P("white") : P("black") }}
-            >
-              404
-            </h1>
-          </div>
-
-          {/* Error Message */}
-          <div className="mb-12">
-            <h2 
-              className="text-2xl md:text-3xl font-extrabold mb-4 uppercase tracking-wide"
-              style={{ color: isDark ? P("white") : P("black") }}
-            >
-              Strona nie została znaleziona
-            </h2>
-            <p 
-              className="text-lg md:text-xl leading-relaxed"
-              style={{ color: isDark ? P("white") : P("charcoal"), opacity: 0.8 }}
-            >
-              Przepraszamy, ale strona której szukasz nie istnieje lub została przeniesiona.
-            </p>
-          </div>
-
-          {/* Requested URL */}
-          <div className="mb-12">
-            <div 
-              className="inline-block px-4 py-2 font-mono text-sm"
-              style={{ 
-                background: isDark ? P("alloy") : P("white"),
-                border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`,
-                color: isDark ? P("white") : P("charcoal")
-              }}
-            >
-              {typeof window !== 'undefined' ? window.location.pathname : ''}
+      <main className="flex-1 flex items-center justify-center px-4 py-20 pb-8 md:py-16 md:pb-12">
+        <div className="text-center max-w-md md:max-w-xl mx-auto w-full mt-0 mb-0 md:mt-16 md:mb-8">
+          {/* Main Content Box */}
+          <div 
+            className="p-8 md:p-12"
+            style={{ 
+              border: `${isDark ? '2px' : '4px'} solid ${isDark ? P("white") : P("black")}`,
+              background: isDark ? P("alloy") : P("white")
+            }}
+          >
+            {/* 404 Number */}
+            <div className="mb-6 md:mb-8">
+              <h1 
+                className="text-[15vw] sm:text-6xl md:text-7xl lg:text-8xl font-extrabold leading-none tracking-tight"
+                style={{ color: isDark ? P("white") : P("black") }}
+              >
+                404
+              </h1>
             </div>
-          </div>
 
-          {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 font-extrabold px-6 py-3 transition-all duration-200 hover:scale-105"
-              style={{
-                border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`,
-                background: isDark ? P("charcoal") : P("white"),
-                color: isDark ? P("white") : P("black")
-              }}
-              onMouseOver={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.background = P("amaranth");
-                (e.currentTarget as HTMLAnchorElement).style.color = P("white");
-              }}
-              onMouseOut={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.background = isDark ? P("charcoal") : P("white");
-                (e.currentTarget as HTMLAnchorElement).style.color = isDark ? P("white") : P("black");
-              }}
-            >
-              <Home className="h-4 w-4" />
-              Strona główna
-            </Link>
+            {/* Error Message */}
+            <div className="mb-8 md:mb-12">
+              <h2 
+                className="text-xl sm:text-2xl md:text-3xl font-extrabold mb-3 md:mb-4 uppercase tracking-wide"
+                style={{ color: isDark ? P("white") : P("black") }}
+              >
+                Strona nie została znaleziona
+              </h2>
+              <p 
+                className="text-base sm:text-lg md:text-xl leading-relaxed px-4"
+                style={{ color: isDark ? P("white") : P("charcoal"), opacity: 0.8 }}
+              >
+                Przepraszamy, ale strona której szukasz nie istnieje lub została przeniesiona.
+              </p>
+            </div>
 
-            <button
-              onClick={() => window.history.back()}
-              className="inline-flex items-center gap-2 font-extrabold px-6 py-3 transition-all duration-200 hover:scale-105"
-              style={{
-                border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`,
-                background: isDark ? P("charcoal") : P("white"),
-                color: isDark ? P("white") : P("black")
-              }}
-              onMouseOver={(e) => {
-                (e.currentTarget as HTMLButtonElement).style.background = P("butter");
-                (e.currentTarget as HTMLButtonElement).style.color = P("white");
-              }}
-              onMouseOut={(e) => {
-                (e.currentTarget as HTMLButtonElement).style.background = isDark ? P("charcoal") : P("white");
-                (e.currentTarget as HTMLButtonElement).style.color = isDark ? P("white") : P("black");
-              }}
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Wstecz
-            </button>
-          </div>
+            {/* Requested URL */}
+            <div className="mb-8 md:mb-12">
+              <div 
+                className="inline-block px-3 py-2 md:px-4 md:py-2 font-mono text-xs sm:text-sm break-all max-w-full"
+                style={{ 
+                  background: isDark ? P("charcoal") : P("ecru"),
+                  border: `${isDark ? '1px' : '2px'} solid ${isDark ? P("white") : P("black")}`,
+                  color: isDark ? P("white") : P("charcoal")
+                }}
+              >
+                {typeof window !== 'undefined' ? window.location.pathname : ''}
+              </div>
+            </div>
 
-          {/* Additional Info */}
-          <div className="mt-12">
-            <p 
-              className="text-sm opacity-60"
-              style={{ color: isDark ? P("white") : P("charcoal") }}
-            >
-              Jeśli uważasz, że to błąd, skontaktuj się z nami.
-            </p>
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-center px-4">
+              <Link
+                href="/"
+                className="inline-flex items-center gap-2 font-extrabold px-6 py-3 transition-all duration-200 hover:scale-105"
+                style={{
+                  border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`,
+                  background: isDark ? P("charcoal") : P("ecru"),
+                  color: isDark ? P("white") : P("black")
+                }}
+                onMouseOver={(e) => {
+                  (e.currentTarget as HTMLAnchorElement).style.background = P("amaranth");
+                  (e.currentTarget as HTMLAnchorElement).style.color = P("white");
+                }}
+                onMouseOut={(e) => {
+                  (e.currentTarget as HTMLAnchorElement).style.background = isDark ? P("charcoal") : P("ecru");
+                  (e.currentTarget as HTMLAnchorElement).style.color = isDark ? P("white") : P("black");
+                }}
+              >
+                <Home className="h-4 w-4" />
+                Strona główna
+              </Link>
+
+              <button
+                onClick={() => window.history.back()}
+                className="inline-flex items-center gap-2 font-extrabold px-6 py-3 transition-all duration-200 hover:scale-105"
+                style={{
+                  border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`,
+                  background: isDark ? P("charcoal") : P("ecru"),
+                  color: isDark ? P("white") : P("black")
+                }}
+                onMouseOver={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.background = P("butter");
+                  (e.currentTarget as HTMLButtonElement).style.color = P("white");
+                }}
+                onMouseOut={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.background = isDark ? P("charcoal") : P("ecru");
+                  (e.currentTarget as HTMLButtonElement).style.color = isDark ? P("white") : P("black");
+                }}
+              >
+                <ArrowLeft className="h-4 w-4" />
+                Wstecz
+              </button>
+            </div>
+
+            {/* Additional Info */}
+            <div className="mt-8 md:mt-12">
+            </div>
           </div>
         </div>
       </main>
@@ -197,40 +200,38 @@ const NotFound = () => {
         </header>
         
         {/* Main Content Fallback */}
-        <main className="flex-1 flex items-center justify-center">
-          <div className="text-center max-w-md mx-auto px-6">
-            <div className="mb-8">
-              <h1 className="text-[20vw] sm:text-8xl md:text-9xl font-extrabold leading-none tracking-tight text-black">
-                404
-              </h1>
-            </div>
-            <div className="mb-12">
-              <h2 className="text-2xl md:text-3xl font-extrabold mb-4 uppercase tracking-wide text-black">
-                Strona nie została znaleziona
-              </h2>
-              <p className="text-lg md:text-xl leading-relaxed text-[#2E2217] opacity-80">
-                Przepraszamy, ale strona której szukasz nie istnieje lub została przeniesiona.
-              </p>
-            </div>
-            <div className="mb-12">
-              <div className="inline-block px-4 py-2 font-mono text-sm bg-white border-3 border-black text-[#2E2217]">
-                /nieistniejaca-strona
+        <main className="flex-1 flex items-center justify-center px-4 py-20 pb-8 md:py-16 md:pb-12">
+          <div className="text-center max-w-md md:max-w-xl mx-auto w-full mt-0 mb-0 md:mt-16 md:mb-8">
+            {/* Main Content Box */}
+            <div className="p-8 md:p-12 bg-white border-4 border-black">
+              <div className="mb-6 md:mb-8">
+                <h1 className="text-[15vw] sm:text-6xl md:text-7xl lg:text-8xl font-extrabold leading-none tracking-tight text-black">
+                  404
+                </h1>
               </div>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <a href="/" className="inline-flex items-center gap-2 font-extrabold px-6 py-3 border-3 border-black bg-white text-black hover:scale-105 transition-all duration-200">
-                <div className="w-4 h-4 border border-black bg-white"></div>
-                Strona główna
-              </a>
-              <button className="inline-flex items-center gap-2 font-extrabold px-6 py-3 border-3 border-black bg-white text-black hover:scale-105 transition-all duration-200">
-                <div className="w-4 h-4 border border-black bg-white"></div>
-                Wstecz
-              </button>
-            </div>
-            <div className="mt-12">
-              <p className="text-sm opacity-60 text-[#2E2217]">
-                Jeśli uważasz, że to błąd, skontaktuj się z nami.
-              </p>
+              <div className="mb-8 md:mb-12">
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold mb-3 md:mb-4 uppercase tracking-wide text-black">
+                  Strona nie została znaleziona
+                </h2>
+                <p className="text-base sm:text-lg md:text-xl leading-relaxed text-[#2E2217] opacity-80 px-4">
+                  Przepraszamy, ale strona której szukasz nie istnieje lub została przeniesiona.
+                </p>
+              </div>
+              <div className="mb-8 md:mb-12">
+                <div className="inline-block px-3 py-2 md:px-4 md:py-2 font-mono text-xs sm:text-sm bg-[#FAF6EE] border-2 border-black text-[#2E2217] break-all max-w-full">
+                  /nieistniejaca-strona
+                </div>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-center px-4">
+                <a href="/" className="inline-flex items-center gap-2 font-extrabold px-6 py-3 border-3 border-black bg-[#FAF6EE] text-black hover:scale-105 transition-all duration-200">
+                  <div className="w-4 h-4 border border-black bg-white"></div>
+                  Strona główna
+                </a>
+                <button className="inline-flex items-center gap-2 font-extrabold px-6 py-3 border-3 border-black bg-[#FAF6EE] text-black hover:scale-105 transition-all duration-200">
+                  <div className="w-4 h-4 border border-black bg-white"></div>
+                  Wstecz
+                </button>
+              </div>
             </div>
           </div>
         </main>

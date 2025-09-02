@@ -69,10 +69,8 @@ const SkillsSectionContent = () => {
     "Grafika 3D", "Grafika 2D", "+ trochę więcej…"
   ];
 
-  // Styl kafelka jak dla: "Analityka marketingu" (index 1 w poprzedniej wersji)
-  const baseBackground = isDark
-    ? `linear-gradient(145deg, #14131b 0%, #1d1626 60%, #241b2b 100%)`
-    : `linear-gradient(145deg, #ffffff 0%, #faf7ef 55%, #f1ead8 100%)`;
+  // Jednolity kolor tła zamiast gradientu
+  const baseBackground = isDark ? P("ecru") : P("white");
 
   return (
     <section
@@ -167,7 +165,7 @@ export const SkillsSection = () => {
                 key={skill}
                 className="relative font-extrabold tracking-tight select-none"
                 style={{
-                  background: "linear-gradient(145deg, #ffffff 0%, #faf7ef 55%, #f1ead8 100%)",
+                  background: "#FFFFFF",
                   color: "#2E2217",
                   padding: "20px 24px",
                   fontSize: "1.05rem",

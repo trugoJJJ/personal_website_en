@@ -36,8 +36,8 @@ const FooterSectionContent = () => {
       }}
     >
       <div className="w-full px-6">
-        <div className="pt-12 md:pt-18 pb-8 md:pb-12">
-          <div className="py-6 grid gap-6 md:gap-6 md:grid-cols-4 md:items-center items-start">
+        <div className="pt-8 md:pt-18 pb-6 md:pb-6">
+          <div className="py-6 grid gap-6 md:gap-4 md:grid-cols-4 md:items-center items-start">
             {/* Kolumna 1 - Firma Gałęcka */}
             <div className="flex flex-col items-center text-center md:relative md:pr-8 mb-6 md:mb-0">
               <h3 className="text-base font-extrabold mb-4" style={{ color: textColor }}>Adam Gałęcki – Firma Gałęcka</h3>
@@ -70,7 +70,7 @@ const FooterSectionContent = () => {
             </div>
             
             {/* Kolumna 2 - NIP */}
-            <div className="flex flex-col items-center text-center font-bold text-sm leading-relaxed mb-4 md:mb-0">
+            <div className="flex flex-col items-center text-center font-bold text-sm leading-relaxed mb-1 md:mb-0">
               <div className="inline-flex items-center gap-3">
                 <span style={{ color: textColor }}>NIP: 9462752489</span>
                 <ClientOnlyWrapper>
@@ -85,7 +85,7 @@ const FooterSectionContent = () => {
             </div>
             
             {/* Kolumna 3 - REGON */}
-            <div className="flex flex-col items-center text-center font-bold text-sm leading-relaxed mb-4 md:mb-0">
+            <div className="flex flex-col items-center text-center font-bold text-sm leading-relaxed mb-1 md:mb-0">
               <div className="inline-flex items-center gap-3">
                 <span style={{ color: textColor }}>REGON: 541404566</span>
                 <ClientOnlyWrapper>
@@ -109,7 +109,7 @@ const FooterSectionContent = () => {
           </div>
           
           {/* Copyright i Polityka Prywatności w jednej linii */}
-          <div className="pt-8 pb-8 text-center">
+          <div className="pt-8 pb-8 md:pb-4 text-center">
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-[11px] font-semibold tracking-wide" style={{ opacity: 0.45, color: textColor }}>
               <span>© Firma Gałęcka 2025</span>
               <div 
@@ -136,9 +136,9 @@ export const FooterSection = () => {
     <ClientOnlyWrapper fallback={
       <footer className="bg-white border-t-3 border-black text-[#686a6c]">
         <div className="w-full px-6">
-          <div className="pt-12 md:pt-18 pb-8 md:pb-12">
-            <div className="py-6 grid gap-6 md:gap-6 md:grid-cols-4 md:items-center items-start">
-              <div className="flex flex-col items-center text-center md:relative md:pr-8 mb-6 md:mb-0">
+          <div className="pt-8 md:pt-18 pb-6 md:pb-6">
+            <div className="py-6 grid gap-3 md:gap-1 md:grid-cols-4 md:items-center items-start">
+              <div className="flex flex-col items-center text-center md:relative md:pr-8 mb-4 md:mb-0">
                 <h3 className="text-base font-extrabold mb-4 text-[#686a6c]">Adam Gałęcki – Firma Gałęcka</h3>
                 <div className="flex flex-wrap justify-center gap-3">
                   {[1, 2, 3, 4, 5, 6].map((i) => (
@@ -146,13 +146,13 @@ export const FooterSection = () => {
                   ))}
                 </div>
               </div>
-              <div className="flex flex-col items-center text-center font-bold text-sm leading-relaxed mb-4 md:mb-0">
+              <div className="flex flex-col items-center text-center font-bold text-sm leading-relaxed mb-3 md:mb-0">
                 <div className="inline-flex items-center gap-3">
                   <span className="text-[#686a6c]">NIP: 9462752489</span>
                   <div className="px-2 py-0.5 text-[10px] font-extrabold tracking-wide border border-black bg-white text-black">Kopiuj</div>
                 </div>
               </div>
-              <div className="flex flex-col items-center text-center font-bold text-sm leading-relaxed mb-4 md:mb-0">
+              <div className="flex flex-col items-center text-center font-bold text-sm leading-relaxed mb-3 md:mb-0">
                 <div className="inline-flex items-center gap-3">
                   <span className="text-[#686a6c]">REGON: 541404566</span>
                   <div className="px-2 py-0.5 text-[10px] font-extrabold tracking-wide border border-black bg-white text-black">Kopiuj</div>
@@ -165,7 +165,7 @@ export const FooterSection = () => {
                 </div>
               </div>
             </div>
-            <div className="pt-8 pb-8 text-center">
+            <div className="pt-8 pb-8 md:pb-4 text-center">
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-[11px] font-semibold tracking-wide opacity-45 text-[#686a6c]">
                 <span>© Firma Gałęcka 2025</span>
                 <div className="hidden sm:block w-px h-4 bg-[#686a6c] opacity-30"></div>
