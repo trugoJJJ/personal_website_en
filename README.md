@@ -1,10 +1,10 @@
 # Adam Gałęcki - Portfolio Website
 
-## 🚀 About
+## About
 
 Professional portfolio website showcasing my expertise as a Digital Marketing Manager. This modern, responsive website highlights my experience in SEO, team management, and digital marketing strategies for B2B and B2C companies.
 
-## ✨ Features
+## Features
 
 - **Professional Portfolio**: Showcase of marketing projects and achievements
 - **Interactive Design**: Smooth animations and modern UI components
@@ -13,7 +13,7 @@ Professional portfolio website showcasing my expertise as a Digital Marketing Ma
 - **Performance Optimized**: Built with Next.js for fast loading and SEO
 - **Multilingual Support**: Polish and English language options
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Development Technologies
 - **Framework**: Next.js 14 with React 18
@@ -35,7 +35,7 @@ Professional portfolio website showcasing my expertise as a Digital Marketing Ma
 
 **All content, graphics, and animations were created independently by me.** While AI tools assisted in the development process, every piece of visual content, animation, and written material represents my original creative work and professional expertise.
 
-## 📱 Sections
+## Sections
 
 - **Hero Section**: Dynamic video background with scaling effects
 - **Portfolio**: Showcase of marketing projects and case studies
@@ -46,7 +46,7 @@ Professional portfolio website showcasing my expertise as a Digital Marketing Ma
 - **Articles**: Marketing insights and industry knowledge
 - **Contact**: Professional contact information and social links
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -81,7 +81,7 @@ npm run build
 npm start
 ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 src/
@@ -96,7 +96,7 @@ src/
 └── lib/                 # Utility functions
 ```
 
-## 🎨 Design System
+## Design System
 
 The website uses a custom design system with:
 - Consistent color palette with dark/light theme support
@@ -105,18 +105,18 @@ The website uses a custom design system with:
 - Responsive grid layouts
 - Custom animations and micro-interactions
 
-## 📊 Performance
+## Performance
 
 - Optimized images and assets
 - Lazy loading for better performance
 - SEO optimized with meta tags and structured data
 - Fast loading times with Next.js optimizations
 
-## 🌐 Deployment
+## Deployment
 
 The website is deployed and accessible at: [galecki.website](https://galecki.website)
 
-## 📝 License
+## License
 
 This project is private but allows copying and modification. You may use this code as inspiration for your own projects, but please avoid copying it exactly as-is. Feel free to adapt the concepts, structure, and design patterns for your own creative work.
 
