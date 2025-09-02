@@ -1,4 +1,4 @@
-# Adam Gałęcki - Portfolio Website
+My Portfolio Website
 
 ## About
 
