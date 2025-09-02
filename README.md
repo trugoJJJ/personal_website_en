@@ -2,8 +2,7 @@
 
 ## About
 
-Professional portfolio website showcasing my expertise as a Digital Marketing Manager. This modern, responsive website highlights my experience in SEO, team management, and digital marketing strategies for B2B and B2C companies.
-
+Professional portfolio website showcasing my expertise as a Digital Marketing Manager.
 ## Features
 
 - **Professional Portfolio**: Showcase of marketing projects and achievements
