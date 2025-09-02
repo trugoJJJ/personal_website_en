@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from "react";
 import { usePalette } from "./hooks";
 import { ClientOnlyWrapper } from "../ClientOnlyWrapper";
-import { Rive } from "../ui/rive";
 
 const HeroSectionContent = () => {
   const { isDark, P } = usePalette();
