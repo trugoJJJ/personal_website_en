@@ -119,11 +119,11 @@ const HeroSectionContent = () => {
   }, []);
 
   return (
-    <section id="home" className="pt-24 sm:pt-32 md:pt-44 pb-24 md:pb-32" style={{ background: isDark ? P("charcoal") : P("white") }}>
+    <section id="home" className="pt-36 sm:pt-32 md:pt-44 pb-24 md:pb-32" style={{ background: isDark ? P("charcoal") : P("white") }}>
       <div className="container mx-auto">
-        <div className="text-center mb-6 sm:mb-16">
+        <div className="text-center mb-12 sm:mb-16">
           <h1 className="font-extrabold uppercase tracking-wider leading-[1.05] text-6xl sm:text-9xl mb-4 sm:mb-6" style={{ color: isDark ? P("white") : P("black") }}>Digital</h1>
-          <h1 className="font-extrabold uppercase tracking-wider leading-[1.05] text-4xl sm:text-6xl mb-4 sm:mb-6" style={{ color: isDark ? P("white") : P("black") }}>Marketing</h1>
+          <h1 className="font-extrabold uppercase tracking-wider leading-[1.05] text-3xl sm:text-6xl mb-4 sm:mb-6" style={{ color: isDark ? P("white") : P("black") }}>Marketing</h1>
           <h1 className="font-extrabold uppercase tracking-wider leading-[1.15] text-2xl sm:text-5xl" style={{ color: isDark ? P("white") : P("black") }}>Manager</h1>
         </div>
         <div className="relative mx-auto w-full max-w-[1600px]">
