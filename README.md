@@ -1,73 +1,126 @@
-# Welcome to your Lovable project
+# Adam Gałęcki - Portfolio Website
 
-## Project info
+## 🚀 About
 
-**URL**: https://lovable.dev/projects/3027c653-090b-4eb9-83cb-4c9c14fc82fe
+Professional portfolio website showcasing my expertise as a Digital Marketing Manager. This modern, responsive website highlights my experience in SEO, team management, and digital marketing strategies for B2B and B2C companies.
 
-## How can I edit this code?
+## ✨ Features
 
-There are several ways of editing your application.
+- **Professional Portfolio**: Showcase of marketing projects and achievements
+- **Interactive Design**: Smooth animations and modern UI components
+- **Responsive Layout**: Optimized for all devices and screen sizes
+- **Dark/Light Theme**: Toggle between themes for better user experience
+- **Performance Optimized**: Built with Next.js for fast loading and SEO
+- **Multilingual Support**: Polish and English language options
 
-**Use Lovable**
+## 🛠️ Tech Stack
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/3027c653-090b-4eb9-83cb-4c9c14fc82fe) and start prompting.
+### Development Technologies
+- **Framework**: Next.js 14 with React 18
+- **Styling**: Tailwind CSS with custom design system
+- **UI Components**: shadcn/ui component library
+- **Animations**: Framer Motion for smooth interactions
+- **Type Safety**: TypeScript for robust development
+- **Deployment**: Optimized for production with static generation
 
-Changes made via Lovable will be committed automatically to this repo.
+### AI Development Tools
+- **Lovable**: AI-powered development platform for code generation and project management
+- **CursorAI**: AI-assisted coding environment for enhanced development workflow
 
-**Use your preferred IDE**
+### Design & Prototyping Tools
+- **Relume**: Website design and prototyping platform
+- **Figma**: UI/UX design and collaboration tool
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 🎨 Creative Work
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+**All content, graphics, and animations were created independently by me.** While AI tools assisted in the development process, every piece of visual content, animation, and written material represents my original creative work and professional expertise.
 
-Follow these steps:
+## 📱 Sections
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
+- **Hero Section**: Dynamic video background with scaling effects
+- **Portfolio**: Showcase of marketing projects and case studies
+- **About**: Professional background and achievements
+- **Experience**: Work history and key accomplishments
+- **Skills**: Technical and marketing expertise
+- **Tech Stack**: Technologies and tools used
+- **Articles**: Marketing insights and industry knowledge
+- **Contact**: Professional contact information and social links
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+ and npm
+- Git
+
+### Installation
+
+```bash
+# Clone the repository
 git clone <YOUR_GIT_URL>
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Navigate to project directory
+cd monke_io
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Install dependencies
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The site will be available at `http://localhost:3000`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Build for Production
 
-**Use GitHub Codespaces**
+```bash
+# Build the project
+npm run build
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+# Start production server
+npm start
+```
 
-## What technologies are used for this project?
+## 📁 Project Structure
 
-This project is built with:
+```
+src/
+├── app/                 # Next.js app router
+├── components/          # React components
+│   ├── home/           # Homepage sections
+│   ├── ui/             # Reusable UI components
+│   └── pages/          # Page-specific components
+├── contexts/            # React contexts (i18n, theme)
+├── data/                # Static data and content
+├── hooks/               # Custom React hooks
+└── lib/                 # Utility functions
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## 🎨 Design System
 
-## How can I deploy this project?
+The website uses a custom design system with:
+- Consistent color palette with dark/light theme support
+- Typography scale optimized for readability
+- Interactive elements with smooth transitions
+- Responsive grid layouts
+- Custom animations and micro-interactions
 
-Simply open [Lovable](https://lovable.dev/projects/3027c653-090b-4eb9-83cb-4c9c14fc82fe) and click on Share -> Publish.
+## 📊 Performance
 
-## Can I connect a custom domain to my Lovable project?
+- Optimized images and assets
+- Lazy loading for better performance
+- SEO optimized with meta tags and structured data
+- Fast loading times with Next.js optimizations
 
-Yes, you can!
+## 🌐 Deployment
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+The website is deployed and accessible at: [galecki.website](https://galecki.website)
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+## 📝 License
+
+This project is private but allows copying and modification. You may use this code as inspiration for your own projects, but please avoid copying it exactly as-is. Feel free to adapt the concepts, structure, and design patterns for your own creative work.
+
+---
+
+**Adam Gałęcki** - Digital Marketing Manager  
+*Specializing in SEO, team management, and digital marketing strategies*
