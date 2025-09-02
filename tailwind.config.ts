@@ -8,6 +8,8 @@ export default {
 		"./src/components/**/*.{ts,tsx}",
 		"./src/app/**/*.{ts,tsx}",
 		"./src/**/*.{ts,tsx}",
+		"./src/index.css",
+		"./src/app/globals.css",
 	],
 	prefix: "",
 	theme: {
@@ -23,6 +25,11 @@ export default {
 			}
 		},
 		extend: {
+			borderWidth: {
+				'6': '6px',
+				'8': '8px',
+				'10': '10px',
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',

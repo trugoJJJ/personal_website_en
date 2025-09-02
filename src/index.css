@@ -36,6 +36,109 @@ All colors MUST be HSL.
     color: hsl(210 40% 98%) !important;
   }
 
+  /* Hero video container */
+  .hero-video-container {
+    @apply relative mx-auto w-full;
+  }
+
+  .hero-video-frame {
+    @apply overflow-hidden transition-transform duration-150 ease-out;
+    border-radius: 0;
+    position: relative;
+  }
+
+  /* Sharp, angular shadow effect - left and bottom edges like contact tiles */
+  .hero-video-frame::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -8px;
+    right: 0;
+    bottom: -8px;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: -1;
+  }
+
+  .dark .hero-video-frame::before {
+    background: rgba(255, 255, 255, 0.8);
+  }
+
+  /* Mobile-specific video styling */
+  @media (max-width: 767px) {
+    .hero-video-container {
+      max-width: 99.8vw;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 0.125rem;
+      padding-right: 0.125rem;
+    }
+    
+    .hero-video-frame {
+      margin-left: 0;
+      margin-right: 0;
+      border-width: 8px !important;
+    }
+
+    /* Thinner shadow on mobile */
+    .hero-video-frame::before {
+      left: -6px;
+      bottom: -6px;
+    }
+
+    /* Mobile video aspect ratio adjustment */
+    .hero-video-frame video {
+      aspect-ratio: 16/10 !important;
+      object-fit: cover;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  /* Small mobile devices */
+  @media (max-width: 480px) {
+    .hero-video-container {
+      max-width: 99.9vw;
+      padding-left: 0.0625rem;
+      padding-right: 0.0625rem;
+    }
+    
+    .hero-video-frame {
+      border-width: 10px !important;
+    }
+
+    /* Even thinner shadow on small mobile */
+    .hero-video-frame::before {
+      left: -4px;
+      bottom: -4px;
+    }
+  }
+
+  /* Extra small mobile devices */
+  @media (max-width: 360px) {
+    .hero-video-container {
+      max-width: 100vw;
+      padding-left: 0;
+      padding-right: 0;
+    }
+    
+    .hero-video-frame {
+      border-width: 12px !important;
+    }
+
+    /* Thinnest shadow on extra small mobile */
+    .hero-video-frame::before {
+      left: -3px;
+      bottom: -3px;
+    }
+  }
+
+  /* Desktop enhanced border effects */
+  @media (min-width: 768px) {
+    .hero-video-frame {
+      border-width: 8px !important;
+    }
+  }
+
   /* Theme switching glitch animation */
   .theme-glitch {
     animation: themeGlitch 0.4s ease-in-out;

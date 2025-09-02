@@ -5,11 +5,49 @@ import { usePalette } from "./hooks";
 import { ClientOnlyWrapper } from "../ClientOnlyWrapper";
 
 const HeroSectionContent = () => {
-  const { isDark, P } = usePalette();
   const [scale, setScale] = useState(0.6);
-  const boxRef = useRef<HTMLDivElement | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const boxRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const { isDark, P } = usePalette();
 
-  // hero scaling
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (videoRef.current && !document.hidden) {
+        videoRef.current.play().catch(() => {
+          // Ignore autoplay errors
+        });
+      }
+    };
+
+    const handleFocus = () => {
+      if (videoRef.current) {
+        videoRef.current.play().catch(() => {
+          // Ignore autoplay errors
+        });
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('focus', handleFocus);
+    
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('focus', handleFocus);
+    };
+  }, []);
+
   useEffect(() => {
     let ticking = false;
     const update = () => {
@@ -43,13 +81,13 @@ const HeroSectionContent = () => {
   }, []);
 
   return (
-    <section id="home" className="pt-44 pb-24 md:pb-32" style={{ background: isDark ? P("charcoal") : P("white") }}>
+    <section id="home" className="pt-32 sm:pt-44 pb-24 md:pb-32" style={{ background: isDark ? P("charcoal") : P("white") }}>
       <div className="container mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="font-extrabold uppercase tracking-wider leading-[1.05] text-6xl sm:text-9xl mb-6" style={{ color: isDark ? P("white") : P("black") }}>Digital</h1>
-          <h1 className="font-extrabold uppercase tracking-wider leading-[1.05] text-4xl sm:text-6xl mb-6" style={{ color: isDark ? P("white") : P("black") }}>Marketing</h1>
-          <h1 className="font-extrabold uppercase tracking-wider leading-[1.15] text-4xl sm:text-5xl" style={{ color: isDark ? P("white") : P("black") }}>Manager</h1>
-        </div>
+          <div className="text-center mb-12">
+            <h1 className="font-extrabold uppercase tracking-wider leading-[1.05] text-6xl sm:text-9xl mb-4 sm:mb-6" style={{ color: isDark ? P("white") : P("black") }}>Digital</h1>
+            <h1 className="font-extrabold uppercase tracking-wider leading-[1.05] text-4xl sm:text-6xl mb-4 sm:mb-6" style={{ color: isDark ? P("white") : P("black") }}>Marketing</h1>
+            <h1 className="font-extrabold uppercase tracking-wider leading-[1.15] text-2xl sm:text-5xl" style={{ color: isDark ? P("white") : P("black") }}>Manager</h1>
+          </div>
         <div className="relative mx-auto w-full max-w-[1600px]">
           <div
             ref={boxRef}
@@ -57,10 +95,16 @@ const HeroSectionContent = () => {
             style={{
               transform: `scale(${scale})`,
               transformOrigin: "center",
-              border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`,
+              border: `${isDark ? '6px' : '8px'} solid ${isDark ? P("white") : P("black")}`,
+              borderRadius: '0',
+              position: 'relative',
+              boxShadow: isDark
+                ? `8px 8px 0 ${P("white")}`
+                : `8px 8px 0 ${P("black")}`,
             }}
           >
             <video 
+              ref={videoRef}
               className="w-full object-cover"
               autoPlay 
               muted 
@@ -70,7 +114,7 @@ const HeroSectionContent = () => {
               style={{ 
                 background: P("ecru"), 
                 width: '100%',
-                aspectRatio: '16/9',
+                aspectRatio: isMobile ? '16/10' : '16/9',
                 display: 'block'
               }}
             >

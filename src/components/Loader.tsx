@@ -115,7 +115,6 @@ const LoaderContent = () => {
       className="fixed inset-0 z-[9999] flex items-center justify-center transition-opacity duration-500 ease-in-out"
       style={{ 
         background: isDark ? P("charcoal") : P("white"),
-        border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`,
         opacity: isVisible ? 1 : 0
       }}
     >
