@@ -6,21 +6,9 @@ import { ClientOnlyWrapper } from "../ClientOnlyWrapper";
 
 const HeroSectionContent = () => {
   const [scale, setScale] = useState(0.6);
-  const [isMobile, setIsMobile] = useState(false);
   const boxRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const { isDark, P } = usePalette();
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 640);
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   useEffect(() => {
     const handleVisibilityChange = () => {
