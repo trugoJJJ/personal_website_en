@@ -24,16 +24,21 @@ const HeaderContent = () => {
   const pathname = usePathname();
   
   const handleNavigation = (section: string) => {
+    console.log('handleNavigation called with section:', section);
     if (pathname === '/') {
       // Na stronie głównej - scroll do sekcji
       const element = document.getElementById(section);
+      console.log('Found element:', element);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        console.log('Element not found for section:', section);
       }
     } else {
       // Na podstronie - przejdź na główną i scroll do sekcji
       router.push(`/#${section}`);
     }
+    console.log('Setting open to false');
     setOpen(false);
   };
   

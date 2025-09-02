@@ -61,16 +61,40 @@ const HeroSectionContent = () => {
       }
     };
 
+    const handlePageShow = () => {
+      if (videoRef.current) {
+        setTimeout(() => {
+          videoRef.current?.play().catch(() => {
+            // Ignore autoplay errors
+          });
+        }, 200);
+      }
+    };
+
+    const handleOnline = () => {
+      if (videoRef.current) {
+        setTimeout(() => {
+          videoRef.current?.play().catch(() => {
+            // Ignore autoplay errors
+          });
+        }, 200);
+      }
+    };
+
     document.addEventListener('visibilitychange', handleVisibilityChange);
     window.addEventListener('focus', handleFocus);
     window.addEventListener('resume', handleResume);
     document.addEventListener('touchstart', handleTouchStart);
+    window.addEventListener('pageshow', handlePageShow);
+    window.addEventListener('online', handleOnline);
     
     return () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('focus', handleFocus);
       window.removeEventListener('resume', handleResume);
       document.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('pageshow', handlePageShow);
+      window.removeEventListener('online', handleOnline);
     };
   }, []);
 
@@ -107,7 +131,7 @@ const HeroSectionContent = () => {
   }, []);
 
   return (
-    <section id="home" className="pt-32 sm:pt-44 pb-24 md:pb-32" style={{ background: isDark ? P("charcoal") : P("white") }}>
+    <section id="home" className="pt-24 sm:pt-32 md:pt-44 pb-24 md:pb-32" style={{ background: isDark ? P("charcoal") : P("white") }}>
       <div className="container mx-auto">
           <div className="text-center mb-12">
             <h1 className="font-extrabold uppercase tracking-wider leading-[1.05] text-6xl sm:text-9xl mb-4 sm:mb-6" style={{ color: isDark ? P("white") : P("black") }}>Digital</h1>
@@ -137,7 +161,7 @@ const HeroSectionContent = () => {
               muted 
               loop 
               playsInline
-              preload="auto"
+              preload="metadata"
               style={{ 
                 background: P("ecru"), 
                 width: '100%',
