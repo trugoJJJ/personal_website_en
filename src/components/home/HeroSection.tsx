@@ -25,14 +25,36 @@ const HeroSectionContent = () => {
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (videoRef.current && !document.hidden) {
-        videoRef.current.play().catch(() => {
-          // Ignore autoplay errors
-        });
+        setTimeout(() => {
+          videoRef.current?.play().catch(() => {
+            // Ignore autoplay errors
+          });
+        }, 100);
       }
     };
 
     const handleFocus = () => {
       if (videoRef.current) {
+        setTimeout(() => {
+          videoRef.current?.play().catch(() => {
+            // Ignore autoplay errors
+          });
+        }, 100);
+      }
+    };
+
+    const handleResume = () => {
+      if (videoRef.current) {
+        setTimeout(() => {
+          videoRef.current?.play().catch(() => {
+            // Ignore autoplay errors
+          });
+        }, 100);
+      }
+    };
+
+    const handleTouchStart = () => {
+      if (videoRef.current && videoRef.current.paused) {
         videoRef.current.play().catch(() => {
           // Ignore autoplay errors
         });
@@ -41,10 +63,14 @@ const HeroSectionContent = () => {
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
     window.addEventListener('focus', handleFocus);
+    window.addEventListener('resume', handleResume);
+    document.addEventListener('touchstart', handleTouchStart);
     
     return () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('focus', handleFocus);
+      window.removeEventListener('resume', handleResume);
+      document.removeEventListener('touchstart', handleTouchStart);
     };
   }, []);
 
@@ -103,9 +129,10 @@ const HeroSectionContent = () => {
                 : `8px 8px 0 ${P("black")}`,
             }}
           >
+
             <video 
               ref={videoRef}
-              className="w-full object-cover"
+              className="w-full"
               autoPlay 
               muted 
               loop 
@@ -114,8 +141,12 @@ const HeroSectionContent = () => {
               style={{ 
                 background: P("ecru"), 
                 width: '100%',
-                aspectRatio: isMobile ? '16/10' : '16/9',
-                display: 'block'
+                height: '100%',
+                objectFit: 'fill',
+                overflow: 'hidden',
+                display: 'block',
+                transform: 'scale(1.05)',
+                transformOrigin: 'center'
               }}
             >
               <source src="/hero_video_small.mp4" type="video/mp4" />
