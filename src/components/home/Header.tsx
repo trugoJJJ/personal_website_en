@@ -130,8 +130,13 @@ const HeaderContent = () => {
               ))}
             </ul>
             <div className="mt-6">
-              <Button asChild size="xl" className="w-full rounded-none font-extrabold" style={{ background: P("amaranth"), color: P("white"), border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
-                <a href="/#contact">Kontakt</a>
+              <Button 
+                size="xl" 
+                className="w-full rounded-none font-extrabold" 
+                onClick={() => handleNavigation('contact')}
+                style={{ background: P("amaranth"), color: P("white"), border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}
+              >
+                Kontakt
               </Button>
             </div>
           </div>
