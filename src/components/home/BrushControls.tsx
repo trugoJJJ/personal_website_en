@@ -64,7 +64,7 @@ const BrushControlsContent = ({
             className="px-3 py-2 font-extrabold transition-transform duration-300 ease-out" 
             style={{
               background: currentBrushType===b.id?P("amaranth"): (isDark?P("charcoal"):P("ecru")),
-              color: currentBrushType===b.id?P("white"): (isDark?P("white"):P("black")),
+              color: currentBrushType===b.id?P("white"): (isDark?P("white"):P("charcoal")),
               borderRight: i===BRUSH_TYPES.length-1? 'none': `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`,
               transform: hoveredButton === b.id ? 'scale(1.05)' : 'scale(1)',
             }}
@@ -83,7 +83,7 @@ const BrushControlsContent = ({
             className="px-4 py-2 font-extrabold transition-transform duration-300 ease-out" 
             style={{
               background: currentSize===s.value?P("amaranth"): (isDark?P("charcoal"):P("ecru")),
-              color: currentSize===s.value?P("white"): (isDark?P("white"):P("black")),
+              color: currentSize===s.value?P("white"): (isDark?P("white"):P("charcoal")),
               borderRight: i===SIZES.length-1? 'none': `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`,
               transform: hoveredButton === s.value ? 'scale(1.05)' : 'scale(1)',
             }}

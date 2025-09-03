@@ -9,7 +9,6 @@ import {
   arrayMove, SortableContext, useSortable, rectSortingStrategy
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { articles } from "@/data/articles";
 import ClientOnlyWrapper from "@/components/ClientOnlyWrapper";
 
 /* ================== PALETA – LIGHT ================== */
@@ -412,7 +411,6 @@ const PortfolioSectionContent = () => {
           {CATEGORIES.map((c) => {
             const isActive = activeCategory === c;
             const baseBg = isDark ? P("charcoal") : P("white");
-            const baseColor = isDark ? P("white") : P("black");
             const activeBg = P("amaranth");
             const activeColor = P("white");
             const borderColor = isDark ? P("white") : P("black");
@@ -428,7 +426,7 @@ const PortfolioSectionContent = () => {
                 style={{
                   border: `${isDark ? '1px' : '3px'} solid ${borderColor}`,
                   background: isActive ? activeBg : baseBg,
-                  color: isActive ? activeColor : baseColor,
+                  color: isActive ? activeColor : (isDark ? P("white") : P("black")),
                 }}
                 onMouseOver={(e) => {
                   (e.currentTarget as HTMLButtonElement).style.background = P("amaranth");
@@ -439,9 +437,8 @@ const PortfolioSectionContent = () => {
                   const activeBg = P("amaranth");
                   const activeColor = P("white");
                   const baseBg = isDark ? P("charcoal") : P("white");
-                  const baseColor = isDark ? P("white") : P("black");
                   (e.currentTarget as HTMLButtonElement).style.background = isActive ? activeBg : baseBg;
-                  (e.currentTarget as HTMLButtonElement).style.color = isActive ? activeColor : baseColor;
+                  (e.currentTarget as HTMLButtonElement).style.color = isActive ? activeColor : (isDark ? P("white") : P("black"));
                 }}
               >
                 {c as string}

@@ -1,18 +1,9 @@
 "use client";
 
 import { usePalette } from "./hooks";
-import { Mail, Linkedin, Github, MessageCircle, Heart, MapPin } from "lucide-react";
+import { MapPin } from "lucide-react";
 import Link from "next/link";
 import { ClientOnlyWrapper } from "../ClientOnlyWrapper";
-
-// TikTok icon component
-const TikTokIcon = (props: any) => (
-  <svg viewBox="0 0 64 64" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="square" strokeLinejoin="miter" {...props}>
-    <path d="M36 8v28" />
-    <path d="M36 36c0 6-6 10-12 10s-12-4-12-10 6-10 12-10c3 0 6 1 8 3" />
-    <path d="M36 14c3 6 10 10 16 10" />
-  </svg>
-);
 
 const FooterSectionContent = () => {
   const { isDark, P } = usePalette();

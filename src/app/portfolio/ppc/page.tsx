@@ -3,13 +3,9 @@
 import ClientOnlyWrapper from '@/components/ClientOnlyWrapper';
 import { Header } from "@/components/home/Header";
 import { SEO } from "@/components/SEO";
-import { Button } from "@/components/ui/button";
-import { TrendingUp, Target, Lightbulb, CheckCircle, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { usePalette, COLORS } from "@/components/home/hooks";
 import { FooterSection } from "@/components/home/FooterSection";
-
-
 
 const PortfolioPPC = () => {
   const { isDark, P } = usePalette();

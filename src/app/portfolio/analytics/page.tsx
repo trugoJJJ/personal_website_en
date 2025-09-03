@@ -16,7 +16,6 @@ import {
   Target, 
   CheckCircle, 
   ArrowRight, 
-  BarChart, 
   Search, 
   PhoneCall, 
   Mail 

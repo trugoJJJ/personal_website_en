@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { Target, TrendingUp, Users, Award, Github, FileText, Briefcase } from "lucide-react";
 import { usePalette } from "./hooks";
 import portrait from "@/assets/hero-portrait.jpg";
 

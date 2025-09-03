@@ -223,15 +223,19 @@ const ExperienceSectionContent = () => {
               onClick={() => setSelectedCert(null)}
               aria-label="Zamknij"
               className="absolute top-2 right-2 px-2 py-1 font-extrabold"
-              style={{ border: `${isDark ? '1px' : '2px'} solid ${isDark ? P("white") : P("black")}` }}
+              style={{ 
+                border: `${isDark ? '1px' : '2px'} solid ${isDark ? P("white") : P("black")}`,
+                background: isDark ? P("charcoal") : P("white"),
+                color: isDark ? P("white") : P("black")
+              }}
             >
               ×
             </button>
             <div className="p-6 space-y-4">
-              <div className="flex items-center gap-2 text-sm" style={{ opacity: 0.9 }}>
+              <div className="flex items-center gap-2 text-sm" style={{ opacity: 0.9, color: isDark ? P("white") : P("black") }}>
                 <Award className="h-4 w-4" /> Certyfikat
               </div>
-              <h3 className="text-xl font-extrabold leading-tight">{selectedCert.title}</h3>
+              <h3 className="text-xl font-extrabold leading-tight" style={{ color: isDark ? P("white") : P("black") }}>{selectedCert.title}</h3>
               <figure className="overflow-hidden" style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: isDark ? P("charcoal") : P("ecru") }}>
                 <img
                   src={selectedCert.image || 'https://placehold.co/800x500?text=Certyfikat'}

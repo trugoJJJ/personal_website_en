@@ -1,5 +1,3 @@
-import { articles } from "@/data/articles";
-
 /* ================== DANE / TYPY ================== */
 export type Project = {
   id: string;
