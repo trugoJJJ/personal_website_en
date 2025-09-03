@@ -31,10 +31,10 @@ export const AboutSection = () => {
             </figure>
             <div className="space-y-6" style={{ color: isDark ? P("white") : P("charcoal") }}>
               <h3 className="text-2xl md:text-3xl font-extrabold text-left">Cześć, nazywam się Adam</h3>
-              <p className="text-lg">
+              <p className="text-base md:text-lg">
                 Zajmuję się kompleksową obsługą komunikacji marketingowej nakierowanej na osiąganie zamierzonych celów biznesowych.
               </p>
-              <p>
+              <p className="text-base md:text-lg">
                 Przez ostatnie 5&nbsp;lat rozwijałem się w&nbsp;marketingu –&nbsp;od grafika,&nbsp;przez specjalistę SEO,&nbsp;po managera zespołu.
                 Realizowałem długoterminowe strategie marketingowe dla różnych branż (IT,&nbsp;produkcyjna,&nbsp;medyczna,&nbsp;krypto). Zarządzałem zespołem i&nbsp;wspierałem projekty IT oraz marketingowe dla największych marek w&nbsp;Polsce.
               </p>
@@ -98,9 +98,17 @@ export const AboutSection = () => {
                         },
                         {
                           Icon: (props: any) => (
-                            <span className="font-black text-center flex items-center justify-center" style={{ fontSize: '16px', fontWeight: 900, width: '100%', height: '100%' }} {...props}>
-                              CV
-                            </span>
+                            <svg viewBox="0 0 242.5 121" width="20" height="20" fill="currentColor" {...props}>
+                              <g>
+                                <path d="M110.5,45.8H78c-0.2-2.7-0.8-5.1-1.8-7.3s-2.3-4.1-4-5.7c-1.7-1.6-3.8-2.8-6.2-3.7c-2.4-0.9-5.2-1.3-8.2-1.3
+                                  c-5.4,0-9.9,1.3-13.6,3.9c-3.7,2.6-6.5,6.3-8.4,11.2c-1.9,4.9-2.8,10.7-2.8,17.5c0,7.2,1,13.2,2.9,18.1c1.9,4.9,4.7,8.5,8.4,10.9
+                                  c3.7,2.4,8.1,3.7,13.3,3.7c3,0,5.6-0.4,7.9-1.1c2.3-0.7,4.4-1.8,6.1-3.3c1.7-1.4,3.1-3.1,4.2-5.1c1.1-2,1.8-4.3,2.2-6.8l32.4,0.2
+                                  c-0.4,5-1.8,10.1-4.2,15.2c-2.4,5.2-5.8,9.9-10.3,14.3c-4.4,4.4-9.9,7.9-16.4,10.5c-6.5,2.6-14.1,4-22.7,4c-10.8,0-20.5-2.3-29.1-7
+                                  c-8.6-4.6-15.3-11.5-20.3-20.5c-5-9-7.4-20-7.4-33.1c0-13.1,2.5-24.2,7.6-33.2c5.1-9,11.9-15.8,20.5-20.4C36.7,2.3,46.3,0,56.8,0
+                                  c7.4,0,14.3,1,20.5,3c6.3,2,11.7,5,16.5,8.9c4.7,3.9,8.5,8.7,11.4,14.4C108.1,32,109.8,38.5,110.5,45.8z"/>
+                                <path d="M157.2,1.6l24.2,83.1h0.9l24.2-83.1h36.1l-38.9,117.8h-43.7L121,1.6H157.2z"/>
+                              </g>
+                            </svg>
                           ),
                           href: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
                           label: "CV",

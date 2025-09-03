@@ -207,7 +207,7 @@ const ExperienceSectionContent = () => {
       {selectedCert && (
         <div
           id="cert-modal"
-          className="fixed inset-0 z-[300] flex items-center justify-center p-4"
+          className="fixed inset-0 z-[300] flex items-center justify-center p-4 animate-in fade-in duration-300"
           role="dialog"
           aria-modal="true"
           aria-label={`Certyfikat ${selectedCert.title}`}
@@ -215,23 +215,33 @@ const ExperienceSectionContent = () => {
           onClick={() => setSelectedCert(null)}
         >
           <div
-            className="w-full max-w-md relative"
+            className="w-full max-w-md relative animate-in zoom-in-95 duration-300"
             style={{ background: isDark ? P("charcoal") : P("white"), border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, color: isDark ? P("white") : P("black") }}
             onClick={(e) => e.stopPropagation()}
           >
             <button
               onClick={() => setSelectedCert(null)}
               aria-label="Zamknij"
-              className="absolute top-2 right-2 px-2 py-1 font-extrabold"
+              className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center font-bold text-lg transition-colors duration-200"
               style={{ 
                 border: `${isDark ? '1px' : '2px'} solid ${isDark ? P("white") : P("black")}`,
                 background: isDark ? P("charcoal") : P("white"),
                 color: isDark ? P("white") : P("black")
               }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = P("amaranth");
+                e.currentTarget.style.color = P("white");
+                e.currentTarget.style.borderColor = isDark ? P("white") : P("black");
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = isDark ? P("charcoal") : P("white");
+                e.currentTarget.style.color = isDark ? P("white") : P("black");
+                e.currentTarget.style.borderColor = isDark ? P("white") : P("black");
+              }}
             >
-              ×
+              ✕
             </button>
-            <div className="p-6 space-y-4">
+            <div className="p-8 md:p-12 space-y-6">
               <div className="flex items-center gap-2 text-sm" style={{ opacity: 0.9, color: isDark ? P("white") : P("black") }}>
                 <Award className="h-4 w-4" /> Certyfikat
               </div>
@@ -252,22 +262,13 @@ const ExperienceSectionContent = () => {
                   href={selectedCert.url}
                   target="_blank"
                   rel="noreferrer nofollow"
-                  className="px-4 py-2 font-extrabold transition-colors"
+                  className="px-6 py-3 font-extrabold transition-colors"
                   style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: P("ecru"), color: isDark ? P("white") : P("black") }}
                   onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = P("amaranth"); (e.currentTarget as HTMLAnchorElement).style.color = P("white"); }}
                   onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = P("ecru"); (e.currentTarget as HTMLAnchorElement).style.color = isDark ? P("white") : P("black"); }}
                 >
                   Dowiedz się więcej
                 </a>
-                <button
-                  onClick={() => setSelectedCert(null)}
-                  className="px-4 py-2 font-extrabold transition-colors"
-                  style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: P("butter"), color: isDark ? P("white") : P("black") }}
-                  onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.background = P("amaranth"); (e.currentTarget as HTMLButtonElement).style.color = P("white"); }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.background = P("butter"); (e.currentTarget as HTMLButtonElement).style.color = isDark ? P("white") : P("black"); }}
-                >
-                  Zamknij
-                </button>
               </div>
             </div>
           </div>

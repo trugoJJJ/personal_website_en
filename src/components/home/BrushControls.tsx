@@ -90,8 +90,8 @@ const BrushControlsContent = ({
               }}
               aria-label={`Kolor ${key}${isActive?' (aktywny)':''}`}
             >
-              {/* Wnętrze – właściwy kolor z białym strokiem */}
-              <span className="absolute inset-[4px]" style={{ background: P(key), boxShadow: `inset 0 0 0 ${isDark ? '1px' : '2px'} ${P("white")}` }} />
+              {/* Wnętrze – właściwy kolor z odwróconym strokiem */}
+              <span className="absolute inset-[4px]" style={{ background: P(key), boxShadow: `inset 0 0 0 ${isDark ? '1px' : '2px'} ${isDark ? P("white") : P("black")}` }} />
               {/* Aktywny kolor – amarantowa ramka wewnętrzna */}
               {isActive && (
                 <span className="pointer-events-none absolute inset-0" style={{ boxShadow: `inset 0 0 0 3px ${P("amaranth")}` }} />
