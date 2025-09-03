@@ -1,94 +1,15 @@
 "use client";
 
 import ClientOnlyWrapper from '@/components/ClientOnlyWrapper';
+import { Header } from "@/components/home/Header";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { TrendingUp, Target, Lightbulb, CheckCircle, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { usePalette, COLORS } from "@/components/home/hooks";
 import { FooterSection } from "@/components/home/FooterSection";
-import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
-import LanguageSwitch from "@/components/LanguageSwitch";
-import ThemeToggle from "@/components/ThemeToggle";
 
-// Header component from Hero.tsx
-const links = [
-  { href: "/#portfolio", label: "Portfolio" },
-  { href: "/#about", label: "O mnie" },
-  { href: "/#experience", label: "Doświadczenie" },
-  { href: "/#skills", label: "Umiejętności" },
-  { href: "/#articles", label: "Artykuły" },
-];
 
-const Header = () => {
-  const { isDark, P } = usePalette();
-  const [open, setOpen] = useState(false);
-  useEffect(() => {
-    if (open) {
-      const originalOverflow = document.body.style.overflow;
-      document.body.style.overflow = 'hidden';
-      return () => { document.body.style.overflow = originalOverflow; };
-    }
-  }, [open]);
-  return (
-    <header className="fixed top-0 inset-x-0 z-50" style={{ background: isDark ? P("charcoal") : P("white"), borderBottom: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, color: isDark ? P("white") : P("charcoal") }}>
-      <nav className="w-full h-16 flex items-center relative">
-        <a href="/" className="font-extrabold tracking-tight leading-none ml-4 md:ml-8" style={{ color: isDark ? P("white") : P("charcoal") }}>Adam&nbsp;Gałęcki</a>
-        <ul
-          className="hidden desk:flex items-center gap-8 text-sm absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-          style={{ color: isDark ? P("white") : P("charcoal") }}
-        >
-          {links.map(l => (
-            <li key={l.href}>
-              <a href={l.href} className="font-bold hover:underline">{l.label}</a>
-            </li>
-          ))}
-        </ul>
-        <div className="hidden desk:flex items-center gap-2 ml-auto mr-4 md:mr-8">
-          <LanguageSwitch />
-          <ThemeToggle />
-          <Button size="lg" asChild className="rounded-none font-extrabold transition-transform hover:scale-[1.02]" style={{ background: P("amaranth"), color: P("white"), border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
-            <a href="/#contact">Kontakt</a>
-          </Button>
-        </div>
-        <div className="flex items-center gap-2 ml-auto desk:hidden">
-          <ThemeToggle />
-          <Button variant="outline" size="icon" aria-label="Otwórz menu" onClick={() => setOpen(true)} className="rounded-none" style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, color: isDark ? P("white") : P("charcoal") }}>
-            <Menu className="h-5 w-5" />
-          </Button>
-        </div>
-      </nav>
-      {open && (
-        <div className="fixed inset-0 z-50" style={{ background: isDark ? P("charcoal") : P("ecru") }}>
-          <div className="w-full h-16 px-4 md:px-8 flex items-center justify-between" style={{ borderBottom: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, color: isDark ? P("white") : P("charcoal") }}>
-            <span className="font-extrabold">Menu</span>
-            <div className="flex items-center gap-2">
-              <LanguageSwitch />
-              <Button variant="outline" size="icon" aria-label="Zamknij menu" onClick={() => setOpen(false)} className="rounded-none" style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, color: isDark ? P("white") : P("charcoal") }}>
-                <X className="h-5 w-5" />
-              </Button>
-            </div>
-          </div>
-          <div className="mt-6 px-6 desk:hidden">
-            <ul className="grid gap-4 text-lg" style={{ color: isDark ? P("white") : P("charcoal") }}>
-              {links.map(l => (
-                <li key={l.href}>
-                  <a href={l.href} className="block py-3" style={{ borderBottom: `${isDark ? '1px' : '2px'} solid ${isDark ? P("white") : P("black")}` }} onClick={() => setOpen(false)}>{l.label}</a>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-6">
-              <Button asChild size="xl" className="w-full rounded-none font-extrabold" style={{ background: P("amaranth"), color: P("white"), border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
-                <a href="/#contact">Kontakt</a>
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
-    </header>
-  );
-};
 
 const PortfolioPPC = () => {
   const { isDark, P } = usePalette();
@@ -183,36 +104,58 @@ const PortfolioPPC = () => {
           {/* Główne ujęcie - dopasowane do stylu ramek */}
           <div className="container mx-auto max-w-6xl px-6 mb-16">
             <figure 
-              className="aspect-video flex items-center justify-center relative overflow-hidden"
+              className="relative overflow-hidden"
               style={{
+                aspectRatio: '1400/826',
                 border: `${isDark ? '1px' : '3px'} solid ${isDark ? P('white') : P('black')}`,
                 background: isDark ? P('charcoal') : P('ecru'),
                 boxShadow: `inset 0 0 0 6px ${isDark ? P('charcoal') : P('white')}`,
               }}
             >
-              <div className="text-center px-6">
-                <div className="w-20 h-20 mx-auto mb-5 flex items-center justify-center" style={cardBase('white')}>
-                  <Target className="h-10 w-10" />
-                </div>
-                <h3 className="font-extrabold mb-2">Główne ujęcie</h3>
-                <p className="text-sm" style={{ opacity: .7 }}>Format 16:9 – miejsce na grafikę kampanii</p>
-              </div>
+              <img 
+                src="/ppc_main.jpg" 
+                alt="Dashboard kampanii PPC - przegląd wyników"
+                className="w-full h-full object-cover"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                }}
+              />
             </figure>
           </div>
         </section>
 
         {/* Case Studies */}
-        <section style={sectionOuter(P('ecru'))} className="py-24 md:py-32" id="case-studies">
+        <section style={sectionOuter(P('ecru'))} className="py-16 sm:py-20 md:py-24 lg:py-32" id="case-studies">
           <div className="container mx-auto max-w-6xl px-6">
-            <header className="mb-12 md:mb-20">
+            <header className="mb-8 sm:mb-12 md:mb-20">
               <h2 className={bigHeadingClass} style={headingStyles}>Case Studies</h2>
             </header>
             
-            <div className="space-y-20">
+            <div className="space-y-12 sm:space-y-16 md:space-y-20">
               {/* Case 1 - Producent drzwi */}
-              <div className="grid md:grid-cols-3 gap-8">
-                <div className="md:col-span-2">
-                  <div className="p-8" style={cardBase('white')}>
+              <div className="grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 md:items-center">
+                {/* Zdjęcie - na mobile nad opisem */}
+                <div 
+                  className="md:order-2 relative overflow-hidden"
+                  style={{
+                    aspectRatio: '1000/500',
+                    ...cardBase('ecru')
+                  }}
+                >
+                  <img 
+                    src="/goole_logo.png" 
+                    alt="Google Ads - kampanie reklamowe"
+                    className="w-full h-full object-cover"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                    }}
+                  />
+                </div>
+                {/* Opis - na mobile pod zdjęciem */}
+                <div className="md:col-span-2 md:order-1">
+                  <div className="p-4 sm:p-6 md:p-8" style={cardBase('white')}>
                     <div className="flex items-center gap-3 mb-6">
                       <span style={pillStyle('amaranth')}>GOOGLE ADS</span>
                       <span style={pillStyle('alloy')}>5 000 PLN / miesiąc</span>
@@ -222,7 +165,7 @@ const PortfolioPPC = () => {
                     <p className="text-sm md:text-base leading-relaxed mb-6" style={{ opacity: .85 }}>
                       Celem kampanii było zwiększenie liczby potencjalnych klientów zainteresowanych zakupem drzwi zewnętrznych poprzez kampanie wyszukiwania w Google. Projekt miał na celu budowę stałego źródła wysokojakościowych leadów dla firmy produkcyjnej.
                     </p>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-2 gap-3 sm:gap-4">
                       <div className="text-center p-4" style={cardBase('ecru')}>
                         <div className="font-extrabold text-2xl" style={{ color: P('amaranth') }}>17%</div>
                         <div className="text-xs mt-1" style={{ opacity: .7 }}>Wzrost współczynnika konwersji</div>
@@ -234,28 +177,31 @@ const PortfolioPPC = () => {
                     </div>
                   </div>
                 </div>
-                <div className="flex items-center justify-center" style={cardBase('ecru')}>
-                  <div className="text-center p-6">
-                    <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center" style={cardBase('white')}>
-                      <Target className="h-8 w-8" />
-                    </div>
-                    <div className="font-extrabold text-sm">Case Study 1</div>
-                  </div>
-                </div>
               </div>
 
               {/* Case 2 - Firma doradcza */}
-              <div className="grid md:grid-cols-3 gap-8">
-                <div className="flex items-center justify-center" style={cardBase('ecru')}>
-                  <div className="text-center p-6">
-                    <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center" style={cardBase('white')}>
-                      <Lightbulb className="h-8 w-8" />
-                    </div>
-                    <div className="font-extrabold text-sm">Case Study 2</div>
-                  </div>
+              <div className="grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 md:items-center">
+                {/* Zdjęcie - na mobile nad opisem */}
+                <div 
+                  className="relative overflow-hidden"
+                  style={{
+                    aspectRatio: '1000/500',
+                    ...cardBase('ecru')
+                  }}
+                >
+                  <img 
+                    src="/linkedin_logo.png" 
+                    alt="LinkedIn Ads - kampanie B2B"
+                    className="w-full h-full object-cover"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                    }}
+                  />
                 </div>
+                {/* Opis - na mobile pod zdjęciem */}
                 <div className="md:col-span-2">
-                  <div className="p-8" style={cardBase('white')}>
+                  <div className="p-4 sm:p-6 md:p-8" style={cardBase('white')}>
                     <div className="flex items-center gap-3 mb-6">
                       <span style={pillStyle('alloy')}>LINKEDIN ADS</span>
                       <span style={pillStyle('amaranth')}>5 000 PLN</span>
@@ -265,7 +211,7 @@ const PortfolioPPC = () => {
                     <p className="text-sm md:text-base leading-relaxed mb-6" style={{ opacity: .85 }}>
                       Celem kampanii było wypromowanie specjalistycznego webinaru skierowanego do wąskiej grupy docelowej - kadry zarządzającej uczelniami wyższymi. Zadaniem było osiągnięcie maksymalnej liczby rejestracji przy jak najniższym koszcie pozyskania uczestnika.
                     </p>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-2 gap-3 sm:gap-4">
                       <div className="text-center p-4" style={cardBase('ecru')}>
                         <div className="font-extrabold text-2xl" style={{ color: P('amaranth') }}>180</div>
                         <div className="text-xs mt-1" style={{ opacity: .7 }}>Rejestracji na webinar</div>
@@ -280,9 +226,28 @@ const PortfolioPPC = () => {
               </div>
 
               {/* Case 3 - Producent oprogramowania */}
-              <div className="grid md:grid-cols-3 gap-8">
-                <div className="md:col-span-2">
-                  <div className="p-8" style={cardBase('white')}>
+              <div className="grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 md:items-center">
+                {/* Zdjęcie - na mobile nad opisem */}
+                <div 
+                  className="md:order-2 relative overflow-hidden"
+                  style={{
+                    aspectRatio: '1000/500',
+                    ...cardBase('ecru')
+                  }}
+                >
+                  <img 
+                    src="/goole_logo.png" 
+                    alt="Google Ads - optymalizacja kampanii"
+                    className="w-full h-full object-cover"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                    }}
+                  />
+                </div>
+                {/* Opis - na mobile pod zdjęciem */}
+                <div className="md:col-span-2 md:order-1">
+                  <div className="p-4 sm:p-6 md:p-8" style={cardBase('white')}>
                     <div className="flex items-center gap-3 mb-6">
                       <span style={pillStyle('amaranth')}>GOOGLE ADS</span>
                       <span style={pillStyle('alloy')}>2 000 PLN / miesiąc</span>
@@ -292,7 +257,7 @@ const PortfolioPPC = () => {
                     <p className="text-sm md:text-base leading-relaxed mb-6" style={{ opacity: .85 }}>
                       Pozyskanie nowych klientów poszukujących usług tworzenia stron i sklepów internetowych oraz aplikacji mobilnych. Głównym założeniem było zwiększenie liczby zapytań ofertowych oraz obniżenie kosztów pozyskania klienta.
                     </p>
-                    <div className="grid grid-cols-3 gap-4">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
                       <div className="text-center p-4" style={cardBase('ecru')}>
                         <div className="font-extrabold text-xl" style={{ color: P('amaranth') }}>+40%</div>
                         <div className="text-xs mt-1" style={{ opacity: .7 }}>Wzrost zapytań</div>
@@ -308,39 +273,65 @@ const PortfolioPPC = () => {
                     </div>
                   </div>
                 </div>
-                <div className="flex items-center justify-center" style={cardBase('ecru')}>
-                  <div className="text-center p-6">
-                    <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center" style={cardBase('white')}>
-                      <TrendingUp className="h-8 w-8" />
-                    </div>
-                    <div className="font-extrabold text-sm">Case Study 3</div>
-                  </div>
-                </div>
               </div>
 
               {/* Case 4 - Wydawnictwo */}
-              <div className="grid md:grid-cols-3 gap-8">
-                <div className="flex items-center justify-center" style={cardBase('ecru')}>
-                  <div className="text-center p-6">
-                    <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center" style={cardBase('white')}>
-                      <ArrowRight className="h-8 w-8" />
-                    </div>
-                    <div className="font-extrabold text-sm">Case Study 4</div>
+              <div className="grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 md:items-center">
+                {/* Zdjęcie - na mobile nad opisem - dwa loga pod sobą */}
+                <div 
+                  className="flex flex-col"
+                  style={{
+                    ...cardBase('ecru')
+                  }}
+                >
+                  <div 
+                    className="relative overflow-hidden"
+                    style={{
+                      aspectRatio: '1000/500',
+                    }}
+                  >
+                    <img 
+                      src="/goole_logo.png" 
+                      alt="Google Ads"
+                      className="w-full h-full object-cover"
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                      }}
+                    />
+                  </div>
+                  <div 
+                    className="relative overflow-hidden"
+                    style={{
+                      aspectRatio: '1000/500',
+                    }}
+                  >
+                    <img 
+                      src="/logo_meta.png" 
+                      alt="Meta Ads"
+                      className="w-full h-full object-cover"
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                      }}
+                    />
                   </div>
                 </div>
+                {/* Opis - na mobile pod zdjęciem */}
                 <div className="md:col-span-2">
-                  <div className="p-8" style={cardBase('white')}>
-                    <div className="flex items-center gap-3 mb-6">
+                  <div className="p-4 sm:p-6 md:p-8" style={cardBase('white')}>
+                    {/* Responsive pills - na mobile 2x2 grid */}
+                    <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-3 mb-6">
                       <span style={pillStyle('amaranth')}>GOOGLE ADS</span>
                       <span style={pillStyle('alloy')}>META ADS</span>
                       <span style={pillStyle('butter')}>4 000 PLN / miesiąc</span>
-                      <span style={pillStyle('charcoal')}>6 miesięcy</span>
+                      <span style={pillStyle('alloy')}>6 miesięcy</span>
                     </div>
                     <h3 className="font-extrabold text-xl md:text-2xl mb-4">Wydawnictwo naukowe</h3>
                     <p className="text-sm md:text-base leading-relaxed mb-6" style={{ opacity: .85 }}>
                       Zwiększenie sprzedaży podręczników szkolnych. Projekt zakładał wykorzystanie różnych platform reklamowych dla maksymalizacji zasięgu.
                     </p>
-                    <div className="grid grid-cols-3 gap-4">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
                       <div className="text-center p-4" style={cardBase('ecru')}>
                         <div className="font-extrabold text-xl" style={{ color: P('amaranth') }}>+8%</div>
                         <div className="text-xs mt-1" style={{ opacity: .7 }}>Wzrost sprzedaży</div>
@@ -359,9 +350,28 @@ const PortfolioPPC = () => {
               </div>
 
               {/* Case 5 - Szpital */}
-              <div className="grid md:grid-cols-3 gap-8">
-                <div className="md:col-span-2">
-                  <div className="p-8" style={cardBase('white')}>
+              <div className="grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 md:items-center">
+                {/* Zdjęcie - na mobile nad opisem */}
+                <div 
+                  className="md:order-2 relative overflow-hidden"
+                  style={{
+                    aspectRatio: '1000/500',
+                    ...cardBase('ecru')
+                  }}
+                >
+                  <img 
+                    src="/goole_logo.png" 
+                    alt="Google Ads - kampania społeczna"
+                    className="w-full h-full object-cover"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                    }}
+                  />
+                </div>
+                {/* Opis - na mobile pod zdjęciem */}
+                <div className="md:col-span-2 md:order-1">
+                  <div className="p-4 sm:p-6 md:p-8" style={cardBase('white')}>
                     <div className="flex items-center gap-3 mb-6">
                       <span style={pillStyle('amaranth')}>GOOGLE ADS</span>
                       <span style={pillStyle('alloy')}>2 000 PLN / miesiąc</span>
@@ -371,7 +381,7 @@ const PortfolioPPC = () => {
                     <p className="text-sm md:text-base leading-relaxed mb-6" style={{ opacity: .85 }}>
                       Celem było dotarcie do kobiet zmagających się z depresją poporodową i zachęcenie ich do zgłoszenia się po pomoc medyczną. Kampania dotyczyła zwiększenie świadomości problemu oraz ułatwienie dostępu do specjalistycznej opieki.
                     </p>
-                    <div className="grid grid-cols-3 gap-4">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
                       <div className="text-center p-4" style={cardBase('ecru')}>
                         <div className="font-extrabold text-xl" style={{ color: P('amaranth') }}>750</div>
                         <div className="text-xs mt-1" style={{ opacity: .7 }}>Wypełnionych formularzy</div>
@@ -387,27 +397,19 @@ const PortfolioPPC = () => {
                     </div>
                   </div>
                 </div>
-                <div className="flex items-center justify-center" style={cardBase('ecru')}>
-                  <div className="text-center p-6">
-                    <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center" style={cardBase('white')}>
-                      <CheckCircle className="h-8 w-8" />
-                    </div>
-                    <div className="font-extrabold text-sm">Case Study 5</div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
         </section>
 
         {/* Proces współpracy */}
-        <section style={sectionOuter(isDark ? P('charcoal') : P('white'))} className="py-24 md:py-32" id="proces">
+        <section style={sectionOuter(isDark ? P('charcoal') : P('white'))} className="py-16 sm:py-20 md:py-24 lg:py-32" id="proces">
           <div className="container mx-auto max-w-6xl px-6">
-            <header className="mb-12 md:mb-20">
+            <header className="mb-8 sm:mb-12 md:mb-20">
               <h2 className={bigHeadingClass} style={headingStyles}>Jak wyglądał typowy proces współpracy?</h2>
             </header>
             
-            <div className="space-y-8">
+            <div className="space-y-6 sm:space-y-8">
               {[{
                 num: '01',
                 t: 'Analiza i Strategia (Tydzień 1)',
@@ -429,15 +431,15 @@ const PortfolioPPC = () => {
                   {/* Linia łącząca */}
                   {index < 3 && (
                     <div 
-                      className="absolute left-8 top-20 w-0.5 h-16 z-0"
+                      className="absolute left-6 sm:left-7 md:left-8 top-16 sm:top-18 md:top-20 w-0.5 h-12 sm:h-14 md:h-16 z-0"
                       style={{ background: P('amaranth') }}
                     />
                   )}
                   
-                  <div className="flex gap-8 items-start relative z-10">
+                  <div className="flex gap-3 sm:gap-6 md:gap-8 items-start relative z-10">
                     {/* Numer w kółku */}
                     <div 
-                      className="w-16 h-16 flex items-center justify-center flex-shrink-0"
+                      className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 flex items-center justify-center flex-shrink-0"
                       style={{
                         background: P('amaranth'),
                         border: `${isDark ? '2px' : '3px'} solid ${isDark ? P('white') : P('black')}`,
@@ -445,12 +447,12 @@ const PortfolioPPC = () => {
                         color: P('white'),
                       }}
                     >
-                      <span className="font-extrabold text-lg">{item.num}</span>
+                      <span className="font-extrabold text-sm sm:text-base md:text-lg">{item.num}</span>
                     </div>
                     
                     {/* Zawartość */}
                     <div 
-                      className="flex-1 p-8"
+                      className="flex-1 p-4 sm:p-6 md:p-8"
                       style={{
                         ...cardBase('white'),
                         borderLeft: `6px solid ${P('amaranth')}`,

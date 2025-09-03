@@ -19,8 +19,8 @@ export const portfolioPages: PortfolioPage[] = [
   {
     id: 'seo',
     slug: 'seo',
-    title: 'Kompleksowa obsługa SEO dla producenta drzwi zewnętrznych',
-    description: 'Optymalizacja techniczna → content → link building → artykuły → analityka → raporty.',
+    title: 'SEO dla producenta drzwi zewnętrznych',
+    description: 'optymalizacja techniczna → copywriting → link building → artykuły → analityka → raporty.',
     image: articles?.[0]?.image || 'https://placehold.co/800x500',
     categories: ['Projekty sprzedażowe'],
     tags: ['SEO', 'Content', 'Link building'],
@@ -31,12 +31,12 @@ export const portfolioPages: PortfolioPage[] = [
   {
     id: 'ppc',
     slug: 'ppc',
-    title: 'Portfolio płatnych kampanii reklamowych',
+    title: 'Płatne kampanie reklamowe PPC',
     description: 'Google Ads → Meta Ads → LinkedIn Ads.',
     image: articles?.[1]?.image || 'https://placehold.co/800x500',
     categories: ['Projekty sprzedażowe'],
     tags: ['PPC', 'Performance', 'ROAS'],
-    metrics: 'Wzrost zapytań 40%',
+    metrics: '40% wzrost zapytań',
     featured: true,
     order: 2
   },

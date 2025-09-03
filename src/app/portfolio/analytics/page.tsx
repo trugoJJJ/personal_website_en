@@ -62,7 +62,7 @@ const PortfolioMartomAnalytics = () => {
   const headingStyles: React.CSSProperties = {
     color: isDark ? P("white") : P("black"),
   };
-  const bigHeadingClass = "text-left text-[9vw] sm:text-5xl md:text-7xl font-extrabold uppercase tracking-tight leading-[0.95]";
+  const bigHeadingClass = "text-left text-[8vw] xs:text-[7vw] sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold uppercase tracking-tight leading-[0.95]";
   const sectionOuter = (bg: string, withTopBorder = true): React.CSSProperties => ({
     background: bg,
     borderTop: withTopBorder ? `${isDark ? '1px' : '3px'} solid ${isDark ? P('white') : P('black')}` : undefined,
@@ -121,7 +121,7 @@ const PortfolioMartomAnalytics = () => {
                 </span>
               </nav>
               
-              <header className="mt-4 md:mt-8 mb-12 md:mb-20 text-center">
+              <header className="mt-4 md:mt-8 mb-8 sm:mb-12 md:mb-20 text-center">
                 <h1 className={bigHeadingClass + ' mb-8'} style={headingStyles}>Implementacja systemu śledzenia danych</h1>
                 
                 {/* Tagi przeniesione bezpośrednio pod tytuł */}
@@ -133,7 +133,7 @@ const PortfolioMartomAnalytics = () => {
                 
                 {/* Ramka dopasowana do kontenera (nie full-width) */}
                 <div
-                  className="mb-8 px-12 py-10 text-left"
+                  className="mb-8 px-4 sm:px-8 md:px-12 py-6 sm:py-8 md:py-10 text-left"
                   style={{
                     border: `${isDark ? '1px' : '3px'} solid ${isDark ? P('white') : P('black')}`,
                     background: isDark ? P('ecru') : P('ecru'),
@@ -153,28 +153,35 @@ const PortfolioMartomAnalytics = () => {
             {/* Główne ujęcie - dopasowane do stylu ramek */}
             <div className="container mx-auto max-w-6xl px-6 mb-16">
               <figure 
-                className="aspect-video flex items-center justify-center relative overflow-hidden"
+                className="relative overflow-hidden"
                 style={{
+                  aspectRatio: '1024/532',
                   border: `${isDark ? '1px' : '3px'} solid ${isDark ? P('white') : P('black')}`,
                   background: isDark ? P('charcoal') : P('ecru'),
                   boxShadow: `inset 0 0 0 6px ${isDark ? P('charcoal') : P('white')}`,
                 }}
               >
-                <div className="text-center px-6">
-                  <div className="w-20 h-20 mx-auto mb-5 flex items-center justify-center" style={cardBase('white')}>
-                    <BarChart className="h-10 w-10" />
-                  </div>
-                  <h3 className="font-extrabold mb-2">System śledzenia</h3>
-                  <p className="text-sm" style={{ opacity: .7 }}>Format 16:9 – miejsce na grafikę / wykres</p>
-                </div>
+                <video 
+                  className="w-full h-full object-cover"
+                  autoPlay
+                  muted
+                  playsInline
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                  }}
+                >
+                  <source src="/google_analytics_screen.mp4" type="video/mp4" />
+                  Twoja przeglądarka nie obsługuje odtwarzania wideo.
+                </video>
               </figure>
             </div>
 
             {/* Detale projektu - z powrotem w kontenerze */}
             <div className="container mx-auto max-w-6xl px-6">
-              <div className="grid md:grid-cols-3 gap-8 mb-16">
+              <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-12 md:mb-16">
                 {[
-                  { icon: Calendar, label: 'Data', value: '2022-2025' },
+                  { icon: Calendar, label: 'Data', value: '2024' },
                   { icon: Building, label: 'Branża', value: 'Producent drzwi' },
                   { icon: User, label: 'Udział w projekcie', value: 'Kompleksowa obsługa' },
                 ].map(({ icon: Icon, label, value }) => (
@@ -190,16 +197,16 @@ const PortfolioMartomAnalytics = () => {
           </section>
 
           {/* Problem */}
-          <section style={sectionOuter(P('ecru'))} className="py-24 md:py-32" id="problem">
+          <section style={sectionOuter(P('ecru'))} className="py-16 sm:py-20 md:py-24 lg:py-32" id="problem">
             <div className="container mx-auto max-w-6xl px-6">
-              <header className="mb-12 md:mb-20">
+              <header className="mb-8 sm:mb-12 md:mb-20">
                 <h2 className={bigHeadingClass} style={headingStyles}>Problem</h2>
               </header>
               <div className="mb-12 p-8 md:p-12" style={cardBase('white')}>
                 <p className="text-lg md:text-xl font-medium leading-relaxed mb-6" style={{ opacity: .9 }}>
                   Po drobnych zmianach na stronie internetowej i w konfiguracji reklam Google Ads nie można było sprawdzić:
                 </p>
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                   {[
                     'Ile osób dzwoni po wejściu na stronę',
                     'Którzy klienci wypełniają formularze kontaktowe',
@@ -219,34 +226,34 @@ const PortfolioMartomAnalytics = () => {
           {/* Rezultaty */}
           <section style={sectionOuter(isDark ? P('charcoal') : P('white'))} className="py-24 md:py-32" id="rezultaty">
             <div className="container mx-auto max-w-6xl px-6">
-              <header className="mb-12 md:mb-20">
+              <header className="mb-8 sm:mb-12 md:mb-20">
                 <h2 className={bigHeadingClass} style={headingStyles}>Rezultaty</h2>
               </header>
-              <div className="grid md:grid-cols-2 gap-8 mb-16">
+              <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mb-12 md:mb-16">
                 {[
                   { v: '150 tys.', l: 'wykrytych konwersji na stronie' },
                   { v: '10', l: 'nowych ścieżek pomiaru danych' },
                 ].map(s => (
-                  <div key={s.l} className="p-8 text-center" style={cardBase('ecru')}>
+                  <div key={s.l} className="p-4 sm:p-6 md:p-8 text-center" style={cardBase('ecru')}>
                     <div style={statNumberStyle}>{s.v}</div>
                     <div className="mt-3 font-extrabold text-sm md:text-base" style={{ opacity: .85 }}>{s.l}</div>
                   </div>
                 ))}
               </div>
-              <div className="grid md:grid-cols-3 gap-8">
-                <div className="p-8 flex flex-col" style={cardBase('white')}>
+              <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+                <div className="p-4 sm:p-6 md:p-8 flex flex-col" style={cardBase('white')}>
                   <h4 className="font-extrabold mb-4 flex items-center gap-2"><TrendingUp className="h-5 w-5" /> Integracja</h4>
                   <p className="text-sm leading-relaxed" style={{ opacity: .85 }}>
                     Integracja danych ze wszystkich kanałów marketingowych – pełny obraz efektywności działań.
                   </p>
                 </div>
-                <div className="p-8 flex flex-col" style={cardBase('white')}>
+                <div className="p-4 sm:p-6 md:p-8 flex flex-col" style={cardBase('white')}>
                   <h4 className="font-extrabold mb-4 flex items-center gap-2"><Target className="h-5 w-5" /> Rozwój</h4>
                   <p className="text-sm leading-relaxed" style={{ opacity: .85 }}>
                     System gotowy do dalszego rozwoju i dodawania nowych metryk biznesowych.
                   </p>
                 </div>
-                <div className="p-8 flex flex-col" style={cardBase('white')}>
+                <div className="p-4 sm:p-6 md:p-8 flex flex-col" style={cardBase('white')}>
                   <h4 className="font-extrabold mb-4 flex items-center gap-2"><CheckCircle className="h-5 w-5" /> Kontrola</h4>
                   <p className="text-sm leading-relaxed" style={{ opacity: .85 }}>
                     Pełna kontrola nad danymi i procesami marketingowymi bez zależności od zewnętrznych agencji.
@@ -259,7 +266,7 @@ const PortfolioMartomAnalytics = () => {
           {/* Proces */}
           <section style={sectionOuter(P('ecru'))} className="py-24 md:py-32" id="proces">
             <div className="container mx-auto max-w-6xl px-6">
-              <header className="mb-12 md:mb-20">
+              <header className="mb-8 sm:mb-12 md:mb-20">
                 <h2 className={bigHeadingClass} style={headingStyles}>Proces</h2>
               </header>
               <div className="space-y-16">
@@ -325,9 +332,9 @@ const PortfolioMartomAnalytics = () => {
                   </div>
                   <div className="p-8 md:p-12" style={cardBase('white')}>
                     <p className="text-base md:text-lg mb-6" style={{ opacity: .9 }}>
-                      Skonfigurowałem śledzenie następujących zachowań klientów:
+                      Skonfigurowałem śledzenie ponad 50 zachowań klientów, w tym:
                     </p>
-                    <div className="grid md:grid-cols-2 gap-6">
+                    <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                       {[
                         { icon: PhoneCall, text: 'Kontakt telefoniczny – kiedy ktoś kliknie w numer telefonu na stronie' },
                         { icon: Mail, text: 'Kontakt mailowy – kliknięcia w adresy email' },
@@ -410,7 +417,7 @@ const PortfolioMartomAnalytics = () => {
           {/* Korzyści długoterminowe */}
           <section style={sectionOuter(isDark ? P('charcoal') : P('white'))} className="py-24 md:py-32" id="korzysci">
             <div className="container mx-auto max-w-6xl px-6">
-              <header className="mb-12 md:mb-20">
+              <header className="mb-8 sm:mb-12 md:mb-20">
                 <h2 className={bigHeadingClass} style={headingStyles}>Korzyści długoterminowe</h2>
               </header>
               
@@ -480,7 +487,7 @@ const PortfolioMartomAnalytics = () => {
           {/* Podsumowanie */}
           <section style={sectionOuter(P('ecru'))} className="py-24 md:py-32" id="podsumowanie">
             <div className="container mx-auto max-w-6xl px-6">
-              <header className="mb-12 md:mb-20">
+              <header className="mb-8 sm:mb-12 md:mb-20">
                 <h2 className={bigHeadingClass} style={headingStyles}>Podsumowanie</h2>
               </header>
               <div className="grid md:grid-cols-3 gap-8 mb-12">

@@ -32,15 +32,15 @@ const SectionHeading = ({ children, id }: { children: React.ReactNode, id?: stri
       {
         title: "LinkedIn",
         text: "Połączmy się i porozmawiajmy",
-        href: "https://linkedin.com/in/adamgalecki",
+        href: "https://www.linkedin.com/in/admagalecki/",
         display: "linkedin.com/in/adamgalecki",
         Icon: MessageCircle, // unchanged original Icon reference
         external: true,
       },
       {
         title: "Calendly",
-        text: "Wybierz dogodny termin",
-        href: "#",
+        text: "Wybierz dogodny termin na rozmowę",
+        href: "https://calendly.com/agalecki-work",
         display: "Zarezerwuj spotkanie",
         Icon: CalendarIcon,
       },

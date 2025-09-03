@@ -21,7 +21,7 @@ const PrivacyPolicyContent = () => {
   });
 
   return (
-    <div style={{ background: isDark ? P('charcoal') : P('white'), color: isDark ? P('white') : P('charcoal') }}>
+    <div style={{ background: isDark ? P('charcoal') : P('white'), color: isDark ? P('white') : P('charcoal'), minHeight: '100vh' }}>
       <Header />
       <main className="pt-28">
         <SEO 
@@ -50,7 +50,7 @@ const PrivacyPolicyContent = () => {
               <h1 style={headingStyles} className={bigHeadingClass}>
                 Polityka Prywatności
               </h1>
-              <p className="mt-6 text-lg max-w-2xl" style={{ color: isDark ? P('white') : P('charcoal') }}>
+              <p className="mt-6 text-lg max-w-4xl leading-relaxed" style={{ color: isDark ? P('white') : P('charcoal') }}>
                 Informacje o przetwarzaniu danych osobowych i wykorzystaniu plików cookies w serwisie galecki.website
               </p>
             </div>
@@ -463,7 +463,7 @@ const PrivacyPolicyContent = () => {
 export default function PrivacyPolicyPage() {
   return (
     <ClientOnlyWrapper fallback={
-      <div className="bg-white text-charcoal">
+      <div className="bg-white text-charcoal min-h-screen">
         <div className="fixed top-0 inset-x-0 z-50 bg-white border-b-3 border-black">
           <nav className="w-full h-16 flex items-center relative">
             <a href="#home" className="font-extrabold tracking-tight leading-none ml-4 md:ml-8 text-charcoal">Adam&nbsp;Gałęcki</a>
@@ -480,7 +480,7 @@ export default function PrivacyPolicyPage() {
               <h1 className="text-left text-[9vw] sm:text-5xl md:text-7xl font-extrabold uppercase tracking-tight leading-[0.95] text-black">
                 Polityka Prywatności
               </h1>
-              <p className="mt-6 text-lg max-w-2xl text-charcoal">
+              <p className="mt-6 text-lg max-w-4xl leading-relaxed text-charcoal">
                 Informacje o przetwarzaniu danych osobowych i wykorzystaniu plików cookies w serwisie galecki.website
               </p>
             </div>

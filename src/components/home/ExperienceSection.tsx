@@ -48,43 +48,43 @@ const ExperienceSectionContent = () => {
       company: "Dogtronic",
       period: "2021 – 2025",
       desc: "Prowadzenie kampanii digital, SEO oraz zarządzanie zespołem marketingowym",
-      url: "https://example.com/case-study/dogtronic"
+      url: "https://dogtronic.io/"
     },
     {
       role: "Specjalista ds. marketingu",
       company: "Instytut Rozwoju Szkolnictwa Wyższego",
       period: "2023 – 2024",
       desc: "Koordynacja działań promocyjnych i rozwój komunikacji wizerunkowej",
-      url: "https://example.com/case-study/irsw"
+      url: "https://irsw.pl/"
     },
     {
       role: "SEO Specialist",
       company: "Kryptobot",
       period: "2021 – 2022",
       desc: "Audyt i optymalizacja serwisów pod SEO, link building i analityka",
-      url: "https://example.com/case-study/kryptobot"
+      url: "https://kryptobot.net/"
     },
     {
       role: "Stażysta w dziale marketingu",
       company: "Akanza",
       period: "2021",
       desc: "Wsparcie zespołu w tworzeniu treści i kampanii reklamowych",
-      url: "https://example.com/case-study/akanza"
+      url: "https://akanza.pl/"
     },
     {
       role: "Grafik",
       company: "EmArt Studio",
       period: "2021",
       desc: "Projektowanie materiałów graficznych online i offline dla klientów",
-      url: "https://example.com/case-study/emart"
+      url: "https://www.emartstudio.pl/"
     },
   ];
 
   const certs = [
-    { year: "2023", title: "Google Ads Certified", org: "Google", url: "https://example.com/cert/google-ads", image: "https://placehold.co/800x500?text=Google+Ads" },
-    { year: "2023", title: "Facebook Blueprint Certified", org: "Meta", url: "https://example.com/cert/meta-blueprint", image: "https://placehold.co/800x500?text=Meta+Blueprint" },
-    { year: "2023", title: "Google Analytics 4 Certified", org: "Google", url: "https://example.com/cert/ga4", image: "https://placehold.co/800x500?text=GA4" },
-    { year: "2022", title: "HubSpot Inbound Marketing", org: "HubSpot", url: "https://example.com/cert/hubspot-inbound", image: "https://placehold.co/800x500?text=HubSpot+Inbound" },
+    { year: "2023", title: "Google Internetowe Rewolucje", org: "Google", url: "https://skillshop.exceedlms.com/student/collection/796504-digital-marketing", image: "/google_certfikat.png" },
+    { year: "2024", title: "Marketing B2B - lead generation", org: "Szymon Negacz", url: "https://www.sellwise.pl/marketing-b2b-lead-generation/", image: "/lejki_certyfikat.png" },
+    { year: "2023", title: "AI dla Marketingu", org: "Sprawny Marketing", url: "https://sprawnymarketing.pl/szkolenia/ai/", image: "/ai_certfikat.png" },
+    { year: "2024", title: "Viral i kreatywny marketing", org: "Jakub Biel", url: "https://jakubbiel.pl/viral/", image: "/viral_certyfikat.png" },
   ];
 
   const [selectedCert, setSelectedCert] = useState<typeof certs[number] | null>(null);
@@ -129,7 +129,7 @@ const ExperienceSectionContent = () => {
           <div className="flex flex-col gap-4 md:gap-8 col-span-2 lg:col-span-1">
             {/* EDU */}
             <a
-              href="https://pollub.pl"
+              href="https://wz.pollub.pl/rekrutacja/kierunki-studiow/marketing-i-komunikacja-rynkowa"
               target="_blank"
               rel="noreferrer nofollow"
               style={{

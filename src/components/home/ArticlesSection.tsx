@@ -102,6 +102,15 @@ const ArticlesSectionContent = () => {
                   href={article.link}
                   target="_blank"
                   rel="noopener noreferrer nofollow"
+                  className="text-sm font-medium hover:opacity-80 transition-opacity mt-12"
+                  style={{ color: isDark ? P("white") : P("amaranth") }}
+                >
+                  <span className="border-b border-current">Czytaj na: dogtronic.io</span>
+                </Link>
+                <Link
+                  href={article.link}
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
                   className="w-full inline-flex items-center justify-center gap-2 font-extrabold px-4 py-3 transition-colors"
                   style={{
                     border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`,

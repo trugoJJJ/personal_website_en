@@ -63,7 +63,7 @@ const SkillsSectionContent = () => {
   
   const technicalSkills = [
     "Zarządzanie zespołem", "Analityka marketingu", "SEO",
-    "Media Społecznościowe", "Płatne Kampanie Reklamowe",
+    "Media Społecznościowe", "PPC",
     "Projektowanie Lejków", "No-Code", "Email Marketing",
     "Automatyzacja", "Tworzenie stron", "Animacja 3D", "Animacja 2D",
     "Grafika 3D", "Grafika 2D", "+ trochę więcej…"

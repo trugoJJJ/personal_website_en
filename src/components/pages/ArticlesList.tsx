@@ -29,6 +29,14 @@ const ArticlesList = () => {
                 </div>
                 <h2 className="text-xl font-semibold">{a.title}</h2>
                 <p className="text-sm text-muted-foreground">{a.excerpt}</p>
+                <Link
+                  href={a.link}
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  className="text-sm font-medium text-[#C25A3A] hover:opacity-80 transition-opacity mt-12"
+                >
+                  <span className="border-b border-current">Czytaj na: dogtronic.io</span>
+                </Link>
                 <Button asChild variant="outline" className="w-full">
                   <Link href={`/articles/${a.id}`} aria-label={`Czytaj więcej: ${a.title}`}>
                     <ExternalLink className="h-4 w-4 mr-2" /> Czytaj więcej

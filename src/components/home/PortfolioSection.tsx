@@ -79,46 +79,64 @@ const CATEGORIES = ["Projekty kreatywne", "Projekty sprzedażowe"] as const;
 
 const portfolioProjects: Omit<Project, 'id'>[] = [
   {
-    title: 'Kompleksowa obsługa SEO dla producenta drzwi zewnętrznych',
+    title: 'SEO dla producenta drzwi zewnętrznych',
     description:
-      'Optymalizacja techniczna → content → link building → artykuły → analityka → raporty.',
-    image: articles?.[0]?.image || 'https://placehold.co/800x500',
+      'optymalizacja techniczna → copywriting → link building → artykuły → analityka → raporty.',
+    image: '/seo_projekt.png',
     categories: ['Projekty sprzedażowe'],
     tags: ['SEO', 'Content', 'Link building'],
     metrics: '+3 mln wyświetleń'
   },
   {
-    title: 'Portfolio płatnych kampanii reklamowych',
+    title: 'Płatne kampanie reklamowe PPC',
     description: 'Google Ads → Meta Ads → LinkedIn Ads.',
-    image: articles?.[1]?.image || 'https://placehold.co/800x500',
+    image: '/ppc_projekt.png',
     categories: ['Projekty sprzedażowe'],
     tags: ['PPC', 'Performance', 'ROAS'],
-    metrics: 'Wzrost zapytań 40%'
+    metrics: '40% wzrost zapytań'
   },
   {
-    title: 'System śledzenia danych o odwiedzających',
-    description: 'GA4 → GSC → Ads → Meta → GTM (pełny pomiar).',
-    image: articles?.[2]?.image || 'https://placehold.co/800x500',
-    categories: ['Projekty kreatywne'],
+    title: 'Automatyczny system śledzenia danych ',
+    description: 'GA4 → GSC → GoogleAds → MetaAds → GTM.',
+    image: '/analityka_projekt.png',
+    categories: ['Projekty sprzedażowe'],
     tags: ['GA4', 'GTM', 'Attribution'],
     metrics: '150 tys. konwersji'
   },
   {
     title: 'Szablon animacji portfolio',
-    description: '2D Motion (AE) – prezentacja produktu/usługi.',
-    image: articles?.[0]?.image || 'https://placehold.co/800x500',
+    description: 'Animacja 2D → Adobe After Effects → Prezentacja usługi.',
+    image: '/animacja_projekt.png',
     categories: ['Projekty kreatywne'],
     tags: ['After Effects', '2D', 'Template'],
     metrics: '50 tys. wyświetleń',
-    externalLink: 'https://www.behance.net/gallery/199466415/Animationforthe-software-dvelopment-company-portfolio'
+    externalLink: 'https://www.instagram.com/reel/C58pTt4No9B/?utm_source=ig_web_copy_link&igsh=c2xxeTQ2MTRwanNk'
+  },
+  {
+    title: 'Landing page promocyjny',
+    description: 'Langing page → Projekt → Development → Kampania promocyjna',
+    image: '/saas_projekt.png',
+    categories: ['Projekty kreatywne'],
+    tags: ['Developnet', 'Promocja', 'Designe'],
+    metrics: 'Kompleksowe wdrożenie',
+    externalLink: 'https://www.behance.net/gallery/233839349/SaaS-Landing-Page-Project-Implementation-Content'
+  },
+  {
+    title: 'Interaktywna animacja w Rive',
+    description: 'Interaktywna animacja → Rive Studio → Animacja na stronę',
+    image: '/rive_projekt.png',
+    categories: ['Projekty kreatywne'],
+    tags: ['Rive', 'Interactive', 'Animation'],
+    metrics: 'Dedykowana animacja',
+    externalLink: 'https://rive.app/community/files/23283-43730-interactive-drawing-animation/'
   },
 ];
 
 const createSixProjects = (projects: Omit<Project, 'id'>[]): Project[] => {
   const sixProjects: Project[] = [];
-  const projectPool = [...projects, ...projects.slice(0, 2)];
-  for (let i = 0; i < projectPool.length; i++) {
-    const projectTemplate = projectPool[i];
+  // Use only the first 6 projects without duplicates
+  for (let i = 0; i < Math.min(6, projects.length); i++) {
+    const projectTemplate = projects[i];
     sixProjects.push({ ...projectTemplate, id: `${projectTemplate.title}-${i}` });
   }
   return sixProjects;
@@ -149,24 +167,49 @@ function SuccessAnimationPlaceholder({ onReset }: { onReset: () => void }) {
 function ProjectCard({ project, isHighlighted = false }: { project: Project, isHighlighted?: boolean }) {
   const { isDark, P } = usePalette();
   
+  // Function to get appropriate link text based on external link URL
+  const getExternalLinkText = (url: string) => {
+    if (url.includes('instagram.com')) {
+      return 'Zobacz na Instagramie';
+    }
+    if (url.includes('behance.net')) {
+      return 'Zobacz na Behance';
+    }
+    if (url.includes('rive.app')) {
+      return 'Zobacz na Rive Marketplace';
+    }
+    if (url.includes('youtube.com') || url.includes('youtu.be')) {
+      return 'Zobacz na YouTube';
+    }
+    if (url.includes('linkedin.com')) {
+      return 'Zobacz na LinkedIn';
+    }
+    // Default fallback
+    return 'Zobacz więcej';
+  };
+  
   // Map project titles to their specific routes
-  const getProjectLink = (title: string) => {
+  const getProjectLink = (title: string, externalLink?: string) => {
     if (title.includes('SEO') || title.includes('Kompleksowa obsługa SEO')) {
       return '/portfolio/seo';
     }
-    if (title.includes('płatnych kampanii') || title.includes('Portfolio płatnych')) {
+    if (title.includes('płatnych kampanii') || title.includes('PPC') || title.includes('Płatne kampanie')) {
       return '/portfolio/ppc';
     }
     if (title.includes('System śledzenia') || title.includes('śledzenia danych')) {
       return '/portfolio/analytics';
     }
-    // For other projects, use generic portfolio detail page
-    return 'https://www.behance.net/gallery/199466415/Animationforthe-software-dvelopment-company-portfolio';
+    // For projects with external links, use the external link
+    if (externalLink) {
+      return externalLink;
+    }
+    // For other projects, use generic portfolio page
+    return '/portfolio';
   };
 
   return (
     <article className="group flex flex-col h-full"
-             style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, outline: isHighlighted ? `4px solid ${P("alloy")}` : "none" }}>
+             style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, outline: isHighlighted ? `4px solid ${isDark ? P("white") : P("alloy")}` : "none" }}>
       <div className="overflow-hidden flex flex-col h-full">
         <figure className="aspect-video overflow-hidden"
                 style={{ borderBottom: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
@@ -206,16 +249,17 @@ function ProjectCard({ project, isHighlighted = false }: { project: Project, isH
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm font-bold underline"
-                style={{ color: isDark ? P("butter") : P("amaranth") }}
+                style={{ color: isDark ? P("white") : P("amaranth") }}
               >
-                Zobacz na Behance
+                {getExternalLinkText(project.externalLink)}
               </a>
             </div>
           )}
           <div className="mt-auto pt-6">
             <Link
-              href={getProjectLink(project.title)}
+              href={getProjectLink(project.title, project.externalLink)}
               className="block w-full font-extrabold transition-colors text-center"
+              {...(project.externalLink ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
               style={{
                 border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`,
                 padding: "10px 0",

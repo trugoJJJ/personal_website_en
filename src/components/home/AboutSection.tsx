@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Target, TrendingUp, Users, Award } from "lucide-react";
+import { Target, TrendingUp, Users, Award, Github, FileText, Briefcase } from "lucide-react";
 import { usePalette } from "./hooks";
 import portrait from "@/assets/hero-portrait.jpg";
 
@@ -36,9 +36,8 @@ export const AboutSection = () => {
                 Zajmuję się kompleksową obsługą komunikacji marketingowej nakierowanej na osiąganie zamierzonych celów biznesowych.
               </p>
               <p>
-                Przez ostatnie 5 lat rozwijałem się w marketingu – od grafika, przez SEO, po managera zespołu.
-                Realizowałem długoterminowe strategie SEO (produkcja drzwi, medyczna, krypto), zarządzałem zespołem
-                i wspierałem projekty IT dla największych marek w Polsce.
+                Przez ostatnie 5&nbsp;lat rozwijałem się w&nbsp;marketingu –&nbsp;od grafika,&nbsp;przez specjalistę SEO,&nbsp;po managera zespołu.
+                Realizowałem długoterminowe strategie marketingowe dla różnych branż (IT,&nbsp;produkcyjna,&nbsp;medyczna,&nbsp;krypto). Zarządzałem zespołem i&nbsp;wspierałem projekty IT oraz marketingowe dla największych marek w&nbsp;Polsce.
               </p>
             </div>
           </div>
@@ -46,10 +45,10 @@ export const AboutSection = () => {
           <div className="space-y-8">
             <div className="grid grid-cols-2 gap-3 md:gap-6">
               {[
-                { value: "+3 mln", label: "Wyświetleń linku do strony w Google" },
-                { value: "125 tys.", label: "Wejść na stronę z wyników Google" },
-                { value: "40%", label: "Wzrost zapytań ofertowych" },
-                { value: "750", label: "Wypełnionych formularzy" },
+                { value: "+5 lat", label: "Doświadczenia w marketingu internetowym" },
+                { value: "+100", label: "Zrealizowanych projektów dla różnych branż" },
+                { value: "100%", label: "Odpowiedzialności za powierzone zadania" },
+                { value: ">847 km", label: "Zapisanych w postach i wpisach blogowych" },
               ].map((s) => (
                 <div key={s.label} className="p-4 md:p-6 text-left"
                      style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: P("ecru"), color: isDark ? P("white") : P("black") }}>
@@ -63,49 +62,67 @@ export const AboutSection = () => {
             <div className="p-10"
                  style={{ background: P("butter"), color: isDark ? P("white") : P("black"), border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
               {(() => {
-                const QR_DATA_URI =
-                  'data:image/svg+xml;utf8,' +
-                  encodeURIComponent(`
-                  <svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 120 120">
-                    <rect width="120" height="120" fill="#ffffff"/>
-                    <rect x="6" y="6" width="28" height="28" fill="none" stroke="#000" stroke-width="6"/>
-                    <rect x="6" y="6" width="18" height="18" fill="#000"/>
-                    <rect x="86" y="6" width="28" height="28" fill="none" stroke="#000" stroke-width="6"/>
-                    <rect x="96" y="16" width="18" height="18" fill="#000"/>
-                    <rect x="6" y="86" width="28" height="28" fill="none" stroke="#000" stroke-width="6"/>
-                    <rect x="6" y="96" width="18" height="18" fill="#000"/>
-                    <rect x="44" y="44" width="8" height="8" fill="#000"/>
-                    <rect x="56" y="44" width="8" height="8" fill="#000"/>
-                    <rect x="68" y="44" width="8" height="8" fill="#000"/>
-                    <rect x="44" y="56" width="8" height="8" fill="#000"/>
-                    <rect x="56" y="56" width="8" height="8" fill="#000"/>
-                    <rect x="68" y="56" width="8" height="8" fill="#000"/>
-                    <rect x="44" y="68" width="8" height="8" fill="#000"/>
-                    <rect x="56" y="68" width="8" height="8" fill="#000"/>
-                    <rect x="68" y="68" width="8" height="8" fill="#000"/>
-                  </svg>
-                `);
+                // Minimalistyczny QR kod bez dodatkowego tła
+                const QR_DATA_URI = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent('https://linktr.ee/trugojjj')}&format=png&color=${isDark ? 'ffffff' : '000000'}&bgcolor=${isDark ? '000000' : 'ffffff'}&ecc=L&margin=0`;
 
                 return (
                   <div className="grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
                     {/* Ikony - full width na mobile, 3 kolumny na desktop */}
                     <div className="col-span-1 md:col-span-3 grid grid-cols-3 gap-4 md:gap-6">
                       {[
-                        { Icon: Target, href: "mailto:agalecki.work@gmail.com", label: "Mail" },
-                        { Icon: TrendingUp, href: "https://linkedin.com/in/adamgalecki", label: "LinkedIn" },
-                        { Icon: Users, href: "https://github.com", label: "GitHub" },
-                        { Icon: Award, href: "#", label: "Messenger" },
-                        { Icon: Target, href: "#", label: "Instagram" },
                         {
                           Icon: (props: any) => (
-                            <svg viewBox="0 0 64 64" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="square" strokeLinejoin="miter" {...props}>
-                              <path d="M36 8v28" />
-                              <path d="M36 36c0 6-6 10-12 10s-12-4-12-10 6-10 12-10c3 0 6 1 8 3" />
-                              <path d="M36 14c3 6 10 10 16 10" />
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" {...props}>
+                              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                             </svg>
                           ),
-                          href: "https://tiktok.com/@twojprofil",
+                          href: "https://www.linkedin.com/in/admagalecki/",
+                          label: "LinkedIn",
+                        },
+                        {
+                          Icon: (props: any) => (
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" {...props}>
+                              <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+                            </svg>
+                          ),
+                          href: "https://www.tiktok.com/@firma_galecka?is_from_webapp=1&sender_device=pc",
                           label: "TikTok",
+                        },
+                        {
+                          Icon: (props: any) => (
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" {...props}>
+                              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                          ),
+                          href: "https://github.com/trugoJJJ",
+                          label: "GitHub",
+                        },
+                        {
+                          Icon: (props: any) => (
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" {...props}>
+                              <path d="M22 7h-7v-2h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14h-8.027c.13 3.211 3.483 3.312 4.588 2.029h3.168zm-7.686-4h4.965c-.105-1.547-1.136-2.219-2.477-2.219-1.466 0-2.277.768-2.488 2.219zm-9.574 6.988h-6.466v-14.967h6.953c5.476.081 5.58 5.444 2.72 6.906 3.461 1.26 3.577 8.061-3.207 8.061zm-3.466-8.988h3.584c2.508 0 2.906-3-.312-3h-3.272v3zm3.391 3h-3.391v3.016h3.341c3.055 0 2.868-3.016.05-3.016z"/>
+                            </svg>
+                          ),
+                          href: "https://www.behance.net/adamgacki1",
+                          label: "Behance",
+                        },
+                        {
+                          Icon: (props: any) => (
+                            <svg fill="currentColor" width="20" height="20" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" {...props}>
+                              <path d="M24.75 17.542c-1.469 0-2.849-0.62-4.099-1.635l0.302-1.432 0.010-0.057c0.276-1.521 1.13-4.078 3.786-4.078 1.99 0 3.604 1.615 3.604 3.604 0 1.984-1.615 3.599-3.604 3.599zM24.75 6.693c-3.385 0-6.016 2.198-7.083 5.818-1.625-2.443-2.865-5.38-3.583-7.854h-3.646v9.484c-0.005 1.875-1.521 3.391-3.396 3.396-1.875-0.005-3.391-1.526-3.396-3.396v-9.484h-3.646v9.484c0 3.885 3.161 7.068 7.042 7.068 3.885 0 7.042-3.182 7.042-7.068v-1.589c0.708 1.474 1.578 2.974 2.635 4.297l-2.234 10.495h3.729l1.62-7.615c1.417 0.906 3.047 1.479 4.917 1.479 4 0 7.25-3.271 7.25-7.266 0-4-3.25-7.25-7.25-7.25z"/>
+                            </svg>
+                          ),
+                          href: "https://www.upwork.com/freelancers/~0170962b0b448c7ac5?mp_source=share",
+                          label: "UpWork",
+                        },
+                        {
+                          Icon: (props: any) => (
+                            <span className="font-black text-center flex items-center justify-center" style={{ fontSize: '18px', fontWeight: 900 }} {...props}>
+                              CV
+                            </span>
+                          ),
+                          href: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+                          label: "CV",
                         },
                       ].map(({ Icon, href, label }, i) => {
                         const baseBg = isDark ? P("charcoal") : P("white");
@@ -145,12 +162,16 @@ export const AboutSection = () => {
 
                     {/* QR po prawej - ukryty na mobile */}
                     <div className="hidden md:block col-span-2 justify-self-end text-center">
-                      <div
-                        className="w-32 h-32 sm:w-40 sm:h-40 flex items-center justify-center mx-auto"
-                        style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: isDark ? P("charcoal") : P("white") }}
+                      <a
+                        href="https://linktr.ee/trugojjj"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block w-32 h-32 sm:w-40 sm:h-40 flex items-center justify-center mx-auto transition-transform duration-300 ease-out hover:scale-105"
+                        style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: isDark ? P("black") : P("white") }}
+                        aria-label="Linktree - wszystkie linki"
                       >
-                        <img src={QR_DATA_URI} alt="QR" className="w-[85%] h-[85%] object-contain" />
-                      </div>
+                        <img src={QR_DATA_URI} alt="QR Code - linktr.ee/trugojjj" className="w-[85%] h-[85%] object-contain" />
+                      </a>
                     </div>
                   </div>
                 );
