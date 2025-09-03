@@ -28,28 +28,7 @@ const BrushControlsContent = ({
   ];
   const PALETTE: (keyof typeof COLORS)[] = ["black","white","amaranth","butter","alloy","charcoal"];
   
-  // Persistent (do refresh) zaznaczenia – multi select; nie resetują się przy zmianie pędzla/koloru
-  const [markedColors, setMarkedColors] = useState<Set<keyof typeof COLORS>>(()=> new Set([currentColorKey]));
   const [hoveredButton, setHoveredButton] = useState<string | number | null>(null);
-  
-  const handleLeftClick = (key: keyof typeof COLORS) => {
-    onColorChange(key);
-    setMarkedColors(prev => {
-      if (prev.has(key)) return new Set(prev); // zachowaj
-      const next = new Set(prev); next.add(key); return next;
-    });
-  };
-  
-  const handleRightClick = (e: React.MouseEvent, key: keyof typeof COLORS) => {
-    e.preventDefault();
-    // pozwalamy usunąć oznaczenie PPM – opcjonalne
-    setMarkedColors(prev => { 
-      const next = new Set(prev); 
-      if (next.has(key)) next.delete(key); 
-      else next.add(key); 
-      return next; 
-    });
-  };
 
   return (
     <div className={`transition-all ${isVisible ? "opacity-100" : "opacity-0"} flex flex-wrap gap-3 items-center justify-center px-6`}>
@@ -95,12 +74,10 @@ const BrushControlsContent = ({
       <div className="flex items-center p-1 gap-1" style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: isDark ? P("charcoal") : P("ecru") }}>
         {PALETTE.map((key,i)=>{
           const isActive = currentColorKey===key;
-          const isMarked = markedColors.has(key);
           return (
             <button
               key={key+i}
-              onClick={()=>handleLeftClick(key)}
-              onContextMenu={(e)=>handleRightClick(e,key)}
+              onClick={()=>onColorChange(key)}
               onMouseEnter={() => setHoveredButton(key)}
               onMouseLeave={() => setHoveredButton(null)}
               className="relative w-10 h-10 transition-transform duration-300 ease-out"
@@ -111,15 +88,10 @@ const BrushControlsContent = ({
                 borderRight: i===PALETTE.length-1? 'none': `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`,
                 transform: hoveredButton === key ? 'scale(1.05)' : 'scale(1)',
               }}
-              aria-label={`Kolor ${key}${isMarked? ' (oznaczony)':''}${isActive?' (aktywny)':''}`}
-              title={isMarked? 'PPM usuń oznaczenie':'PPM dodaj oznaczenie'}
+              aria-label={`Kolor ${key}${isActive?' (aktywny)':''}`}
             >
-              {/* Wnętrze – właściwy kolor z odstępem (pusta ramka) */}
-              <span className="absolute inset-[4px]" style={{ background: P(key), boxShadow: `inset 0 0 0 ${isDark ? '1px' : '2px'} ${isDark ? P("white") : P("black")}` }} />
-              {/* Oznaczenie (persist) */}
-              {isMarked && (
-                <span className="pointer-events-none absolute inset-0" style={{ boxShadow: `inset 0 0 0 2px ${P("white")}, inset 0 0 0 ${isDark ? '3px' : '4px'} ${isDark ? P("white") : P("black")}` }} />
-              )}
+              {/* Wnętrze – właściwy kolor z białym strokiem */}
+              <span className="absolute inset-[4px]" style={{ background: P(key), boxShadow: `inset 0 0 0 ${isDark ? '1px' : '2px'} ${P("white")}` }} />
               {/* Aktywny kolor – amarantowa ramka wewnętrzna */}
               {isActive && (
                 <span className="pointer-events-none absolute inset-0" style={{ boxShadow: `inset 0 0 0 3px ${P("amaranth")}` }} />
