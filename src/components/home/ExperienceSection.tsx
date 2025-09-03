@@ -253,18 +253,18 @@ const ExperienceSectionContent = () => {
                   target="_blank"
                   rel="noreferrer nofollow"
                   className="px-4 py-2 font-extrabold transition-colors"
-                  style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: P("ecru"), color: P("black") }}
+                  style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: P("ecru"), color: isDark ? P("white") : P("black") }}
                   onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = P("amaranth"); (e.currentTarget as HTMLAnchorElement).style.color = P("white"); }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = P("ecru"); (e.currentTarget as HTMLAnchorElement).style.color = P("black"); }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = P("ecru"); (e.currentTarget as HTMLAnchorElement).style.color = isDark ? P("white") : P("black"); }}
                 >
                   Dowiedz się więcej
                 </a>
                 <button
                   onClick={() => setSelectedCert(null)}
                   className="px-4 py-2 font-extrabold transition-colors"
-                  style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: P("butter"), color: P("black") }}
+                  style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: P("butter"), color: isDark ? P("white") : P("black") }}
                   onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.background = P("amaranth"); (e.currentTarget as HTMLButtonElement).style.color = P("white"); }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.background = P("butter"); (e.currentTarget as HTMLButtonElement).style.color = P("black"); }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.background = P("butter"); (e.currentTarget as HTMLButtonElement).style.color = isDark ? P("white") : P("black"); }}
                 >
                   Zamknij
                 </button>
