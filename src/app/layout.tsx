@@ -59,7 +59,7 @@ export default function RootLayout({
         />
         
         {/* Start cookieyes banner */}
-        <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/da9ae73dac2da25aa791bf45/script.js"></script>
+        <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/da9ae73dac2da25aa791bf45/script.js?lang=en"></script>
         {/* End cookieyes banner */}
       </head>
       <body>
