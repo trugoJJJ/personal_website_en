@@ -173,7 +173,7 @@ export const AboutSection = () => {
                         href="https://linktr.ee/trugojjj"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="block w-40 h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 flex items-center justify-center mx-auto transition-transform duration-300 ease-out hover:scale-105"
+                        className="block w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 flex items-center justify-center mx-auto transition-transform duration-300 ease-out hover:scale-105"
                         style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: isDark ? P("black") : P("white") }}
                         aria-label="Linktree - wszystkie linki"
                       >
