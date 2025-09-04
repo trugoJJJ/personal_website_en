@@ -1,18 +1,18 @@
-# 🚀 Personal Portfolio Website
+# Personal Portfolio Website
 
 A modern, responsive portfolio website built with Next.js 14, showcasing my expertise as a Digital Marketing Manager.
 
-## ✨ Features
+## Features
 
-- **🎨 Modern Design**: Clean, professional interface with smooth animations
-- **📱 Responsive Layout**: Optimized for all devices and screen sizes
-- **🌙 Theme Toggle**: Dark/light mode support for better user experience
-- **🌍 Multilingual**: Polish and English language options
-- **⚡ Performance**: Built with Next.js for fast loading and SEO optimization
-- **🎭 Interactive Elements**: Smooth animations powered by Framer Motion
-- **📊 Portfolio Showcase**: Professional project presentations and case studies
+- ** Modern Design**: Clean, professional interface with smooth animations
+- ** Responsive Layout**: Optimized for all devices and screen sizes
+- ** Theme Toggle**: Dark/light mode support for better user experience
+- ** Multilingual**: Polish and English language options
+- ** Performance**: Built with Next.js for fast loading and SEO optimization
+- ** Interactive Elements**: Smooth animations powered by Framer Motion
+- ** Portfolio Showcase**: Professional project presentations and case studies
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Frontend Framework
 - **Next.js 14** - React framework with App Router
@@ -33,7 +33,7 @@ A modern, responsive portfolio website built with Next.js 14, showcasing my expe
 - **Lovable** - AI-powered development platform
 - **CursorAI** - AI-assisted coding environment
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - Node.js 18+ 
@@ -94,7 +94,7 @@ src/
 └── lib/                 # Utility functions
 ```
 
-## 🎨 Design System
+## Design System
 
 - **Color Palette**: Consistent theme with dark/light mode support
 - **Typography**: Optimized font scales for readability
@@ -113,7 +113,7 @@ src/
 - **Articles** - Marketing insights and industry knowledge
 - **Contact** - Professional contact information
 
-## 🚀 Deployment
+## Deployment
 
 The website is deployed and accessible at: [galecki.site](https://galecki.site)
 
@@ -125,24 +125,20 @@ npm run build
 npm run deploy
 ```
 
-## 🤝 Contributing
+## Contributing
 
 This is a personal portfolio project, but if you find any bugs or have suggestions for improvements, feel free to open an issue or submit a pull request.
 
-## 📄 License
+## License
 
 This project is private but allows copying and modification. You may use this code as inspiration for your own projects, but please avoid copying it exactly as-is. Feel free to adapt the concepts, structure, and design patterns for your own creative work.
 
-## 👨‍💼 About Me
+## About Me
 
 **Adam Gałęcki** - Digital Marketing Manager  
 Specializing in SEO, team management, and digital marketing strategies.
 
 ### Connect with me
-- 🌐 [Website](https://galecki.site)
-- 💼 [LinkedIn](https://linkedin.com/in/admagalecki)
-- 📱 [TikTok](https://www.tiktok.com/@firma_galecka)
-
----
-
-⭐ **Star this repository if you found it helpful!**
+- [Website](https://galecki.site)
+- [LinkedIn](https://linkedin.com/in/admagalecki)
+- [TikTok](https://www.tiktok.com/@firma_galecka)
