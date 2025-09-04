@@ -63,7 +63,6 @@ const LanguageSwitchContent = () => {
   const PALETTE = isDark ? DARK : LIGHT;
   const pathname = typeof window !== "undefined" ? window.location.pathname.replace(/\/$/, '') : null;
 
-  const setPL = () => setLocale("pl" as Locale);
   const setEN = () => setLocale("en" as Locale);
 
   // Generate Polish version URL based on current path
@@ -158,7 +157,6 @@ const LanguageSwitchContent = () => {
 };
 
 export const LanguageSwitch = () => {
-  const pathname = typeof window !== "undefined" ? window.location.pathname.replace(/\/$/, '') : null;
   return (
     <ClientOnlyWrapper fallback={
       <div className="inline-flex items-center gap-2" aria-label="Language switch">
