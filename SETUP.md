@@ -29,13 +29,13 @@ Before you begin, ensure you have the following installed:
 
 ### 1. Clone the Repository
 
-```bash
-# Clone the repository
-git clone https://github.com/trugoJJJ/personal-portfolio.git
-
-# Navigate to project directory
-cd personal-portfolio
-```
+   ```bash
+   # Clone the repository
+   git clone https://github.com/trugoJJJ/personal_website_en.git
+   
+   # Navigate to project directory
+   cd personal_website_en
+   ```
 
 ### 2. Install Dependencies
 

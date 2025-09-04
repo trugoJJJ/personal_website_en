@@ -44,8 +44,8 @@ A modern, responsive portfolio website built with Next.js 14, showcasing my expe
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/trugoJJJ/personal-portfolio.git
-   cd personal-portfolio
+   git clone https://github.com/trugoJJJ/personal_website_en.git
+   cd personal_website_en
    ```
 
 2. **Install dependencies**
