@@ -47,8 +47,8 @@ const PortfolioPPC = () => {
       <Header />
       <main className="pt-28">
         <SEO 
-          title="Kampanie reklamowe Google Ads i Meta Ads – Adam Gałęcki"
-          description="Kompleksowe kampanie reklamowe Google Ads i Meta Ads dla producenta drzwi. Optymalizacja konwersji, zarządzanie budżetem i wzrost sprzedaży."
+          title="PPC Advertising Campaigns Google Ads and Meta Ads – Adam Gałęcki"
+          description="Comprehensive Google Ads and Meta Ads advertising campaigns for door manufacturer. Conversion optimization, budget management and sales growth."
           canonical="https://galecki.site/portfolio/ppc"
           ogImage="/og_cover.png"
         />
@@ -72,7 +72,7 @@ const PortfolioPPC = () => {
             </nav>
             
             <header className="mt-4 md:mt-8 mb-12 md:mb-20 text-center">
-              <h1 className={bigHeadingClass + ' mb-8'} style={headingStyles}>Portfolio płatnych kampanii reklamowych</h1>
+              <h1 className={bigHeadingClass + ' mb-8'} style={headingStyles}>PPC Advertising Campaigns Portfolio</h1>
               
               {/* Tagi przeniesione bezpośrednio pod tytuł */}
               <div className="flex flex-wrap gap-3 mb-12 justify-start">
@@ -91,7 +91,7 @@ const PortfolioPPC = () => {
                   }}
                 >
                   <p className="text-lg md:text-xl font-medium leading-relaxed" style={{ color: isDark ? P('white') : P('charcoal'), opacity: .9 }}>
-                  Specjalizuję się w zarządzaniu kampaniami reklamowymi Google Ads i Meta Ads. Mam doświadczenie w optymalizacji budżetów reklamowych o wartości do 15 000 zł miesięcznie. Jako samodzielny menedżer wielu kont reklamowych zdobyłem doświadczenie w zakresie budowania strategii oraz optymalizacji i alokacji budżetów.
+                  I specialize in managing Google Ads and Meta Ads advertising campaigns. I have experience in optimizing advertising budgets up to 15,000 PLN monthly. As an independent manager of multiple advertising accounts, I have gained experience in building strategies and optimizing and allocating budgets.
                   </p>
                 </div>
             </header>
@@ -157,18 +157,18 @@ const PortfolioPPC = () => {
                       <span style={pillStyle('alloy')}>5 000 PLN / miesiąc</span>
                       <span style={pillStyle('butter')}>3 lata</span>
                     </div>
-                    <h3 className="font-extrabold text-xl md:text-2xl mb-4">Producent drzwi zewnętrznych</h3>
+                    <h3 className="font-extrabold text-xl md:text-2xl mb-4">External Door Manufacturer</h3>
                     <p className="text-sm md:text-base leading-relaxed mb-6" style={{ opacity: .85 }}>
-                      Celem kampanii było zwiększenie liczby potencjalnych klientów zainteresowanych zakupem drzwi zewnętrznych poprzez kampanie wyszukiwania w Google. Projekt miał na celu budowę stałego źródła wysokojakościowych leadów dla firmy produkcyjnej.
+                      The campaign goal was to increase the number of potential customers interested in purchasing external doors through Google search campaigns. The project aimed to build a steady source of high-quality leads for the manufacturing company.
                     </p>
                     <div className="grid grid-cols-2 gap-3 sm:gap-4">
                       <div className="text-center p-4" style={cardBase('ecru')}>
                         <div className="font-extrabold text-2xl" style={{ color: P('amaranth') }}>17%</div>
-                        <div className="text-xs mt-1" style={{ opacity: .7 }}>Wzrost współczynnika konwersji</div>
+                        <div className="text-xs mt-1" style={{ opacity: .7 }}>Conversion rate increase</div>
                       </div>
                       <div className="text-center p-4" style={cardBase('ecru')}>
                         <div className="font-extrabold text-2xl" style={{ color: P('amaranth') }}>120</div>
-                        <div className="text-xs mt-1" style={{ opacity: .7 }}>Leadów miesięcznie</div>
+                        <div className="text-xs mt-1" style={{ opacity: .7 }}>Leads monthly</div>
                       </div>
                     </div>
                   </div>
@@ -203,18 +203,18 @@ const PortfolioPPC = () => {
                       <span style={pillStyle('amaranth')}>5 000 PLN</span>
                       <span style={pillStyle('butter')}>1 miesiąc</span>
                     </div>
-                    <h3 className="font-extrabold text-xl md:text-2xl mb-4">Firma doradcza z sektora edukacyjnego</h3>
+                    <h3 className="font-extrabold text-xl md:text-2xl mb-4">Educational Consulting Company</h3>
                     <p className="text-sm md:text-base leading-relaxed mb-6" style={{ opacity: .85 }}>
-                      Celem kampanii było wypromowanie specjalistycznego webinaru skierowanego do wąskiej grupy docelowej - kadry zarządzającej uczelniami wyższymi. Zadaniem było osiągnięcie maksymalnej liczby rejestracji przy jak najniższym koszcie pozyskania uczestnika.
+                      The campaign goal was to promote a specialized webinar targeted at a narrow target group - higher education management staff. The task was to achieve the maximum number of registrations at the lowest possible cost of acquiring participants.
                     </p>
                     <div className="grid grid-cols-2 gap-3 sm:gap-4">
                       <div className="text-center p-4" style={cardBase('ecru')}>
                         <div className="font-extrabold text-2xl" style={{ color: P('amaranth') }}>180</div>
-                        <div className="text-xs mt-1" style={{ opacity: .7 }}>Rejestracji na webinar</div>
+                        <div className="text-xs mt-1" style={{ opacity: .7 }}>Webinar registrations</div>
                       </div>
                       <div className="text-center p-4" style={cardBase('ecru')}>
-                        <div className="font-extrabold text-2xl" style={{ color: P('amaranth') }}>28 zł</div>
-                        <div className="text-xs mt-1" style={{ opacity: .7 }}>Koszt pozyskania (50% taniej)</div>
+                        <div className="text-extrabold text-2xl" style={{ color: P('amaranth') }}>28 PLN</div>
+                        <div className="text-xs mt-1" style={{ opacity: .7 }}>Acquisition cost (50% cheaper)</div>
                       </div>
                     </div>
                   </div>
@@ -249,22 +249,22 @@ const PortfolioPPC = () => {
                       <span style={pillStyle('alloy')}>2 000 PLN / miesiąc</span>
                       <span style={pillStyle('butter')}>1 rok</span>
                     </div>
-                    <h3 className="font-extrabold text-xl md:text-2xl mb-4">Producent oprogramowania</h3>
+                    <h3 className="font-extrabold text-xl md:text-2xl mb-4">Software Company</h3>
                     <p className="text-sm md:text-base leading-relaxed mb-6" style={{ opacity: .85 }}>
-                      Pozyskanie nowych klientów poszukujących usług tworzenia stron i sklepów internetowych oraz aplikacji mobilnych. Głównym założeniem było zwiększenie liczby zapytań ofertowych oraz obniżenie kosztów pozyskania klienta.
+                      Acquiring new clients looking for website and e-commerce development services as well as mobile applications. The main assumption was to increase the number of quote requests and reduce customer acquisition costs.
                     </p>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
                       <div className="text-center p-4" style={cardBase('ecru')}>
                         <div className="font-extrabold text-xl" style={{ color: P('amaranth') }}>+40%</div>
-                        <div className="text-xs mt-1" style={{ opacity: .7 }}>Wzrost zapytań</div>
+                        <div className="text-xs mt-1" style={{ opacity: .7 }}>Quote increase</div>
                       </div>
                       <div className="text-center p-4" style={cardBase('ecru')}>
                         <div className="font-extrabold text-xl" style={{ color: P('amaranth') }}>-27%</div>
-                        <div className="text-xs mt-1" style={{ opacity: .7 }}>Obniżenie CPC</div>
+                        <div className="text-xs mt-1" style={{ opacity: .7 }}>CPC reduction</div>
                       </div>
                       <div className="text-center p-4" style={cardBase('ecru')}>
                         <div className="font-extrabold text-xl" style={{ color: P('amaranth') }}>5x</div>
-                        <div className="text-xs mt-1" style={{ opacity: .7 }}>Klientów 15k+ zł</div>
+                        <div className="text-xs mt-1" style={{ opacity: .7 }}>Clients 15k+ PLN</div>
                       </div>
                     </div>
                   </div>
@@ -323,22 +323,22 @@ const PortfolioPPC = () => {
                       <span style={pillStyle('butter')}>4 000 PLN / miesiąc</span>
                       <span style={pillStyle('alloy')}>6 miesięcy</span>
                     </div>
-                    <h3 className="font-extrabold text-xl md:text-2xl mb-4">Wydawnictwo naukowe</h3>
+                    <h3 className="font-extrabold text-xl md:text-2xl mb-4">Scientific Publishing House</h3>
                     <p className="text-sm md:text-base leading-relaxed mb-6" style={{ opacity: .85 }}>
-                      Zwiększenie sprzedaży podręczników szkolnych. Projekt zakładał wykorzystanie różnych platform reklamowych dla maksymalizacji zasięgu.
+                      Increasing sales of school textbooks. The project involved using various advertising platforms to maximize reach.
                     </p>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
                       <div className="text-center p-4" style={cardBase('ecru')}>
                         <div className="font-extrabold text-xl" style={{ color: P('amaranth') }}>+8%</div>
-                        <div className="text-xs mt-1" style={{ opacity: .7 }}>Wzrost sprzedaży</div>
+                        <div className="text-xs mt-1" style={{ opacity: .7 }}>Sales increase</div>
                       </div>
                       <div className="text-center p-4" style={cardBase('ecru')}>
-                        <div className="font-extrabold text-xl" style={{ color: P('amaranth') }}>2,8%</div>
-                        <div className="text-xs mt-1" style={{ opacity: .7 }}>Konwersja Google</div>
+                        <div className="font-extrabold text-xl" style={{ color: P('amaranth') }}>2.8%</div>
+                        <div className="text-xs mt-1" style={{ opacity: .7 }}>Google conversion</div>
                       </div>
                       <div className="text-center p-4" style={cardBase('ecru')}>
-                        <div className="font-extrabold text-xl" style={{ color: P('amaranth') }}>1,9%</div>
-                        <div className="text-xs mt-1" style={{ opacity: .7 }}>Konwersja Meta</div>
+                        <div className="font-extrabold text-xl" style={{ color: P('amaranth') }}>1.9%</div>
+                        <div className="text-xs mt-1" style={{ opacity: .7 }}>Meta conversion</div>
                       </div>
                     </div>
                   </div>
@@ -373,22 +373,22 @@ const PortfolioPPC = () => {
                       <span style={pillStyle('alloy')}>2 000 PLN / miesiąc</span>
                       <span style={pillStyle('butter')}>6 miesięcy</span>
                     </div>
-                    <h3 className="font-extrabold text-xl md:text-2xl mb-4">Lubelski szpital - kampania promująca profilaktykę</h3>
+                    <h3 className="font-extrabold text-xl md:text-2xl mb-4">Lublin Hospital - Preventive Care Campaign</h3>
                     <p className="text-sm md:text-base leading-relaxed mb-6" style={{ opacity: .85 }}>
-                      Celem było dotarcie do kobiet zmagających się z depresją poporodową i zachęcenie ich do zgłoszenia się po pomoc medyczną. Kampania dotyczyła zwiększenie świadomości problemu oraz ułatwienie dostępu do specjalistycznej opieki.
+                      The goal was to reach women struggling with postpartum depression and encourage them to seek medical help. The campaign focused on raising awareness of the problem and facilitating access to specialized care.
                     </p>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
                       <div className="text-center p-4" style={cardBase('ecru')}>
                         <div className="font-extrabold text-xl" style={{ color: P('amaranth') }}>750</div>
-                        <div className="text-xs mt-1" style={{ opacity: .7 }}>Wypełnionych formularzy</div>
+                        <div className="text-xs mt-1" style={{ opacity: .7 }}>Completed forms</div>
                       </div>
                       <div className="text-center p-4" style={cardBase('ecru')}>
                         <div className="font-extrabold text-xl" style={{ color: P('amaranth') }}>4%</div>
-                        <div className="text-xs mt-1" style={{ opacity: .7 }}>Współczynnik konwersji</div>
+                        <div className="text-xs mt-1" style={{ opacity: .7 }}>Conversion rate</div>
                       </div>
                       <div className="text-center p-4" style={cardBase('ecru')}>
                         <div className="font-extrabold text-xl" style={{ color: P('amaranth') }}>16 PLN</div>
-                        <div className="text-xs mt-1" style={{ opacity: .7 }}>Koszt konwersji</div>
+                        <div className="text-xs mt-1" style={{ opacity: .7 }}>Conversion cost</div>
                       </div>
                     </div>
                   </div>
@@ -402,26 +402,26 @@ const PortfolioPPC = () => {
         <section style={sectionOuter(isDark ? P('charcoal') : P('white'))} className="py-16 sm:py-20 md:py-24 lg:py-32" id="proces">
           <div className="container mx-auto max-w-6xl px-6">
             <header className="mb-8 sm:mb-12 md:mb-20">
-              <h2 className={bigHeadingClass} style={headingStyles}>Jak wyglądał typowy proces współpracy?</h2>
+              <h2 className={bigHeadingClass} style={headingStyles}>What was the typical collaboration process?</h2>
             </header>
             
             <div className="space-y-6 sm:space-y-8">
               {[{
                 num: '01',
-                t: 'Analiza i Strategia (Tydzień 1)',
-                d: 'Audyt obecnych działań reklamowych, analiza konkurencji i zdefiniowanie celów biznesowych. Opracowanie strategii kampanii z uwzględnieniem budżetu i oczekiwanych rezultatów.'
+                t: 'Analysis and Strategy (Week 1)',
+                d: 'Audit of current advertising activities, competitor analysis and definition of business goals. Development of campaign strategy considering budget and expected results.'
               },{
                 num: '02',
-                t: 'Implementacja (Tygodnie 2-3)',
-                d: 'Konfiguracja kampanii, tworzenie grup reklamowych, dobór słów kluczowych i przygotowanie kreacji reklamowych. Ustawienie systemów trackingu i konwersji.'
+                t: 'Implementation (Weeks 2-3)',
+                d: 'Campaign configuration, creation of ad groups, keyword selection and preparation of advertising creatives. Setting up tracking and conversion systems.'
               },{
                 num: '03',
-                t: 'Optymalizacja i Monitoring (Na bieżąco)',
-                d: 'Cotygodniowe analizy wyników, testowanie różnych wariantów reklam i dostosowywanie stawek. Regularne raportowanie z konkretnymi metrykami i rekomendacjami.'
+                t: 'Optimization and Monitoring (Ongoing)',
+                d: 'Weekly performance analysis, testing different ad variants and adjusting bids. Regular reporting with specific metrics and recommendations.'
               },{
                 num: '04',
-                t: 'Rozwój i Skalowanie (Od miesiąca 2)',
-                d: 'Rozszerzanie najskuteczniejszych kampanii, testowanie nowych kanałów i formatów reklamowych. Długoterminowa optymalizacja ROI na podstawie zebranych danych.'
+                t: 'Development and Scaling (From Month 2)',
+                d: 'Expanding the most effective campaigns, testing new channels and ad formats. Long-term ROI optimization based on collected data.'
               }].map((item, index) => (
                 <div key={item.num} className="relative">
                   {/* Linia łącząca */}
@@ -476,11 +476,11 @@ const PortfolioPPC = () => {
         <section style={sectionOuter(P('ecru'))} className="py-24 md:py-32" id="wnioski">
           <div className="container mx-auto max-w-6xl px-6">
             <header className="mb-12 md:mb-20">
-              <h2 className={bigHeadingClass} style={headingStyles}>Wnioski</h2>
+              <h2 className={bigHeadingClass} style={headingStyles}>Conclusions</h2>
             </header>
             <div className="p-8 md:p-12" style={cardBase('butter')}>
               <p className="font-extrabold text-center text-sm md:text-base max-w-3xl mx-auto leading-relaxed" style={{ color: isDark ? P('white') : P('black') }}>
-                Skuteczne zarządzanie kampaniami reklamowymi wymaga ciągłej optymalizacji, testowania i dostosowywania strategii do zmieniających się potrzeb rynku. Każdy projekt pokazuje, jak ważne jest precyzyjne targetowanie i systematyczny monitoring wyników.
+                Effective management of advertising campaigns requires continuous optimization, testing and adjusting strategies to changing market needs. Each project shows how important precise targeting and systematic monitoring of results are.
               </p>
             </div>
           </div>
