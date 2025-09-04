@@ -69,19 +69,16 @@ const LanguageSwitchContent = () => {
   const getPolishUrl = () => {
     console.log('Current pathname:', pathname); // Debug log
     console.log('Pathname type:', typeof pathname); // Debug log
-    console.log('Current theme:', isDark ? 'dark' : 'light'); // Debug log
     
-    if (!pathname) return `https://galecki.website/?theme=${isDark ? 'dark' : 'light'}`; // Handle undefined case
+    if (!pathname) return `https://galecki.website/`; // Handle undefined case
     
-    const themeParam = `?theme=${isDark ? 'dark' : 'light'}`;
-    
-    if (pathname === "/") return `https://galecki.website/${themeParam}`;
-    if (pathname === "/privacy-policy") return `https://galecki.website/polityka-prywatnosci${themeParam}`;
+    if (pathname === "/") return `https://galecki.website/`;
+    if (pathname === "/privacy-policy") return `https://galecki.website/polityka-prywatnosci`;
     if (pathname.startsWith("/portfolio/")) {
       // Keep the same portfolio path for Polish version
-      return `https://galecki.website${pathname}${themeParam}`;
+      return `https://galecki.website${pathname}`;
     }
-    return `https://galecki.website/${themeParam}`;
+    return `https://galecki.website/`;
   };
 
   const baseBtn = "rounded-none font-extrabold select-none transition-colors";
@@ -161,7 +158,7 @@ export const LanguageSwitch = () => {
     <ClientOnlyWrapper fallback={
       <div className="inline-flex items-center gap-2" aria-label="Language switch">
         <a 
-          href="https://galecki.website/?theme=light"
+          href="https://galecki.website/"
           className="rounded-none font-extrabold select-none transition-colors hover:opacity-80"
           style={{
             border: `3px solid ${LIGHT.black}`,
