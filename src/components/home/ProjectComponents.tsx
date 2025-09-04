@@ -66,7 +66,7 @@ export function ProjectCard({ project, isHighlighted = false }: ProjectCardProps
                 (e.currentTarget as HTMLButtonElement).style.color = isDark ? P("white") : P("black");
               }}
             >
-              Szczegóły
+              Details
             </button>
           </div>
         </div>
@@ -116,14 +116,14 @@ export function SuccessAnimationPlaceholder({ onReset }: SuccessAnimationPlaceho
          style={{ background: `rgba(0,0,0,0.85)` }}>
       <div className="p-8 text-center"
            style={{ background: P("ecru"), color: P("black"), border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
-        <h2 className="text-4xl md:text-5xl font-extrabold mb-6 uppercase tracking-tight">Gratulacje!</h2>
-        <p className="mb-8">Sekwencja została ułożona poprawnie.</p>
+        <h2 className="text-4xl md:text-5xl font-extrabold mb-6 uppercase tracking-tight">Congratulations!</h2>
+        <p className="mb-8">The sequence has been arranged correctly.</p>
         <button
           onClick={onReset}
           className="px-6 py-3 font-extrabold"
           style={{ background: P("butter"), border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}
         >
-          Ułóż od nowa
+          Arrange again
         </button>
       </div>
     </div>

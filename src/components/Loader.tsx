@@ -3,7 +3,7 @@
 import { ClientOnlyWrapper } from "./ClientOnlyWrapper";
 import { useState, useEffect } from "react";
 
-// Paleta kolorów
+// Color palette
 const COLORS = {
   amaranth: "#C25A3A",
   ecru: "#FAF6EE",
@@ -118,14 +118,14 @@ const LoaderContent = () => {
         opacity: isVisible ? 1 : 0
       }}
     >
-      {/* Kręcące się kwadratowe kółko */}
+      {/* Spinning square circle */}
       <div 
         className="w-16 h-16 md:w-20 md:h-20 relative"
         style={{
           animation: 'spin 1.5s linear infinite'
         }}
       >
-        {/* Górny kwadrat */}
+        {/* Top square */}
         <div
           className="absolute top-0 left-1/2 transform -translate-x-1/2 w-4 h-4 md:w-5 md:h-5"
           style={{
@@ -134,7 +134,7 @@ const LoaderContent = () => {
           }}
         />
         
-        {/* Prawy kwadrat */}
+        {/* Right square */}
         <div
           className="absolute top-1/2 right-0 transform -translate-y-1/2 w-4 h-4 md:w-5 md:h-5"
           style={{
@@ -143,7 +143,7 @@ const LoaderContent = () => {
           }}
         />
         
-        {/* Dolny kwadrat */}
+        {/* Bottom square */}
         <div
           className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-4 h-4 md:w-5 md:h-5"
           style={{
@@ -152,7 +152,7 @@ const LoaderContent = () => {
           }}
         />
         
-        {/* Lewy kwadrat */}
+        {/* Left square */}
         <div
           className="absolute top-1/2 left-0 transform -translate-y-1/2 w-4 h-4 md:w-5 md:h-5"
           style={{

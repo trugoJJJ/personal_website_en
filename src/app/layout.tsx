@@ -26,7 +26,7 @@ export default function RootLayout({
         <meta property="og:title" content="Portfolio – Adam Gałęcki – Digital Marketing Manager" />
         <meta property="og:description" content="Zajmuję się kompleksową obsługą komunikacji marketingowej nakierowanej na osiąganie zamierzonych celów biznesowych w firmach B2B i B2C." />
         <meta property="og:image" content="/og_cover.png" />
-        <meta property="og:url" content="https://galecki.website" />
+        <meta property="og:url" content="https://galecki.site" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Portfolio – Adam Gałęcki – Digital Marketing Manager" />
         <meta name="twitter:description" content="Zajmuję się kompleksową obsługą komunikacji marketingowej nakierowanej na osiąganie zamierzonych celów biznesowych w firmach B2B i B2C." />

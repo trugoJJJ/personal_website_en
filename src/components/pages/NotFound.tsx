@@ -8,18 +8,18 @@ import { Header } from "@/components/home/Header";
 import { FooterSection } from "@/components/home/FooterSection";
 import { SEO } from "@/components/SEO";
 
-/* ================== PALETA – LIGHT ================== */
+/* ================== PALETTE – LIGHT ================== */
 const COLORS = {
-  amaranth: "#C25A3A",  // Burnt Sienna – główny akcent (primary)
+  amaranth: "#C25A3A",  // Burnt Sienna – primary accent
   ecru: "#FAF6EE",      // Cream background
-  butter: "#D8A23A",    // Goldenrod – akcent / highlight
-  alloy: "#736134",     // Olive Brown – secondary / średni kontrast
-  charcoal: "#2E2217",  // Dark Brown – ciemne elementy / tekst
+  butter: "#D8A23A",    // Goldenrod – accent / highlight
+  alloy: "#736134",     // Olive Brown – secondary / medium contrast
+  charcoal: "#2E2217",  // Dark Brown – dark elements / text
   white: "#FFFFFF",
   black: "#000000",
 };
 
-/* ================== PALETA – DARK (fiolety/ciemne) ================== */
+/* ================== PALETTE – DARK (violets/dark) ================== */
 const DARK_COLORS: typeof COLORS = {
   amaranth: "#6B2D5B",
   ecru: "#241b2b",
@@ -30,7 +30,7 @@ const DARK_COLORS: typeof COLORS = {
   black: "#000000",
 };
 
-/* ================== HOOKI/UTILS ================== */
+/* ================== HOOKS/UTILS ================== */
 function usePalette() {
   const isDomDark = () => document.documentElement.classList.contains("dark");
   const [isDark, setIsDark] = useState<boolean>(false);
@@ -69,8 +69,8 @@ const NotFoundContent = () => {
       
       {/* SEO */}
       <SEO 
-        title="404 – Strona nie została znaleziona – Adam Gałęcki"
-        description="Przepraszamy, ale strona której szukasz nie istnieje lub została przeniesiona."
+        title="404 – Page Not Found – Adam Gałęcki"
+        description="Sorry, but the page you're looking for doesn't exist or has been moved."
         noIndex
         ogImage="/og_cover.png"
       />
@@ -102,13 +102,13 @@ const NotFoundContent = () => {
                 className="text-xl sm:text-2xl md:text-3xl font-extrabold mb-3 md:mb-4 uppercase tracking-wide"
                 style={{ color: isDark ? P("white") : P("black") }}
               >
-                Strona nie została znaleziona
+                Page Not Found
               </h2>
               <p 
                 className="text-base sm:text-lg md:text-xl leading-relaxed px-4"
                 style={{ color: isDark ? P("white") : P("charcoal"), opacity: 0.8 }}
               >
-                Przepraszamy, ale strona której szukasz nie istnieje lub została przeniesiona.
+                Sorry, but the page you're looking for doesn't exist or has been moved.
               </p>
             </div>
 
@@ -146,7 +146,7 @@ const NotFoundContent = () => {
                 }}
               >
                 <Home className="h-4 w-4" />
-                Strona główna
+                Home
               </Link>
 
               <button
@@ -167,7 +167,7 @@ const NotFoundContent = () => {
                 }}
               >
                 <ArrowLeft className="h-4 w-4" />
-                Wstecz
+                Back
               </button>
             </div>
 
@@ -211,25 +211,25 @@ const NotFound = () => {
               </div>
               <div className="mb-8 md:mb-12">
                 <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold mb-3 md:mb-4 uppercase tracking-wide text-black">
-                  Strona nie została znaleziona
+                  Page Not Found
                 </h2>
                 <p className="text-base sm:text-lg md:text-xl leading-relaxed text-[#2E2217] opacity-80 px-4">
-                  Przepraszamy, ale strona której szukasz nie istnieje lub została przeniesiona.
+                  Sorry, but the page you're looking for doesn't exist or has been moved.
                 </p>
               </div>
               <div className="mb-8 md:mb-12">
                 <div className="inline-block px-3 py-2 md:px-4 md:py-2 font-mono text-xs sm:text-sm bg-[#FAF6EE] border-2 border-black text-[#2E2217] break-all max-w-full">
-                  /nieistniejaca-strona
+                  /non-existent-page
                 </div>
               </div>
               <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-center px-4">
                 <a href="/" className="inline-flex items-center gap-2 font-extrabold px-6 py-3 border-3 border-black bg-[#FAF6EE] text-black hover:scale-105 transition-all duration-200">
                   <div className="w-4 h-4 border border-black bg-white"></div>
-                  Strona główna
+                  Home
                 </a>
                 <button className="inline-flex items-center gap-2 font-extrabold px-6 py-3 border-3 border-black bg-[#FAF6EE] text-black hover:scale-105 transition-all duration-200">
                   <div className="w-4 h-4 border border-black bg-white"></div>
-                  Wstecz
+                  Back
                 </button>
               </div>
             </div>
@@ -242,7 +242,7 @@ const NotFound = () => {
             <div className="pt-12 md:pt-18 pb-8 md:pb-12">
               <div className="py-6 grid gap-6 md:gap-6 md:grid-cols-4 md:items-center items-start">
                 <div className="flex flex-col items-center text-center md:relative md:pr-8 mb-6 md:mb-0">
-                  <h3 className="text-base font-extrabold mb-4 text-[#686a6c]">Adam Gałęcki – Firma Gałęcka</h3>
+                  <h3 className="text-base font-extrabold mb-4 text-[#686a6c]">Adam Gałęcki – Gałęcki Company</h3>
                   <div className="flex flex-wrap justify-center gap-3">
                     {[1, 2, 3, 4, 5, 6].map((i) => (
                       <div key={i} className="w-8 h-8 border border-black bg-white"></div>
@@ -252,28 +252,28 @@ const NotFound = () => {
                 <div className="flex flex-col items-center text-center font-bold text-sm leading-relaxed mb-4 md:mb-0">
                   <div className="inline-flex items-center gap-3">
                     <span className="text-[#686a6c]">NIP: 9462752489</span>
-                    <div className="px-2 py-0.5 text-[10px] font-extrabold tracking-wide border border-black bg-white text-black">Kopiuj</div>
+                    <div className="px-2 py-0.5 text-[10px] font-extrabold tracking-wide border border-black bg-white text-black">Copy</div>
                   </div>
                 </div>
                 <div className="flex flex-col items-center text-center font-bold text-sm leading-relaxed mb-4 md:mb-0">
                   <div className="inline-flex items-center gap-3">
                     <span className="text-[#686a6c]">REGON: 541404566</span>
-                    <div className="px-2 py-0.5 text-[10px] font-extrabold tracking-wide border border-black bg-white text-black">Kopiuj</div>
+                    <div className="px-2 py-0.5 text-[10px] font-extrabold tracking-wide border border-black bg-white text-black">Copy</div>
                   </div>
                 </div>
                 <div className="flex flex-col items-center text-center font-bold text-sm leading-relaxed">
                   <div className="flex items-center gap-2 text-[#686a6c]">
                     <div className="w-4 h-4 border border-black bg-white"></div>
-                    <span>Lublin, Polska</span>
+                    <span>Lublin, Poland</span>
                   </div>
                 </div>
               </div>
               <div className="pt-8 pb-8 text-center">
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-[11px] font-semibold tracking-wide opacity-45 text-[#686a6c]">
-                  <span>© Firma Gałęcka 2025</span>
+                  <span>© Gałęcki Company 2025</span>
                   <div className="hidden sm:block w-px h-4 bg-[#686a6c] opacity-30"></div>
-                  <a href="/polityka-prywatnosci" className="hover:opacity-70 transition-opacity text-[#686a6c]">
-                    Polityka Prywatności
+                  <a href="/privacy-policy" className="hover:opacity-70 transition-opacity text-[#686a6c]">
+                    Privacy Policy
                   </a>
                 </div>
               </div>

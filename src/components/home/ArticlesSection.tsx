@@ -8,10 +8,10 @@ import { ClientOnlyWrapper } from "@/components/ClientOnlyWrapper";
 
 /* ================== PALETA – LIGHT ================== */
 const COLORS = {
-  amaranth: "#C25A3A",  // Burnt Sienna – główny akcent (primary)
+  amaranth: "#C25A3A",  // Burnt Sienna – primary accent
   ecru: "#FAF6EE",      // Cream background
   butter: "#D8A23A",    // Goldenrod – akcent / highlight
-  alloy: "#736134",     // Olive Brown – secondary / średni kontrast
+  alloy: "#736134",     // Olive Brown – secondary / medium contrast
   charcoal: "#2E2217",  // Dark Brown – ciemne elementy / tekst
   white: "#FFFFFF",
   black: "#000000",
@@ -68,7 +68,7 @@ const ArticlesSectionContent = () => {
     <section className="py-24 md:py-36" id="articles"
              style={{ background: isDark ? P("charcoal") : P("white"), borderTop: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
       <div className="container mx-auto px-6 max-w-6xl">
-        <SectionHeading>Artykuły</SectionHeading>
+        <SectionHeading>Articles</SectionHeading>
 
         <div className="grid lg:grid-cols-3 gap-8 mb-12">
           {articles.map((article) => (
@@ -105,7 +105,7 @@ const ArticlesSectionContent = () => {
                   className="text-sm font-medium hover:opacity-80 transition-opacity mt-12"
                   style={{ color: isDark ? P("white") : P("amaranth") }}
                 >
-                  <span className="border-b border-current">Czytaj na: dogtronic.io</span>
+                  <span className="border-b border-current">Read on: dogtronic.io</span>
                 </Link>
                 <Link
                   href={article.link}
@@ -127,7 +127,7 @@ const ArticlesSectionContent = () => {
                   }}
                 >
                   <ExternalLink className="h-4 w-4" />
-                  Czytaj więcej
+                  Read more
                 </Link>
               </div>
             </article>
@@ -145,7 +145,7 @@ export const ArticlesSection = () => {
         <div className="container mx-auto px-6 max-w-6xl">
           <header className="mt-4 md:mt-8 mb-12 md:mb-24">
             <h2 className="text-left text-[9vw] sm:text-5xl md:text-7xl font-extrabold uppercase tracking-tight leading-[0.95] text-black">
-              Artykuły
+              Articles
             </h2>
           </header>
           <div className="grid lg:grid-cols-3 gap-8 mb-12">
@@ -155,7 +155,7 @@ export const ArticlesSection = () => {
                   <div className="w-full h-full bg-gray-200"></div>
                   <div className="absolute top-3 left-3">
                     <span className="text-xs font-extrabold px-2 py-1 bg-[#736134] text-white border-2 border-black">
-                      Kategoria {i}
+                      Category {i}
                     </span>
                   </div>
                 </div>
@@ -170,11 +170,11 @@ export const ArticlesSection = () => {
                       {i * 5} min
                     </div>
                   </div>
-                  <h3 className="text-xl font-extrabold">Tytuł artykułu {i}</h3>
-                  <p className="text-sm">Krótki opis artykułu i jego zawartości...</p>
+                  <h3 className="text-xl font-extrabold">Article title {i}</h3>
+                  <p className="text-sm">Brief description of the article and its content...</p>
                   <div className="w-full inline-flex items-center justify-center gap-2 font-extrabold px-4 py-3 border-3 border-black bg-white text-black">
                     <div className="w-4 h-4 border border-black bg-white"></div>
-                    Czytaj więcej
+                    Read more
                   </div>
                 </div>
               </article>

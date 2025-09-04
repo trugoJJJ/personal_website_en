@@ -6,11 +6,11 @@ import { ClientOnlyWrapper } from "./ClientOnlyWrapper";
 
 /* ================== PALETA – LIGHT ================== */
 const COLORS = {
-  amaranth: "#C25A3A",  // Burnt Sienna – główny akcent (primary)
+  amaranth: "#C25A3A",  // Burnt Sienna – primary accent
   ecru: "#FAF6EE",      // Cream background
-  butter: "#D8A23A",    // Goldenrod – akcent / highlight
-  alloy: "#736134",     // Olive Brown – secondary / średni kontrast
-  charcoal: "#2E2217",  // Dark Brown – ciemne elementy / tekst
+  butter: "#D8A23A",    // Goldenrod – accent / highlight
+  alloy: "#736134",     // Olive Brown – secondary / medium contrast
+  charcoal: "#2E2217",  // Dark Brown – dark elements / text
   white: "#FFFFFF",
   black: "#000000",
 };
@@ -89,7 +89,7 @@ const ScrollToTopContent = () => {
         (e.currentTarget as HTMLButtonElement).style.background = isDark ? P("charcoal") : P("white");
         (e.currentTarget as HTMLButtonElement).style.color = isDark ? P("white") : P("black");
       }}
-      aria-label="Przejdź na górę strony"
+      aria-label="Go to top of page"
     >
       <ArrowUp className="h-5 w-5" />
     </button>

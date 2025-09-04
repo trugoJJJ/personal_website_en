@@ -10,15 +10,15 @@ import { FooterSection } from "@/components/home/FooterSection";
 const PortfolioPPC = () => {
   const { isDark, P } = usePalette();
   
-  // Mockowy projekt PPC (ID = 4)
+  // Mock PPC project (ID = 4)
   const project = {
     id: 4,
-    title: "Kampanie reklamowe PPC",
-    description: "Portfolio płatnych kampanii reklamowych",
+    title: "PPC Advertising Campaigns",
+    description: "Portfolio of paid advertising campaigns",
     tags: ["Google Ads", "Meta Ads", "LinkedIn Ads", "PPC Management", "Conversion Optimization"]
   };
 
-  // Helpery stylistyczne (spójne z Hero.tsx)
+  // Stylistic helpers (consistent with Hero.tsx)
   const headingStyles: React.CSSProperties = {
     color: isDark ? P("white") : P("black"),
   };
@@ -49,7 +49,7 @@ const PortfolioPPC = () => {
         <SEO 
           title="Kampanie reklamowe Google Ads i Meta Ads – Adam Gałęcki"
           description="Kompleksowe kampanie reklamowe Google Ads i Meta Ads dla producenta drzwi. Optymalizacja konwersji, zarządzanie budżetem i wzrost sprzedaży."
-          canonical="https://monke.io/portfolio/ppc"
+          canonical="https://galecki.site/portfolio/ppc"
           ogImage="/og_cover.png"
         />
 

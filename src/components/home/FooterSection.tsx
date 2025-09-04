@@ -162,11 +162,11 @@ const FooterSectionContent = () => {
                 style={{ background: textColor, opacity: 0.3 }}
               />
               <Link 
-                href="/polityka-prywatnosci"
+                href="/privacy-policy"
                 className="hover:opacity-70 transition-opacity"
                 style={{ color: textColor }}
               >
-                Polityka Prywatności
+                Privacy Policy
               </Link>
             </div>
           </div>
@@ -239,8 +239,8 @@ export const FooterSection = () => {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-[11px] font-semibold tracking-wide opacity-45 text-[#686a6c]">
                 <span>© Firma Gałęcka 2025</span>
                 <div className="hidden sm:block w-px h-4 bg-[#686a6c] opacity-30"></div>
-                <a href="/polityka-prywatnosci" className="hover:opacity-70 transition-opacity text-[#686a6c]">
-                  Polityka Prywatności
+                <a href="/privacy-policy" className="hover:opacity-70 transition-opacity text-[#686a6c]">
+                  Privacy Policy
                 </a>
               </div>
             </div>

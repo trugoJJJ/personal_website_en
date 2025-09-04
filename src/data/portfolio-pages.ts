@@ -10,57 +10,57 @@ export interface PortfolioPage {
   tags: string[];
   metrics: string;
   externalLink?: string;
-  featured: boolean; // Czy pokazywać na stronie głównej
-  order: number; // Kolejność na stronie głównej
+  featured: boolean; // Whether to show on homepage
+  order: number; // Order on homepage
 }
 
-// Automatyczna konfiguracja podstron portfolio
+// Automatic portfolio subpages configuration
 export const portfolioPages: PortfolioPage[] = [
   {
     id: 'seo',
     slug: 'seo',
-    title: 'SEO dla producenta drzwi zewnętrznych',
-    description: 'optymalizacja techniczna → copywriting → link building → artykuły → analityka → raporty.',
+    title: 'SEO for external door manufacturer',
+    description: 'technical optimization → copywriting → link building → articles → analytics → reports.',
     image: articles?.[0]?.image || 'https://placehold.co/800x500',
-    categories: ['Projekty sprzedażowe'],
+    categories: ['Sales Projects'],
     tags: ['SEO', 'Content', 'Link building'],
-    metrics: '+3 mln wyświetleń',
+    metrics: '+3M views',
     featured: true,
     order: 1
   },
   {
     id: 'ppc',
     slug: 'ppc',
-    title: 'Płatne kampanie reklamowe PPC',
+    title: 'Paid advertising campaigns PPC',
     description: 'Google Ads → Meta Ads → LinkedIn Ads.',
     image: articles?.[1]?.image || 'https://placehold.co/800x500',
-    categories: ['Projekty sprzedażowe'],
+    categories: ['Sales Projects'],
     tags: ['PPC', 'Performance', 'ROAS'],
-    metrics: '40% wzrost zapytań',
+    metrics: '40% increase in queries',
     featured: true,
     order: 2
   },
   {
     id: 'analytics',
     slug: 'analytics',
-    title: 'System śledzenia danych o odwiedzających',
-    description: 'GA4 → GSC → Ads → Meta → GTM (pełny pomiar).',
+    title: 'Visitor data tracking system',
+    description: 'GA4 → GSC → Ads → Meta → GTM (full measurement).',
     image: articles?.[2]?.image || 'https://placehold.co/800x500',
-    categories: ['Projekty kreatywne'],
+    categories: ['Creative Projects'],
     tags: ['GA4', 'GTM', 'Attribution'],
-    metrics: '150 tys. konwersji',
+    metrics: '150K conversions',
     featured: true,
     order: 3
   },
   {
     id: 'animation',
     slug: 'animation',
-    title: 'Szablon animacji portfolio',
-    description: '2D Motion (AE) – prezentacja produktu/usługi.',
+    title: 'Portfolio animation template',
+    description: '2D Motion (AE) – product/service presentation.',
     image: articles?.[0]?.image || 'https://placehold.co/800x500',
-    categories: ['Projekty kreatywne'],
+    categories: ['Creative Projects'],
     tags: ['After Effects', '2D', 'Template'],
-    metrics: '50 tys. wyświetleń',
+    metrics: '50K views',
     externalLink: 'https://www.behance.net/gallery/199466415/Animationforthe-software-dvelopment-company-portfolio',
     featured: true,
     order: 4
@@ -69,11 +69,11 @@ export const portfolioPages: PortfolioPage[] = [
     id: 'ecommerce',
     slug: 'ecommerce',
     title: 'E-commerce Growth Campaign',
-    description: 'Kampania marketingowa, która zwiększyła sprzedaż o 340% w 6 miesięcy',
+    description: 'Marketing campaign that increased sales by 340% in 6 months',
     image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop',
-    categories: ['Projekty sprzedażowe'],
+    categories: ['Sales Projects'],
     tags: ['Google Ads', 'Facebook Ads', 'Email Marketing', 'Analytics'],
-    metrics: '+340% sprzedaż',
+    metrics: '+340% sales',
     featured: false,
     order: 5
   },
@@ -81,11 +81,11 @@ export const portfolioPages: PortfolioPage[] = [
     id: 'saas',
     slug: 'saas',
     title: 'SaaS Landing Page Optimization',
-    description: 'Redesign i optymalizacja strony głównej, która podwoiła konwersję',
+    description: 'Homepage redesign and optimization that doubled conversion',
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop',
-    categories: ['Projekty kreatywne'],
+    categories: ['Creative Projects'],
     tags: ['A/B Testing', 'UX/UI', 'Analytics', 'Webflow'],
-    metrics: '+127% konwersja',
+    metrics: '+127% conversion',
     featured: false,
     order: 6
   },
@@ -93,11 +93,11 @@ export const portfolioPages: PortfolioPage[] = [
     id: 'automation',
     slug: 'automation',
     title: 'Content Marketing Automation',
-    description: 'System automatyzacji content marketingu z wykorzystaniem AI',
+    description: 'Content marketing automation system using AI',
     image: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=600&h=400&fit=crop',
-    categories: ['Projekty kreatywne'],
+    categories: ['Creative Projects'],
     tags: ['AI Tools', 'Automation', 'Content Marketing', 'Social Media'],
-    metrics: '70% oszczędność czasu',
+    metrics: '70% time savings',
     featured: false,
     order: 7
   },
@@ -105,56 +105,31 @@ export const portfolioPages: PortfolioPage[] = [
     id: 'attribution',
     slug: 'attribution',
     title: 'Multi-channel Attribution Model',
-    description: 'Zaawansowany model atrybukcji do trackowania customer journey',
+    description: 'Advanced attribution model for tracking customer journey',
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop',
-    categories: ['Projekty sprzedażowe'],
+    categories: ['Sales Projects'],
     tags: ['Analytics', 'Python', 'Data Science', 'Attribution'],
-    metrics: '360° wgląd w dane',
+    metrics: '360° data insight',
     featured: false,
     order: 8
   }
 ];
 
-// Funkcja do pobierania projektów na stronę główną (6 pierwszych featured)
+// Function to get projects for the homepage (first 6 featured)
 export const getFeaturedProjects = () => {
   return portfolioPages
     .filter(page => page.featured)
     .sort((a, b) => a.order - b.order)
-    .slice(0, 6)
-    .map(page => ({
-      id: page.id,
-      title: page.title,
-      description: page.description,
-      image: page.image,
-      categories: page.categories,
-      tags: page.tags,
-      metrics: page.metrics,
-      externalLink: page.externalLink
-    }));
+    .slice(0, 6);
 };
 
-// Funkcja do pobierania wszystkich projektów dla strony portfolio
+// Function to get all projects for the portfolio page
 export const getAllProjects = () => {
   return portfolioPages
-    .sort((a, b) => a.order - b.order)
-    .map(page => ({
-      id: page.id,
-      title: page.title,
-      description: page.description,
-      image: page.image,
-      categories: page.categories,
-      tags: page.tags,
-      metrics: page.metrics,
-      externalLink: page.externalLink
-    }));
+    .sort((a, b) => a.order - b.order);
 };
 
-// Funkcja do pobierania projektu po slug
-export const getProjectBySlug = (slug: string) => {
-  return portfolioPages.find(page => page.slug === slug);
-};
-
-// Funkcja do pobierania projektu po ID
+// Function to get project by ID
 export const getProjectById = (id: string) => {
   return portfolioPages.find(page => page.id === id);
 };

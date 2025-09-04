@@ -55,21 +55,21 @@ const EN: Dict = {
   "nav.contact": "Contact",
   "nav.menu": "Menu",
 
-  "hero.placeholder": "Rive animation placeholder",
+  "hero.placeholder": "Rive animation will be inserted here",
 
   "portfolio.combined.title": "Selected projects and visual portfolio",
-  "portfolio.combined.subtitle": "Browse the work — filter by category.",
+  "portfolio.combined.subtitle": "Project overview — filter by category.",
   "portfolio.cta.more": "VIEW MORE WORK",
 
   "filters.animations": "Animations",
   "filters.design": "Design",
-  "filters.team": "Team management",
+  "filters.team": "Team Management",
   "filters.campaigns": "Advertising campaigns",
 
   "about.tabs.about": "About me",
-  "about.tabs.education": "Education & Certificates",
+  "about.tabs.education": "Education and certificates",
   "about.tabs.experience": "Experience",
-  "about.tabs.skills": "Skills & Tech Stack",
+  "about.tabs.skills": "Skills and Tech Stack",
   "about.cv": "DOWNLOAD CV",
 
   "articles.title": "Latest Articles",
@@ -85,7 +85,7 @@ const DICTS: Record<Locale, Dict> = { pl: PL, en: EN };
 const I18nContext = createContext<I18nContextType | null>(null);
 
 export const I18nProvider = ({ children }: { children: ReactNode }) => {
-  const [locale, setLocale] = useState<Locale>("pl");
+  const [locale, setLocale] = useState<Locale>("en");
   const dict = DICTS[locale];
 
   const value = useMemo<I18nContextType>(

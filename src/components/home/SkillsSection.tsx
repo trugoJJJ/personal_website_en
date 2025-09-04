@@ -62,14 +62,14 @@ const SkillsSectionContent = () => {
   const { isDark, P } = usePalette();
   
   const technicalSkills = [
-    "Zarządzanie zespołem", "Analityka marketingu", "SEO",
-    "Media Społecznościowe", "PPC",
-    "Projektowanie Lejków", "No-Code", "Email Marketing",
-    "Automatyzacja", "Tworzenie stron", "Animacja 3D", "Animacja 2D",
-    "Grafika 3D", "Grafika 2D", "+ trochę więcej…"
+    "Team Management", "Marketing Analytics", "SEO",
+    "Social Media", "PPC",
+    "Landing Page Design", "No-Code", "Email Marketing",
+    "Automation", "Website Creation", "3D Animation", "2D Animation",
+    "3D Graphics", "2D Graphics", "+ more…"
   ];
 
-  // Jednolity kolor tła zamiast gradientu
+          // Uniform background color instead of gradient
   const baseBackground = isDark ? P("ecru") : P("white");
 
   return (
@@ -79,7 +79,7 @@ const SkillsSectionContent = () => {
       style={{ background: isDark ? P("charcoal") : P("white"), borderTop: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}
     >
       <div className="container mx-auto px-6 max-w-6xl">
-        <SectionHeading>Umiejętności</SectionHeading>
+        <SectionHeading>Skills</SectionHeading>
 
         <div
           className="grid gap-5"
@@ -116,7 +116,7 @@ const SkillsSectionContent = () => {
                   mixBlendMode: isDark ? "normal" : "multiply",
                 }}
               />
-              {/* numer (zostawiamy – spójny element stylu) */}
+              {/* number (we keep it – consistent style element) */}
               <span
                 aria-hidden="true"
                 style={{
@@ -150,16 +150,16 @@ export const SkillsSection = () => {
         <div className="container mx-auto px-6 max-w-6xl">
           <header className="mt-4 md:mt-8 mb-12 md:mb-24">
             <h2 className="text-left text-[9vw] sm:text-5xl md:text-7xl font-extrabold uppercase tracking-tight leading-[0.95] text-black">
-              Umiejętności
+              Skills
             </h2>
           </header>
           <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fill,minmax(220px,1fr))" }}>
             {[
-              "Zarządzanie zespołem", "Analityka marketingu", "SEO",
-              "Media Społecznościowe", "Płatne Kampanie Reklamowe",
-              "Projektowanie Lejków", "No-Code", "Email Marketing",
-              "Automatyzacja", "Tworzenie stron", "Animacja 3D", "Animacja 2D",
-              "Grafika 3D", "Grafika 2D", "+ trochę więcej…"
+              "Team Management", "Marketing Analytics", "SEO",
+              "Social Media", "PPC",
+              "Landing Page Design", "No-Code", "Email Marketing",
+              "Automation", "Website Creation", "3D Animation", "2D Animation",
+              "3D Graphics", "2D Graphics", "+ more…"
             ].map((skill, i) => (
               <div
                 key={skill}

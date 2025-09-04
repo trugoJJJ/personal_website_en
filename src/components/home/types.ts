@@ -9,41 +9,40 @@ export type Project = {
   metrics?: string;
 };
 
-export const CATEGORIES = ["Projekty kreatywne", "Projekty sprzedażowe"] as const;
+export const CATEGORIES = ["Creative Projects", "Sales Projects"] as const;
 
 export const portfolioProjects: Omit<Project, 'id'>[] = [
   {
-    title: 'Kompleksowa obsługa SEO dla producenta drzwi zewnętrznych',
-    description:
-      'Optymalizacja techniczna → content → link building → artykuły → analityka → raporty.',
+    title: 'SEO for external door manufacturer',
+    description: 'Technical optimization → content → link building → articles → analytics → reports.',
     image: '/seo.png',
-    categories: ['Projekty sprzedażowe'],
+    categories: ['Sales Projects'],
     tags: ['SEO', 'Content', 'Link building'],
-    metrics: '+3 mln wyświetleń'
+    metrics: '+3M views'
   },
   {
-    title: 'Portfolio płatnych kampanii reklamowych',
+    title: 'Portfolio of paid advertising campaigns',
     description: 'Google Ads → Meta Ads → LinkedIn Ads.',
     image: '/google_maps.png',
-    categories: ['Projekty sprzedażowe'],
+    categories: ['Sales Projects'],
     tags: ['PPC', 'Performance', 'ROAS'],
-    metrics: 'Wzrost zapytań 40%'
+    metrics: '40% increase in queries'
   },
   {
-    title: 'System śledzenia danych o odwiedzających',
-    description: 'GA4 → GSC → Ads → Meta → GTM (pełny pomiar).',
+    title: 'Data tracking system for visitors',
+    description: 'GA4 → GSC → Ads → Meta → GTM (full measurement).',
     image: '/gpt_seo.png',
-    categories: ['Projekty kreatywne'],
+    categories: ['Creative Projects'],
     tags: ['GA4', 'GTM', 'Attribution'],
     metrics: '150 tys. konwersji'
   },
   {
     title: 'Szablon animacji portfolio',
-    description: '2D Motion (AE) – prezentacja produktu/usługi.',
+    description: '2D Motion (AE) – product/service presentation.',
     image: '/pierwszy_komputer.png',
-    categories: ['Projekty kreatywne'],
+    categories: ['Creative Projects'],
     tags: ['After Effects', '2D', 'Template'],
-    metrics: '50 tys. wyświetleń'
+    metrics: '50K views'
   },
 ];
 

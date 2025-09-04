@@ -43,7 +43,7 @@ const ThemeToggleContent = () => {
     <Button
       variant="outline"
       size="icon"
-      aria-label={isDark ? "Przełącz na jasny motyw" : "Przełącz na ciemny motyw"}
+      aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
       onClick={handleThemeToggle}
       className={baseBtn}
       style={baseStyle}

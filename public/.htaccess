@@ -7,7 +7,7 @@ ErrorDocument 404 /404.html
 # Handle client-side routing for SPA (only for known routes)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(portfolio|polityka-prywatnosci)(/.*)?$ /index.html [L]
+RewriteRule ^(portfolio|privacy-policy)(/.*)?$ /index.html [L]
 
 # Security headers
 <IfModule mod_headers.c>

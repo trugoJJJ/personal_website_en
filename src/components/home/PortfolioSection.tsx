@@ -13,11 +13,11 @@ import ClientOnlyWrapper from "@/components/ClientOnlyWrapper";
 
 /* ================== PALETA – LIGHT ================== */
 const COLORS = {
-  amaranth: "#C25A3A",  // Burnt Sienna – główny akcent (primary)
+  amaranth: "#C25A3A",  // Burnt Sienna – primary accent
   ecru: "#FAF6EE",      // Cream background
-  butter: "#D8A23A",    // Goldenrod – akcent / highlight
-  alloy: "#736134",     // Olive Brown – secondary / średni kontrast
-  charcoal: "#2E2217",  // Dark Brown – ciemne elementy / tekst
+  butter: "#D8A23A",    // Goldenrod – accent / highlight
+  alloy: "#736134",     // Olive Brown – secondary / medium contrast
+  charcoal: "#2E2217",  // Dark Brown – dark elements / text
   white: "#FFFFFF",
   black: "#000000",
 };
@@ -74,59 +74,59 @@ type Project = {
   externalLink?: string;
 };
 
-const CATEGORIES = ["Projekty kreatywne", "Projekty sprzedażowe"] as const;
+const CATEGORIES = ["Creative Projects", "Sales Projects"] as const;
 
 const portfolioProjects: Omit<Project, 'id'>[] = [
   {
-    title: 'SEO dla producenta drzwi zewnętrznych',
+    title: 'SEO for external door manufacturer',
     description:
-      'optymalizacja techniczna → copywriting → link building → artykuły → analityka → raporty.',
+      'technical optimization → copywriting → link building → articles → analytics → reports.',
     image: '/seo_projekt.png',
-    categories: ['Projekty sprzedażowe'],
+    categories: ['Sales Projects'],
     tags: ['SEO', 'Content', 'Link building'],
-    metrics: '+3 mln wyświetleń'
+    metrics: '+3 mln views'
   },
   {
-    title: 'Płatne kampanie reklamowe PPC',
+    title: 'Paid advertising campaigns PPC',
     description: 'Google Ads → Meta Ads → LinkedIn Ads.',
     image: '/ppc_projekt.png',
-    categories: ['Projekty sprzedażowe'],
+    categories: ['Sales Projects'],
     tags: ['PPC', 'Performance', 'ROAS'],
-    metrics: '40% wzrost zapytań'
+    metrics: '40% increase in inquiries'
   },
   {
-    title: 'Automatyczny system śledzenia danych ',
+    title: 'Automated data tracking system',
     description: 'GA4 → GSC → GoogleAds → MetaAds → GTM.',
     image: '/analityka_projekt.png',
-    categories: ['Projekty sprzedażowe'],
+    categories: ['Sales Projects'],
     tags: ['GA4', 'GTM', 'Attribution'],
-    metrics: '150 tys. konwersji'
+    metrics: '150 tys. conversions'
   },
   {
-    title: 'Szablon animacji portfolio',
-    description: 'Animacja 2D → Adobe After Effects → Prezentacja usługi.',
+    title: 'Portfolio animation template',
+    description: '2D animation → Adobe After Effects → Service presentation.',
     image: '/animacja_projekt.png',
-    categories: ['Projekty kreatywne'],
+    categories: ['Creative Projects'],
     tags: ['After Effects', '2D', 'Template'],
-    metrics: '50 tys. wyświetleń',
+    metrics: '50 tys. views',
     externalLink: 'https://www.instagram.com/reel/C58pTt4No9B/?utm_source=ig_web_copy_link&igsh=c2xxeTQ2MTRwanNk'
   },
   {
-    title: 'Landing page promocyjny',
-    description: 'Langing page → Projekt → Development → Kampania promocyjna',
+    title: 'Promotional landing page',
+    description: 'Landing page → Project → Development → Promotion campaign',
     image: '/saas_projekt.png',
-    categories: ['Projekty kreatywne'],
-    tags: ['Developnet', 'Promocja', 'Designe'],
-    metrics: 'Kompleksowe wdrożenie',
+    categories: ['Creative Projects'],
+    tags: ['Developnet', 'Promotion', 'Designe'],
+    metrics: 'Comprehensive implementation',
     externalLink: 'https://www.behance.net/gallery/233839349/SaaS-Landing-Page-Project-Implementation-Content'
   },
   {
-    title: 'Interaktywna animacja w Rive',
-    description: 'Interaktywna animacja → Rive Studio → Animacja na stronę',
+    title: 'Interactive animation in Rive',
+    description: 'Interactive animation → Rive Studio → Animation on page',
     image: '/rive_projekt.png',
-    categories: ['Projekty kreatywne'],
+    categories: ['Creative Projects'],
     tags: ['Rive', 'Interactive', 'Animation'],
-    metrics: 'Dedykowana animacja',
+    metrics: 'Dedicated animation',
     externalLink: 'https://rive.app/community/files/23283-43730-interactive-drawing-animation/'
   },
 ];
@@ -149,14 +149,14 @@ function SuccessAnimationPlaceholder({ onReset }: { onReset: () => void }) {
          style={{ background: `rgba(0,0,0,0.85)` }}>
       <div className="p-8 text-center"
            style={{ background: P("ecru"), color: P("black"), border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
-        <h2 className="text-4xl md:text-5xl font-extrabold mb-6 uppercase tracking-tight">Gratulacje!</h2>
-        <p className="mb-8">Sekwencja została ułożona poprawnie.</p>
+        <h2 className="text-4xl md:text-5xl font-extrabold mb-6 uppercase tracking-tight">Congratulations!</h2>
+        <p className="mb-8">The sequence has been arranged correctly.</p>
         <button
           onClick={onReset}
           className="px-6 py-3 font-extrabold"
           style={{ background: P("butter"), border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}
         >
-          Ułóż od nowa
+          Arrange again
         </button>
       </div>
     </div>
@@ -169,33 +169,33 @@ function ProjectCard({ project, isHighlighted = false }: { project: Project, isH
   // Function to get appropriate link text based on external link URL
   const getExternalLinkText = (url: string) => {
     if (url.includes('instagram.com')) {
-      return 'Zobacz na Instagramie';
+      return 'View on Instagram';
     }
     if (url.includes('behance.net')) {
-      return 'Zobacz na Behance';
+      return 'View on Behance';
     }
     if (url.includes('rive.app')) {
-      return 'Zobacz na Rive Marketplace';
+      return 'View on Rive Marketplace';
     }
     if (url.includes('youtube.com') || url.includes('youtu.be')) {
-      return 'Zobacz na YouTube';
+      return 'View on YouTube';
     }
     if (url.includes('linkedin.com')) {
-      return 'Zobacz na LinkedIn';
+      return 'View on LinkedIn';
     }
     // Default fallback
-    return 'Zobacz więcej';
+    return 'View more';
   };
   
   // Map project titles to their specific routes
   const getProjectLink = (title: string, externalLink?: string) => {
-    if (title.includes('SEO') || title.includes('Kompleksowa obsługa SEO')) {
+    if (title.includes('SEO') || title.includes('Comprehensive SEO for external door manufacturer')) {
       return '/portfolio/seo';
     }
-    if (title.includes('płatnych kampanii') || title.includes('PPC') || title.includes('Płatne kampanie')) {
+    if (title.includes('paid advertising campaigns') || title.includes('PPC') || title.includes('Paid advertising campaigns')) {
       return '/portfolio/ppc';
     }
-    if (title.includes('System śledzenia') || title.includes('śledzenia danych')) {
+    if (title.includes('Data tracking system for visitors') || title.includes('data tracking system')) {
       return '/portfolio/analytics';
     }
     // For projects with external links, use the external link
@@ -275,7 +275,7 @@ function ProjectCard({ project, isHighlighted = false }: { project: Project, isH
                 (e.currentTarget as HTMLAnchorElement).style.color = isDark ? P("white") : P("black");
               }}
             >
-              Szczegóły
+              Details
             </Link>
           </div>
         </div>
@@ -340,7 +340,7 @@ const SectionHeading = ({ children, id }: { children: any, id?: string }) => {
   );
 };
 
-/* ================== GŁÓWNY KOMPONENT SEKCJI PORTFOLIO ================== */
+/* ================== MAIN PORTFOLIO SECTION COMPONENT ================== */
 const PortfolioSectionContent = () => {
   const { isDark, P } = usePalette();
   const [items, setItems] = useState<Project[]>(() => shuffleArray(createSixProjects(portfolioProjects)));
@@ -375,10 +375,10 @@ const PortfolioSectionContent = () => {
   // portfolio helpers
   const checkSolution = (currentOrder: Project[]) => {
     const sequenceTitles = currentOrder.map(item => item.title);
-    const a = 'Kompleksowa obsługa SEO dla producenta drzwi zewnętrznych';
-    const b = 'Portfolio płatnych kampanii reklamowych';
-    const c = 'System śledzenia danych o odwiedzających';
-    const d = 'Szablon animacji portfolio';
+    const a = 'Comprehensive SEO for external door manufacturer';
+    const b = 'Portfolio of paid advertising campaigns';
+    const c = 'Data tracking system for visitors';
+    const d = 'Portfolio animation template';
     const winning1 = [a, a, b, c, d, d];
     const winning2 = [d, d, c, b, a, a];
     const isMatch = (x: string[], y: string[]) => JSON.stringify(x) === JSON.stringify(y);
@@ -406,7 +406,7 @@ const PortfolioSectionContent = () => {
       <div className="container mx-auto px-6 max-w-6xl">
         <SectionHeading>Portfolio</SectionHeading>
 
-        {/* Kategorie (wyrównane do prawej) — DARK MODE FIX */}
+        {/* Categories (right-aligned) — DARK MODE FIX */}
         <div className="hidden sm:flex justify-end mb-10 gap-3">
           {CATEGORIES.map((c) => {
             const isActive = activeCategory === c;
@@ -463,7 +463,7 @@ const PortfolioSectionContent = () => {
                     key={item.id}
                     project={item}
                     isHighlighted={!!isHighlighted}
-                    isDraggable={false} // TODO: Zmień na true żeby włączyć drag & drop
+                    isDraggable={false} // TODO: Change to true to enable drag & drop
                   />
                 );
               })}
@@ -494,10 +494,10 @@ export const PortfolioSection = () => {
           </header>
           <div className="hidden sm:flex justify-end mb-10 gap-3">
             <button className="px-5 py-2 font-extrabold transition-colors border-3 border-black bg-white text-black">
-              Projekty kreatywne
+              Creative Projects
             </button>
             <button className="px-5 py-2 font-extrabold transition-colors border-3 border-black bg-white text-black">
-              Projekty sprzedażowe
+              Sales Projects
             </button>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">

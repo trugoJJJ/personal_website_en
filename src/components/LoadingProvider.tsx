@@ -27,12 +27,12 @@ export const LoadingProvider = ({ children }: LoadingProviderProps) => {
   const [shouldRender, setShouldRender] = useState(true);
 
   useEffect(() => {
-    // Symulacja ładowania aplikacji
+    // Application loading simulation
     const timer = setTimeout(() => {
       setIsLoading(false);
-      // Opóźnienie usunięcia z DOM po fade out
+      // Delay removing from DOM after fade out
       setTimeout(() => setShouldRender(false), 500);
-    }, 2000); // 2 sekundy ładowania
+    }, 2000); // 2 seconds loading
 
     return () => clearTimeout(timer);
   }, []);

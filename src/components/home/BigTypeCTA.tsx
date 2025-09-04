@@ -256,7 +256,7 @@ const BigTypeCTAContent = () => {
                 className="block md:hidden mt-2 text-xs font-bold opacity-75"
                 style={{ color: P("white") }}
               >
-                (przytrzymaj aby rysować)
+                (hold to draw)
               </span>
             </div>
           </a>

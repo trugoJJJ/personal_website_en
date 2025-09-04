@@ -22,21 +22,21 @@ export const AboutSection = () => {
     <section className="py-24 md:py-36" id="about"
              style={{ background: isDark ? P("charcoal") : P("white"), borderTop: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
       <div className="container mx-auto max-w-6xl">
-        <SectionHeading>O mnie</SectionHeading>
+        <SectionHeading>About Me</SectionHeading>
 
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           <div className="space-y-8">
             <figure className="overflow-hidden" style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
-              <img src={portrait.src} alt="Portret – o mnie" loading="lazy" className="w-full h-64 object-cover md:h-80" />
+              <img src={portrait.src} alt="Portrait – about me" loading="lazy" className="w-full h-64 object-cover md:h-80" />
             </figure>
             <div className="space-y-6" style={{ color: isDark ? P("white") : P("charcoal") }}>
-              <h3 className="text-2xl md:text-3xl font-extrabold text-left">Cześć, nazywam się Adam</h3>
+              <h3 className="text-2xl md:text-3xl font-extrabold text-left">Hi, I'm Adam</h3>
               <p className="text-base md:text-lg">
-                Zajmuję się kompleksową obsługą komunikacji marketingowej nakierowanej na osiąganie zamierzonych celów biznesowych.
+                I provide comprehensive marketing communication services focused on achieving business goals.
               </p>
               <p className="text-base md:text-lg">
-                Przez ostatnie 5&nbsp;lat rozwijałem się w&nbsp;marketingu –&nbsp;od grafika,&nbsp;przez specjalistę SEO,&nbsp;po managera zespołu.
-                Realizowałem długoterminowe strategie marketingowe dla różnych branż (IT,&nbsp;produkcyjna,&nbsp;medyczna,&nbsp;krypto). Zarządzałem zespołem i&nbsp;wspierałem projekty IT oraz marketingowe dla największych marek w&nbsp;Polsce.
+                Over the last 5&nbsp;years, I've developed in marketing –&nbsp;from graphic designer,&nbsp;through SEO specialist,&nbsp;to team manager.
+                I've implemented long-term marketing strategies for various industries (IT,&nbsp;manufacturing,&nbsp;medical,&nbsp;crypto). I've managed teams and&nbsp;supported IT and marketing projects for the biggest brands in&nbsp;Poland.
               </p>
             </div>
           </div>
@@ -44,10 +44,10 @@ export const AboutSection = () => {
           <div className="space-y-8">
             <div className="grid grid-cols-2 gap-3 md:gap-6">
               {[
-                { value: "+5 lat", label: "Doświadczenia w marketingu internetowym" },
-                { value: "+100", label: "Zrealizowanych projektów dla różnych branż" },
-                { value: "100%", label: "Odpowiedzialności za powierzone zadania" },
-                { value: ">847 km", label: "Zapisanych w postach i wpisach blogowych" },
+                { value: "+5 years", label: "Experience in internet marketing" },
+                { value: "+100", label: "Completed projects for various industries" },
+                { value: "100%", label: "Responsibility for entrusted tasks" },
+                { value: ">847 km", label: "Written in posts and blog entries" },
               ].map((s) => (
                 <div key={s.label} className="p-4 md:p-6 text-left"
                      style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: P("ecru"), color: isDark ? P("white") : P("black") }}>
@@ -61,7 +61,7 @@ export const AboutSection = () => {
             <div className="p-10"
                  style={{ background: P("butter"), color: isDark ? P("white") : P("black"), border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
               {(() => {
-                // Minimalistyczny QR kod bez dodatkowego tła
+                // Minimalist QR code without additional background
                 const QR_DATA_URI = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent('https://linktr.ee/trugojjj')}&format=png&color=${isDark ? 'ffffff' : '000000'}&bgcolor=${isDark ? '000000' : 'ffffff'}&ecc=L&margin=0`;
 
                 return (

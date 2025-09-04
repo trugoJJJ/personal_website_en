@@ -24,7 +24,7 @@ const visualWorks = [
     title: "E-commerce UI Design",
     type: "UI/UX",
     image: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=600&h=400&fit=crop",
-    description: "Nowoczesny design sklepu internetowego z fokusem na konwersję",
+    description: "Modern e-commerce website design with focus on conversion",
     tools: ["Figma", "Photoshop"]
   },
   {
@@ -32,7 +32,7 @@ const visualWorks = [
     title: "Social Media Templates",
     type: "Social Media",
     image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&h=400&fit=crop",
-    description: "Zestaw szablonów dla konsystentnej komunikacji w social media",
+    description: "Template set for consistent social media communication",
     tools: ["Canva", "Illustrator"]
   },
   {
@@ -40,7 +40,7 @@ const visualWorks = [
     title: "Explainer Video",
     type: "Animation",
     image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=600&h=400&fit=crop",
-    description: "Animowany film objaśniający dla platformy SaaS",
+    description: "Animated explainer video for SaaS platform",
     tools: ["After Effects", "Illustrator"]
   },
   {
@@ -65,7 +65,7 @@ export const VisualPortfolio = () => {
               Portfolio Graficzne & Animacje
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Kreatywne projekty, które łączą estetykę z funkcjonalnością. 
+              Creative projects that combine aesthetics with functionality. 
               Od identyfikacji wizualnej po animacje marketingowe.
             </p>
           </div>
@@ -91,7 +91,7 @@ export const VisualPortfolio = () => {
                     {work.type === "Animation" ? (
                       <Button variant="secondary" size="sm" className="bg-white/20 backdrop-blur-sm">
                         <Play className="h-4 w-4 mr-2" />
-                        Zobacz animację
+                        View animation
                       </Button>
                     ) : (
                       <Button variant="secondary" size="sm" className="bg-white/20 backdrop-blur-sm">
@@ -138,7 +138,7 @@ export const VisualPortfolio = () => {
           {/* View More Button */}
           <div className="text-center animate-fade-in-up" style={{animationDelay: "1s"}}>
             <Button asChild size="lg" className="bg-gradient-primary hover:opacity-90 text-white font-semibold px-8 py-6">
-              <a href="/portfolio" aria-label="Zobacz pełne portfolio">Zobacz pełne portfolio</a>
+              <a href="/portfolio" aria-label="View full portfolio">View full portfolio</a>
             </Button>
           </div>
 

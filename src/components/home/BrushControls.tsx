@@ -20,11 +20,11 @@ const BrushControlsContent = ({
   currentColorKey, currentSize, currentBrushType, isVisible,
 }: BrushControlsProps) => {
   const { isDark, P } = usePalette();
-  const SIZES = [ { label: 'Mały', value: 50 }, { label: 'Duży', value: 500 } ];
+  const SIZES = [ { label: 'Small', value: 50 }, { label: 'Large', value: 500 } ];
   const BRUSH_TYPES: { id: BrushType; name: string }[] = [
-    { id: "brush", name: "Pędzel" },
+    { id: "brush", name: "Brush" },
     { id: "spray", name: "Spray" },
-    { id: "cursor", name: "Kursor" },
+    { id: "cursor", name: "Cursor" },
   ];
   const PALETTE: (keyof typeof COLORS)[] = ["black","white","amaranth","butter","alloy","charcoal"];
   
@@ -32,7 +32,7 @@ const BrushControlsContent = ({
 
   return (
     <div className={`transition-all ${isVisible ? "opacity-100" : "opacity-0"} flex flex-wrap gap-3 items-center justify-center px-6`}>
-      {/* Tryby pędzla */}
+      {/* Brush modes */}
       <div className="flex items-center p-1 gap-1" style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: isDark ? P("charcoal") : P("ecru") }}>
         {BRUSH_TYPES.map((b,i)=>(
           <button 
@@ -51,7 +51,7 @@ const BrushControlsContent = ({
         ))}
       </div>
       
-      {/* Rozmiary */}
+      {/* Sizes */}
       <div className="flex items-center p-1 gap-1" style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: isDark ? P("charcoal") : P("ecru") }}>
         {SIZES.map((s,i)=>(
           <button 
@@ -70,7 +70,7 @@ const BrushControlsContent = ({
         ))}
       </div>
       
-      {/* Paleta z pustą ramką */}
+      {/* Palette with empty frame */}
       <div className="flex items-center p-1 gap-1" style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: isDark ? P("charcoal") : P("ecru") }}>
         {PALETTE.map((key,i)=>{
           const isActive = currentColorKey===key;
@@ -82,17 +82,17 @@ const BrushControlsContent = ({
               onMouseLeave={() => setHoveredButton(null)}
               className="relative w-10 h-10 transition-transform duration-300 ease-out"
               style={{
-                // zewnętrzne tło = tło panelu – tworzy wizualną ramkę
+                // external background = panel background – creates visual frame
                 background: isDark ? P("charcoal") : P("ecru"),
                 padding: 0,
                 borderRight: i===PALETTE.length-1? 'none': `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`,
                 transform: hoveredButton === key ? 'scale(1.05)' : 'scale(1)',
               }}
-              aria-label={`Kolor ${key}${isActive?' (aktywny)':''}`}
+              aria-label={`Color ${key}${isActive?' (active)':''}`}
             >
-              {/* Wnętrze – właściwy kolor z odwróconym strokiem */}
+              {/* Interior – actual color with inverted stroke */}
               <span className="absolute inset-[4px]" style={{ background: P(key), boxShadow: `inset 0 0 0 ${isDark ? '1px' : '2px'} ${isDark ? P("white") : P("black")}` }} />
-              {/* Aktywny kolor – amarantowa ramka wewnętrzna */}
+              {/* Active color – amaranth inner frame */}
               {isActive && (
                 <span className="pointer-events-none absolute inset-0" style={{ boxShadow: `inset 0 0 0 3px ${P("amaranth")}` }} />
               )}

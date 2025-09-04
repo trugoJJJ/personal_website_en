@@ -23,7 +23,7 @@ const ExperienceSectionContent = () => {
   const { isDark, P } = usePalette();
   const [isMobile, setIsMobile] = useState(false);
 
-  // Bezpieczne sprawdzenie szerokości ekranu
+      // Safe screen width check
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
@@ -47,44 +47,44 @@ const ExperienceSectionContent = () => {
       role: "Digital Marketing Specialist",
       company: "Dogtronic",
       period: "2021 – 2025",
-      desc: "Prowadzenie kampanii digital, SEO oraz zarządzanie zespołem marketingowym",
+      desc: "Leading digital campaigns, SEO and managing marketing team",
       url: "https://dogtronic.io/"
     },
     {
-      role: "Specjalista ds. marketingu",
-      company: "Instytut Rozwoju Szkolnictwa Wyższego",
+      role: "Marketing Specialist",
+      company: "Institute for Higher Education Development",
       period: "2023 – 2024",
-      desc: "Koordynacja działań promocyjnych i rozwój komunikacji wizerunkowej",
+      desc: "Coordinating promotional activities and developing brand communication",
       url: "https://irsw.pl/"
     },
     {
       role: "SEO Specialist",
       company: "Kryptobot",
       period: "2021 – 2022",
-      desc: "Audyt i optymalizacja serwisów pod SEO, link building i analityka",
+      desc: "Website SEO audit and optimization, link building and analytics",
       url: "https://kryptobot.net/"
     },
     {
-      role: "Stażysta w dziale marketingu",
+      role: "Marketing Intern",
       company: "Akanza",
       period: "2021",
-      desc: "Wsparcie zespołu w tworzeniu treści i kampanii reklamowych",
+      desc: "Supporting team in content creation and advertising campaigns",
       url: "https://akanza.pl/"
     },
     {
-      role: "Grafik",
+      role: "Graphic Designer",
       company: "EmArt Studio",
       period: "2021",
-      desc: "Projektowanie materiałów graficznych online i offline dla klientów",
+      desc: "Designing online and offline graphic materials for clients",
       url: "https://www.emartstudio.pl/"
     },
   ];
 
   const certs = [
-    { year: "2023", title: "Google Internetowe Rewolucje", org: "Google", url: "https://skillshop.exceedlms.com/student/collection/796504-digital-marketing", image: "/google_certfikat.png" },
-    { year: "2024", title: "Marketing B2B - lead generation", org: "Szymon Negacz", url: "https://www.sellwise.pl/marketing-b2b-lead-generation/", image: "/lejki_certyfikat.png" },
-    { year: "2023", title: "AI dla Marketingu", org: "Sprawny Marketing", url: "https://sprawnymarketing.pl/szkolenia/ai/", image: "/ai_certfikat.png" },
-    { year: "2024", title: "Viral i kreatywny marketing", org: "Jakub Biel", url: "https://jakubbiel.pl/viral/", image: "/viral_certyfikat.png" },
+    { year: "2023", title: "Google Internet Revolutions", org: "Google", url: "https://skillshop.exceedlms.com/student/collection/796504-digital-marketing", image: "/google_certfikat.png" },
+    { year: "2024", title: "B2B Marketing - lead generation", org: "Szymon Negacz", url: "https://www.sellwise.pl/marketing-b2b-lead-generation/", image: "/lejki_certyfikat.png" },
+    { year: "2023", title: "AI for Marketing", org: "Sprawny Marketing", url: "https://sprawnymarketing.pl/szkolenia/ai/", image: "/ai_certfikat.png" },
+    { year: "2024", title: "Viral and creative marketing", org: "Jakub Biel", url: "https://jakubbiel.pl/viral/", image: "/viral_certyfikat.png" },
   ];
 
   const [selectedCert, setSelectedCert] = useState<typeof certs[number] | null>(null);
@@ -96,10 +96,10 @@ const ExperienceSectionContent = () => {
       style={{ background: P("ecru"), borderTop: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}
     >
       <div className="container mx-auto max-w-6xl">
-        <SectionHeading>Doświadczenie</SectionHeading>
+        <SectionHeading>Experience</SectionHeading>
 
         <div className="grid gap-4 md:gap-8 grid-cols-2 lg:grid-cols-[2fr_1fr]">
-          {/* LEWA: PRACA */}
+          {/* LEFT: WORK */}
           <div className="flex flex-col gap-4 md:gap-8 col-span-2 lg:col-span-1">
             {jobs.map((job) => (
               <a
@@ -125,7 +125,7 @@ const ExperienceSectionContent = () => {
             ))}
           </div>
 
-          {/* PRAWA: EDU na górze + CERTYFIKATY niżej */}
+          {/* RIGHT: EDU at top + CERTIFICATES below */}
           <div className="flex flex-col gap-4 md:gap-8 col-span-2 lg:col-span-1">
             {/* EDU */}
             <a
@@ -146,16 +146,16 @@ const ExperienceSectionContent = () => {
                 cursor: 'pointer',
               }}
               className="transition-transform duration-200 hover:scale-[1.02] focus-visible:outline-none"
-              aria-label="Marketing i Komunikacja Rynkowa – Politechnika Lubelska (otwórz w nowej karcie)"
+              aria-label="Marketing and Market Communication – Lublin University of Technology (open in new tab)"
             >
               <div className="flex items-center gap-2 text-xs md:text-sm mb-1 md:mb-2" style={{ opacity: 0.9 }}>
-                <GraduationCap className="h-3 w-3 md:h-4 md:w-4" /> Edukacja
+                <GraduationCap className="h-3 w-3 md:h-4 md:w-4" /> Education
               </div>
-              <h4 className="font-extrabold mb-1 text-sm md:text-base">Marketing i Komunikacja Rynkowa</h4>
-              <div className="font-bold text-sm md:text-base">Politechnika Lubelska</div>
+              <h4 className="font-extrabold mb-1 text-sm md:text-base">Marketing and Market Communication</h4>
+              <div className="font-bold text-sm md:text-base">Lublin University of Technology</div>
             </a>
 
-            {/* CERTYFIKATY */}
+            {/* CERTIFICATES */}
             {certs.map((c) => (
               <a
                 key={c.title}
@@ -192,11 +192,11 @@ const ExperienceSectionContent = () => {
                 </div>
 
                 <div className="flex items-center gap-2 text-xs md:text-sm mb-1 md:mb-2" style={{ opacity: 0.9 }}>
-                  <Award className="h-3 w-3 md:h-4 md:w-4" /> Certyfikat
+                  <Award className="h-3 w-3 md:h-4 md:w-4" /> Certificate
                 </div>
                 <h4 className="font-extrabold text-sm md:text-base">{c.title}</h4>
                 <div className="italic text-sm md:text-base">{c.org}</div>
-                <span className="block mt-2 md:mt-3 text-xs font-bold opacity-60">Kliknij, aby zobaczyć certyfikat</span>
+                <span className="block mt-2 md:mt-3 text-xs font-bold opacity-60">Click to view certificate</span>
               </a>
             ))}
           </div>
@@ -249,7 +249,7 @@ const ExperienceSectionContent = () => {
               <figure className="overflow-hidden" style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: isDark ? P("charcoal") : P("ecru") }}>
                 <img
                   src={selectedCert.image || 'https://placehold.co/800x500?text=Certyfikat'}
-                  alt={`Podgląd certyfikatu ${selectedCert.title}`}
+                  alt={`Certificate preview ${selectedCert.title}`}
                   className="w-full h-auto object-contain"
                   style={{ maxHeight: 380 }}
                   loading="lazy"

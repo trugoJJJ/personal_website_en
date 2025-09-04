@@ -11,10 +11,10 @@ import { useRouter, usePathname } from "next/navigation";
 
 const links = [
   { section: "portfolio", label: "Portfolio" },
-  { section: "about", label: "O mnie" },
-  { section: "experience", label: "Doświadczenie" },
-  { section: "skills", label: "Umiejętności" },
-  { section: "articles", label: "Artykuły" },
+  { section: "about", label: "About Me" },
+  { section: "experience", label: "Experience" },
+  { section: "skills", label: "Skills" },
+  { section: "articles", label: "Articles" },
 ];
 
 const HeaderContent = () => {
@@ -26,7 +26,7 @@ const HeaderContent = () => {
   const handleNavigation = (section: string) => {
     console.log('handleNavigation called with section:', section);
     if (pathname === '/') {
-      // Na stronie głównej - scroll do sekcji
+      // On homepage - scroll to section
       const element = document.getElementById(section);
       console.log('Found element:', element);
       if (element) {
@@ -35,7 +35,7 @@ const HeaderContent = () => {
         console.log('Element not found for section:', section);
       }
     } else {
-      // Na podstronie - przejdź na główną i scroll do sekcji
+      // On subpage - go to homepage and scroll to section
       router.push(`/#${section}`);
     }
     console.log('Setting open to false');
@@ -96,14 +96,14 @@ const HeaderContent = () => {
           <LanguageSwitch />
           <ThemeToggle />
           <Button size="lg" asChild className="rounded-none font-extrabold transition-transform hover:scale-[1.02]" style={{ background: P("amaranth"), color: P("white"), border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
-            <a href="/#contact">Kontakt</a>
+            <a href="/#contact">Contact</a>
           </Button>
         </div>
         
         {/* Mobile right side */}
         <div className="flex items-center gap-2 ml-auto mr-4 desk:hidden">
           <ThemeToggle />
-          <Button variant="outline" size="icon" aria-label="Otwórz menu" onClick={() => setOpen(true)} className="rounded-none" style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("charcoal")}`, color: isDark ? P("white") : P("charcoal") }}>
+          <Button variant="outline" size="icon" aria-label="Open menu" onClick={() => setOpen(true)} className="rounded-none" style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("charcoal")}`, color: isDark ? P("white") : P("charcoal") }}>
             <Menu className="h-5 w-5" />
           </Button>
         </div>
@@ -126,7 +126,7 @@ const HeaderContent = () => {
               <Button 
                 variant="outline" 
                 size="icon" 
-                aria-label="Zamknij menu" 
+                aria-label="Close menu" 
                 onClick={() => setOpen(false)} 
                 className="rounded-none transition-transform hover:scale-110 hover:rotate-90 duration-200" 
                 style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("charcoal")}`, color: isDark ? P("white") : P("charcoal") }}
@@ -164,7 +164,7 @@ const HeaderContent = () => {
                   border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`
                 }}
               >
-                Kontakt
+                Contact
               </Button>
               
               {/* Social icons from About section */}

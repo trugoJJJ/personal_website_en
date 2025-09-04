@@ -4,11 +4,11 @@ import { useState, useEffect } from "react";
 
 /* ================== PALETA – LIGHT ================== */
 export const COLORS = {
-  amaranth: "#C25A3A",  // Burnt Sienna – główny akcent (primary)
+  amaranth: "#C25A3A",  // Burnt Sienna – primary accent
   ecru: "#FAF6EE",      // Cream background
-  butter: "#D8A23A",    // Goldenrod – akcent / highlight
-  alloy: "#736134",     // Olive Brown – secondary / średni kontrast
-  charcoal: "#2E2217",  // Dark Brown – ciemne elementy / tekst
+  butter: "#D8A23A",    // Goldenrod – accent / highlight
+  alloy: "#736134",     // Olive Brown – secondary / medium contrast
+  charcoal: "#2E2217",  // Dark Brown – dark elements / text
   white: "#FFFFFF",
   black: "#000000",
 };
@@ -73,8 +73,8 @@ export function shuffleArray<T>(array: T[]): T[] {
 export const useI18n = () => ({
   t: (key: string) =>
     ({
-      "portfolio.cta.more": "Kliknij, aby zobaczyć portfolio graficzne",
-      "portfolio.cta.more.mobile": "Kliknij, aby zobaczyć<br/>portfolio graficzne",
+      "portfolio.cta.more": "Click to view graphic portfolio",
+      "portfolio.cta.more.mobile": "Click to view<br/>graphic portfolio",
       "portfolio.cta.contact": "Pobierz CV",
       "portfolio.cta.contact.mobile": "Pobierz CV",
     }[key] || key),

@@ -19,8 +19,8 @@ const Index = () => {
     <div className="min-h-screen">
       <SEO 
         title="Portfolio – Adam Gałęcki – Digital Marketing Manager"
-        description="Zajmuję się kompleksową obsługą komunikacji marketingowej nakierowanej na osiąganie zamierzonych celów biznesowych w firmach B2B i B2C."
-        canonical="https://galecki.website"
+        description="I provide comprehensive marketing communication services focused on achieving business goals for B2B and B2C companies."
+        canonical="https://galecki.site"
         ogImage="/og_cover.png"
       />
       <Header />

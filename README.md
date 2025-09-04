@@ -1,74 +1,69 @@
-My Portfolio Website
+# 🚀 Personal Portfolio Website
 
-## About
+A modern, responsive portfolio website built with Next.js 14, showcasing my expertise as a Digital Marketing Manager.
 
-Professional portfolio website showcasing my expertise as a Digital Marketing Manager.
-## Features
+## ✨ Features
 
-- **Professional Portfolio**: Showcase of marketing projects and achievements
-- **Interactive Design**: Smooth animations and modern UI components
-- **Responsive Layout**: Optimized for all devices and screen sizes
-- **Dark/Light Theme**: Toggle between themes for better user experience
-- **Performance Optimized**: Built with Next.js for fast loading and SEO
-- **Multilingual Support**: Polish and English language options
+- **🎨 Modern Design**: Clean, professional interface with smooth animations
+- **📱 Responsive Layout**: Optimized for all devices and screen sizes
+- **🌙 Theme Toggle**: Dark/light mode support for better user experience
+- **🌍 Multilingual**: Polish and English language options
+- **⚡ Performance**: Built with Next.js for fast loading and SEO optimization
+- **🎭 Interactive Elements**: Smooth animations powered by Framer Motion
+- **📊 Portfolio Showcase**: Professional project presentations and case studies
 
-## Tech Stack
+## 🛠️ Tech Stack
 
-### Development Technologies
-- **Framework**: Next.js 14 with React 18
-- **Styling**: Tailwind CSS with custom design system
-- **UI Components**: shadcn/ui component library
-- **Animations**: Framer Motion for smooth interactions
-- **Type Safety**: TypeScript for robust development
-- **Deployment**: Optimized for production with static generation
+### Frontend Framework
+- **Next.js 14** - React framework with App Router
+- **React 18** - Latest React features and hooks
+- **TypeScript** - Type-safe development
 
-### AI Development Tools
-- **Lovable**: AI-powered development platform for code generation and project management
-- **CursorAI**: AI-assisted coding environment for enhanced development workflow
+### Styling & UI
+- **Tailwind CSS** - Utility-first CSS framework
+- **shadcn/ui** - Modern component library
+- **Framer Motion** - Smooth animations and transitions
 
-### Design & Prototyping Tools
-- **Relume**: Website design and prototyping platform
-- **Figma**: UI/UX design and collaboration tool
+### Development Tools
+- **ESLint** - Code quality and consistency
+- **PostCSS** - CSS processing
+- **Autoprefixer** - CSS vendor prefixing
 
-## 🎨 Creative Work
+### AI Development
+- **Lovable** - AI-powered development platform
+- **CursorAI** - AI-assisted coding environment
 
-**All content, graphics, and animations were created independently by me.** While AI tools assisted in the development process, every piece of visual content, animation, and written material represents my original creative work and professional expertise.
-
-## Sections
-
-- **Hero Section**: Dynamic video background with scaling effects
-- **Portfolio**: Showcase of marketing projects and case studies
-- **About**: Professional background and achievements
-- **Experience**: Work history and key accomplishments
-- **Skills**: Technical and marketing expertise
-- **Tech Stack**: Technologies and tools used
-- **Articles**: Marketing insights and industry knowledge
-- **Contact**: Professional contact information and social links
-
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
-
-- Node.js 18+ and npm
+- Node.js 18+ 
+- npm or yarn
 - Git
 
 ### Installation
 
-```bash
-# Clone the repository
-git clone <YOUR_GIT_URL>
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/trugoJJJ/personal-portfolio.git
+   cd personal-portfolio
+   ```
 
-# Navigate to project directory
-cd monke_io
+2. **Install dependencies**
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
 
-# Install dependencies
-npm install
+3. **Start development server**
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
 
-# Start development server
-npm run dev
-```
-
-The site will be available at `http://localhost:3000`
+4. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000)
 
 ### Build for Production
 
@@ -80,11 +75,15 @@ npm run build
 npm start
 ```
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 src/
 ├── app/                 # Next.js app router
+│   ├── globals.css     # Global styles
+│   ├── layout.tsx      # Root layout
+│   ├── page.tsx        # Homepage
+│   └── portfolio/      # Portfolio pages
 ├── components/          # React components
 │   ├── home/           # Homepage sections
 │   ├── ui/             # Reusable UI components
@@ -95,31 +94,55 @@ src/
 └── lib/                 # Utility functions
 ```
 
-## Design System
+## 🎨 Design System
 
-The website uses a custom design system with:
-- Consistent color palette with dark/light theme support
-- Typography scale optimized for readability
-- Interactive elements with smooth transitions
-- Responsive grid layouts
-- Custom animations and micro-interactions
+- **Color Palette**: Consistent theme with dark/light mode support
+- **Typography**: Optimized font scales for readability
+- **Spacing**: Systematic spacing system using Tailwind CSS
+- **Components**: Reusable UI components with consistent styling
+- **Animations**: Smooth micro-interactions and transitions
 
-## Performance
+## 📱 Sections
 
-- Optimized images and assets
-- Lazy loading for better performance
-- SEO optimized with meta tags and structured data
-- Fast loading times with Next.js optimizations
+- **Hero Section** - Dynamic video background with scaling effects
+- **Portfolio** - Marketing projects and case studies showcase
+- **About** - Professional background and achievements
+- **Experience** - Work history and key accomplishments
+- **Skills** - Technical and marketing expertise
+- **Tech Stack** - Technologies and tools used
+- **Articles** - Marketing insights and industry knowledge
+- **Contact** - Professional contact information
 
-## Deployment
+## 🚀 Deployment
 
-The website is deployed and accessible at: [galecki.website](https://galecki.website)
+The website is deployed and accessible at: [galecki.site](https://galecki.site)
 
-## License
+### Deployment Commands
+
+```bash
+# Build and deploy
+npm run build
+npm run deploy
+```
+
+## 🤝 Contributing
+
+This is a personal portfolio project, but if you find any bugs or have suggestions for improvements, feel free to open an issue or submit a pull request.
+
+## 📄 License
 
 This project is private but allows copying and modification. You may use this code as inspiration for your own projects, but please avoid copying it exactly as-is. Feel free to adapt the concepts, structure, and design patterns for your own creative work.
 
----
+## 👨‍💼 About Me
 
 **Adam Gałęcki** - Digital Marketing Manager  
-*Specializing in SEO, team management, and digital marketing strategies*
+Specializing in SEO, team management, and digital marketing strategies.
+
+### Connect with me
+- 🌐 [Website](https://galecki.site)
+- 💼 [LinkedIn](https://linkedin.com/in/admagalecki)
+- 📱 [TikTok](https://www.tiktok.com/@firma_galecka)
+
+---
+
+⭐ **Star this repository if you found it helpful!**

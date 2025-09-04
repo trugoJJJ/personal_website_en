@@ -1,16 +1,12 @@
-import { SEO } from "@/components/SEO";
+import { SEO } from '../SEO';
 
-const Blog = () => {
+export default function Blog() {
   return (
-    <main className="py-16">
-      <SEO title="Blog – Wkrótce" description="Sekcja blogowa w przygotowaniu" />
-      <section className="container mx-auto px-6 text-center">
-        <h1 className="text-4xl font-bold">Blog</h1>
-        <p className="text-muted-foreground mt-3">Nowa sekcja blogowa pojawi się wkrótce. Zajrzyj do działu Artykuły już teraz.</p>
-        <a href="/articles" className="underline">Przejdź do artykułów</a>
-      </section>
-    </main>
+    <div className="container mx-auto px-4 py-8">
+      <SEO title="Blog – Coming Soon" description="Blog section in preparation" />
+      <h1 className="text-4xl font-bold mb-4">Blog – Coming Soon</h1>
+      <p className="text-muted-foreground mt-3">New blog section will appear soon. Check out the Articles section now.</p>
+      <a href="/articles" className="underline">Go to articles</a>
+    </div>
   );
-};
-
-export default Blog;
+}

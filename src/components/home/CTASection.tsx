@@ -24,14 +24,14 @@ const SectionHeading = ({ children, id }: { children: React.ReactNode, id?: stri
     const tiles = [
       {
         title: "Email",
-        text: "Odpowiadam zwykle w ciągu 24h",
+        text: "I usually respond within 24h",
         href: "mailto:agalecki.work@gmail.com",
         display: "agalecki.work@gmail.com",
         Icon: Mail,
       },
       {
         title: "LinkedIn",
-        text: "Połączmy się i porozmawiajmy",
+        text: "Let's connect and talk",
         href: "https://www.linkedin.com/in/admagalecki/",
         display: "linkedin.com/in/adamgalecki",
         Icon: MessageCircle, // unchanged original Icon reference
@@ -39,9 +39,9 @@ const SectionHeading = ({ children, id }: { children: React.ReactNode, id?: stri
       },
       {
         title: "Calendly",
-        text: "Wybierz dogodny termin na rozmowę",
+        text: "Choose a convenient time for a meeting",
         href: "https://calendly.com/agalecki-work",
-        display: "Zarezerwuj spotkanie",
+        display: "Book a meeting",
         Icon: CalendarIcon,
       },
     ];
@@ -50,7 +50,7 @@ const SectionHeading = ({ children, id }: { children: React.ReactNode, id?: stri
       <section className="py-24 md:py-36" id="contact"
                style={{ background: P("ecru"), borderTop: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}` }}>
         <div className="container mx-auto max-w-6xl">
-          <SectionHeading>Kontakt</SectionHeading>
+          <SectionHeading>Contact</SectionHeading>
           <div className="grid md:grid-cols-3 gap-8">
             {tiles.map((t, i) => {
               const baseBg = isDark ? P("charcoal") : P("white");
@@ -132,14 +132,14 @@ const SectionHeading = ({ children, id }: { children: React.ReactNode, id?: stri
           <div className="container mx-auto max-w-6xl">
             <header className="mt-4 md:mt-8 mb-12 md:mb-24">
               <h2 className="text-left text-[9vw] sm:text-5xl md:text-7xl font-extrabold uppercase tracking-tight leading-[0.95] text-black">
-                Kontakt
+                Contact
               </h2>
             </header>
             <div className="grid md:grid-cols-3 gap-8">
               {[
-                { title: "Email", text: "Odpowiadam zwykle w ciągu 24h", display: "agalecki.work@gmail.com" },
-                { title: "LinkedIn", text: "Połączmy się i porozmawiajmy", display: "linkedin.com/in/adamgalecki" },
-                { title: "Calendly", text: "Wybierz dogodny termin", display: "Zarezerwuj spotkanie" }
+                { title: "Email", text: "I usually respond within 24h", display: "agalecki.work@gmail.com" },
+                { title: "LinkedIn", text: "Let's connect and talk", display: "linkedin.com/in/adamgalecki" },
+                { title: "Calendly", text: "Choose a convenient time for a meeting", display: "Book a meeting" }
               ].map((t, i) => (
                 <div
                   key={i}
