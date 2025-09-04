@@ -65,7 +65,7 @@ export const AboutSection = () => {
                 const QR_DATA_URI = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent('https://linktr.ee/trugojjj')}&format=png&color=${isDark ? 'ffffff' : '000000'}&bgcolor=${isDark ? '000000' : 'ffffff'}&ecc=L&margin=0`;
 
                 return (
-                  <div className="grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
+                  <div className="grid grid-cols-1 md:grid-cols-5 gap-8 items-stretch">
                     {/* Ikony - full width na mobile, 3 kolumny na desktop */}
                     <div className="col-span-1 md:col-span-3 grid grid-cols-3 gap-4 md:gap-6">
                       {[
@@ -168,13 +168,17 @@ export const AboutSection = () => {
                     </div>
 
                     {/* QR po prawej - ukryty na mobile */}
-                    <div className="hidden md:block col-span-2 justify-self-end text-center">
+                    <div className="hidden md:block col-span-2 flex items-center justify-center">
                       <a
                         href="https://linktr.ee/trugojjj"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="block w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 flex items-center justify-center mx-auto transition-transform duration-300 ease-out hover:scale-105"
-                        style={{ border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, background: isDark ? P("black") : P("white") }}
+                        className="block w-full h-full flex items-center justify-center transition-transform duration-300 ease-out hover:scale-105"
+                        style={{ 
+                          border: `${isDark ? '1px' : '3px'} solid ${isDark ? P("white") : P("black")}`, 
+                          background: isDark ? P("black") : P("white"),
+                          aspectRatio: '1'
+                        }}
                         aria-label="Linktree - wszystkie linki"
                       >
                         <img src={QR_DATA_URI} alt="QR Code - linktr.ee/trugojjj" className="w-full h-full object-contain p-2" />
