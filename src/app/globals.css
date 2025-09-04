@@ -1,1 +1,194 @@
 @import '../index.css';
+
+/* ================== CUSTOMIZACJA BANERA COOKIEYES ================== */
+
+/* ================== GŁÓWNY BANER COOKIES ================== */
+
+/* Główny kontener banera - zawsze light mode */
+.cky-consent-container {
+  border-radius: 0 !important;
+  border: 3px solid #000000 !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+  font-family: 'Inter', sans-serif !important;
+  max-width: 90vw !important;
+  margin: 1rem !important;
+  background-color: #FFFFFF !important;
+  color: #2E2217 !important;
+}
+
+/* Treść banera */
+.cky-notice-content-wrapper {
+  padding: 1.5rem !important;
+}
+
+/* Tytuł banera */
+.cky-title {
+  font-weight: 800 !important;
+  font-size: 1.25rem !important;
+  line-height: 1.2 !important;
+  text-transform: uppercase !important;
+  letter-spacing: -0.025em !important;
+  margin-bottom: 1rem !important;
+}
+
+/* Opis banera */
+.cky-notice-des p {
+  font-size: 0.875rem !important;
+  line-height: 1.6 !important;
+  margin-bottom: 1.5rem !important;
+}
+
+/* Kontener przycisków */
+.cky-notice-btn-wrapper {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.75rem !important;
+  padding-top: 1.5rem !important;
+  border-top: 3px solid #000000 !important;
+}
+
+@media (min-width: 640px) {
+  .cky-notice-btn-wrapper {
+    flex-direction: row !important;
+  }
+}
+
+/* Przycisk "Dostosuj" */
+.cky-btn-customize {
+  background-color: #FFFFFF !important;
+  color: #000000 !important;
+  border: 3px solid #000000 !important;
+  border-radius: 0 !important;
+  padding: 0.75rem 1.5rem !important;
+  font-weight: 800 !important;
+  font-size: 0.875rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.025em !important;
+  transition: all 0.3s ease !important;
+  flex: 1 !important;
+}
+
+.cky-btn-customize:hover {
+  background-color: #736134 !important;
+  color: #FFFFFF !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Przycisk "Odrzuć wszystkie" */
+.cky-btn-reject {
+  background-color: #736134 !important;
+  color: #FFFFFF !important;
+  border: 3px solid #000000 !important;
+  border-radius: 0 !important;
+  padding: 0.75rem 1.5rem !important;
+  font-weight: 800 !important;
+  font-size: 0.875rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.025em !important;
+  transition: all 0.3s ease !important;
+  flex: 1 !important;
+}
+
+.cky-btn-reject:hover {
+  background-color: #D8A23A !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Przycisk "Akceptuj wszystko" */
+.cky-btn-accept {
+  background-color: #C25A3A !important;
+  color: #FFFFFF !important;
+  border: 3px solid #000000 !important;
+  border-radius: 0 !important;
+  padding: 0.75rem 1.5rem !important;
+  font-weight: 800 !important;
+  font-size: 0.875rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.025em !important;
+  transition: all 0.3s ease !important;
+  flex: 1 !important;
+}
+
+.cky-btn-accept:hover {
+  background-color: #D8A23A !important;
+  transform: translateY(-2px) !important;
+}
+
+/* ================== PRZYCISK REVISIT - CAŁKOWICIE UKRYTY ================== */
+
+.cky-btn-revisit-wrapper,
+.cky-revisit-bottom-left,
+[data-cky-tag="revisit-consent"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* ================== UKRYCIE "POWERED BY" ================== */
+
+/* Ukrycie logo CookieYes w głównym banerze */
+.cky-consent-container [data-cky-tag="powered-by"] {
+  display: none !important;
+}
+
+/* Ukrycie logo CookieYes w modalu */
+.cky-modal [data-cky-tag="detail-powered-by"] {
+  display: none !important;
+}
+
+/* ================== STYLOWANIE PRZYCISKÓW W FOOTER MODALA ================== */
+
+/* Przycisk "Zapisz" w footer - spójny z innymi przyciskami */
+.cky-footer-wrapper .cky-btn-preferences {
+  background-color: #C25A3A !important;
+  color: #FFFFFF !important;
+  border: 3px solid #000000 !important;
+  border-radius: 0 !important;
+  padding: 0.75rem 1.5rem !important;
+  font-weight: 800 !important;
+  font-size: 0.875rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.025em !important;
+  transition: all 0.3s ease !important;
+  flex: 1 !important;
+  cursor: pointer !important;
+}
+
+.cky-footer-wrapper .cky-btn-preferences:hover {
+  background-color: #D8A23A !important;
+  transform: translateY(-2px) !important;
+}
+
+/* ================== RESPONSYWNOŚĆ ================== */
+
+@media (max-width: 640px) {
+  .cky-consent-container {
+    margin: 0.5rem !important;
+    border-width: 2px !important;
+  }
+  
+  .cky-notice-content-wrapper {
+    padding: 1rem !important;
+  }
+  
+  .cky-title {
+    font-size: 1.125rem !important;
+  }
+  
+  .cky-notice-btn-wrapper {
+    flex-direction: column !important;
+  }
+}
+
+/* ================== ANIMACJE I TRANSITIONS ================== */
+
+/* Smooth transitions dla wszystkich elementów */
+.cky-consent-container * {
+  transition: all 0.3s ease !important;
+}
+
+/* Hover effects */
+.cky-btn:hover {
+  transform: translateY(-2px) !important;
+}
