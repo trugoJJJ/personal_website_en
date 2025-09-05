@@ -25,15 +25,15 @@ export const CVViewer = ({ children }: CVViewerProps) => {
 
   const handleDownload = () => {
     const link = document.createElement('a');
-    link.href = '/adam_galecki_cv.pdf';
-    link.download = 'Adam_Galecki_CV.pdf';
+    link.href = '/adam_galecki_cv_en.pdf';
+    link.download = 'Adam_Galecki_CV_English.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
 
   const handleViewPDF = () => {
-    window.open('/adam_galecki_cv.pdf', '_blank');
+    window.open('/adam_galecki_cv_en.pdf', '_blank');
   };
 
   const handleClick = () => {
@@ -118,15 +118,15 @@ export const CVViewer = ({ children }: CVViewerProps) => {
               </div>
             </div>
 
-            {/* PDF Viewer */}
-            <div className="h-full">
-              <iframe
-                src="/adam_galecki_cv.pdf#toolbar=0&navpanes=0&scrollbar=1&view=FitH"
-                className="w-full h-full border-0"
-                title="CV - Adam Gałęcki"
-                style={{ minHeight: 'calc(100% - 40px)' }}
-              />
-            </div>
+                                    {/* PDF Viewer */}
+                        <div className="h-full">
+                          <iframe
+                            src="/adam_galecki_cv_en.pdf#toolbar=0&navpanes=0&scrollbar=1&view=FitH"
+                            className="w-full h-full border-0"
+                            title="CV - Adam Gałęcki"
+                            style={{ minHeight: 'calc(100% - 40px)' }}
+                          />
+                        </div>
           </div>
         </div>
       )}

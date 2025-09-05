@@ -81,7 +81,7 @@ const ExperienceSectionContent = () => {
   ];
 
   const certs = [
-    { year: "2023", title: "Google Internet Revolutions", org: "Google", url: "https://skillshop.exceedlms.com/student/collection/796504-digital-marketing", image: "/google_certfikat.png" },
+    { year: "2023", title: "Fundamentals of digital marketing", org: "Google", url: "https://skillshop.exceedlms.com/student/collection/796504-digital-marketing", image: "/google_certfikat.png" },
     { year: "2024", title: "B2B Marketing - lead generation", org: "Szymon Negacz", url: "https://www.sellwise.pl/marketing-b2b-lead-generation/", image: "/lejki_certyfikat.png" },
     { year: "2023", title: "AI for Marketing", org: "Sprawny Marketing", url: "https://sprawnymarketing.pl/szkolenia/ai/", image: "/ai_certfikat.png" },
     { year: "2024", title: "Viral and creative marketing", org: "Jakub Biel", url: "https://jakubbiel.pl/viral/", image: "/viral_certyfikat.png" },
