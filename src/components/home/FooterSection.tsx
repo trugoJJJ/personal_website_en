@@ -4,6 +4,7 @@ import { usePalette } from "./hooks";
 import { MapPin } from "lucide-react";
 import Link from "next/link";
 import { ClientOnlyWrapper } from "../ClientOnlyWrapper";
+import { CVViewer } from "@/components/CVViewer";
 
 const FooterSectionContent = () => {
   const { isDark, P } = usePalette();
@@ -90,22 +91,39 @@ const FooterSectionContent = () => {
                         CV
                       </span>
                     ),
-                    href: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+                    href: null, // Will be handled by CVViewer
                     label: "CV",
-                    ext: true
+                    ext: true,
+                    isCV: true,
                   },
-                ].map(({ href, label, Icon, ext }, i) => (
-                  <a
-                    key={i}
-                    href={href}
-                    {...(ext ? { target: '_blank', rel: 'noreferrer nofollow' } : {})}
-                    className={`w-8 h-8 flex items-center justify-center transition ${iconHover}`}
-                    style={{ border: `1px solid ${borderColor}`, color: textColor }}
-                    aria-label={label}
-                  >
-                    <Icon />
-                  </a>
-                ))}
+                ].map(({ href, label, Icon, ext, isCV }, i) => {
+                  if (isCV) {
+                    return (
+                      <CVViewer key={i}>
+                        <button
+                          className={`w-8 h-8 flex items-center justify-center transition ${iconHover}`}
+                          style={{ border: `1px solid ${borderColor}`, color: textColor }}
+                          aria-label={label}
+                        >
+                          <Icon />
+                        </button>
+                      </CVViewer>
+                    );
+                  }
+                  
+                  return (
+                    <a
+                      key={i}
+                      href={href || undefined}
+                      {...(ext ? { target: '_blank', rel: 'noreferrer nofollow' } : {})}
+                      className={`w-8 h-8 flex items-center justify-center transition ${iconHover}`}
+                      style={{ border: `1px solid ${borderColor}`, color: textColor }}
+                      aria-label={label}
+                    >
+                      <Icon />
+                    </a>
+                  );
+                })}
               </div>
               {/* Pionowy separator po prawej stronie tylko na desktop */}
               <div 
@@ -211,9 +229,11 @@ export const FooterSection = () => {
                       <path d="M24.75 17.542c-1.469 0-2.849-0.62-4.099-1.635l0.302-1.432 0.010-0.057c0.276-1.521 1.13-4.078 3.786-4.078 1.99 0 3.604 1.615 3.604 3.604 0 1.984-1.615 3.599-3.604 3.599zM24.75 6.693c-3.385 0-6.016 2.198-7.083 5.818-1.625-2.443-2.865-5.38-3.583-7.854h-3.646v9.484c-0.005 1.875-1.521 3.391-3.396 3.396-1.875-0.005-3.391-1.526-3.396-3.396v-9.484h-3.646v9.484c0 3.885 3.161 7.068 7.042 7.068 3.885 0 7.042-3.182 7.042-7.068v-1.589c0.708 1.474 1.578 2.974 2.635 4.297l-2.234 10.495h3.729l1.62-7.615c1.417 0.906 3.047 1.479 4.917 1.479 4 0 7.25-3.271 7.25-7.266 0-4-3.25-7.25-7.25-7.25z"/>
                     </svg>
                   </a>
-                  <a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" target="_blank" rel="noreferrer" className="w-8 h-8 border border-black bg-white flex items-center justify-center text-[8px] font-black" aria-label="CV">
-                    CV
-                  </a>
+                  <CVViewer>
+                    <button className="w-8 h-8 border border-black bg-white flex items-center justify-center text-[8px] font-black" aria-label="CV">
+                      CV
+                    </button>
+                  </CVViewer>
                 </div>
               </div>
               <div className="flex flex-col items-center text-center font-bold text-sm leading-relaxed mb-3 md:mb-0">
