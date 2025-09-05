@@ -30,9 +30,10 @@ jobs:
       run: npm run build
 
     - name: Test build
-      run: npm start &
-      run: sleep 10
-      run: curl -f http://localhost:3000 || exit 1
+      run: |
+        npm start &
+        sleep 10
+        curl -f http://localhost:3000 || exit 1
 
   deploy:
     needs: build
