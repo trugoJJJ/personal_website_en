@@ -38,8 +38,12 @@ export const CVViewer = ({ children }: CVViewerProps) => {
 
   const handleClick = () => {
     if (isMobile) {
-      // Mobile i tablet - otwórz w nowej karcie
+      // Mobile i tablet - otwórz w nowej karcie i automatycznie pobierz
       handleViewPDF();
+      // Automatyczne pobieranie po krótkim opóźnieniu
+      setTimeout(() => {
+        handleDownload();
+      }, 500);
     } else {
       // Desktop - otwórz popup
       setIsOpen(true);
