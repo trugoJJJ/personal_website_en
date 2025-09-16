@@ -150,6 +150,7 @@ const HeroSectionContent = () => {
               loop 
               playsInline
               preload="metadata"
+              poster="/cover_hero_video.png"
               style={{ 
                 background: P("ecru"), 
                 width: '100%',
@@ -198,6 +199,7 @@ export const HeroSection = () => {
                 loop 
                 playsInline
                 controls
+                poster="/cover_hero_video.png"
                 style={{ 
                   background: "#FAF6EE", 
                   width: '100%',
