@@ -33,7 +33,7 @@ export const AboutSection = () => {
             <div className="space-y-6" style={{ color: isDark ? P("white") : P("charcoal") }}>
               <h3 className="text-2xl md:text-3xl font-extrabold text-left">Hi, I'm Adam</h3>
               <p className="text-base md:text-lg">
-              I specialise in creating comprehensive marketing communications for companies operating in the business-to-business and service sectors.
+              I specialise in creating comprehensive marketing communications for companies operating in the business-to-business, service and product sectors.
               </p>
               <p className="text-base md:text-lg">
               I have extensive experience in creative work, as well as in managing, analysing and planning marketing activities.
