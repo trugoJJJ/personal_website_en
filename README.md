@@ -142,3 +142,4 @@ Specializing in SEO, team management, and digital marketing strategies.
 - [Website](https://galecki.site)
 - [LinkedIn](https://linkedin.com/in/admagalecki)
 - [TikTok](https://www.tiktok.com/@firma_galecka)
+# Update
